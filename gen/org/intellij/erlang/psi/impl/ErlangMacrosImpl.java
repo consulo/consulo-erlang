@@ -28,12 +28,6 @@ public class ErlangMacrosImpl extends ErlangCompositeElementImpl implements Erla
     return findChildByClass(ErlangMacrosName.class);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getQmark() {
-    return findNotNullChildByType(ERL_QMARK);
-  }
-
   @Nullable
   public PsiReference getReference() {
     return ErlangPsiImplUtil.getReference(this);

@@ -16,26 +16,30 @@
 
 package org.intellij.erlang.console;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.*;
-import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.util.xmlb.XmlSerializer;
+import java.util.Arrays;
+import java.util.Collection;
+
 import org.intellij.erlang.sdk.ErlangSdkType;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
-import java.util.Collection;
+import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
+import com.intellij.execution.ExecutionException;
+import com.intellij.execution.Executor;
+import com.intellij.execution.configurations.ModuleBasedConfiguration;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunConfigurationModule;
+import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.configurations.RuntimeConfigurationException;
+import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.module.ModuleUtilCore;
+import com.intellij.openapi.options.SettingsEditor;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.WriteExternalException;
+import com.intellij.util.xmlb.XmlSerializer;
 
 public final class ErlangConsoleRunConfiguration extends ModuleBasedConfiguration<RunConfigurationModule> {
   @NotNull private String myWorkingDirPath;
@@ -80,13 +84,10 @@ public final class ErlangConsoleRunConfiguration extends ModuleBasedConfiguratio
   public void checkConfiguration() throws RuntimeConfigurationException {
     final Module selectedModule = getConfigurationModule().getModule();
     if (selectedModule == null) {
-      final Sdk projectSdk = ProjectRootManager.getInstance(getProject()).getProjectSdk();
-      if (projectSdk == null || projectSdk.getSdkType() != ErlangSdkType.getInstance()) {
-        throw new RuntimeConfigurationException("Neither Erlang module selected nor Erlang SDK is configured for the project");
-      }
+      throw new RuntimeConfigurationException("Neither Erlang module selected nor Erlang SDK is configured ");
     }
     else {
-      final Sdk moduleSdk = ModuleRootManager.getInstance(selectedModule).getSdk();
+      final Sdk moduleSdk = ModuleUtilCore.getSdk(selectedModule, ErlangModuleExtension.class);
       if (moduleSdk == null || moduleSdk.getSdkType() != ErlangSdkType.getInstance()) {
         throw new RuntimeConfigurationException("Erlang SDK is not configured for the selected module");
       }

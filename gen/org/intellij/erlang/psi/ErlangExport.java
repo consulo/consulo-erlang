@@ -10,10 +10,4 @@ public interface ErlangExport extends ErlangCompositeElement {
   @Nullable
   ErlangExportFunctions getExportFunctions();
 
-  @Nullable
-  PsiElement getParLeft();
-
-  @Nullable
-  PsiElement getParRight();
-
 }

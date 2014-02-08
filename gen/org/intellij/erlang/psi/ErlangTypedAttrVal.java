@@ -16,10 +16,4 @@ public interface ErlangTypedAttrVal extends ErlangCompositeElement {
   @Nullable
   ErlangTypedRecordFields getTypedRecordFields();
 
-  @Nullable
-  PsiElement getColonColon();
-
-  @Nullable
-  PsiElement getComma();
-
 }

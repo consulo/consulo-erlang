@@ -27,16 +27,4 @@ public class ErlangImportFunctionsImpl extends ErlangCompositeElementImpl implem
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangImportFunction.class);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getBracketLeft() {
-    return findNotNullChildByType(ERL_BRACKET_LEFT);
-  }
-
-  @Override
-  @NotNull
-  public PsiElement getBracketRight() {
-    return findNotNullChildByType(ERL_BRACKET_RIGHT);
-  }
-
 }

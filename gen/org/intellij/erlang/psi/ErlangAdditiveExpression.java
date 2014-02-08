@@ -11,12 +11,6 @@ public interface ErlangAdditiveExpression extends ErlangFakeBinaryExpression {
   List<ErlangExpression> getExpressionList();
 
   @Nullable
-  PsiElement getOpMinus();
-
-  @Nullable
-  PsiElement getOpPlus();
-
-  @Nullable
   PsiElement getBor();
 
   @Nullable

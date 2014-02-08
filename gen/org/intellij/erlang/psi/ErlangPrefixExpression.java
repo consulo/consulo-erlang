@@ -11,12 +11,6 @@ public interface ErlangPrefixExpression extends ErlangExpression {
   ErlangExpression getExpression();
 
   @Nullable
-  PsiElement getOpMinus();
-
-  @Nullable
-  PsiElement getOpPlus();
-
-  @Nullable
   PsiElement getBnot();
 
   @Nullable

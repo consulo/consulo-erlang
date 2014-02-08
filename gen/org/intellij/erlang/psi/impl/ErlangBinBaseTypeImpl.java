@@ -29,12 +29,6 @@ public class ErlangBinBaseTypeImpl extends ErlangTypeImpl implements ErlangBinBa
 
   @Override
   @NotNull
-  public PsiElement getColon() {
-    return findNotNullChildByType(ERL_COLON);
-  }
-
-  @Override
-  @NotNull
   public PsiElement getInteger() {
     return findNotNullChildByType(ERL_INTEGER);
   }

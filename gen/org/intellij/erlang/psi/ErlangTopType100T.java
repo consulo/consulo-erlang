@@ -10,7 +10,4 @@ public interface ErlangTopType100T extends ErlangType {
   @NotNull
   List<ErlangType> getTypeList();
 
-  @Nullable
-  PsiElement getOpOr();
-
 }

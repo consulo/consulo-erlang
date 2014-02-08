@@ -16,137 +16,187 @@
 
 package org.intellij.erlang.compilation;
 
+import java.nio.charset.Charset;
+import java.util.List;
+
+import org.intellij.erlang.ErlangFileType;
+import org.intellij.erlang.sdk.ErlangSdkType;
+import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.CapturingProcessHandler;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.CompileScope;
+import com.intellij.openapi.compiler.CompilerManager;
 import com.intellij.openapi.compiler.CompilerMessageCategory;
 import com.intellij.openapi.compiler.TranslatingCompiler;
+import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Chunk;
 import com.intellij.util.PathUtil;
-import org.intellij.erlang.ErlangFileType;
-import org.intellij.erlang.jps.builder.ErlangCompilerError;
-import org.intellij.erlang.jps.model.JpsErlangSdkType;
-import org.intellij.erlang.sdk.ErlangSdkType;
-import org.jetbrains.annotations.NotNull;
 
-import java.nio.charset.Charset;
-import java.util.List;
+public class ErlangCompiler implements TranslatingCompiler
+{
+	@NotNull
+	@Override
+	public String getDescription()
+	{
+		return "Erlang compiler";
+	}
 
-public class ErlangCompiler implements TranslatingCompiler {
-  @NotNull
-  @Override
-  public String getDescription() {
-    return "Erlang compiler";
-  }
+	@Override
+	public boolean validateConfiguration(CompileScope compileScope)
+	{
+		return true;
+	}
 
-  @Override
-  public boolean validateConfiguration(CompileScope compileScope) {
-    return true;
-  }
+	@Override
+	public void init(@NotNull CompilerManager compilerManager)
+	{
 
-  @Override
-  public boolean isCompilableFile(VirtualFile file, CompileContext context) {
-    String extension = file.getExtension();
-    if (extension == null) return false;
-    return extension.equals("erl") && file.getFileType() == ErlangFileType.MODULE;
-  }
+	}
 
-  @Override
-  public void compile(CompileContext context, Chunk<Module> moduleChunk, VirtualFile[] files, OutputSink outputSink) {
-    context.getProgressIndicator().pushState();
-    context.getProgressIndicator().setText("Hardcore compile action...");
+	@Override
+	public boolean isCompilableFile(VirtualFile file, CompileContext context)
+	{
+		String extension = file.getExtension();
+		if(extension == null)
+		{
+			return false;
+		}
+		return extension.equals("erl") && file.getFileType() == ErlangFileType.MODULE;
+	}
 
-    final GeneralCommandLine commandLine = new GeneralCommandLine();
-    commandLine.setWorkDirectory(PathUtil.getParentPath(context.getProject().getProjectFilePath()));
-    commandLine.setPassParentEnvironment(true);
+	@Override
+	public void compile(CompileContext context, Chunk<Module> moduleChunk, VirtualFile[] files, OutputSink outputSink)
+	{
+		context.getProgressIndicator().pushState();
+		context.getProgressIndicator().setText("Hardcore compile action...");
 
-    for (Module module : moduleChunk.getNodes()) {
-      final ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
+		final GeneralCommandLine commandLine = new GeneralCommandLine();
+		commandLine.setWorkDirectory(PathUtil.getParentPath(context.getProject().getProjectFilePath()));
+		commandLine.setPassParentEnvironment(true);
 
-      for (VirtualFile sourceRoot : moduleRootManager.getSourceRoots()) {
-        commandLine.addParameter("-I");
-        String path = sourceRoot.getCanonicalPath();
-        if (path != null) {
-          commandLine.addParameter(path);
-        }
-      }
+		for(Module module : moduleChunk.getNodes())
+		{
+			final ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(module);
 
-      VirtualFile outDir = context.getModuleOutputDirectory(module);
-      if (outDir == null) {
-        context.addMessage(CompilerMessageCategory.ERROR, "No output dir for module: " + module.getName(), null, -1, -1);
-        return;
-      }
-      commandLine.setWorkDirectory(outDir.getCanonicalPath());
+			for(VirtualFile sourceRoot : moduleRootManager.getSourceRoots())
+			{
+				commandLine.addParameter("-I");
+				String path = sourceRoot.getCanonicalPath();
+				if(path != null)
+				{
+					commandLine.addParameter(path);
+				}
+			}
 
-      for (VirtualFile o : files) {
-        String canonicalPath = o.getCanonicalPath();
-        if (canonicalPath == null) continue;
-        commandLine.addParameter(canonicalPath);
-      }
+			VirtualFile outDir = context.getModuleOutputDirectory(module);
+			if(outDir == null)
+			{
+				context.addMessage(CompilerMessageCategory.ERROR, "No output dir for module: " + module.getName(), null, -1, -1);
+				return;
+			}
+			commandLine.setWorkDirectory(outDir.getCanonicalPath());
 
-//      commandLine.addParameters("+warn_unused_vars", "+nowarn_shadow_vars", "+warn_unused_import");
+			for(VirtualFile o : files)
+			{
+				String canonicalPath = o.getCanonicalPath();
+				if(canonicalPath == null)
+				{
+					continue;
+				}
+				commandLine.addParameter(canonicalPath);
+			}
 
-      final Sdk sdk = moduleRootManager.getSdk();
+			//      commandLine.addParameters("+warn_unused_vars", "+nowarn_shadow_vars", "+warn_unused_import");
 
-      if (sdk == null) {
-        context.addMessage(CompilerMessageCategory.ERROR, "No SDK for module: " + module.getName(), null, -1, -1);
-        return;
-      }
+			final Sdk sdk = ModuleUtilCore.getSdk(module, ErlangModuleExtension.class);
 
-      if (sdk.getSdkType() != ErlangSdkType.getInstance()) {
-        context.addMessage(CompilerMessageCategory.ERROR, "Not a Erlang SDK for module: " + module.getName(), null, -1, -1);
-        return;
-      }
+			if(sdk == null)
+			{
+				context.addMessage(CompilerMessageCategory.ERROR, "No SDK for module: " + module.getName(), null, -1, -1);
+				return;
+			}
 
-      String sdkHomePath = sdk.getHomePath();
+			if(sdk.getSdkType() != ErlangSdkType.getInstance())
+			{
+				context.addMessage(CompilerMessageCategory.ERROR, "Not a Erlang SDK for module: " + module.getName(), null, -1, -1);
+				return;
+			}
 
-      if (sdkHomePath == null) {
-        context.addMessage(CompilerMessageCategory.ERROR, "No home path for Erlang SDK: " + sdk.getName(), null, -1, -1);
-        return;
-      }
+			String sdkHomePath = sdk.getHomePath();
 
-      String erlc = FileUtil.toSystemDependentName(JpsErlangSdkType.getByteCodeCompilerExecutable(sdkHomePath).getAbsolutePath());
+			if(sdkHomePath == null)
+			{
+				context.addMessage(CompilerMessageCategory.ERROR, "No home path for Erlang SDK: " + sdk.getName(), null, -1, -1);
+				return;
+			}
 
-      commandLine.setExePath(erlc);
+			String erlc = FileUtil.toSystemDependentName(ErlangSdkType.getByteCodeCompilerExecutable(sdkHomePath).getAbsolutePath());
 
-//      System.out.println(commandLine.getCommandLineString());
+			commandLine.setExePath(erlc);
 
-      ProcessOutput output = null;
-      try {
-        output = new CapturingProcessHandler(commandLine.createProcess(), Charset.defaultCharset(), commandLine.getCommandLineString()).runProcess();
-      } catch (ExecutionException e) {
-        context.addMessage(CompilerMessageCategory.ERROR, "process throw exception: " + e.getMessage(), null, -1, -1);
-      }
+			//      System.out.println(commandLine.getCommandLineString());
 
-      if (output != null) {
-        fillContext(module, context, output.getStdoutLines());
-      }
-    }
-  }
+			ProcessOutput output = null;
+			try
+			{
+				output = new CapturingProcessHandler(commandLine.createProcess(), Charset.defaultCharset(),
+						commandLine.getCommandLineString()).runProcess();
+			}
+			catch(ExecutionException e)
+			{
+				context.addMessage(CompilerMessageCategory.ERROR, "process throw exception: " + e.getMessage(), null, -1, -1);
+			}
 
-  private static void fillContext(Module module, CompileContext context, List<String> errors) {
-    for (String error : errors) {
-      addErrorToContext(module, error, context);
-    }
-  }
+			if(output != null)
+			{
+				fillContext(module, context, output.getStdoutLines());
+			}
+		}
+	}
 
-  private static void addErrorToContext(Module module, String error, CompileContext context) {
+	@NotNull
+	@Override
+	public FileType[] getInputFileTypes()
+	{
+		return new FileType[0];
+	}
 
-    final ErlangCompilerError compilerError = ErlangCompilerError.create(PathUtil.getParentPath(module.getModuleFilePath()), error);
-    if (compilerError == null) {
-      context.addMessage(CompilerMessageCategory.ERROR, error, null, -1, -1);
-      return;
-    }
+	@NotNull
+	@Override
+	public FileType[] getOutputFileTypes()
+	{
+		return new FileType[0];
+	}
 
-    context.addMessage(compilerError.getCategory(), compilerError.getErrorMessage(), compilerError.getUrl(), compilerError.getLine(), -1);
-  }
+	private static void fillContext(Module module, CompileContext context, List<String> errors)
+	{
+		for(String error : errors)
+		{
+			addErrorToContext(module, error, context);
+		}
+	}
+
+	private static void addErrorToContext(Module module, String error, CompileContext context)
+	{
+
+		final ErlangCompilerError compilerError = ErlangCompilerError.create(module.getModuleDirPath(), error);
+		if(compilerError == null)
+		{
+			context.addMessage(CompilerMessageCategory.ERROR, error, null, -1, -1);
+			return;
+		}
+
+		context.addMessage(compilerError.getCategory(), compilerError.getErrorMessage(), compilerError.getUrl(), compilerError.getLine(), -1);
+	}
 }
 

@@ -11,12 +11,6 @@ public interface ErlangMultiplicativeExpression extends ErlangFakeBinaryExpressi
   List<ErlangExpression> getExpressionList();
 
   @Nullable
-  PsiElement getOpArDiv();
-
-  @Nullable
-  PsiElement getOpArMul();
-
-  @Nullable
   PsiElement getAnd();
 
   @Nullable

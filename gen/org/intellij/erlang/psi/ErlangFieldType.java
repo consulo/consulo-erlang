@@ -15,9 +15,6 @@ public interface ErlangFieldType extends ErlangType {
   ErlangTopType getTopType();
 
   @Nullable
-  PsiElement getColonColon();
-
-  @Nullable
   PsiReference getReference();
 
 }

@@ -31,7 +31,4 @@ public interface ErlangAttribute extends ErlangCompositeElement {
   @Nullable
   ErlangSpecification getSpecification();
 
-  @NotNull
-  PsiElement getOpMinus();
-
 }

@@ -27,16 +27,4 @@ public class ErlangExportImpl extends ErlangCompositeElementImpl implements Erla
     return findChildByClass(ErlangExportFunctions.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getParLeft() {
-    return findChildByType(ERL_PAR_LEFT);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getParRight() {
-    return findChildByType(ERL_PAR_RIGHT);
-  }
-
 }

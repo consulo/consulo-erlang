@@ -11,12 +11,6 @@ public interface ErlangBinUnitType extends ErlangType {
   List<ErlangQVar> getQVarList();
 
   @NotNull
-  PsiElement getColon();
-
-  @NotNull
-  PsiElement getOpArMul();
-
-  @NotNull
   PsiElement getInteger();
 
 }

@@ -10,10 +10,4 @@ public interface ErlangListOpExpression extends ErlangFakeBinaryExpression {
   @NotNull
   List<ErlangExpression> getExpressionList();
 
-  @Nullable
-  PsiElement getOpMinusMinus();
-
-  @Nullable
-  PsiElement getOpPlusPlus();
-
 }

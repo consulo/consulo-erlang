@@ -27,16 +27,4 @@ public class ErlangListOpExpressionImpl extends ErlangFakeBinaryExpressionImpl i
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangExpression.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getOpMinusMinus() {
-    return findChildByType(ERL_OP_MINUS_MINUS);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getOpPlusPlus() {
-    return findChildByType(ERL_OP_PLUS_PLUS);
-  }
-
 }

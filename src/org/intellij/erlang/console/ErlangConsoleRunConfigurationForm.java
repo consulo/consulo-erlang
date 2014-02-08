@@ -16,9 +16,17 @@
 
 package org.intellij.erlang.console;
 
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JList;
+import javax.swing.JPanel;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleType;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
@@ -26,11 +34,6 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ListCellRendererWrapper;
 import com.intellij.ui.RawCommandLineEditor;
-import org.intellij.erlang.ErlangModuleType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
 
 public final class ErlangConsoleRunConfigurationForm extends SettingsEditor<ErlangConsoleRunConfiguration> {
   private JPanel myPanel;
@@ -51,7 +54,7 @@ public final class ErlangConsoleRunConfigurationForm extends SettingsEditor<Erla
   protected void resetEditorFrom(@NotNull ErlangConsoleRunConfiguration config) {
     myModuleComboBox.removeAllItems();
     for (final Module module : config.getValidModules()) {
-      if (ModuleType.get(module) == ErlangModuleType.getInstance()) {
+      if (ModuleUtilCore.getExtension(module, ErlangModuleExtension.class) != null) {
         myModuleComboBox.addItem(module);
       }
     }

@@ -39,16 +39,4 @@ public class ErlangGlobalFunctionCallExpressionImpl extends ErlangExpressionImpl
     return findChildByClass(ErlangQAtom.class);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getColon() {
-    return findNotNullChildByType(ERL_COLON);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getDot() {
-    return findChildByType(ERL_DOT);
-  }
-
 }

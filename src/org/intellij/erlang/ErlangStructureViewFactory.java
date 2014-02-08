@@ -16,7 +16,23 @@
 
 package org.intellij.erlang;
 
-import com.intellij.ide.structureView.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import javax.swing.Icon;
+
+import org.intellij.erlang.psi.*;
+import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import com.intellij.ide.IconDescriptorUpdaters;
+import com.intellij.ide.structureView.StructureViewBuilder;
+import com.intellij.ide.structureView.StructureViewModel;
+import com.intellij.ide.structureView.StructureViewModelBase;
+import com.intellij.ide.structureView.StructureViewTreeElement;
+import com.intellij.ide.structureView.TreeBasedStructureViewBuilder;
 import com.intellij.ide.util.treeView.smartTree.TreeElement;
 import com.intellij.lang.PsiStructureViewFactory;
 import com.intellij.navigation.ItemPresentation;
@@ -31,16 +47,6 @@ import com.intellij.ui.RowIcon;
 import com.intellij.util.Function;
 import com.intellij.util.PlatformIcons;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.psi.*;
-import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 public class ErlangStructureViewFactory implements PsiStructureViewFactory {
   @Override
@@ -201,7 +207,7 @@ public class ErlangStructureViewFactory implements PsiStructureViewFactory {
       else if (myElement instanceof ErlangRecordDefinition) return ErlangIcons.RECORD;
       else if (myElement instanceof ErlangMacrosDefinition) return ErlangIcons.MACROS;
       else if (myElement instanceof ErlangTypeDefinition)   return ErlangIcons.TYPE;
-      return myElement.getIcon(0);
+      return IconDescriptorUpdaters.getIcon(myElement, 0);
     }
   }
 

@@ -18,18 +18,6 @@ public interface ErlangTypeDefinition extends ErlangNamedElement, StubBasedPsiEl
   @Nullable
   ErlangTopType getTopType();
 
-  @Nullable
-  PsiElement getColonColon();
-
-  @NotNull
-  PsiElement getOpMinus();
-
-  @Nullable
-  PsiElement getParLeft();
-
-  @Nullable
-  PsiElement getParRight();
-
   @NotNull
   String getName();
 

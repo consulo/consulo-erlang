@@ -12,12 +12,6 @@ public interface ErlangBehaviour extends ErlangCompositeElement, StubBasedPsiEle
   @Nullable
   ErlangModuleRef getModuleRef();
 
-  @Nullable
-  PsiElement getParLeft();
-
-  @Nullable
-  PsiElement getParRight();
-
   @NotNull
   String getName();
 

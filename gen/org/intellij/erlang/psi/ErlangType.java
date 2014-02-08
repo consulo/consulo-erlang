@@ -23,39 +23,6 @@ public interface ErlangType extends ErlangCompositeElement {
   ErlangTypeRef getTypeRef();
 
   @Nullable
-  PsiElement getBracketLeft();
-
-  @Nullable
-  PsiElement getBracketRight();
-
-  @Nullable
-  PsiElement getColon();
-
-  @Nullable
-  PsiElement getColonColon();
-
-  @Nullable
-  PsiElement getCurlyLeft();
-
-  @Nullable
-  PsiElement getCurlyRight();
-
-  @Nullable
-  PsiElement getDotDot();
-
-  @Nullable
-  PsiElement getDotDotDot();
-
-  @Nullable
-  PsiElement getParLeft();
-
-  @Nullable
-  PsiElement getParRight();
-
-  @Nullable
-  PsiElement getRadix();
-
-  @Nullable
   PsiElement getFun();
 
 }

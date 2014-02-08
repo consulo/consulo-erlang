@@ -27,16 +27,4 @@ public class ErlangAttrValImpl extends ErlangCompositeElementImpl implements Erl
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangExpression.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getParLeft() {
-    return findChildByType(ERL_PAR_LEFT);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getParRight() {
-    return findChildByType(ERL_PAR_RIGHT);
-  }
-
 }

@@ -13,13 +13,4 @@ public interface ErlangFunType100T extends ErlangType {
   @Nullable
   ErlangTopTypeClause getTopTypeClause();
 
-  @Nullable
-  PsiElement getDotDotDot();
-
-  @NotNull
-  PsiElement getParLeft();
-
-  @Nullable
-  PsiElement getParRight();
-
 }

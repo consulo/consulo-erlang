@@ -16,10 +16,4 @@ public interface ErlangGlobalFunctionCallExpression extends ErlangExpression {
   @Nullable
   ErlangQAtom getQAtom();
 
-  @NotNull
-  PsiElement getColon();
-
-  @Nullable
-  PsiElement getDot();
-
 }

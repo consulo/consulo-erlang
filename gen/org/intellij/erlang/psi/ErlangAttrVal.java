@@ -10,10 +10,4 @@ public interface ErlangAttrVal extends ErlangCompositeElement {
   @NotNull
   List<ErlangExpression> getExpressionList();
 
-  @Nullable
-  PsiElement getParLeft();
-
-  @Nullable
-  PsiElement getParRight();
-
 }

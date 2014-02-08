@@ -10,10 +10,4 @@ public interface ErlangRecordLikeType extends ErlangType {
   @NotNull
   List<ErlangTopType> getTopTypeList();
 
-  @NotNull
-  PsiElement getCurlyLeft();
-
-  @NotNull
-  PsiElement getCurlyRight();
-
 }

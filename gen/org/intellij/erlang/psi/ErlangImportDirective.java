@@ -13,13 +13,4 @@ public interface ErlangImportDirective extends ErlangCompositeElement {
   @Nullable
   ErlangModuleRef getModuleRef();
 
-  @Nullable
-  PsiElement getComma();
-
-  @Nullable
-  PsiElement getParLeft();
-
-  @Nullable
-  PsiElement getParRight();
-
 }

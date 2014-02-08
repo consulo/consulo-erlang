@@ -69,10 +69,4 @@ public class ErlangAttributeImpl extends ErlangCompositeElementImpl implements E
     return findChildByClass(ErlangSpecification.class);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getOpMinus() {
-    return findNotNullChildByType(ERL_OP_MINUS);
-  }
-
 }

@@ -12,9 +12,6 @@ public interface ErlangSpecFun extends ErlangCompositeElement {
   ErlangQAtom getQAtom();
 
   @Nullable
-  PsiElement getOpArDiv();
-
-  @Nullable
   PsiElement getInteger();
 
   @Nullable

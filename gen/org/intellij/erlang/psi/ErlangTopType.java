@@ -13,7 +13,4 @@ public interface ErlangTopType extends ErlangCompositeElement {
   @NotNull
   ErlangType getType();
 
-  @Nullable
-  PsiElement getColonColon();
-
 }

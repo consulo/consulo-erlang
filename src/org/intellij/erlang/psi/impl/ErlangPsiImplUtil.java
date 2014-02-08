@@ -16,6 +16,45 @@
 
 package org.intellij.erlang.psi.impl;
 
+import static com.intellij.patterns.PlatformPatterns.psiElement;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Set;
+
+import javax.swing.Icon;
+
+import org.intellij.erlang.ErlangApplicationIndex;
+import org.intellij.erlang.ErlangCompletionContributor;
+import org.intellij.erlang.ErlangIcons;
+import org.intellij.erlang.ErlangModuleIndex;
+import org.intellij.erlang.ErlangStringLiteralEscaper;
+import org.intellij.erlang.ErlangTypes;
+import org.intellij.erlang.bif.ErlangBifDescriptor;
+import org.intellij.erlang.bif.ErlangBifTable;
+import org.intellij.erlang.parser.ErlangParserUtil;
+import org.intellij.erlang.psi.*;
+import org.intellij.erlang.rebar.util.RebarConfigUtil;
+import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
+import org.intellij.erlang.sdk.ErlangSdkRelease;
+import org.intellij.erlang.sdk.ErlangSdkType;
+import org.intellij.erlang.stubs.ErlangBehaviourStub;
+import org.intellij.erlang.stubs.ErlangFunctionStub;
+import org.intellij.erlang.stubs.ErlangIncludeLibStub;
+import org.intellij.erlang.stubs.ErlangIncludeStub;
+import org.intellij.erlang.stubs.ErlangMacrosDefinitionStub;
+import org.intellij.erlang.stubs.ErlangModuleStub;
+import org.intellij.erlang.stubs.ErlangRecordDefinitionStub;
+import org.intellij.erlang.stubs.ErlangTypeDefinitionStub;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.codeInsight.completion.BasicInsertHandler;
 import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
@@ -32,8 +71,12 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.util.*;
+import com.intellij.openapi.util.Comparing;
+import com.intellij.openapi.util.Condition;
+import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.io.FileUtilRt;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
@@ -54,24 +97,6 @@ import com.intellij.util.Function;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.*;
-import org.intellij.erlang.bif.ErlangBifDescriptor;
-import org.intellij.erlang.bif.ErlangBifTable;
-import org.intellij.erlang.parser.ErlangParserUtil;
-import org.intellij.erlang.psi.*;
-import org.intellij.erlang.rebar.util.RebarConfigUtil;
-import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
-import org.intellij.erlang.sdk.ErlangSdkRelease;
-import org.intellij.erlang.sdk.ErlangSdkType;
-import org.intellij.erlang.sdk.ErlangSystemUtil;
-import org.intellij.erlang.stubs.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.util.*;
-
-import static com.intellij.patterns.PlatformPatterns.psiElement;
 
 public class ErlangPsiImplUtil {
   public static final Set<String> KNOWN_MACROS = ContainerUtil.set("MODULE", "MODULE_NAME", "FILE", "LINE", "MACHINE");
@@ -415,9 +440,7 @@ public class ErlangPsiImplUtil {
       List<ErlangFunction> functions = new ArrayList<ErlangFunction>();
 
       List<LookupElement> lookupElements = ContainerUtil.newArrayList();
-
-      Module module = ModuleUtilCore.findModuleForPsiElement(containingFile);
-      Sdk sdk = module == null ? null : ModuleRootManager.getInstance(module).getSdk();
+      Sdk sdk = ModuleUtilCore.getSdk(containingFile, ErlangModuleExtension.class);
       ErlangSdkRelease release = sdk != null ? ErlangSdkType.getRelease(sdk) : null;
       if (qAtom != null) {
         String moduleName = StringUtil.unquoteString(qAtom.getText());
@@ -888,11 +911,7 @@ public class ErlangPsiImplUtil {
         if (includedFile != null) return ContainerUtil.newSmartList(includedFile);
       }
     }
-    //TODO consider providing source roots functionality to small IDEs
-    if (ErlangSystemUtil.isSmallIde()) {
-      VirtualFile appRoot = getContainingOtpAppRoot(project, parent);
-      return getDirectlyIncludedFilesForSmallIde(project, relativePath, appRoot);
-    }
+
     return ContainerUtil.emptyList();
   }
 

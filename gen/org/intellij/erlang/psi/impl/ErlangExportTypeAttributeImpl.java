@@ -27,16 +27,4 @@ public class ErlangExportTypeAttributeImpl extends ErlangCompositeElementImpl im
     return findChildByClass(ErlangExportTypes.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getParLeft() {
-    return findChildByType(ERL_PAR_LEFT);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getParRight() {
-    return findChildByType(ERL_PAR_RIGHT);
-  }
-
 }

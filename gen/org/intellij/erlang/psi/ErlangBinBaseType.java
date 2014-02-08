@@ -11,9 +11,6 @@ public interface ErlangBinBaseType extends ErlangType {
   ErlangQVar getQVar();
 
   @NotNull
-  PsiElement getColon();
-
-  @NotNull
   PsiElement getInteger();
 
 }

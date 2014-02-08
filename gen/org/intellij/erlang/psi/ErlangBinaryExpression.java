@@ -10,10 +10,4 @@ public interface ErlangBinaryExpression extends ErlangExpression {
   @NotNull
   List<ErlangBinElement> getBinElementList();
 
-  @Nullable
-  PsiElement getBinEnd();
-
-  @NotNull
-  PsiElement getBinStart();
-
 }

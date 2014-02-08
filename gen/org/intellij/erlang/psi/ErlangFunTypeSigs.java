@@ -16,10 +16,4 @@ public interface ErlangFunTypeSigs extends ErlangCompositeElement {
   @NotNull
   List<ErlangTypeSig> getTypeSigList();
 
-  @Nullable
-  PsiElement getColon();
-
-  @Nullable
-  PsiElement getColonColon();
-
 }

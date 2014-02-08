@@ -27,16 +27,4 @@ public class ErlangModelFieldListImpl extends ErlangCompositeElementImpl impleme
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangArgumentDefinition.class);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getBracketLeft() {
-    return findNotNullChildByType(ERL_BRACKET_LEFT);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getBracketRight() {
-    return findChildByType(ERL_BRACKET_RIGHT);
-  }
-
 }

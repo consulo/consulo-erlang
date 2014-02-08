@@ -46,8 +46,6 @@ import com.intellij.projectImport.ProjectImportBuilder;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.ErlangIcons;
-import org.intellij.erlang.configuration.ErlangCompilerSettings;
-import org.intellij.erlang.ErlangModuleType;
 import org.intellij.erlang.facet.ErlangFacet;
 import org.intellij.erlang.facet.ErlangFacetConfiguration;
 import org.intellij.erlang.rebar.settings.RebarSettings;

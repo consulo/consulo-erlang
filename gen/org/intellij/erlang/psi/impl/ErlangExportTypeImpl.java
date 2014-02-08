@@ -30,12 +30,6 @@ public class ErlangExportTypeImpl extends ErlangCompositeElementImpl implements 
 
   @Override
   @Nullable
-  public PsiElement getOpArDiv() {
-    return findChildByType(ERL_OP_AR_DIV);
-  }
-
-  @Override
-  @Nullable
   public PsiElement getInteger() {
     return findChildByType(ERL_INTEGER);
   }

@@ -10,13 +10,4 @@ public interface ErlangBinaryType extends ErlangType {
   @NotNull
   List<ErlangType> getTypeList();
 
-  @Nullable
-  PsiElement getBinEnd();
-
-  @NotNull
-  PsiElement getBinStart();
-
-  @Nullable
-  PsiElement getComma();
-
 }

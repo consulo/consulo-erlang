@@ -27,16 +27,4 @@ public class ErlangArgumentDefinitionListImpl extends ErlangCompositeElementImpl
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangArgumentDefinition.class);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getParLeft() {
-    return findNotNullChildByType(ERL_PAR_LEFT);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getParRight() {
-    return findChildByType(ERL_PAR_RIGHT);
-  }
-
 }

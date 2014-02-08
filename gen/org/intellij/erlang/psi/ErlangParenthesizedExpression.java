@@ -10,10 +10,4 @@ public interface ErlangParenthesizedExpression extends ErlangExpression {
   @Nullable
   ErlangExpression getExpression();
 
-  @NotNull
-  PsiElement getParLeft();
-
-  @Nullable
-  PsiElement getParRight();
-
 }

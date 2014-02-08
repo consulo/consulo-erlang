@@ -16,6 +16,14 @@
 
 package org.intellij.erlang.sdk;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.CapturingProcessHandler;
@@ -24,11 +32,6 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.PlatformUtils;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
-import java.util.*;
 
 public class ErlangSystemUtil {
   public static final int STANDARD_TIMEOUT = 10 * 1000;
@@ -83,9 +86,5 @@ public class ErlangSystemUtil {
       cmd.addParameter("-I");
       cmd.addParameter(path);
     }
-  }
-
-  public static boolean isSmallIde() {
-    return PlatformUtils.isRubyMine() || PlatformUtils.isPyCharm() || PlatformUtils.isPhpStorm() || PlatformUtils.isWebStorm();
   }
 }

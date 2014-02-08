@@ -16,18 +16,7 @@
 
 package org.intellij.erlang.documentation;
 
-import com.intellij.codeInsight.documentation.PlatformDocumentationUtil;
-import com.intellij.ide.BrowserUtil;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.JavadocOrderRootType;
-import com.intellij.openapi.roots.OrderEntry;
-import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.roots.ProjectRootManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.ResourceUtil;
-import com.intellij.util.net.HttpConfigurable;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import static com.intellij.codeInsight.documentation.DocumentationManager.PSI_ELEMENT_PROTOCOL;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -42,7 +31,18 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.intellij.codeInsight.documentation.DocumentationManager.PSI_ELEMENT_PROTOCOL;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import com.intellij.codeInsight.documentation.PlatformDocumentationUtil;
+import com.intellij.ide.BrowserUtil;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.roots.OrderEntry;
+import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.roots.ProjectFileIndex;
+import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.ResourceUtil;
+import com.intellij.util.net.HttpConfigurable;
 
 abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
   private static final Pattern PATTERN_HREF = Pattern.compile("<a href=\"(.*?)\">");
@@ -178,7 +178,7 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
                                           @NotNull VirtualFile virtualFile,
                                           @NotNull String inDocRef) {
     for (OrderEntry orderEntry : orderEntries) {
-      final String[] docRootUrls = JavadocOrderRootType.getUrls(orderEntry);
+      final String[] docRootUrls = orderEntry.getUrls(OrderRootType.DOCUMENTATION);
       final String sdkHttpDocRelPath = httpDocRelPath(virtualFile);
       final List<String> httpUrls = PlatformDocumentationUtil.getHttpRoots(
         docRootUrls, sdkHttpDocRelPath + inDocRef);
@@ -194,7 +194,7 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
                                           @NotNull VirtualFile virtualFile) {
     List<String> fileUrls = null;
     for (OrderEntry orderEntry : orderEntries) {
-      final VirtualFile[] docRootFiles = orderEntry.getFiles(JavadocOrderRootType.getInstance());
+      final VirtualFile[] docRootFiles = orderEntry.getFiles(OrderRootType.DOCUMENTATION);
       final String sdkHttpDocRelPath = httpDocRelPath(virtualFile);
       for (VirtualFile docRootFile : docRootFiles) {
         if (docRootFile.isInLocalFileSystem()) {

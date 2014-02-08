@@ -10,10 +10,4 @@ public interface ErlangTupleExpression extends ErlangExpression {
   @NotNull
   List<ErlangExpression> getExpressionList();
 
-  @NotNull
-  PsiElement getCurlyLeft();
-
-  @Nullable
-  PsiElement getCurlyRight();
-
 }

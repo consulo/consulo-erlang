@@ -18,18 +18,6 @@ public interface ErlangMacrosDefinition extends ErlangNamedElement, StubBasedPsi
   @Nullable
   ErlangMacrosName getMacrosName();
 
-  @Nullable
-  PsiElement getComma();
-
-  @NotNull
-  PsiElement getOpMinus();
-
-  @Nullable
-  PsiElement getParLeft();
-
-  @Nullable
-  PsiElement getParRight();
-
   @NotNull
   String getName();
 

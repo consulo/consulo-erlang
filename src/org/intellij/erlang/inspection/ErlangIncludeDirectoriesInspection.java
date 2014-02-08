@@ -1,10 +1,21 @@
 package org.intellij.erlang.inspection;
 
-import com.intellij.codeInspection.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.intellij.erlang.psi.ErlangFile;
+import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
+import com.intellij.codeInspection.InspectionManager;
+import com.intellij.codeInspection.LocalInspectionTool;
+import com.intellij.codeInspection.LocalQuickFix;
+import com.intellij.codeInspection.ProblemDescriptor;
+import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ex.DisableInspectionToolAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -13,14 +24,6 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.ErlangModuleType;
-import org.intellij.erlang.psi.ErlangFile;
-import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ErlangIncludeDirectoriesInspection extends LocalInspectionTool {
   @Nullable
@@ -102,7 +105,7 @@ public class ErlangIncludeDirectoriesInspection extends LocalInspectionTool {
     }
 
     private static void doFix(@NotNull Module module) {
-      if (ModuleType.get(module) != ErlangModuleType.getInstance()) return;
+      if (ModuleUtilCore.getExtension(module, ErlangModuleExtension.class) == null) return;
       List<VirtualFile> includeFolders = getIncludeFoldersNotMarkedAsIncludeDirectories(module);
       for (VirtualFile includeFolder : includeFolders) {
         ErlangIncludeDirectoryUtil.markAsIncludeDirectory(module, includeFolder);

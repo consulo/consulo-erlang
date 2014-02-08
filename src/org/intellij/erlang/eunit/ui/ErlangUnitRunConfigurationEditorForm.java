@@ -21,7 +21,6 @@ import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.roots.ui.configuration.ModulesCombobox;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ListCellRendererWrapper;
-import org.intellij.erlang.ErlangModuleType;
 import org.intellij.erlang.eunit.ErlangUnitRunConfiguration;
 import org.jetbrains.annotations.NotNull;
 

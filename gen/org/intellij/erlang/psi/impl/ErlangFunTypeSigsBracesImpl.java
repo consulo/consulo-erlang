@@ -27,16 +27,4 @@ public class ErlangFunTypeSigsBracesImpl extends ErlangCompositeElementImpl impl
     return findChildByClass(ErlangFunTypeSigs.class);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getParLeft() {
-    return findNotNullChildByType(ERL_PAR_LEFT);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getParRight() {
-    return findChildByType(ERL_PAR_RIGHT);
-  }
-
 }

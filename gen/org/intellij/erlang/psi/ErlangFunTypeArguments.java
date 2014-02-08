@@ -10,10 +10,4 @@ public interface ErlangFunTypeArguments extends ErlangCompositeElement {
   @NotNull
   List<ErlangTopType> getTopTypeList();
 
-  @NotNull
-  PsiElement getParLeft();
-
-  @Nullable
-  PsiElement getParRight();
-
 }
