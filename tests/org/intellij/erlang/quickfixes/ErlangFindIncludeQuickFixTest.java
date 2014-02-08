@@ -20,7 +20,6 @@ import com.intellij.codeInsight.intention.IntentionAction;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.facet.ErlangFacet;
 import org.intellij.erlang.inspection.ErlangUnresolvedIncludeInspection;
 import org.intellij.erlang.inspection.ErlangUnresolvedIncludeLibInspection;
 import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;

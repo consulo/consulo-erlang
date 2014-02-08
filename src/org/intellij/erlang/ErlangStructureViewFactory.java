@@ -200,7 +200,7 @@ public class ErlangStructureViewFactory implements PsiStructureViewFactory {
       }
       else if (myElement instanceof ErlangModule) {
         PsiFile file = myElement.getContainingFile();
-        return file instanceof ErlangFile ? ErlangIconProvider.getIcon((ErlangFile) file) : ErlangIcons.FILE;
+        return file instanceof ErlangFile ? ErlangIconDescriptorUpdater.getIcon((ErlangFile) file) : ErlangIcons.FILE;
       }
       else if (myElement instanceof ErlangFunctionClause)   return ErlangIcons.FUNCTION_CLAUSE;
       else if (myElement instanceof ErlangAttribute)        return ErlangIcons.ATTRIBUTE;

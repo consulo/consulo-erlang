@@ -16,32 +16,30 @@
 
 package org.intellij.erlang.roots;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.erlang.module.ErlangIncludeContentFolderTypeProvider;
+import org.mustbe.consulo.roots.ContentFolderScopes;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.jps.model.ErlangIncludeSourceRootType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public final class ErlangIncludeDirectoryUtil {
   private ErlangIncludeDirectoryUtil() {
   }
 
   @NotNull
-  public static List<VirtualFile> getIncludeDirectories(@Nullable Module module) {
-    if (module == null) return ContainerUtil.emptyList();
+  public static VirtualFile[] getIncludeDirectories(@Nullable Module module) {
+    if (module == null) return VirtualFile.EMPTY_ARRAY;
     ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
-    return rootManager.getSourceRoots(ErlangIncludeSourceRootType.INSTANCE);
+    return rootManager.getContentFolderFiles(ContentFolderScopes.of(ErlangIncludeContentFolderTypeProvider.getInstance()));
   }
 
   public static void markAsIncludeDirectory(@NotNull ContentEntry contentEntry, @NotNull VirtualFile directory) {
-    contentEntry.addSourceFolder(directory, ErlangIncludeSourceRootType.INSTANCE);
+    contentEntry.addFolder(directory, ErlangIncludeContentFolderTypeProvider.getInstance());
   }
 
   public static void markAsIncludeDirectory(@NotNull Module module, @NotNull VirtualFile directory) {

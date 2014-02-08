@@ -16,25 +16,20 @@
 
 package org.intellij.erlang.editor;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.regex.Pattern;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.ide.util.importProject.ModuleDescriptor;
 import com.intellij.ide.util.importProject.ProjectDescriptor;
-import com.intellij.ide.util.projectWizard.ModuleWizardStep;
-import com.intellij.ide.util.projectWizard.ProjectJdkForModuleStep;
 import com.intellij.ide.util.projectWizard.importSources.DetectedProjectRoot;
 import com.intellij.ide.util.projectWizard.importSources.ProjectFromSourcesBuilder;
 import com.intellij.ide.util.projectWizard.importSources.ProjectStructureDetector;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.sdk.ErlangSdkType;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class ErlangProjectStructureDetector extends ProjectStructureDetector {
   @NotNull
@@ -61,16 +56,16 @@ public class ErlangProjectStructureDetector extends ProjectStructureDetector {
       if (modules.isEmpty()) {
         modules = new ArrayList<ModuleDescriptor>();
         for (DetectedProjectRoot root : roots) {
-          modules.add(new ModuleDescriptor(root.getDirectory(), ErlangModuleType.getInstance(), ContainerUtil.<DetectedProjectRoot>emptyList()));
+          modules.add(new ModuleDescriptor(root.getDirectory(), ContainerUtil.<DetectedProjectRoot>emptyList()));
         }
         projectDescriptor.setModules(modules);
       }
     }
   }
-
+/*
   @Override
   public List<ModuleWizardStep> createWizardSteps(ProjectFromSourcesBuilder builder, ProjectDescriptor projectDescriptor, Icon stepIcon) {
     ProjectJdkForModuleStep projectJdkForModuleStep = new ProjectJdkForModuleStep(builder.getContext(), ErlangSdkType.getInstance());
     return Collections.<ModuleWizardStep>singletonList(projectJdkForModuleStep);
-  }
+  }*/
 }

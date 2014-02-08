@@ -16,6 +16,13 @@
 
 package org.intellij.erlang.runconfig;
 
+import java.util.List;
+
+import org.intellij.erlang.console.ErlangConsoleUtil;
+import org.intellij.erlang.sdk.ErlangSdkType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.CommandLineState;
@@ -27,17 +34,11 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.console.ErlangConsoleUtil;
-import org.intellij.erlang.sdk.ErlangSdkType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public abstract class ErlangRunningState extends CommandLineState {
   private final Module myModule;
@@ -50,7 +51,7 @@ public abstract class ErlangRunningState extends CommandLineState {
   @NotNull
   @Override
   protected ProcessHandler startProcess() throws ExecutionException {
-    Sdk sdk = ModuleRootManager.getInstance(myModule).getSdk();
+    Sdk sdk = ModuleUtilCore.getSdk(myModule, ErlangModuleExtension.class);
     assert sdk != null;
     GeneralCommandLine commandLine = getCommand(sdk);
     return new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString());

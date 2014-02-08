@@ -16,11 +16,11 @@
 
 package org.intellij.erlang;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
+import javax.swing.Icon;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
+import com.intellij.openapi.fileTypes.LanguageFileType;
 
 public class ErlangFileType extends LanguageFileType {
   public static ErlangFileType MODULE = new ErlangFileType();
@@ -53,12 +53,6 @@ public class ErlangFileType extends LanguageFileType {
   @Override
   public Icon getIcon() {
     return ErlangIcons.FILE;
-  }
-
-  @Override
-  public boolean isJVMDebuggingSupported() {
-    // turn off for now
-    return false;
   }
 
   public static class HrlFileType extends ErlangFileType {

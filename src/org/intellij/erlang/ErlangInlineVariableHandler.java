@@ -16,6 +16,18 @@
 
 package org.intellij.erlang;
 
+import java.util.Collection;
+
+import org.intellij.erlang.psi.ErlangAssignmentExpression;
+import org.intellij.erlang.psi.ErlangExpression;
+import org.intellij.erlang.psi.ErlangFunExpression;
+import org.intellij.erlang.psi.ErlangFunctionWithArity;
+import org.intellij.erlang.psi.ErlangGenericFunctionCallExpression;
+import org.intellij.erlang.psi.ErlangMaxExpression;
+import org.intellij.erlang.psi.ErlangModuleRef;
+import org.intellij.erlang.psi.ErlangQVar;
+import org.intellij.erlang.psi.impl.ErlangElementFactory;
+import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lang.refactoring.InlineActionHandler;
@@ -29,14 +41,8 @@ import com.intellij.psi.impl.source.codeStyle.CodeEditUtil;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.refactoring.HelpID;
 import com.intellij.refactoring.util.CommonRefactoringUtil;
 import com.intellij.util.Query;
-import org.intellij.erlang.psi.*;
-import org.intellij.erlang.psi.impl.ErlangElementFactory;
-import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-
-import java.util.Collection;
 
 public class ErlangInlineVariableHandler extends InlineActionHandler {
   private static final String REFACTORING_NAME = "Inline variable";

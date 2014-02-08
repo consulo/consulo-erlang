@@ -16,13 +16,16 @@
 
 package org.intellij.erlang.application.ui;
 
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.intellij.erlang.application.ErlangApplicationConfiguration;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.roots.ui.configuration.ModulesCombobox;
-import org.intellij.erlang.application.ErlangApplicationConfiguration;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 public class ErlangRunConfigurationEditorForm extends SettingsEditor<ErlangApplicationConfiguration> {
   private JPanel component;
@@ -35,7 +38,7 @@ public class ErlangRunConfigurationEditorForm extends SettingsEditor<ErlangAppli
   @SuppressWarnings("unchecked")
   @Override
   protected void resetEditorFrom(ErlangApplicationConfiguration configuration) {
-    myComboModules.fillModules(configuration.getProject(), ErlangModuleType.getInstance());
+    myComboModules.fillModules(configuration.getProject());
     myComboModules.setSelectedModule(configuration.getConfigurationModule().getModule());
     myParamsField.setText(configuration.getParams());
     myStopErlangInterpreterCheckBox.setSelected(configuration.stopErlang());

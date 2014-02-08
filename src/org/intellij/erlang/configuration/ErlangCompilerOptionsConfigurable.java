@@ -1,89 +1,55 @@
 package org.intellij.erlang.configuration;
 
+import javax.swing.JCheckBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
 import com.intellij.compiler.options.CompilerConfigurable;
-import com.intellij.ide.DataManager;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.SearchableConfigurable;
-import com.intellij.openapi.options.newEditor.OptionsEditor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
-import org.intellij.erlang.rebar.settings.RebarSettings;
-import org.intellij.erlang.settings.ErlangExternalToolsConfigurable;
-import org.intellij.erlang.utils.AncestorAdapter;
-import org.jetbrains.annotations.NotNull;
 
-import javax.swing.*;
-import javax.swing.event.AncestorEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+public class ErlangCompilerOptionsConfigurable extends CompilerConfigurable
+{
+	private JPanel myRootPanel;
 
-public class ErlangCompilerOptionsConfigurable extends CompilerConfigurable {
+	private JCheckBox myAddDebugInfoCheckBox;
+	private final ErlangCompilerSettings mySettings;
 
-  private JPanel myRootPanel;
-  private JCheckBox myUseRebarCompilerCheckBox;
-  private JButton myConfigureRebarButton;
-  private JCheckBox myAddDebugInfoCheckBox;
-  private final ErlangCompilerSettings mySettings;
-  private final Project myProject;
+	public ErlangCompilerOptionsConfigurable(final Project project)
+	{
+		super(project);
 
-  public ErlangCompilerOptionsConfigurable(final Project project) {
-    super(project);
-    myProject = project;
-    mySettings = ErlangCompilerSettings.getInstance(project);
-    setupUiListeners();
-  }
+		mySettings = ErlangCompilerSettings.getInstance(project);
+	}
 
-  private void setupUiListeners() {
-    myConfigureRebarButton.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        OptionsEditor optionsEditor = OptionsEditor.KEY.getData(DataManager.getInstance().getDataContext(myConfigureRebarButton));
-        assert optionsEditor != null;
-        SearchableConfigurable erlangExternalToolsConfigurable = optionsEditor.findConfigurableById(ErlangExternalToolsConfigurable.ERLANG_RELATED_TOOLS);
-        optionsEditor.select(erlangExternalToolsConfigurable);
-      }
-    });
-    myRootPanel.addAncestorListener(new AncestorAdapter() {
-      @Override
-      public void ancestorAdded(AncestorEvent event) {
-        reset();
-      }
-    });
-  }
+	@Override
+	public String getDisplayName()
+	{
+		return "Erlang Compiler";
+	}
 
-  @NotNull
-  @Override
-  public String getId() {
-    return "Erlang compiler";
-  }
+	@Override
+	public JComponent createComponent()
+	{
+		return myRootPanel;
+	}
 
-  @Override
-  public String getDisplayName() {
-    return "Erlang Compiler";
-  }
+	@Override
+	public void reset()
+	{
 
-  @Override
-  public JComponent createComponent() {
-    return myRootPanel;
-  }
+		myAddDebugInfoCheckBox.setSelected(mySettings.isAddDebugInfoEnabled());
+	}
 
-  @Override
-  public void reset() {
-    boolean rebarPathIsSet = StringUtil.isNotEmpty(RebarSettings.getInstance(myProject).getRebarPath());
-    myUseRebarCompilerCheckBox.setEnabled(rebarPathIsSet);
-    myConfigureRebarButton.setVisible(!rebarPathIsSet);
-    myUseRebarCompilerCheckBox.setSelected(rebarPathIsSet && mySettings.isUseRebarCompilerEnabled());
-    myAddDebugInfoCheckBox.setSelected(mySettings.isAddDebugInfoEnabled());
-  }
+	@Override
+	public void apply() throws ConfigurationException
+	{
+		mySettings.setAddDebugInfoEnabled(myAddDebugInfoCheckBox.isSelected());
+	}
 
-  @Override
-  public void apply() throws ConfigurationException {
-    mySettings.setUseRebarCompilerEnabled(myUseRebarCompilerCheckBox.isSelected());
-    mySettings.setAddDebugInfoEnabled(myAddDebugInfoCheckBox.isSelected());
-  }
-
-  @Override
-  public boolean isModified() {
-    return myUseRebarCompilerCheckBox.isSelected() != mySettings.isUseRebarCompilerEnabled();
-  }
+	@Override
+	public boolean isModified()
+	{
+		return mySettings.isAddDebugInfoEnabled() != myAddDebugInfoCheckBox.isSelected();
+	}
 }

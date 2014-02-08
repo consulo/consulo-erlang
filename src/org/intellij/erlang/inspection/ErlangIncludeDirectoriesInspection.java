@@ -23,6 +23,7 @@ import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
+import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 
 public class ErlangIncludeDirectoriesInspection extends LocalInspectionTool {
@@ -49,13 +50,13 @@ public class ErlangIncludeDirectoriesInspection extends LocalInspectionTool {
   }
 
   private static List<VirtualFile> getIncludeFoldersNotMarkedAsIncludeDirectories(Module module) {
-    final List<VirtualFile> includeDirectories = ErlangIncludeDirectoryUtil.getIncludeDirectories(module);
+    final VirtualFile[] includeDirectories = ErlangIncludeDirectoryUtil.getIncludeDirectories(module);
     List<VirtualFile> includeFolders = getIncludeFolders(module);
     return ContainerUtil.filter(includeFolders, new Condition<VirtualFile>() {
       @Override
       public boolean value(VirtualFile includeFolderPath) {
-        return !includeDirectories.contains(includeFolderPath);
-      }
+        return !ArrayUtil.contains(includeFolderPath, includeDirectories);
+	  }
     });
   }
 

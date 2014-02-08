@@ -16,6 +16,30 @@
 
 package org.intellij.erlang;
 
+import static com.intellij.patterns.PlatformPatterns.psiElement;
+import static com.intellij.patterns.StandardPatterns.instanceOf;
+
+import gnu.trove.THashSet;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+
+import javax.swing.Icon;
+
+import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
+import org.intellij.erlang.parser.ErlangLexer;
+import org.intellij.erlang.parser.ErlangParserUtil;
+import org.intellij.erlang.psi.*;
+import org.intellij.erlang.psi.impl.ErlangFileImpl;
+import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
+import org.intellij.erlang.psi.impl.ErlangVariableReferenceImpl;
+import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
+import org.intellij.erlang.types.ErlangExpressionType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.completion.util.ParenthesesInsertHandler;
 import com.intellij.codeInsight.lookup.LookupElement;
@@ -34,7 +58,13 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiComment;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiFileFactory;
+import com.intellij.psi.PsiPolyVariantReference;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
@@ -46,26 +76,6 @@ import com.intellij.util.Function;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.text.CaseInsensitiveStringHashingStrategy;
-import gnu.trove.THashSet;
-import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
-import org.intellij.erlang.parser.ErlangLexer;
-import org.intellij.erlang.parser.ErlangParserUtil;
-import org.intellij.erlang.psi.*;
-import org.intellij.erlang.psi.impl.ErlangFileImpl;
-import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.intellij.erlang.psi.impl.ErlangVariableReferenceImpl;
-import org.intellij.erlang.rebar.util.RebarConfigUtil;
-import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
-import org.intellij.erlang.sdk.ErlangSystemUtil;
-import org.intellij.erlang.types.ErlangExpressionType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.util.*;
-
-import static com.intellij.patterns.PlatformPatterns.psiElement;
-import static com.intellij.patterns.StandardPatterns.instanceOf;
 
 public class ErlangCompletionContributor extends CompletionContributor {
   public static final int MODULE_PRIORITY = -15;
@@ -381,18 +391,6 @@ public class ErlangCompletionContributor extends CompletionContributor {
     Module module = ModuleUtilCore.findModuleForPsiElement(file);
     for (VirtualFile includeDir : ErlangIncludeDirectoryUtil.getIncludeDirectories(module)) {
       result.addAll(getModulePathLookupElements(includeDir, includeOwner, includeText));
-    }
-    if (ErlangSystemUtil.isSmallIde()) {
-      VirtualFile otpAppRoot = ErlangPsiImplUtil.getContainingOtpAppRoot(file.getProject(), includeOwner);
-      VirtualFile otpIncludeDirectory = otpAppRoot != null ? otpAppRoot.findChild("include") : null;
-      result.addAll(getModulePathLookupElements(otpIncludeDirectory, includeOwner, includeText));
-      ErlangFile rebarConfigPsi = RebarConfigUtil.getRebarConfig(file.getProject(), otpAppRoot);
-      if (rebarConfigPsi != null && otpAppRoot != null) {
-        for (String relativeIncludePath : ContainerUtil.reverse(RebarConfigUtil.getIncludePaths(rebarConfigPsi))) {
-          VirtualFile includePath = VfsUtilCore.findRelativeFile(relativeIncludePath, otpAppRoot);
-          result.addAll(getModulePathLookupElements(includePath, includeOwner, includeText));
-        }
-      }
     }
     return result;
   }

@@ -16,13 +16,15 @@
 
 package org.intellij.erlang.debugger.remote.ui;
 
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.intellij.erlang.debugger.remote.ErlangRemoteDebugRunConfiguration;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.roots.ui.configuration.ModulesCombobox;
-import org.intellij.erlang.debugger.remote.ErlangRemoteDebugRunConfiguration;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 
 public class ErlangRemoteDebugConfigurationEditorForm extends SettingsEditor<ErlangRemoteDebugRunConfiguration> {
   private JPanel myComponent;
@@ -32,7 +34,7 @@ public class ErlangRemoteDebugConfigurationEditorForm extends SettingsEditor<Erl
 
   @Override
   protected void resetEditorFrom(ErlangRemoteDebugRunConfiguration configuration) {
-    myModuleComboBox.fillModules(configuration.getProject(), ErlangModuleType.getInstance());
+    myModuleComboBox.fillModules(configuration.getProject());
     myModuleComboBox.setSelectedModule(configuration.getConfigurationModule().getModule());
     myNodeTextField.setText(configuration.getErlangNode());
     myCookieTextField.setText(configuration.getCookie());

@@ -15,7 +15,7 @@ import com.intellij.ui.JBColor;
  */
 public class ErlangIncludeContentFolderTypeProvider extends BaseContentFolderTypeProvider
 {
-	public static final Color COLOR = new JBColor(new Color(225, 190, 185), new Color(225, 190, 185));
+	public static final Color COLOR = new JBColor(new Color(140, 123, 79), new Color(140, 123, 79));
 
 	@NotNull
 	public static ErlangIncludeContentFolderTypeProvider getInstance()

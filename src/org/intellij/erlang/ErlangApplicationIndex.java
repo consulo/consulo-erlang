@@ -16,185 +16,230 @@
 
 package org.intellij.erlang;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.CompilerModuleExtension;
-import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.Processor;
-import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.indexing.*;
-import com.intellij.util.io.EnumeratorStringDescriptor;
-import com.intellij.util.io.KeyDescriptor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class ErlangApplicationIndex extends ScalarIndexExtension<String> {
-  public static final ID<String, Void> ERLANG_APPLICAION_INDEX = ID.create("ErlangApplicationIndex");
+import org.consulo.compiler.ModuleCompilerPathsManager;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.roots.impl.ProductionContentFolderTypeProvider;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.Processor;
+import com.intellij.util.containers.ContainerUtil;
+import com.intellij.util.indexing.DataIndexer;
+import com.intellij.util.indexing.FileBasedIndex;
+import com.intellij.util.indexing.FileContent;
+import com.intellij.util.indexing.ID;
+import com.intellij.util.indexing.ScalarIndexExtension;
+import com.intellij.util.io.EnumeratorStringDescriptor;
+import com.intellij.util.io.KeyDescriptor;
 
-  private static final FileBasedIndex.InputFilter INPUT_FILTER = new ErlangApplicationInputFilter();
-  private static final int INDEX_VERSION = 1;
-  private static final KeyDescriptor<String> KEY_DESCRIPTOR = new EnumeratorStringDescriptor();
-  private static final DataIndexer<String, Void, FileContent> DATA_INDEXER = new ErlangApplicationDataIndexer();
-  private static final String APP_SRC = ".app.src";
+public class ErlangApplicationIndex extends ScalarIndexExtension<String>
+{
+	public static final ID<String, Void> ERLANG_APPLICAION_INDEX = ID.create("ErlangApplicationIndex");
 
-  @NotNull
-  @Override
-  public ID<String, Void> getName() {
-    return ERLANG_APPLICAION_INDEX;
-  }
+	private static final FileBasedIndex.InputFilter INPUT_FILTER = new ErlangApplicationInputFilter();
+	private static final int INDEX_VERSION = 1;
+	private static final KeyDescriptor<String> KEY_DESCRIPTOR = new EnumeratorStringDescriptor();
+	private static final DataIndexer<String, Void, FileContent> DATA_INDEXER = new ErlangApplicationDataIndexer();
+	private static final String APP_SRC = ".app.src";
 
-  @NotNull
-  @Override
-  public DataIndexer<String, Void, FileContent> getIndexer() {
-    return DATA_INDEXER;
-  }
+	@NotNull
+	@Override
+	public ID<String, Void> getName()
+	{
+		return ERLANG_APPLICAION_INDEX;
+	}
 
-  @Override
-  public KeyDescriptor<String> getKeyDescriptor() {
-    return KEY_DESCRIPTOR;
-  }
+	@NotNull
+	@Override
+	public DataIndexer<String, Void, FileContent> getIndexer()
+	{
+		return DATA_INDEXER;
+	}
 
-  @Override
-  public FileBasedIndex.InputFilter getInputFilter() {
-    return INPUT_FILTER;
-  }
+	@Override
+	public KeyDescriptor<String> getKeyDescriptor()
+	{
+		return KEY_DESCRIPTOR;
+	}
 
-  @Override
-  public boolean dependsOnFileContent() {
-    return false;
-  }
+	@Override
+	public FileBasedIndex.InputFilter getInputFilter()
+	{
+		return INPUT_FILTER;
+	}
 
-  @Override
-  public int getVersion() {
-    return INDEX_VERSION;
-  }
+	@Override
+	public boolean dependsOnFileContent()
+	{
+		return false;
+	}
 
-  @Nullable
-  public static VirtualFile getApplicationDirectoryByName(@NotNull String appName, @NotNull GlobalSearchScope searchScope) {
-    ApplicationPathExtractingProcessor processor = new ApplicationPathExtractingProcessor();
-    FileBasedIndex.getInstance().processValues(ERLANG_APPLICAION_INDEX, appName, null, processor, searchScope);
-    Project project = searchScope.getProject();
-    if (project != null) {
-      processAppFiles(getAppFilesFromEbinDirectories(project), appName, processor);
-    }
+	@Override
+	public int getVersion()
+	{
+		return INDEX_VERSION;
+	}
 
-    return processor.getApplicationPath();
-  }
+	@Nullable
+	public static VirtualFile getApplicationDirectoryByName(@NotNull String appName, @NotNull GlobalSearchScope searchScope)
+	{
+		ApplicationPathExtractingProcessor processor = new ApplicationPathExtractingProcessor();
+		FileBasedIndex.getInstance().processValues(ERLANG_APPLICAION_INDEX, appName, null, processor, searchScope);
+		Project project = searchScope.getProject();
+		if(project != null)
+		{
+			processAppFiles(getAppFilesFromEbinDirectories(project), appName, processor);
+		}
 
-  public static List<VirtualFile> getAllApplicationDirectories(@NotNull Project project, @NotNull final GlobalSearchScope searchScope) {
-    final ArrayList<VirtualFile> result = new ArrayList<VirtualFile>();
-    final FileBasedIndex index = FileBasedIndex.getInstance();
-    final List<VirtualFile> appFilesFromEbinDirectories = getAppFilesFromEbinDirectories(project);
+		return processor.getApplicationPath();
+	}
 
-    index.processAllKeys(ERLANG_APPLICAION_INDEX, new Processor<String>() {
-      @Override
-      public boolean process(String appName) {
-        ApplicationPathExtractingProcessor processor = new ApplicationPathExtractingProcessor();
-        index.processValues(ERLANG_APPLICAION_INDEX, appName, null, processor, searchScope);
-        processAppFiles(appFilesFromEbinDirectories, appName, processor);
-        //TODO examine: processor does not get called for some appNames when running
-        //              ErlangSmallIdeHighlightingTest.testIncludeFromOtpIncludeDirResolve()
-        //              it seems, that index is reused for different tests, thus we obtain keys (appNames)
-        //              which are not valid anymore...
-        ContainerUtil.addIfNotNull(processor.getApplicationPath(), result);
-        return true;
-      }
-    }, project);
+	public static List<VirtualFile> getAllApplicationDirectories(@NotNull Project project, @NotNull final GlobalSearchScope searchScope)
+	{
+		final ArrayList<VirtualFile> result = new ArrayList<VirtualFile>();
+		final FileBasedIndex index = FileBasedIndex.getInstance();
+		final List<VirtualFile> appFilesFromEbinDirectories = getAppFilesFromEbinDirectories(project);
 
-    return result;
-  }
+		index.processAllKeys(ERLANG_APPLICAION_INDEX, new Processor<String>()
+		{
+			@Override
+			public boolean process(String appName)
+			{
+				ApplicationPathExtractingProcessor processor = new ApplicationPathExtractingProcessor();
+				index.processValues(ERLANG_APPLICAION_INDEX, appName, null, processor, searchScope);
+				processAppFiles(appFilesFromEbinDirectories, appName, processor);
+				//TODO examine: processor does not get called for some appNames when running
+				//              ErlangSmallIdeHighlightingTest.testIncludeFromOtpIncludeDirResolve()
+				//              it seems, that index is reused for different tests, thus we obtain keys (appNames)
+				//              which are not valid anymore...
+				ContainerUtil.addIfNotNull(processor.getApplicationPath(), result);
+				return true;
+			}
+		}, project);
 
-  private static void processAppFiles(List<VirtualFile> appFiles, String appName, FileBasedIndex.ValueProcessor<Void> processor) {
-    for (VirtualFile appFile : appFiles) {
-      if (appName.equals(getApplicationName(appFile))) {
-        processor.process(appFile, null);
-      }
-    }
-  }
+		return result;
+	}
 
-  public static List<VirtualFile> getAppFilesFromEbinDirectories(Project project) {
-    List<VirtualFile> appFiles = new ArrayList<VirtualFile>();
-    for (Module m : ModuleManager.getInstance(project).getModules()) {
-      CompilerModuleExtension moduleExtension = ModuleRootManager.getInstance(m).getModuleExtension(CompilerModuleExtension.class);
-      VirtualFile compilerOutputPath = moduleExtension != null ? moduleExtension.getCompilerOutputPath() : null;
+	private static void processAppFiles(List<VirtualFile> appFiles, String appName, FileBasedIndex.ValueProcessor<Void> processor)
+	{
+		for(VirtualFile appFile : appFiles)
+		{
+			if(appName.equals(getApplicationName(appFile)))
+			{
+				processor.process(appFile, null);
+			}
+		}
+	}
 
-      if (compilerOutputPath == null || !compilerOutputPath.isDirectory()) continue;
+	public static List<VirtualFile> getAppFilesFromEbinDirectories(Project project)
+	{
+		List<VirtualFile> appFiles = new ArrayList<VirtualFile>();
+		for(Module m : ModuleManager.getInstance(project).getModules())
+		{
+			ModuleCompilerPathsManager moduleCompilerPathsManager = ModuleCompilerPathsManager.getInstance(m);
 
-      for (VirtualFile file : compilerOutputPath.getChildren()) {
-        if (ErlangApplicationInputFilter.isApplicationFile(file)) {
-          appFiles.add(file);
-        }
-      }
-    }
-    return appFiles;
-  }
+			VirtualFile compilerOutputPath = moduleCompilerPathsManager.getCompilerOutput(ProductionContentFolderTypeProvider.getInstance());
 
-  @Nullable
-  private static VirtualFile getLibraryDirectory(VirtualFile appFile) {
-    VirtualFile parent = appFile.getParent();
-    return parent != null ? parent.getParent() : null;
-  }
+			if(compilerOutputPath == null || !compilerOutputPath.isDirectory())
+			{
+				continue;
+			}
 
-  private static class ApplicationPathExtractingProcessor implements FileBasedIndex.ValueProcessor<Void> {
-    private VirtualFile myPath = null;
+			for(VirtualFile file : compilerOutputPath.getChildren())
+			{
+				if(ErlangApplicationInputFilter.isApplicationFile(file))
+				{
+					appFiles.add(file);
+				}
+			}
+		}
+		return appFiles;
+	}
 
-    @Override
-    public boolean process(VirtualFile appFile, @Nullable Void value) {
-      VirtualFile libDir = getLibraryDirectory(appFile);
-      if (libDir == null) return true;
-      String appName = getApplicationName(appFile);
-      //applications with no version specification have higher priority
-      if (myPath == null || appName.equals(libDir.getName())) {
-        myPath = libDir;
-        return true;
-      }
-      if (appName.equals(myPath.getName())) return true;
-      myPath = myPath.getName().compareTo(libDir.getName()) < 0 ? libDir : myPath;
-      return true;
-    }
+	@Nullable
+	private static VirtualFile getLibraryDirectory(VirtualFile appFile)
+	{
+		VirtualFile parent = appFile.getParent();
+		return parent != null ? parent.getParent() : null;
+	}
 
-    public VirtualFile getApplicationPath() {
-      return myPath;
-    }
-  }
+	private static class ApplicationPathExtractingProcessor implements FileBasedIndex.ValueProcessor<Void>
+	{
+		private VirtualFile myPath = null;
 
-  private static class ErlangApplicationInputFilter implements FileBasedIndex.InputFilter {
-    @Override
-    public boolean acceptInput(VirtualFile file) {
-      return isApplicationFile(file) && isInsideEbinOrSrcDirectory(file);
-    }
+		@Override
+		public boolean process(VirtualFile appFile, @Nullable Void value)
+		{
+			VirtualFile libDir = getLibraryDirectory(appFile);
+			if(libDir == null)
+			{
+				return true;
+			}
+			String appName = getApplicationName(appFile);
+			//applications with no version specification have higher priority
+			if(myPath == null || appName.equals(libDir.getName()))
+			{
+				myPath = libDir;
+				return true;
+			}
+			if(appName.equals(myPath.getName()))
+			{
+				return true;
+			}
+			myPath = myPath.getName().compareTo(libDir.getName()) < 0 ? libDir : myPath;
+			return true;
+		}
 
-    private static boolean isApplicationFile(VirtualFile file) {
-      return file != null && file.getFileType() == ErlangFileType.APP;
-    }
-    
-    private static boolean isInsideEbinOrSrcDirectory(VirtualFile file) {
-      VirtualFile parentDirectory = file.getParent();
-      String parentDirectoryName = parentDirectory != null ? parentDirectory.getName() : null;
-      return null != parentDirectoryName && ("src".equals(parentDirectoryName) || "ebin".equals(parentDirectoryName));
-    }
-  }
+		public VirtualFile getApplicationPath()
+		{
+			return myPath;
+		}
+	}
 
-  private static class ErlangApplicationDataIndexer implements DataIndexer<String, Void, FileContent> {
-    @NotNull
-    @Override
-    public Map<String, Void> map(FileContent inputData) {
-      return Collections.singletonMap(getApplicationName(inputData.getFile()), null);
-    }
-  }
+	private static class ErlangApplicationInputFilter implements FileBasedIndex.InputFilter
+	{
+		@Override
+		public boolean acceptInput(Project project, VirtualFile file)
+		{
+			return isApplicationFile(file) && isInsideEbinOrSrcDirectory(file);
+		}
 
-  @NotNull
-  private static String getApplicationName(VirtualFile appFile) {
-    String filename = appFile.getName();
-    return filename.endsWith(APP_SRC) ? StringUtil.trimEnd(filename, APP_SRC) : appFile.getNameWithoutExtension();
-  }
+		private static boolean isApplicationFile(VirtualFile file)
+		{
+			return file != null && file.getFileType() == ErlangFileType.APP;
+		}
+
+		private static boolean isInsideEbinOrSrcDirectory(VirtualFile file)
+		{
+			VirtualFile parentDirectory = file.getParent();
+			String parentDirectoryName = parentDirectory != null ? parentDirectory.getName() : null;
+			return null != parentDirectoryName && ("src".equals(parentDirectoryName) || "ebin".equals(parentDirectoryName));
+		}
+	}
+
+	private static class ErlangApplicationDataIndexer implements DataIndexer<String, Void, FileContent>
+	{
+		@NotNull
+		@Override
+		public Map<String, Void> map(FileContent inputData)
+		{
+			return Collections.singletonMap(getApplicationName(inputData.getFile()), null);
+		}
+	}
+
+	@NotNull
+	private static String getApplicationName(VirtualFile appFile)
+	{
+		String filename = appFile.getName();
+		return filename.endsWith(APP_SRC) ? StringUtil.trimEnd(filename, APP_SRC) : appFile.getNameWithoutExtension();
+	}
 }

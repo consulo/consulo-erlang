@@ -1,5 +1,10 @@
 package org.intellij.erlang.rebar.runner;
 
+import java.util.List;
+
+import org.intellij.erlang.utils.ErlangExternalToolsNotificationListener;
+import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.erlang.rebar.module.RebarModuleUtil;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.OSProcessHandler;
@@ -8,11 +13,6 @@ import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.rebar.settings.RebarSettings;
-import org.intellij.erlang.utils.ErlangExternalToolsNotificationListener;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class RebarRunningStateUtil {
   private RebarRunningStateUtil() {
@@ -20,11 +20,12 @@ public class RebarRunningStateUtil {
 
   public static GeneralCommandLine getRebarCommandLine(@NotNull RebarRunConfigurationBase configuration) {
     Project project = configuration.getProject();
-    RebarSettings rebarSettings = RebarSettings.getInstance(project);
+
+
     GeneralCommandLine commandLine = new GeneralCommandLine();
 
     commandLine.setWorkDirectory(project.getBasePath());
-    commandLine.setExePath(rebarSettings.getRebarPath());
+    commandLine.setExePath(RebarModuleUtil.getRebarPath(null));
 
     List<String> split = ContainerUtil.list(configuration.getCommand().split("\\s+"));
     if (configuration.isSkipDependencies() && !split.contains("skip_deps=true")) {

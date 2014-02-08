@@ -16,22 +16,37 @@
 
 package org.intellij.erlang.inspection;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.intellij.erlang.ErlangLanguage;
+import org.intellij.erlang.psi.ErlangAttribute;
+import org.intellij.erlang.psi.ErlangClauseBody;
+import org.intellij.erlang.psi.ErlangCompositeElement;
+import org.intellij.erlang.psi.ErlangExpression;
+import org.intellij.erlang.psi.ErlangFunction;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.codeInsight.daemon.impl.actions.AbstractSuppressByNoInspectionCommentFix;
-import com.intellij.codeInspection.*;
+import com.intellij.codeInspection.CustomSuppressableInspectionTool;
+import com.intellij.codeInspection.InspectionManager;
+import com.intellij.codeInspection.LocalInspectionTool;
+import com.intellij.codeInspection.ProblemDescriptor;
+import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.codeInspection.SuppressIntentionAction;
+import com.intellij.codeInspection.SuppressionUtil;
 import com.intellij.lang.Commenter;
 import com.intellij.lang.LanguageCommenters;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiComment;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiInvalidElementAccessException;
+import com.intellij.psi.PsiParserFacade;
+import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.ObjectUtils;
-import org.intellij.erlang.ErlangLanguage;
-import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 abstract public class ErlangInspectionBase extends LocalInspectionTool implements CustomSuppressableInspectionTool {
   private static final Pattern SUPPRESS_PATTERN = Pattern.compile(SuppressionUtil.COMMON_SUPPRESS_REGEXP);
@@ -137,7 +152,7 @@ abstract public class ErlangInspectionBase extends LocalInspectionTool implement
     @Override
     protected void createSuppression(@NotNull Project project, @NotNull PsiElement element, @NotNull PsiElement container) throws IncorrectOperationException {
       final PsiParserFacade parserFacade = PsiParserFacade.SERVICE.getInstance(project);
-      final String text = SuppressionUtilCore.SUPPRESS_INSPECTIONS_TAG_NAME + " " + myID;
+      final String text = "noinspection " + myID;
       PsiComment comment = parserFacade.createLineOrBlockCommentFromText(element.getContainingFile().getLanguage(), text);
       PsiElement where = container.getParent().addBefore(comment, container);
       PsiElement spaceFromText = PsiParserFacade.SERVICE.getInstance(project).createWhiteSpaceFromText("\n");

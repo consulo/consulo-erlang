@@ -16,21 +16,27 @@
 
 package org.intellij.erlang.eunit.ui;
 
-import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.options.SettingsEditor;
-import com.intellij.openapi.roots.ui.configuration.ModulesCombobox;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.ui.ListCellRendererWrapper;
-import org.intellij.erlang.eunit.ErlangUnitRunConfiguration;
-import org.jetbrains.annotations.NotNull;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import org.intellij.erlang.eunit.ErlangUnitRunConfiguration;
+import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.options.SettingsEditor;
+import com.intellij.openapi.roots.ui.configuration.ModulesCombobox;
+import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.ui.ListCellRendererWrapper;
 
 public class ErlangUnitRunConfigurationEditorForm extends SettingsEditor<ErlangUnitRunConfiguration> {
   private JPanel component;
@@ -52,7 +58,7 @@ public class ErlangUnitRunConfigurationEditorForm extends SettingsEditor<ErlangU
 
   @Override
   protected void resetEditorFrom(ErlangUnitRunConfiguration configuration) {
-    myModuleComboBox.fillModules(configuration.getProject(), ErlangModuleType.getInstance());
+    myModuleComboBox.fillModules(configuration.getProject());
     myModuleComboBox.setSelectedModule(configuration.getConfigurationModule().getModule());
 
     ErlangUnitRunConfiguration.ErlangUnitConfigData configData = configuration.getConfigData();

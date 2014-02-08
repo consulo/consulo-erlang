@@ -16,29 +16,35 @@
 
 package org.intellij.erlang.utils;
 
+import javax.swing.event.HyperlinkEvent;
+
+import org.jetbrains.annotations.NotNull;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationListener;
 import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.project.Project;
-import org.intellij.erlang.settings.ErlangExternalToolsConfigurable;
-import org.jetbrains.annotations.NotNull;
 
-import javax.swing.event.HyperlinkEvent;
+public class ErlangExternalToolsNotificationListener implements NotificationListener
+{
+	public static final String ERLANG_RELATED_TOOLS = "Erlang External Tools";
 
-public class ErlangExternalToolsNotificationListener implements NotificationListener {
-  @NotNull
-  private final Project myProject;
+	@NotNull
+	private final Project myProject;
 
-  public ErlangExternalToolsNotificationListener(@NotNull Project project) {
-    myProject = project;
-  }
+	public ErlangExternalToolsNotificationListener(@NotNull Project project)
+	{
+		myProject = project;
+	}
 
-  @Override
-  public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent event) {
-    if (event.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
-      if (event.getDescription().equals("configure") && !myProject.isDisposed()) {
-        ShowSettingsUtil.getInstance().showSettingsDialog(myProject, ErlangExternalToolsConfigurable.ERLANG_RELATED_TOOLS);
-      }
-    }
-  }
+	@Override
+	public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent event)
+	{
+		if(event.getEventType() == HyperlinkEvent.EventType.ACTIVATED)
+		{
+			if(event.getDescription().equals("configure") && !myProject.isDisposed())
+			{
+				ShowSettingsUtil.getInstance().showSettingsDialog(myProject, ERLANG_RELATED_TOOLS);
+			}
+		}
+	}
 }

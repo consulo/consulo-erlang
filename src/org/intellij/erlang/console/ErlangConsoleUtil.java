@@ -16,22 +16,29 @@
 
 package org.intellij.erlang.console;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.consulo.compiler.ModuleCompilerPathsManager;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
+import org.mustbe.consulo.roots.impl.ProductionContentFolderTypeProvider;
+import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.CompilerModuleExtension;
 import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Processor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
-import java.util.*;
 
 public final class ErlangConsoleUtil {
   public static final String EUNIT_FAILURE_PATH = "\\[\\{file,\"" + FileReferenceFilter.PATH_MACROS + "\"\\},\\{line," + FileReferenceFilter.LINE_MACROS + "\\}\\]";
@@ -72,11 +79,10 @@ public final class ErlangConsoleUtil {
     final List<String> codePath = new ArrayList<String>(codePathModules.size() * 2);
     for (Module codePathModule : codePathModules) {
       final ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(codePathModule);
-      final CompilerModuleExtension compilerModuleExt =
-        moduleRootManager.getModuleExtension(CompilerModuleExtension.class);
+      final ModuleCompilerPathsManager compilerModuleExt = ModuleCompilerPathsManager.getInstance(codePathModule);
       final VirtualFile buildOutput = useTestOutputPath && codePathModule == module ?
         getCompilerOutputPathForTests(compilerModuleExt) : 
-        compilerModuleExt.getCompilerOutputPath();
+        compilerModuleExt.getCompilerOutput(ProductionContentFolderTypeProvider.getInstance());
       if (buildOutput != null) {
         codePath.add("-pa");
         codePath.add(buildOutput.getCanonicalPath());
@@ -91,9 +97,9 @@ public final class ErlangConsoleUtil {
   }
 
   @Nullable
-  private static VirtualFile getCompilerOutputPathForTests(CompilerModuleExtension module) {
-    final VirtualFile testPath = module.getCompilerOutputPathForTests();
-    return testPath == null || !testPath.exists() ? module.getCompilerOutputPath() : testPath;
+  private static VirtualFile getCompilerOutputPathForTests(ModuleCompilerPathsManager module) {
+    final VirtualFile testPath = module.getCompilerOutput(TestContentFolderTypeProvider.getInstance());
+    return testPath == null || !testPath.exists() ? module.getCompilerOutput(ProductionContentFolderTypeProvider.getInstance()) : testPath;
   }
 
   @NotNull
@@ -106,13 +112,8 @@ public final class ErlangConsoleUtil {
 
   @NotNull
   static String getErlPath(@NotNull Project project, @Nullable Module module) throws ExecutionException {
-    final Sdk sdk;
-    if (module != null) {
-      sdk = ModuleRootManager.getInstance(module).getSdk();
-    }
-    else {
-      sdk = ProjectRootManager.getInstance(project).getProjectSdk();
-    }
+    Sdk sdk = module != null ? ModuleUtilCore.getSdk(module, ErlangModuleExtension.class) : null;
+
     if (sdk == null) {
       throw new ExecutionException("Erlang SDK is not configured");
     }

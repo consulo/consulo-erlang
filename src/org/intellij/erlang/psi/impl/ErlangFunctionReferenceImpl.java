@@ -16,30 +16,39 @@
 
 package org.intellij.erlang.psi.impl;
 
-import com.intellij.openapi.module.Module;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.intellij.erlang.ErlangModuleIndex;
+import org.intellij.erlang.bif.ErlangBifTable;
+import org.intellij.erlang.psi.ErlangCallbackSpec;
+import org.intellij.erlang.psi.ErlangExportFunction;
+import org.intellij.erlang.psi.ErlangFile;
+import org.intellij.erlang.psi.ErlangFunction;
+import org.intellij.erlang.psi.ErlangImportFunction;
+import org.intellij.erlang.psi.ErlangQAtom;
+import org.intellij.erlang.sdk.ErlangSdkRelease;
+import org.intellij.erlang.sdk.ErlangSdkType;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.*;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementResolveResult;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiPolyVariantReferenceBase;
+import com.intellij.psi.PsiReference;
+import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.ErlangModuleIndex;
-import org.intellij.erlang.bif.ErlangBifTable;
-import org.intellij.erlang.psi.*;
-import org.intellij.erlang.sdk.ErlangSdkRelease;
-import org.intellij.erlang.sdk.ErlangSdkType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class ErlangFunctionReferenceImpl<T extends ErlangQAtom> extends PsiPolyVariantReferenceBase<T> {
   @Nullable
@@ -85,8 +94,7 @@ public class ErlangFunctionReferenceImpl<T extends ErlangQAtom> extends PsiPolyV
       ErlangFunction implicitFunction = getExternalFunction("erlang");
       if (implicitFunction != null) return implicitFunction;
 
-      Module module = ModuleUtilCore.findModuleForPsiElement(erlangFile);
-      Sdk sdk = module == null ? null : ModuleRootManager.getInstance(module).getSdk();
+      Sdk sdk = ModuleUtilCore.getSdk(erlangFile, ErlangModuleExtension.class);
       ErlangSdkRelease release = sdk != null ? ErlangSdkType.getRelease(sdk) : null;
 
       if ((release == null || release.needBifCompletion("erlang")) && ErlangBifTable.isBif("erlang", myReferenceName, myArity)) {

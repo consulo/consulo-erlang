@@ -1,5 +1,32 @@
 package org.intellij.erlang.debugger.xdebug;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.intellij.erlang.ErlangFileType;
+import org.intellij.erlang.debugger.node.ErlangDebuggerEventListener;
+import org.intellij.erlang.debugger.node.ErlangDebuggerNode;
+import org.intellij.erlang.debugger.node.ErlangDebuggerNodeException;
+import org.intellij.erlang.debugger.node.ErlangProcessSnapshot;
+import org.intellij.erlang.debugger.remote.ErlangRemoteDebugRunConfiguration;
+import org.intellij.erlang.debugger.remote.ErlangRemoteDebugRunningState;
+import org.intellij.erlang.psi.ErlangFile;
+import org.intellij.erlang.psi.ErlangModule;
+import org.intellij.erlang.runconfig.ErlangRunConfigurationBase;
+import org.intellij.erlang.runconfig.ErlangRunningState;
+import org.intellij.erlang.sdk.ErlangSdkType;
+import org.intellij.erlang.utils.ErlangModulesUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
 import com.ericsson.otp.erlang.OtpErlangPid;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
@@ -12,9 +39,9 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.util.Condition;
 import com.intellij.openapi.util.io.FileUtil;
@@ -32,28 +59,6 @@ import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.evaluation.EvaluationMode;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
-import org.intellij.erlang.ErlangFileType;
-import org.intellij.erlang.debugger.node.ErlangDebuggerEventListener;
-import org.intellij.erlang.debugger.node.ErlangDebuggerNode;
-import org.intellij.erlang.debugger.node.ErlangDebuggerNodeException;
-import org.intellij.erlang.debugger.node.ErlangProcessSnapshot;
-import org.intellij.erlang.debugger.remote.ErlangRemoteDebugRunConfiguration;
-import org.intellij.erlang.debugger.remote.ErlangRemoteDebugRunningState;
-import org.intellij.erlang.psi.ErlangFile;
-import org.intellij.erlang.psi.ErlangModule;
-import org.intellij.erlang.runconfig.ErlangRunConfigurationBase;
-import org.intellij.erlang.runconfig.ErlangRunningState;
-import org.intellij.erlang.sdk.ErlangSdkType;
-import org.intellij.erlang.utils.ErlangModulesUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.*;
-import java.net.URL;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class ErlangXDebugProcess extends XDebugProcess {
   private final ExecutionEnvironment myExecutionEnvironment;
@@ -298,7 +303,7 @@ public class ErlangXDebugProcess extends XDebugProcess {
 
   private void runDebugTarget() throws ExecutionException {
     ErlangRunningState runningState = createRunningState();
-    Sdk sdk = ModuleRootManager.getInstance(runningState.getModule()).getSdk();
+    Sdk sdk = ModuleUtilCore.getSdk(runningState.getModule(), ErlangModuleExtension.class);
     String sdkHome = sdk != null ? sdk.getHomePath() : null;
     assert sdkHome != null;
     File erl = ErlangSdkType.getTopLevelExecutable(sdkHome);

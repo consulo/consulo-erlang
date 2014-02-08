@@ -16,6 +16,21 @@
 
 package org.intellij.erlang.navigation;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.swing.Icon;
+
+import org.intellij.erlang.ErlangIcons;
+import org.intellij.erlang.psi.ErlangBehaviour;
+import org.intellij.erlang.psi.ErlangCallbackSpec;
+import org.intellij.erlang.psi.ErlangFile;
+import org.intellij.erlang.psi.ErlangFunction;
+import org.intellij.erlang.psi.ErlangModuleRef;
+import org.intellij.erlang.psi.ErlangSpecFun;
+import org.intellij.erlang.psi.impl.ErlangCompositeElementImpl;
+import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;
@@ -23,15 +38,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.ErlangIcons;
-import org.intellij.erlang.psi.*;
-import org.intellij.erlang.psi.impl.ErlangCompositeElementImpl;
-import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.Nullable;
-
-import javax.swing.*;
-import java.util.LinkedList;
-import java.util.List;
 
 public class ErlangNavigationUtil {
 
@@ -89,11 +95,11 @@ public class ErlangNavigationUtil {
         };
       }
 
-      @Nullable
+      /*@Nullable
       @Override
       public Icon getIcon(int flags) {
         return ErlangIcons.CALLBACK;
-      }
+      } */
     };
   }
 }
