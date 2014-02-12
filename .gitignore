@@ -4,3 +4,4 @@ bin/
 system-test/
 config-test/
 /dep
+/.consulo/workspace.xml
