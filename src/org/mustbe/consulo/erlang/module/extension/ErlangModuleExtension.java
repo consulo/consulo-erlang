@@ -11,8 +11,8 @@ import org.mustbe.consulo.erlang.module.ErlangIncludeContentFolderTypeProvider;
 import org.mustbe.consulo.roots.ContentFoldersSupport;
 import org.mustbe.consulo.roots.impl.ProductionContentFolderTypeProvider;
 import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.SdkType;
+import com.intellij.openapi.roots.ModifiableRootModel;
 
 /**
  * @author VISTALL
@@ -27,7 +27,7 @@ public class ErlangModuleExtension extends ModuleExtensionWithSdkImpl<ErlangModu
 {
 	protected List<String> myParseTransforms = new ArrayList<String>();
 
-	public ErlangModuleExtension(@NotNull String id, @NotNull Module module)
+	public ErlangModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
 	{
 		super(id, module);
 	}

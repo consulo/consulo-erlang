@@ -3,8 +3,8 @@ package org.mustbe.consulo.erlang.rebar.module.extension;
 import org.consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import org.jetbrains.annotations.NotNull;
 import org.mustbe.consulo.erlang.rebar.bundle.RebarBundleType;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.SdkType;
+import com.intellij.openapi.roots.ModifiableRootModel;
 
 /**
  * @author VISTALL
@@ -12,7 +12,7 @@ import com.intellij.openapi.projectRoots.SdkType;
  */
 public class RebarModuleExtension extends ModuleExtensionWithSdkImpl<RebarModuleExtension>
 {
-	public RebarModuleExtension(@NotNull String id, @NotNull Module module)
+	public RebarModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
 	{
 		super(id, module);
 	}

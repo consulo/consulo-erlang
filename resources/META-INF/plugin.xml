@@ -213,9 +213,17 @@
 		<additionalTextAttributes scheme="Default" file="colorSchemes/ErlangDefault.xml"/>
 		<additionalTextAttributes scheme="Darcula" file="colorSchemes/ErlangDarcula.xml"/>
 
-		<moduleExtensionProvider key="erlang" implementationClass="org.mustbe.consulo.erlang.module.extension.ErlangModuleExtensionProvider"/>
-		<moduleExtensionProvider key="rebar" parent-key="erlang"
-								 implementationClass="org.mustbe.consulo.erlang.rebar.module.extension.RebarModuleExtensionProvider"/>
+		<moduleExtensionProvider key="erlang"
+								 name="Erlang"
+								 icon="/icons/erlang-small-16.png"
+								 immutableClass="org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension"
+								 mutableClass="org.mustbe.consulo.erlang.module.extension.ErlangMutableModuleExtension"/>
+		<moduleExtensionProvider key="rebar"
+								 parentKey="erlang"
+								 name="Rebar"
+								 icon="/icons/rebar-16.png"
+								 immutableClass="org.mustbe.consulo.erlang.rebar.module.extension.RebarModuleExtension"
+								 mutableClass="org.mustbe.consulo.erlang.rebar.module.extension.RebarMutableModuleExtension"/>
 	</extensions>
 
 	<actions>
