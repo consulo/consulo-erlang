@@ -17,8 +17,9 @@ public class RebarModuleExtension extends ModuleExtensionWithSdkImpl<RebarModule
 		super(id, module);
 	}
 
+	@NotNull
 	@Override
-	protected Class<? extends SdkType> getSdkTypeClass()
+	public Class<? extends SdkType> getSdkTypeClass()
 	{
 		return RebarBundleType.class;
 	}

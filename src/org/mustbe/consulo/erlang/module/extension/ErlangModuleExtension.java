@@ -69,8 +69,9 @@ public class ErlangModuleExtension extends ModuleExtensionWithSdkImpl<ErlangModu
 		return myParseTransforms;
 	}
 
+	@NotNull
 	@Override
-	protected Class<? extends SdkType> getSdkTypeClass()
+	public Class<? extends SdkType> getSdkTypeClass()
 	{
 		return ErlangSdkType.class;
 	}

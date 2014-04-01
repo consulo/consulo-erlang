@@ -28,6 +28,12 @@ public class ErlangIncludeContentFolderTypeProvider extends BaseContentFolderTyp
 		super("ERLANG_INCLUDE");
 	}
 
+	@Override
+	public int getWeight()
+	{
+		return 125;
+	}
+
 	@NotNull
 	@Override
 	public Icon getIcon()
