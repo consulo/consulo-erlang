@@ -16,11 +16,12 @@
 
 package org.intellij.erlang;
 
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.util.text.StringUtil;
 
 public class ErlangFileTypeFactory extends FileTypeFactory {
   private static final class ExtensionFileNameMatcher implements FileNameMatcher {
@@ -31,8 +32,8 @@ public class ErlangFileTypeFactory extends FileTypeFactory {
     }
 
     @Override
-    public boolean accept(@NonNls @NotNull String fileName) {
-      return fileName.endsWith(myDotExtension);
+    public boolean accept(@NonNls @NotNull CharSequence fileName) {
+      return StringUtil.endsWith(fileName, myDotExtension);
     }
 
     @NotNull
