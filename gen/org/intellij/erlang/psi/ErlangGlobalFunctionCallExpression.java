@@ -7,7 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface ErlangGlobalFunctionCallExpression extends ErlangExpression {
 
-  @NotNull
+  @Nullable
   ErlangFunctionCallExpression getFunctionCallExpression();
 
   @Nullable
@@ -15,5 +15,11 @@ public interface ErlangGlobalFunctionCallExpression extends ErlangExpression {
 
   @Nullable
   ErlangQAtom getQAtom();
+
+  @NotNull
+  PsiElement getColon();
+
+  @Nullable
+  PsiElement getDot();
 
 }

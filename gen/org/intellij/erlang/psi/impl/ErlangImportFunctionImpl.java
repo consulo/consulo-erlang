@@ -30,11 +30,17 @@ public class ErlangImportFunctionImpl extends ErlangCompositeElementImpl impleme
 
   @Override
   @Nullable
+  public PsiElement getOpArDiv() {
+    return findChildByType(ERL_OP_AR_DIV);
+  }
+
+  @Override
+  @Nullable
   public PsiElement getInteger() {
     return findChildByType(ERL_INTEGER);
   }
 
-  @NotNull
+  @Nullable
   public PsiReference getReference() {
     return ErlangPsiImplUtil.getReference(this);
   }

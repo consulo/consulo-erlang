@@ -12,9 +12,12 @@ public interface ErlangImportFunction extends ErlangCompositeElement {
   ErlangQAtom getQAtom();
 
   @Nullable
+  PsiElement getOpArDiv();
+
+  @Nullable
   PsiElement getInteger();
 
-  @NotNull
+  @Nullable
   PsiReference getReference();
 
 }

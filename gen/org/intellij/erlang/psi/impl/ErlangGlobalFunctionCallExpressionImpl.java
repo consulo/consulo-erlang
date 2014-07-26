@@ -22,9 +22,9 @@ public class ErlangGlobalFunctionCallExpressionImpl extends ErlangExpressionImpl
   }
 
   @Override
-  @NotNull
+  @Nullable
   public ErlangFunctionCallExpression getFunctionCallExpression() {
-    return findNotNullChildByClass(ErlangFunctionCallExpression.class);
+    return findChildByClass(ErlangFunctionCallExpression.class);
   }
 
   @Override
@@ -37,6 +37,18 @@ public class ErlangGlobalFunctionCallExpressionImpl extends ErlangExpressionImpl
   @Nullable
   public ErlangQAtom getQAtom() {
     return findChildByClass(ErlangQAtom.class);
+  }
+
+  @Override
+  @NotNull
+  public PsiElement getColon() {
+    return findNotNullChildByType(ERL_COLON);
+  }
+
+  @Override
+  @Nullable
+  public PsiElement getDot() {
+    return findChildByType(ERL_DOT);
   }
 
 }
