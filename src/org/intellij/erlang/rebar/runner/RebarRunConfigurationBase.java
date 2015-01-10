@@ -1,8 +1,14 @@
 package org.intellij.erlang.rebar.runner;
 
+import org.jdom.Element;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.*;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.configurations.RuntimeConfiguration;
+import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAction;
 import com.intellij.openapi.options.SettingsEditor;
@@ -10,10 +16,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.xmlb.XmlSerializer;
-import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
 
-public abstract class RebarRunConfigurationBase extends RuntimeConfiguration implements RunConfigurationWithSuppressedDefaultRunAction, RunConfigurationWithSuppressedDefaultDebugAction {
+public abstract class RebarRunConfigurationBase extends RuntimeConfiguration implements RunConfigurationWithSuppressedDefaultRunAction {
   @NotNull
   private String myCommand = "";
   private boolean mySkipDependencies = false;

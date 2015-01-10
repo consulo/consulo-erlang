@@ -1,9 +1,7 @@
 <component name="libraryTable">
   <library name="OtpErlang">
-    <CLASSES>
+    <binaries>
       <root url="jar://$PROJECT_DIR$/libs/OtpErlang.jar!/" />
-    </CLASSES>
-    <DOCUMENTATION />
-    <SOURCES />
+    </binaries>
   </library>
 </component>
