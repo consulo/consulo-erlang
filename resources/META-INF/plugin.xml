@@ -1,6 +1,7 @@
 <idea-plugin>
 	<id>org.jetbrains.erlang</id>
 	<version>SNAPSHOT</version>
+	<category>Custom Languages</category>
 	<vendor email="sergey.ignatov@jetbrains.com">Sergey Ignatov</vendor>
 	<name>Erlang</name>
 
