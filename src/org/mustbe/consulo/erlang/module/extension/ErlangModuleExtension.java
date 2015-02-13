@@ -7,10 +7,6 @@ import org.consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import org.intellij.erlang.sdk.ErlangSdkType;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.erlang.module.ErlangIncludeContentFolderTypeProvider;
-import org.mustbe.consulo.roots.ContentFoldersSupport;
-import org.mustbe.consulo.roots.impl.ProductionContentFolderTypeProvider;
-import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.roots.ModifiableRootModel;
 
@@ -18,11 +14,6 @@ import com.intellij.openapi.roots.ModifiableRootModel;
  * @author VISTALL
  * @since 08.02.14
  */
-@ContentFoldersSupport(value = {
-		ProductionContentFolderTypeProvider.class,
-		TestContentFolderTypeProvider.class,
-		ErlangIncludeContentFolderTypeProvider.class
-})
 public class ErlangModuleExtension extends ModuleExtensionWithSdkImpl<ErlangModuleExtension>
 {
 	protected List<String> myParseTransforms = new ArrayList<String>();

@@ -17,26 +17,27 @@
 package org.intellij.erlang.sdk;
 
 import java.io.File;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.regex.Pattern;
 
 import javax.swing.Icon;
 
 import org.intellij.erlang.ErlangIcons;
-import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
-import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkAdditionalData;
-import com.intellij.openapi.projectRoots.SdkModel;
 import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.projectRoots.impl.SdkImpl;
 import com.intellij.openapi.roots.OrderRootType;
+import com.intellij.openapi.roots.types.BinariesOrderRootType;
+import com.intellij.openapi.roots.types.DocumentationOrderRootType;
+import com.intellij.openapi.roots.types.SourcesOrderRootType;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
@@ -51,7 +52,7 @@ public class ErlangSdkType extends SdkType
 	@NotNull
 	public static ErlangSdkType getInstance()
 	{
-		return SdkType.findInstance(ErlangSdkType.class);
+		return EP_NAME.findExtension(ErlangSdkType.class);
 	}
 
 	public ErlangSdkType()
@@ -66,9 +67,26 @@ public class ErlangSdkType extends SdkType
 		return ErlangIcons.ERLANG;
 	}
 
-	@Nullable
+	@NotNull
 	@Override
-	public String suggestHomePath()
+	public Collection<String> suggestHomePaths()
+	{
+		String s = suggestHomePath();
+		if(s != null)
+		{
+			return Collections.singletonList(s);
+		}
+		return super.suggestHomePaths();
+	}
+
+	@Override
+	public boolean canCreatePredefinedSdks()
+	{
+		return true;
+	}
+
+	@Nullable
+	private String suggestHomePath()
 	{
 		if(SystemInfo.isWindows)
 		{
@@ -182,19 +200,6 @@ public class ErlangSdkType extends SdkType
 		return getDefaultDocumentationUrl(getRelease(sdk));
 	}
 
-	@Nullable
-	@Override
-	public AdditionalDataConfigurable createAdditionalDataConfigurable(@NotNull final SdkModel sdkModel,
-			@NotNull final SdkModificator sdkModificator)
-	{
-		return null;
-	}
-
-	@Override
-	public void saveAdditionalData(@NotNull final SdkAdditionalData additionalData, @NotNull final Element additional)
-	{
-	}
-
 	@NotNull
 	@NonNls
 	@Override
@@ -212,7 +217,8 @@ public class ErlangSdkType extends SdkType
 	@Override
 	public boolean isRootTypeApplicable(OrderRootType type)
 	{
-		return type == OrderRootType.CLASSES || type == OrderRootType.DOCUMENTATION || type == OrderRootType.SOURCES;
+		return type == BinariesOrderRootType.getInstance() || type == DocumentationOrderRootType.getInstance() || type == SourcesOrderRootType
+				.getInstance();
 	}
 
 	@TestOnly
@@ -238,7 +244,7 @@ public class ErlangSdkType extends SdkType
 		if(externalDocUrl != null)
 		{
 			final VirtualFile fileByUrl = VirtualFileManager.getInstance().findFileByUrl(externalDocUrl);
-			sdkModificator.addRoot(fileByUrl, OrderRootType.DOCUMENTATION);
+			sdkModificator.addRoot(fileByUrl, DocumentationOrderRootType.getInstance());
 		}
 		sdkModificator.commitChanges();
 	}
@@ -354,8 +360,8 @@ public class ErlangSdkType extends SdkType
 		final VirtualFile dir = LocalFileSystem.getInstance().findFileByIoFile(stdLibDir);
 		if(dir != null)
 		{
-			sdkModificator.addRoot(dir, OrderRootType.SOURCES);
-			sdkModificator.addRoot(dir, OrderRootType.CLASSES);
+			sdkModificator.addRoot(dir, BinariesOrderRootType.getInstance());
+			sdkModificator.addRoot(dir, SourcesOrderRootType.getInstance());
 		}
 		return true;
 	}

@@ -225,6 +225,8 @@
 								 icon="/icons/rebar-16.png"
 								 immutableClass="org.mustbe.consulo.erlang.rebar.module.extension.RebarModuleExtension"
 								 mutableClass="org.mustbe.consulo.erlang.rebar.module.extension.RebarMutableModuleExtension"/>
+
+		<contentFolderSupportPatcher implementation="org.mustbe.consulo.erlang.module.ErlangContentFolderSupportPatcher" />
 	</extensions>
 
 	<actions>
