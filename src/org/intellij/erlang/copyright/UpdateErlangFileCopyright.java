@@ -16,46 +16,56 @@
 
 package org.intellij.erlang.copyright;
 
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
+import org.intellij.erlang.psi.ErlangFile;
+import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.copyright.config.CopyrightFileConfig;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.maddyhome.idea.copyright.CopyrightProfile;
 import com.maddyhome.idea.copyright.psi.UpdatePsiFileCopyright;
-import org.intellij.erlang.psi.ErlangFile;
 
-public class UpdateErlangFileCopyright extends UpdatePsiFileCopyright {
+public class UpdateErlangFileCopyright extends UpdatePsiFileCopyright<CopyrightFileConfig>
+{
 
-  public UpdateErlangFileCopyright(Project project, Module module, VirtualFile root, CopyrightProfile options) {
-    super(project, module, root, options);
-  }
+	public UpdateErlangFileCopyright(@NotNull PsiFile psiFile, @NotNull CopyrightProfile copyrightProfile)
+	{
+		super(psiFile, copyrightProfile);
+	}
 
-  @Override
-  protected boolean accept() {
-    return getFile() instanceof ErlangFile;
-  }
+	@Override
+	protected boolean accept()
+	{
+		return getFile() instanceof ErlangFile;
+	}
 
-  protected void scanFile() {
-    PsiElement first = getFile().getFirstChild();
-    PsiElement last = first;
-    PsiElement next = first;
-    while (next != null) {
-      if (next instanceof PsiComment || next instanceof PsiWhiteSpace) {
-        next = getNextSibling(next);
-      }
-      else {
-        break;
-      }
-      last = next;
-    }
+	@Override
+	protected void scanFile()
+	{
+		PsiElement first = getFile().getFirstChild();
+		PsiElement last = first;
+		PsiElement next = first;
+		while(next != null)
+		{
+			if(next instanceof PsiComment || next instanceof PsiWhiteSpace)
+			{
+				next = getNextSibling(next);
+			}
+			else
+			{
+				break;
+			}
+			last = next;
+		}
 
-    if (first != null) {
-      checkComments(first, last, true);
-    }
-    else {
-      checkComments(null, null, true);
-    }
-  }
+		if(first != null)
+		{
+			checkComments(first, last, true);
+		}
+		else
+		{
+			checkComments(null, null, true);
+		}
+	}
 }

@@ -16,31 +16,41 @@
 
 package org.intellij.erlang.copyright;
 
+import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.copyright.config.CopyrightFileConfig;
 import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
 import com.maddyhome.idea.copyright.CopyrightProfile;
-import com.maddyhome.idea.copyright.options.LanguageOptions;
-import com.maddyhome.idea.copyright.psi.UpdateCopyright;
 import com.maddyhome.idea.copyright.psi.UpdateCopyrightsProvider;
+import com.maddyhome.idea.copyright.psi.UpdatePsiFileCopyright;
+import com.maddyhome.idea.copyright.ui.TemplateCommentPanel;
 
 
-public class UpdateErlangCopyrightsProvider extends UpdateCopyrightsProvider {
+public class UpdateErlangCopyrightsProvider extends UpdateCopyrightsProvider<CopyrightFileConfig>
+{
+	@NotNull
+	@Override
+	public UpdatePsiFileCopyright<CopyrightFileConfig> createInstance(@NotNull PsiFile file, @NotNull CopyrightProfile copyrightProfile)
+	{
+		return new UpdateErlangFileCopyright(file, copyrightProfile);
+	}
 
-  @Override
-  public UpdateCopyright createInstance(Project project, Module module, VirtualFile file, FileType base,
-                                        CopyrightProfile options) {
-    return new UpdateErlangFileCopyright(project, module, file, options);
-  }
+	@NotNull
+	@Override
+	public CopyrightFileConfig createDefaultOptions()
+	{
+		CopyrightFileConfig options = new CopyrightFileConfig();
+		options.setFiller("=");
+		options.setBlock(false);
+		options.setPrefixLines(true);
+		return options;
+	}
 
-
-  @Override
-  public LanguageOptions getDefaultOptions() {
-    LanguageOptions options = super.getDefaultOptions();
-    options.setFiller("=");
-    options.setBlock(false);
-    options.setPrefixLines(true);
-    return options;
-  }
+	@NotNull
+	@Override
+	public TemplateCommentPanel createConfigurable(@NotNull Project project, @NotNull TemplateCommentPanel parentPane, @NotNull FileType fileType)
+	{
+		return new TemplateCommentPanel(fileType, parentPane, project);
+	}
 }
