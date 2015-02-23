@@ -8,7 +8,7 @@ import org.intellij.erlang.sdk.ErlangSdkType;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.projectRoots.SdkType;
-import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL
@@ -18,9 +18,9 @@ public class ErlangModuleExtension extends ModuleExtensionWithSdkImpl<ErlangModu
 {
 	protected List<String> myParseTransforms = new ArrayList<String>();
 
-	public ErlangModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
+	public ErlangModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
 	{
-		super(id, module);
+		super(id, moduleRootLayer);
 	}
 
 	@Override

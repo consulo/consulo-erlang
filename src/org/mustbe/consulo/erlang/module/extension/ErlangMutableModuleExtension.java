@@ -1,11 +1,9 @@
 package org.mustbe.consulo.erlang.module.extension;
 
-import java.awt.BorderLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -15,7 +13,8 @@ import org.consulo.module.extension.ui.ModuleExtensionWithSdkPanel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
+import com.intellij.openapi.roots.ModuleRootLayer;
+import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
 import lombok.val;
@@ -26,9 +25,9 @@ import lombok.val;
  */
 public class ErlangMutableModuleExtension extends ErlangModuleExtension implements MutableModuleExtensionWithSdk<ErlangModuleExtension>
 {
-	public ErlangMutableModuleExtension(@NotNull String id, @NotNull ModifiableRootModel module)
+	public ErlangMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
 	{
-		super(id, module);
+		super(id, moduleRootLayer);
 	}
 
 	@NotNull
@@ -55,17 +54,9 @@ public class ErlangMutableModuleExtension extends ErlangModuleExtension implemen
 				myParseTransforms.addAll(StringUtil.split(parseTransformsField.getText(), ","));
 			}
 		});
-		panel.add(label("Parse transforms:", parseTransformsField));
+		panel.add(LabeledComponent.left(parseTransformsField, "Parse transforms"));
 
 		return wrapToNorth(new ModuleExtensionWithSdkPanel(this, runnable));
-	}
-
-	private JComponent label(String comp, JComponent component)
-	{
-		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(new JLabel(comp), BorderLayout.WEST);
-		panel.add(component, BorderLayout.CENTER);
-		return panel;
 	}
 
 	@Override
