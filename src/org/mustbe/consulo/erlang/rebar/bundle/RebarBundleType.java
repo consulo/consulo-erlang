@@ -1,5 +1,8 @@
 package org.mustbe.consulo.erlang.rebar.bundle;
 
+import javax.swing.Icon;
+
+import org.intellij.erlang.ErlangIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.projectRoots.SdkType;
@@ -39,5 +42,12 @@ public class RebarBundleType extends SdkType
 	public String getPresentableName()
 	{
 		return "Rebar";
+	}
+
+	@Nullable
+	@Override
+	public Icon getIcon()
+	{
+		return ErlangIcons.REBAR;
 	}
 }
