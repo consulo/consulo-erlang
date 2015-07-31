@@ -123,7 +123,7 @@ public class ErlangStructureViewFactory implements PsiStructureViewFactory {
     @Override
     public TreeElement[] getChildren() {
       if (myElement instanceof ErlangFunctionClause) {
-        return EMPTY_ARRAY;
+        return StructureViewTreeElement.EMPTY_ARRAY;
       }
       final ArrayList<TreeElement> result = new ArrayList<TreeElement>();
       if (myElement instanceof ErlangFunction) {
