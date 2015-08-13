@@ -7,6 +7,7 @@ import org.consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import org.intellij.erlang.sdk.ErlangSdkType;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
+import org.mustbe.consulo.RequiredReadAction;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.roots.ModuleRootLayer;
 
@@ -34,6 +35,7 @@ public class ErlangModuleExtension extends ModuleExtensionWithSdkImpl<ErlangModu
 		}
 	}
 
+	@RequiredReadAction
 	@Override
 	protected void loadStateImpl(@NotNull Element element)
 	{
