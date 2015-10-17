@@ -16,6 +16,7 @@
 
 package org.intellij.erlang.rebar.runner;
 
+import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.configurations.RunProfile;
@@ -26,30 +27,29 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.RunContentBuilder;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
 
-public final class RebarRunner extends DefaultProgramRunner {
-  public static final String REBAR_RUNNER_ID = "RebarRunner";
+public final class RebarRunner extends DefaultProgramRunner
+{
+	public static final String REBAR_RUNNER_ID = "RebarRunner";
 
-  @NotNull
-  @Override
-  public String getRunnerId() {
-    return REBAR_RUNNER_ID;
-  }
+	@NotNull
+	@Override
+	public String getRunnerId()
+	{
+		return REBAR_RUNNER_ID;
+	}
 
-  @Override
-  public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile) {
-    return DefaultRunExecutor.EXECUTOR_ID.equals(executorId) && profile instanceof RebarRunConfigurationBase;
-  }
+	@Override
+	public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile)
+	{
+		return DefaultRunExecutor.EXECUTOR_ID.equals(executorId) && profile instanceof RebarRunConfigurationBase;
+	}
 
-  @Override
-  protected RunContentDescriptor doExecute(Project project,
-                                           RunProfileState state,
-                                           RunContentDescriptor contentToReuse,
-                                           ExecutionEnvironment env) throws ExecutionException {
-    FileDocumentManager.getInstance().saveAllDocuments();
-    ExecutionResult result = state.execute(env.getExecutor(), this);
-    return new RunContentBuilder(this, result, env).showRunContent(contentToReuse);
-  }
+	@Override
+	protected RunContentDescriptor doExecute(RunProfileState state, ExecutionEnvironment env) throws ExecutionException
+	{
+		FileDocumentManager.getInstance().saveAllDocuments();
+		ExecutionResult result = state.execute(env.getExecutor(), this);
+		return new RunContentBuilder(result, env).showRunContent(env.getContentToReuse());
+	}
 }
