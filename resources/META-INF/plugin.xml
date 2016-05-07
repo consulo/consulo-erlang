@@ -48,7 +48,7 @@
 		<internalFileTemplate name="Erlang Gen FSM"/>
 		<internalFileTemplate name="Erlang Gen Event"/>
 
-		<defaultLiveTemplatesProvider implementation="org.intellij.erlang.template.ErlangLiveTemplateProvider"/>
+		<bundleLiveTemplateSet path="liveTemplates/erlang"/>
 		<liveTemplateContext implementation="org.intellij.erlang.template.ErlangContextType$Generic"/>
 		<liveTemplateContext implementation="org.intellij.erlang.template.ErlangContextType$Declaration"/>
 		<liveTemplateContext implementation="org.intellij.erlang.template.ErlangContextType$Statement"/>
@@ -202,7 +202,7 @@
 
 		<spellchecker.bundledDictionaryProvider implementation="org.intellij.erlang.spellchecker.ErlangBundledDictionaryProvider"/>
 
-		<xdebugger.lineBreakpointTypeResolver filetype="Erlang" implementationClass="consulo.erlang.debugger.ErlangLineBreakpointTypeResolver" />
+		<xdebugger.lineBreakpointTypeResolver filetype="Erlang" implementationClass="consulo.erlang.debugger.ErlangLineBreakpointTypeResolver"/>
 
 		<intentionAction>
 			<className>org.intellij.erlang.intention.ErlangExportFunctionIntention</className>
@@ -228,7 +228,7 @@
 								 immutableClass="consulo.erlang.rebar.module.extension.RebarModuleExtension"
 								 mutableClass="consulo.erlang.rebar.module.extension.RebarMutableModuleExtension"/>
 
-		<contentFolderSupportPatcher implementation="consulo.erlang.module.ErlangContentFolderSupportPatcher" />
+		<contentFolderSupportPatcher implementation="consulo.erlang.module.ErlangContentFolderSupportPatcher"/>
 	</extensions>
 
 	<actions>
