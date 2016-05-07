@@ -29,7 +29,6 @@ import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.util.io.FileUtilRt;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.testFramework.LightProjectDescriptor;
 
 @SuppressWarnings({"JUnitTestClassNamingConvention"})
 public class ErlangBifParser extends ErlangLightPlatformCodeInsightFixtureTestCase
@@ -132,27 +131,8 @@ public class ErlangBifParser extends ErlangLightPlatformCodeInsightFixtureTestCa
 	}
 
 	@Override
-	protected LightProjectDescriptor getProjectDescriptor()
-	{
- /*   return new DefaultLightProjectDescriptor() {
-	  @Override
-      public Sdk getSdk() {
-        final Sdk mockSdk = ErlangSdkType.createMockSdk(ERLANG_SDK_PATH);
-        // Set local SDK documentation path
-        final SdkModificator sdkModificator = mockSdk.getSdkModificator();
-        final VirtualFile localDocDir = LocalFileSystem.getInstance().findFileByPath(ERLANG_DOC_PATH);
-        sdkModificator.addRoot(localDocDir, OrderRootType.DOCUMENTATION);
-        sdkModificator.commitChanges();
-        return mockSdk;
-      }
-    }; */
-		return null;
-	}
-
-	@Override
 	protected void setUp() throws Exception
 	{
-		System.setProperty("idea.platform.prefix", "Idea");
 		super.setUp();
 		myDocProvider = new ErlangDocumentationProvider();
 		setUpProjectSdk();

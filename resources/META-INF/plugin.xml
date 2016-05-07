@@ -202,6 +202,8 @@
 
 		<spellchecker.bundledDictionaryProvider implementation="org.intellij.erlang.spellchecker.ErlangBundledDictionaryProvider"/>
 
+		<xdebugger.lineBreakpointTypeResolver filetype="Erlang" implementationClass="consulo.erlang.debugger.ErlangLineBreakpointTypeResolver" />
+
 		<intentionAction>
 			<className>org.intellij.erlang.intention.ErlangExportFunctionIntention</className>
 			<category>Erlang</category>
