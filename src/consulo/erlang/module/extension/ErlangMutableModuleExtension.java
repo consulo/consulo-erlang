@@ -1,4 +1,4 @@
-package org.mustbe.consulo.erlang.module.extension;
+package consulo.erlang.module.extension;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

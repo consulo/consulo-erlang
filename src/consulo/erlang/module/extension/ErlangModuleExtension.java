@@ -1,4 +1,4 @@
-package org.mustbe.consulo.erlang.module.extension;
+package consulo.erlang.module.extension;
 
 import java.util.ArrayList;
 import java.util.List;

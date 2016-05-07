@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.intellij.erlang.utils.ErlangExternalToolsNotificationListener;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.erlang.rebar.module.RebarModuleUtil;
+import consulo.erlang.rebar.module.RebarModuleUtil;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.OSProcessHandler;

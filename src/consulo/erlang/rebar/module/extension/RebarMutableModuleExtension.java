@@ -1,4 +1,4 @@
-package org.mustbe.consulo.erlang.rebar.module.extension;
+package consulo.erlang.rebar.module.extension;
 
 import javax.swing.JComponent;
 

@@ -22,7 +22,7 @@ import java.util.List;
 import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.sdk.ErlangSdkType;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
+import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.CapturingProcessHandler;

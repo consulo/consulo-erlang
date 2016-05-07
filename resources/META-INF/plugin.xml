@@ -63,7 +63,7 @@
 		<lang.formatter language="Erlang" implementationClass="org.intellij.erlang.formatter.ErlangFormattingModelBuilder"/>
 		<fileTypeFactory implementation="org.intellij.erlang.ErlangFileTypeFactory"/>
 		<iconDescriptorUpdater implementation="org.intellij.erlang.ErlangIconDescriptorUpdater"/>
-		<contentFolderTypeProvider implementation="org.mustbe.consulo.erlang.module.ErlangIncludeContentFolderTypeProvider"/>
+		<contentFolderTypeProvider implementation="consulo.erlang.module.ErlangIncludeContentFolderTypeProvider"/>
 		<updateAddedFileProcessor implementation="org.intellij.erlang.ErlangUpdateAddedFileProcessor"/>
 		<lang.findUsagesProvider language="Erlang" implementationClass="org.intellij.erlang.ErlangFindUsagesProvider"/>
 		<elementDescriptionProvider implementation="org.intellij.erlang.ErlangDescriptionProvider"/>
@@ -219,16 +219,16 @@
 		<moduleExtensionProvider key="erlang"
 								 name="Erlang"
 								 icon="/icons/erlang-small-16.png"
-								 immutableClass="org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension"
-								 mutableClass="org.mustbe.consulo.erlang.module.extension.ErlangMutableModuleExtension"/>
+								 immutableClass="consulo.erlang.module.extension.ErlangModuleExtension"
+								 mutableClass="consulo.erlang.module.extension.ErlangMutableModuleExtension"/>
 		<moduleExtensionProvider key="rebar"
 								 parentKey="erlang"
 								 name="Rebar"
 								 icon="/icons/rebar-16.png"
-								 immutableClass="org.mustbe.consulo.erlang.rebar.module.extension.RebarModuleExtension"
-								 mutableClass="org.mustbe.consulo.erlang.rebar.module.extension.RebarMutableModuleExtension"/>
+								 immutableClass="consulo.erlang.rebar.module.extension.RebarModuleExtension"
+								 mutableClass="consulo.erlang.rebar.module.extension.RebarMutableModuleExtension"/>
 
-		<contentFolderSupportPatcher implementation="org.mustbe.consulo.erlang.module.ErlangContentFolderSupportPatcher" />
+		<contentFolderSupportPatcher implementation="consulo.erlang.module.ErlangContentFolderSupportPatcher" />
 	</extensions>
 
 	<actions>

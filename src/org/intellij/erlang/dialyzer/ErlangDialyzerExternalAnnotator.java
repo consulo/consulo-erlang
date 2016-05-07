@@ -23,7 +23,7 @@ import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.sdk.ErlangSystemUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
+import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.codeInsight.daemon.HighlightDisplayKey;
 import com.intellij.codeInspection.InspectionProfile;
 import com.intellij.codeInspection.ex.DisableInspectionToolAction;

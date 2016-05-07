@@ -26,7 +26,7 @@ import java.util.Set;
 import org.consulo.compiler.ModuleCompilerPathsManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
+import consulo.erlang.module.extension.ErlangModuleExtension;
 import org.mustbe.consulo.roots.impl.ProductionContentFolderTypeProvider;
 import org.mustbe.consulo.roots.impl.TestContentFolderTypeProvider;
 import com.intellij.execution.ExecutionException;

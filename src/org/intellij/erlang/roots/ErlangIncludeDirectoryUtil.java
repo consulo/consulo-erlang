@@ -18,7 +18,7 @@ package org.intellij.erlang.roots;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.erlang.module.ErlangIncludeContentFolderTypeProvider;
+import consulo.erlang.module.ErlangIncludeContentFolderTypeProvider;
 import org.mustbe.consulo.roots.ContentFolderScopes;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;

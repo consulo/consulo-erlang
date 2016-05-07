@@ -22,7 +22,7 @@ import org.intellij.erlang.console.ErlangConsoleUtil;
 import org.intellij.erlang.sdk.ErlangSdkType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
+import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.CommandLineState;

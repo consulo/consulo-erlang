@@ -26,7 +26,7 @@ import org.intellij.erlang.sdk.ErlangSdkType;
 import org.intellij.erlang.utils.ErlangModulesUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
+import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.ericsson.otp.erlang.OtpErlangPid;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;

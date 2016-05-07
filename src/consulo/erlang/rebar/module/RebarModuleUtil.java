@@ -1,6 +1,6 @@
-package org.mustbe.consulo.erlang.rebar.module;
+package consulo.erlang.rebar.module;
 
-import org.mustbe.consulo.erlang.rebar.module.extension.RebarModuleExtension;
+import consulo.erlang.rebar.module.extension.RebarModuleExtension;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.projectRoots.Sdk;

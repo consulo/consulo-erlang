@@ -22,7 +22,7 @@ import org.intellij.erlang.emacs.EmacsSettings;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.utils.ErlangExternalToolsNotificationListener;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
+import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessAdapter;

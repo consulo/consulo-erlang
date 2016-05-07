@@ -3,7 +3,7 @@ package org.intellij.erlang.eunit;
 import java.util.Collection;
 
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.erlang.rebar.module.RebarModuleUtil;
+import consulo.erlang.rebar.module.RebarModuleUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;

@@ -1,4 +1,4 @@
-package org.mustbe.consulo.erlang.rebar.bundle;
+package consulo.erlang.rebar.bundle;
 
 import javax.swing.Icon;
 

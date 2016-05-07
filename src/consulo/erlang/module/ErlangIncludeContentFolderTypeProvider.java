@@ -1,4 +1,4 @@
-package org.mustbe.consulo.erlang.module;
+package consulo.erlang.module;
 
 import java.awt.Color;
 

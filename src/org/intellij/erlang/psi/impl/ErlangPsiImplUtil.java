@@ -55,7 +55,7 @@ import org.intellij.erlang.stubs.ErlangRecordDefinitionStub;
 import org.intellij.erlang.stubs.ErlangTypeDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.mustbe.consulo.erlang.module.extension.ErlangModuleExtension;
+import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.codeInsight.completion.BasicInsertHandler;
 import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;

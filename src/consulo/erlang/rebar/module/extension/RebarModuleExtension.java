@@ -1,8 +1,8 @@
-package org.mustbe.consulo.erlang.rebar.module.extension;
+package consulo.erlang.rebar.module.extension;
 
 import org.consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.erlang.rebar.bundle.RebarBundleType;
+import consulo.erlang.rebar.bundle.RebarBundleType;
 import com.intellij.openapi.projectRoots.SdkType;
 import com.intellij.openapi.roots.ModuleRootLayer;
 
