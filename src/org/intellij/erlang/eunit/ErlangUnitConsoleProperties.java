@@ -17,20 +17,21 @@
 package org.intellij.erlang.eunit;
 
 import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.RuntimeConfiguration;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.testframework.sm.runner.SMTRunnerConsoleProperties;
 
 public class ErlangUnitConsoleProperties extends SMTRunnerConsoleProperties {
 
-  private RuntimeConfiguration myConfig;
+  private RunConfiguration myConfig;
 
-  public ErlangUnitConsoleProperties(final RuntimeConfiguration config, final Executor executor) {
+  public ErlangUnitConsoleProperties(final RunConfiguration config, final Executor executor) {
     super(config, "Erlang", executor);
     myConfig = config;
   }
 
   @Override
-  public RuntimeConfiguration getConfiguration() {
+  public RunProfile getConfiguration() {
     return myConfig;
   }
 }
