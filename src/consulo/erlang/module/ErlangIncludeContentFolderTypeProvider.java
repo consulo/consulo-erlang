@@ -6,14 +6,14 @@ import javax.swing.Icon;
 
 import org.intellij.erlang.ErlangIcons;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.roots.impl.BaseContentFolderTypeProvider;
+import org.mustbe.consulo.roots.ContentFolderTypeProvider;
 import com.intellij.ui.JBColor;
 
 /**
  * @author VISTALL
  * @since 08.02.14
  */
-public class ErlangIncludeContentFolderTypeProvider extends BaseContentFolderTypeProvider
+public class ErlangIncludeContentFolderTypeProvider extends ContentFolderTypeProvider
 {
 	public static final Color COLOR = new JBColor(new Color(140, 123, 79), new Color(140, 123, 79));
 
