@@ -16,16 +16,16 @@
 
 package org.intellij.erlang.debugger.xdebug;
 
-import org.consulo.lombok.annotations.LazyInstance;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.xdebugger.breakpoints.XLineBreakpointType;
+import consulo.lombok.annotations.Lazy;
 
 public class ErlangLineBreakpointType extends XLineBreakpointType<ErlangLineBreakpointProperties>
 {
 	@NotNull
-	@LazyInstance
+	@Lazy
 	public static ErlangLineBreakpointType getInstance()
 	{
 		return EXTENSION_POINT_NAME.findExtension(ErlangLineBreakpointType.class);

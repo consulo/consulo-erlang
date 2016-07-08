@@ -1,6 +1,5 @@
 package org.intellij.erlang.configuration;
 
-import org.consulo.lombok.annotations.ProjectService;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.components.PersistentStateComponent;
@@ -8,6 +7,7 @@ import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.openapi.components.StorageScheme;
+import consulo.lombok.annotations.ProjectService;
 
 @State(
 		name = "ErlangCompilerSettings",
