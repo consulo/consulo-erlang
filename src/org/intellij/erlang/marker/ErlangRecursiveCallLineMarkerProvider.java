@@ -16,6 +16,16 @@
 
 package org.intellij.erlang.marker;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+
+import org.intellij.erlang.ErlangIcons;
+import org.intellij.erlang.psi.ErlangFunction;
+import org.intellij.erlang.psi.ErlangFunctionCallExpression;
+import org.intellij.erlang.psi.ErlangFunctionWithArity;
+import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.codeHighlighting.Pass;
 import com.intellij.codeInsight.daemon.LineMarkerInfo;
 import com.intellij.codeInsight.daemon.LineMarkerProvider;
@@ -27,16 +37,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.util.FunctionUtil;
 import com.intellij.util.containers.HashSet;
-import org.intellij.erlang.ErlangIcons;
-import org.intellij.erlang.psi.ErlangFunction;
-import org.intellij.erlang.psi.ErlangFunctionCallExpression;
-import org.intellij.erlang.psi.ErlangFunctionWithArity;
-import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
 public class ErlangRecursiveCallLineMarkerProvider implements LineMarkerProvider, DumbAware {
 
@@ -75,7 +75,7 @@ public class ErlangRecursiveCallLineMarkerProvider implements LineMarkerProvider
       super(methodCall,
         methodCall.getTextRange(),
         ErlangIcons.RECURSIVE_CALL,
-        Pass.UPDATE_OVERRIDEN_MARKERS,
+        Pass.LINE_MARKERS,
         FunctionUtil.<PsiElement, String>constant("Recursive call"),
         null,
         GutterIconRenderer.Alignment.RIGHT

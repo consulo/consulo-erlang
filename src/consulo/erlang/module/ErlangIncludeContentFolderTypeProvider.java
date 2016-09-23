@@ -6,8 +6,8 @@ import javax.swing.Icon;
 
 import org.intellij.erlang.ErlangIcons;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.roots.ContentFolderTypeProvider;
 import com.intellij.ui.JBColor;
+import consulo.roots.ContentFolderTypeProvider;
 
 /**
  * @author VISTALL

@@ -1,10 +1,10 @@
 package consulo.erlang.rebar.module.extension;
 
-import org.consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import org.jetbrains.annotations.NotNull;
-import consulo.erlang.rebar.bundle.RebarBundleType;
 import com.intellij.openapi.projectRoots.SdkType;
-import com.intellij.openapi.roots.ModuleRootLayer;
+import consulo.erlang.rebar.bundle.RebarBundleType;
+import consulo.extension.impl.ModuleExtensionWithSdkImpl;
+import consulo.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL

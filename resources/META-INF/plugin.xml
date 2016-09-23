@@ -59,7 +59,6 @@
 		<!-- dialyzer -->
 		<projectService serviceImplementation="org.intellij.erlang.dialyzer.DialyzerSettings"/>
 
-		<errorHandler implementation="com.intellij.diagnostic.ITNReporter"/>
 		<lang.formatter language="Erlang" implementationClass="org.intellij.erlang.formatter.ErlangFormattingModelBuilder"/>
 		<fileTypeFactory implementation="org.intellij.erlang.ErlangFileTypeFactory"/>
 		<iconDescriptorUpdater implementation="org.intellij.erlang.ErlangIconDescriptorUpdater"/>

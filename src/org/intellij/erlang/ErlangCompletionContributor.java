@@ -76,6 +76,7 @@ import com.intellij.util.Function;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.text.CaseInsensitiveStringHashingStrategy;
+import consulo.codeInsight.completion.CompletionProvider;
 
 public class ErlangCompletionContributor extends CompletionContributor {
   public static final int MODULE_PRIORITY = -15;
@@ -122,9 +123,9 @@ public class ErlangCompletionContributor extends CompletionContributor {
   }
 
   public ErlangCompletionContributor() {
-    extend(CompletionType.BASIC, psiElement().inFile(instanceOf(ErlangFileImpl.class)), new CompletionProvider<CompletionParameters>() {
+    extend(CompletionType.BASIC, psiElement().inFile(instanceOf(ErlangFileImpl.class)), new CompletionProvider() {
       @Override
-      protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+	  public void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
         PsiElement position = parameters.getPosition();
         PsiFile file = position.getContainingFile();
         if (ErlangParserUtil.isApplicationConfigFileType(file)) return;
@@ -208,9 +209,9 @@ public class ErlangCompletionContributor extends CompletionContributor {
         return dot != null && dot.getNode().getElementType() == ErlangTypes.ERL_DOT;
       }
     });
-    extend(CompletionType.SMART, psiElement().inside(true, psiElement(ErlangArgumentList.class)), new CompletionProvider<CompletionParameters>() {
+    extend(CompletionType.SMART, psiElement().inside(true, psiElement(ErlangArgumentList.class)), new CompletionProvider() {
       @Override
-      protected void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+      public void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
         PsiElement position = parameters.getPosition();
         ErlangQVar var = PsiTreeUtil.getParentOfType(position, ErlangQVar.class);
         PsiReference reference = var == null ? null : var.getReference();

@@ -18,13 +18,13 @@ package org.intellij.erlang.copyright;
 
 import org.intellij.erlang.psi.ErlangFile;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.copyright.config.CopyrightFileConfig;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.maddyhome.idea.copyright.CopyrightProfile;
 import com.maddyhome.idea.copyright.psi.UpdatePsiFileCopyright;
+import consulo.copyright.config.CopyrightFileConfig;
 
 public class UpdateErlangFileCopyright extends UpdatePsiFileCopyright<CopyrightFileConfig>
 {

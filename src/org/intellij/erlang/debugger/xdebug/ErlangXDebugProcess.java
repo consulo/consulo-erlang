@@ -316,8 +316,7 @@ public class ErlangXDebugProcess extends XDebugProcess {
     commandLine.addParameters("-sname", "test_node" + System.currentTimeMillis());
     commandLine.addParameters("-run", "debugnode", "main", myDebuggerNode.getName(), myDebuggerNode.getMessageBoxName(), "-noshell");
     commandLine.addParameters("-s", "init", "stop");
-    Process process = commandLine.createProcess();
-    myErlangProcessHandler = new OSProcessHandler(process);
+    myErlangProcessHandler = new OSProcessHandler(commandLine);
     getSession().getConsoleView().attachToProcess(myErlangProcessHandler);
     myErlangProcessHandler.startNotify();
     if (runningState instanceof ErlangRemoteDebugRunningState) {

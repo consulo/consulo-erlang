@@ -3,13 +3,13 @@ package consulo.erlang.module.extension;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import org.intellij.erlang.sdk.ErlangSdkType;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
-import org.mustbe.consulo.RequiredReadAction;
 import com.intellij.openapi.projectRoots.SdkType;
-import com.intellij.openapi.roots.ModuleRootLayer;
+import consulo.annotations.RequiredReadAction;
+import consulo.extension.impl.ModuleExtensionWithSdkImpl;
+import consulo.roots.ModuleRootLayer;
 
 /**
  * @author VISTALL

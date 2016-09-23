@@ -16,13 +16,13 @@
 
 package org.intellij.erlang.console;
 
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.util.HashSet;
 import java.util.Set;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
 
 final class ErlangConsoleViewDirectory {
   private static final ErlangConsoleViewDirectory outInstance = new ErlangConsoleViewDirectory();
@@ -47,7 +47,7 @@ final class ErlangConsoleViewDirectory {
   @Nullable
   public synchronized ErlangConsoleView getConsole(@NotNull Editor editor) {
     for (ErlangConsoleView consoleView : consoleViews) {
-      if (editor == consoleView.getConsole().getConsoleEditor()) {
+      if (editor == consoleView.getConsoleEditor()) {
         return consoleView;
       }
     }

@@ -16,8 +16,6 @@ import org.intellij.erlang.utils.ErlangModulesUtil;
 import org.jdom.Document;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
-import consulo.erlang.module.extension.ErlangModuleExtension;
-import com.intellij.compiler.server.BuildManager;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.CompileTask;
@@ -34,6 +32,8 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.xmlb.SkipDefaultValuesSerializationFilters;
 import com.intellij.util.xmlb.XmlSerializationException;
 import com.intellij.util.xmlb.XmlSerializer;
+import consulo.compiler.server.BuildManager;
+import consulo.erlang.module.extension.ErlangModuleExtension;
 
 
 public class ErlangPrepareDependenciesCompileTask implements CompileTask

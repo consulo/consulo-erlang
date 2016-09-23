@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="OtpErlang">
     <binaries>
-      <root url="jar://$PROJECT_DIR$/libs/OtpErlang.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/OtpErlang.jar!/" />
     </binaries>
   </library>
 </component>
