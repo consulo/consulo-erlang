@@ -18,13 +18,6 @@
           <orderEntry type="module-extension-sdk" extension-id="java" />
           <orderEntry type="sourceFolder" />
           <orderEntry type="library" name="OtpErlang" level="project" />
-          <orderEntry type="module-library">
-            <library name="consulo:Spellchecker">
-              <binaries>
-                <root url="jar://$MODULE_DIR$/dep/spellchecker/lib/spellchecker.jar!/" />
-              </binaries>
-            </library>
-          </orderEntry>
           <orderEntry type="library" name="consulo-plugin: com.intellij.spellchecker" level="project" />
         </module-layer>
       </module>
