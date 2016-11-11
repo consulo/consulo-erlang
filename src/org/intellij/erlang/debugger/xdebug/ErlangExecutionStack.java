@@ -16,15 +16,15 @@
 
 package org.intellij.erlang.debugger.xdebug;
 
-import com.intellij.util.containers.ContainerUtil;
-import com.intellij.xdebugger.frame.XExecutionStack;
-import com.intellij.xdebugger.frame.XStackFrame;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.intellij.erlang.debugger.node.ErlangProcessSnapshot;
 import org.intellij.erlang.debugger.node.ErlangTraceElement;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.intellij.util.containers.ContainerUtil;
+import com.intellij.xdebugger.frame.XExecutionStack;
+import com.intellij.xdebugger.frame.XStackFrame;
 
 public class ErlangExecutionStack extends XExecutionStack {
   private final ErlangProcessSnapshot myProcessSnapshot;
@@ -43,7 +43,7 @@ public class ErlangExecutionStack extends XExecutionStack {
   }
 
   @Override
-  public void computeStackFrames(int firstFrameIndex, XStackFrameContainer container) {
+  public void computeStackFrames(XStackFrameContainer container) {
     if (myStack.isEmpty()) {
       List<ErlangTraceElement> traceElements = myProcessSnapshot.getStack();
       for (ErlangTraceElement traceElement : traceElements) {
