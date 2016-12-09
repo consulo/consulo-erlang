@@ -21,7 +21,7 @@ public class ErlangASTLeafFactory implements ASTLeafFactory
 
 	@NotNull
 	@Override
-	public LeafElement createLeaf(@NotNull IElementType elementType, @NotNull LanguageVersion<?> languageVersion, @NotNull CharSequence charSequence)
+	public LeafElement createLeaf(@NotNull IElementType elementType, @NotNull LanguageVersion languageVersion, @NotNull CharSequence charSequence)
 	{
 		return new ErlangCommentImpl(elementType, charSequence);
 	}
