@@ -18,7 +18,6 @@ import consulo.extension.ui.ModuleExtensionSdkBoxBuilder;
 import consulo.module.extension.MutableModuleExtensionWithSdk;
 import consulo.module.extension.MutableModuleInheritableNamedPointer;
 import consulo.roots.ModuleRootLayer;
-import lombok.val;
 
 /**
  * @author VISTALL
@@ -46,7 +45,7 @@ public class ErlangMutableModuleExtension extends ErlangModuleExtension implemen
 		JPanel panel = new JPanel(new VerticalFlowLayout());
 		panel.add(ModuleExtensionSdkBoxBuilder.createAndDefine(this, runnable).build());
 
-		val parseTransformsField = new JTextField(StringUtil.join(myParseTransforms, ","));
+		JTextField parseTransformsField = new JTextField(StringUtil.join(myParseTransforms, ","));
 		parseTransformsField.addKeyListener(new KeyAdapter()
 		{
 			@Override

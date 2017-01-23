@@ -1,22 +1,29 @@
 package org.intellij.erlang.configuration;
 
 import org.jdom.Element;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.components.PersistentStateComponent;
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.openapi.components.StorageScheme;
-import consulo.lombok.annotations.ProjectService;
+import com.intellij.openapi.project.Project;
 
 @State(
 		name = "ErlangCompilerSettings",
 		storages = {
 				@Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/compiler.xml", scheme = StorageScheme.DIRECTORY_BASED)
 		})
-@ProjectService
 public class ErlangCompilerSettings implements PersistentStateComponent<Element>
 {
+	@NotNull
+	public static ErlangCompilerSettings getInstance(@NotNull Project project)
+	{
+		return ServiceManager.getService(project, ErlangCompilerSettings.class);
+	}
+
 	private boolean myAddDebugInfoEnabled;
 
 	@Nullable
