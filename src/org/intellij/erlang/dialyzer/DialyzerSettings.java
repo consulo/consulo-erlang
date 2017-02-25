@@ -22,13 +22,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@State(
-  name = "DialyzerSettings",
-  storages = {
-    @Storage(file = StoragePathMacros.PROJECT_FILE),
-    @Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/dialyzer.xml", scheme = StorageScheme.DIRECTORY_BASED)
-  }
-)
+@State(  name = "DialyzerSettings", storages = @Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/dialyzer.xml"))
 public final class DialyzerSettings implements PersistentStateComponent<DialyzerSettings> {
   @NotNull
   private String myCurrentPltPath = "";

@@ -1,21 +1,12 @@
 package org.intellij.erlang.configuration;
 
+import com.intellij.openapi.components.*;
+import com.intellij.openapi.project.Project;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.components.State;
-import com.intellij.openapi.components.Storage;
-import com.intellij.openapi.components.StoragePathMacros;
-import com.intellij.openapi.components.StorageScheme;
-import com.intellij.openapi.project.Project;
 
-@State(
-		name = "ErlangCompilerSettings",
-		storages = {
-				@Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/compiler.xml", scheme = StorageScheme.DIRECTORY_BASED)
-		})
+@State(name = "ErlangCompilerSettings", storages = @Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/compiler.xml"))
 public class ErlangCompilerSettings implements PersistentStateComponent<Element>
 {
 	@NotNull

@@ -22,13 +22,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@State(
-  name = "EmacsSettings",
-  storages = {
-    @Storage(file = StoragePathMacros.PROJECT_FILE),
-    @Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/emacs.xml", scheme = StorageScheme.DIRECTORY_BASED)
-  }
-)
+@State(name = "EmacsSettings", storages = @Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/emacs.xml"))
 public final class EmacsSettings implements PersistentStateComponent<EmacsSettings> {
   @NotNull
   private String myEmacsPath = "";
