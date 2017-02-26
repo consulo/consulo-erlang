@@ -16,8 +16,6 @@
 
 package org.intellij.erlang.documentation;
 
-import static com.intellij.codeInsight.documentation.DocumentationManager.PSI_ELEMENT_PROTOCOL;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,6 +31,7 @@ import java.util.regex.Pattern;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import com.intellij.codeInsight.documentation.DocumentationManagerProtocol;
 import com.intellij.codeInsight.documentation.PlatformDocumentationUtil;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.project.Project;
@@ -274,13 +273,13 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
     final String concreteHref = (evaluatedLinkMatcher.matches()) ? evaluatedLinkMatcher.group(1) : href;
     final Matcher externalLinkMatcher = PATTERN_EXTERNAL_LINK.matcher(concreteHref);
     if (externalLinkMatcher.matches()) {
-      return PSI_ELEMENT_PROTOCOL + externalLinkMatcher.group(1) + "#" + externalLinkMatcher.group(2);
+      return DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL + externalLinkMatcher.group(1) + "#" + externalLinkMatcher.group(2);
     }
     if (concreteHref.charAt(0) == '#') {
-      return PSI_ELEMENT_PROTOCOL + myVirtualFile.getNameWithoutExtension() + concreteHref;
+      return DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL + myVirtualFile.getNameWithoutExtension() + concreteHref;
     }
     if (concreteHref.endsWith(".html")) {
-      return PSI_ELEMENT_PROTOCOL + concreteHref.substring(0, concreteHref.length() - 5);
+      return DocumentationManagerProtocol.PSI_ELEMENT_PROTOCOL + concreteHref.substring(0, concreteHref.length() - 5);
     }
     return href;
   }
