@@ -7,12 +7,6 @@
 
 	<depends optional="true">com.intellij.spellchecker</depends>
 
-	<project-components>
-		<component>
-			<implementation-class>org.intellij.erlang.compilation.ErlangDependenciesManager</implementation-class>
-		</component>
-	</project-components>
-
 	<!--Rebar related extensions -->
 	<extensions defaultExtensionNs="com.intellij">
 		<projectService serviceImplementation="org.intellij.erlang.rebar.settings.RebarSettings"/>
@@ -28,6 +22,7 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<compiler implementation="org.intellij.erlang.compilation.ErlangCompiler"/>
+		<compiler.beforeTask implementation="org.intellij.erlang.compilation.ErlangPrepareDependenciesCompileTask"/>
 
 		<projectService serviceImplementation="org.intellij.erlang.configuration.ErlangCompilerSettings"/>
 		<projectConfigurable instance="org.intellij.erlang.configuration.ErlangCompilerOptionsConfigurable" parentId="project.propCompiler"
