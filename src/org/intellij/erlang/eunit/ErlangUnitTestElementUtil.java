@@ -1,5 +1,14 @@
 package org.intellij.erlang.eunit;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.intellij.erlang.psi.ErlangFile;
+import org.intellij.erlang.psi.ErlangFunction;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.project.Project;
@@ -9,15 +18,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.psi.ErlangFile;
-import org.intellij.erlang.psi.ErlangFunction;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class ErlangUnitTestElementUtil {
   private ErlangUnitTestElementUtil() {
@@ -29,7 +29,7 @@ public class ErlangUnitTestElementUtil {
   }
 
   public static Collection<ErlangFile> findFileTestElements(Project project, DataContext dataContext) {
-    VirtualFile[] selectedFiles = CommonDataKeys.VIRTUAL_FILE_ARRAY.getData(dataContext);
+    VirtualFile[] selectedFiles = dataContext.getData(CommonDataKeys.VIRTUAL_FILE_ARRAY);
 
     if (selectedFiles == null) return Collections.emptyList();
 

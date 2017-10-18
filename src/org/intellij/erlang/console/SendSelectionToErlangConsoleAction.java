@@ -16,13 +16,17 @@
 
 package org.intellij.erlang.console;
 
-import com.intellij.openapi.actionSystem.*;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiFile;
 import org.intellij.erlang.ErlangIcons;
 import org.intellij.erlang.psi.ErlangFile;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
+import com.intellij.psi.PsiFile;
 
 public class SendSelectionToErlangConsoleAction extends AnAction {
   @Override
@@ -31,12 +35,12 @@ public class SendSelectionToErlangConsoleAction extends AnAction {
     presentation.setIcon(ErlangIcons.ERLANG_CONSOLE);
     presentation.setVisible(true);
     final DataContext dataContext = actionEvent.getDataContext();
-    final PsiFile psiFile = CommonDataKeys.PSI_FILE.getData(dataContext);
+    final PsiFile psiFile = dataContext.getData(CommonDataKeys.PSI_FILE);
     if (!(psiFile instanceof ErlangFile)) {
       presentation.setEnabled(false);
       return;
     }
-    final Editor editor = CommonDataKeys.EDITOR.getData(dataContext);
+    final Editor editor = dataContext.getData(CommonDataKeys.EDITOR);
     if (editor == null || editor.getSelectionModel().getSelectedText() == null) {
       presentation.setEnabled(false);
       return;
@@ -53,7 +57,7 @@ public class SendSelectionToErlangConsoleAction extends AnAction {
   @Override
   public void actionPerformed(@NotNull AnActionEvent actionEvent) {
     final DataContext dataContext = actionEvent.getDataContext();
-    final Editor editor = CommonDataKeys.EDITOR.getData(dataContext);
+    final Editor editor = dataContext.getData(CommonDataKeys.EDITOR);
     if (editor == null) {
       return;
     }
