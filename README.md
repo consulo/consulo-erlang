@@ -1,1 +1,1 @@
-![Build Status](http://must-be.org/vulcan/statusImage?name=consulo-erlang)
+[![Build Status](https://ci.consulo.io/view/consulo/job/consulo-erlang/badge/icon)](https://ci.consulo.io/view/consulo/job/consulo-erlang/)
