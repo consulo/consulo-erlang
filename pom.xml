@@ -68,6 +68,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.ericsson.otp.erlang</groupId>
+			<artifactId>otperlang</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+		<dependency>
 			<groupId>${project.parent.groupId}</groupId>
 			<artifactId>consulo-lang-impl-testing</artifactId>
 			<version>${project.parent.version}</version>
