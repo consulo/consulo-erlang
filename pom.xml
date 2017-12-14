@@ -38,6 +38,11 @@
 				<updatePolicy>interval:60</updatePolicy>
 			</snapshots>
 		</repository>
+		<repository>
+			<id>clojars</id>
+			<name>clojars</name>
+			<url>http://clojars.org/repo/</url>
+		</repository>
 	</repositories>
 
 	<build>
@@ -49,6 +54,9 @@
 				<extensions>true</extensions>
 				<configuration>
 					<repositoryChannel>nightly</repositoryChannel>
+					<dependencies>
+						<dependency>com.intellij.spellchecker</dependency>
+					</dependencies>
 					<packaging>
 						<skip>${dev.mode}</skip>
 						<version>${build.number}</version>
@@ -71,6 +79,12 @@
 			<groupId>com.ericsson.otp.erlang</groupId>
 			<artifactId>otperlang</artifactId>
 			<version>1.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>consulo.plugin</groupId>
+			<artifactId>com.intellij.spellchecker</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>${project.parent.groupId}</groupId>

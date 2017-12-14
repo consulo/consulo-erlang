@@ -16,8 +16,6 @@
 
 package org.intellij.erlang;
 
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
 import org.intellij.erlang.compilation.ErlangDependenciesResolutionTest;
 import org.intellij.erlang.completion.ErlangCompletionTest;
 import org.intellij.erlang.completion.ErlangCompletionWithSdkTest;
@@ -31,21 +29,23 @@ import org.intellij.erlang.folding.ErlangFoldingBuilderTest;
 import org.intellij.erlang.formatting.ErlangAutoIndentTest;
 import org.intellij.erlang.formatting.ErlangFormattingTest;
 import org.intellij.erlang.highlighting.ErlangBehaviourInspectionsTest;
-import org.intellij.erlang.highlighting.ErlangConsoleViewTest;
 import org.intellij.erlang.highlighting.ErlangHighlightingTest;
 import org.intellij.erlang.highlighting.ErlangSmallIdeHighlightingTest;
 import org.intellij.erlang.highlighting.generate.ErlangGenerateTest;
 import org.intellij.erlang.info.ErlangParameterInfoHandlerTest;
 import org.intellij.erlang.navigation.ErlangGotoSuperTest;
-import org.intellij.erlang.parser.ErlangAppParserTest;
-import org.intellij.erlang.parser.ErlangParserTest;
 import org.intellij.erlang.performance.ErlangPerformanceTest;
-import org.intellij.erlang.quickfixes.*;
-import org.intellij.erlang.rebar.importWizard.RebarProjectImportBuilderTest;
+import org.intellij.erlang.quickfixes.ErlangExportTypeFixTest;
+import org.intellij.erlang.quickfixes.ErlangFindIncludeQuickFixTest;
+import org.intellij.erlang.quickfixes.ErlangFunctionFixesTest;
+import org.intellij.erlang.quickfixes.ErlangHeadMismatchFixTest;
+import org.intellij.erlang.quickfixes.ErlangIntroduceFunctionFixTest;
+import org.intellij.erlang.quickfixes.ErlangIntroduceMacroQuickFixTest;
+import org.intellij.erlang.quickfixes.ErlangIntroduceRecordFieldTest;
+import org.intellij.erlang.quickfixes.ErlangIntroduceRecordFixTest;
+import org.intellij.erlang.quickfixes.ErlangIntroduceVariableFixTest;
 import org.intellij.erlang.refactoring.ErlangExtractFunctionTest;
-import org.intellij.erlang.refactoring.ErlangInlineVariableTest;
 import org.intellij.erlang.refactoring.ErlangIntroduceVariableTest;
-import org.intellij.erlang.refactoring.ErlangSafeDeleteTest;
 import org.intellij.erlang.resolve.ErlangIncludeLibResolveTest;
 import org.intellij.erlang.resolve.ErlangIncludeResolveTest;
 import org.intellij.erlang.resolve.ErlangModuleResolutionTest;
@@ -55,13 +55,15 @@ import org.intellij.erlang.selection.ErlangWordSelectionTest;
 import org.intellij.erlang.typing.ErlangEnterHandlerTest;
 import org.intellij.erlang.typing.ErlangSmartEnterClauseProcessorTest;
 import org.intellij.erlang.typing.ErlangTypedHandlerTest;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 @SuppressWarnings("ALL")
 public class ErlangTestCase extends TestCase {
   public static TestSuite suite() {
     TestSuite suite = new TestSuite();
-    suite.addTestSuite(ErlangParserTest.class);
-    suite.addTestSuite(ErlangAppParserTest.class);
+    //suite.addTestSuite(ErlangParserTest.class);
+    //suite.addTestSuite(ErlangAppParserTest.class);
     suite.addTestSuite(ErlangHighlightingTest.class);
     suite.addTestSuite(ErlangSmallIdeHighlightingTest.class);
     suite.addTestSuite(ErlangFormattingTest.class);
@@ -69,7 +71,7 @@ public class ErlangTestCase extends TestCase {
     suite.addTestSuite(ErlangCompletionTest.class);
     suite.addTestSuite(ErlangSmallIdeCompletionTest.class);
     suite.addTestSuite(ErlangCompletionWithSdkTest.class);
-    suite.addTestSuite(RebarProjectImportBuilderTest.class);
+    //suite.addTestSuite(RebarProjectImportBuilderTest.class);
     suite.addTestSuite(FileReferenceFilterTest.class);
     suite.addTestSuite(ErlangDocumentationProviderTest.class);
     suite.addTestSuite(ErlangParameterInfoHandlerTest.class);
@@ -85,13 +87,13 @@ public class ErlangTestCase extends TestCase {
     suite.addTestSuite(ErlangIntroduceVariableTest.class);
     suite.addTestSuite(ErlangFindIncludeQuickFixTest.class);
     suite.addTestSuite(ErlangExtractFunctionTest.class);
-    suite.addTestSuite(ErlangSafeDeleteTest.class);
+    //suite.addTestSuite(ErlangSafeDeleteTest.class);
     suite.addTestSuite(ErlangSmartEnterClauseProcessorTest.class);
     suite.addTestSuite(ErlangSdkReleaseTest.class);
     suite.addTestSuite(ErlangBehaviourInspectionsTest.class);
     suite.addTestSuite(ErlangCopyFileTest.class);
     suite.addTestSuite(ErlangGenerateTest.class);
-    suite.addTestSuite(ErlangInlineVariableTest.class);
+    //suite.addTestSuite(ErlangInlineVariableTest.class);
     suite.addTestSuite(ErlangGotoSuperTest.class);
     suite.addTestSuite(ErlangTypedHandlerTest.class);
     suite.addTestSuite(ErlangEnterHandlerTest.class);
@@ -102,7 +104,7 @@ public class ErlangTestCase extends TestCase {
     suite.addTestSuite(ErlangUnitTestElementUtilTest.class);
     suite.addTestSuite(ErlangEunitDetectionTest.class);
     suite.addTestSuite(ErlangDependenciesResolutionTest.class);
-    suite.addTestSuite(ErlangConsoleViewTest.class);
+    //suite.addTestSuite(ErlangConsoleViewTest.class);
     suite.addTestSuite(ErlangSourcePositionTest.class);
     suite.addTestSuite(ErlangModuleResolutionTest.class);
     suite.addTestSuite(ErlangPerformanceTest.class);

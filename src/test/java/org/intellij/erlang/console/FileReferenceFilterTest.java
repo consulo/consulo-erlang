@@ -16,20 +16,15 @@
 
 package org.intellij.erlang.console;
 
+import java.io.File;
+import java.util.regex.Pattern;
+
+import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 import com.intellij.execution.filters.Filter;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.testFramework.LightProjectDescriptor;
-import com.intellij.testFramework.fixtures.DefaultLightProjectDescriptor;
 import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.sdk.ErlangSdkType;
-import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.File;
-import java.util.regex.Pattern;
 
 @SuppressWarnings("ConstantConditions")
 public class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
@@ -112,7 +107,7 @@ public class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtu
     assertNotNull(result.hyperlinkInfo);
   }
 
-  @NotNull
+  /*@NotNull
   @Override
   protected LightProjectDescriptor getProjectDescriptor() {
     return new DefaultLightProjectDescriptor() {
@@ -121,5 +116,5 @@ public class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtu
         return ErlangSdkType.createMockSdk("testData/mockSdk-R15B02/");
       }
     };
-  }
+  } */
 }

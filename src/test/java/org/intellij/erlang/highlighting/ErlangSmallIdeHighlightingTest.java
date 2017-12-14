@@ -16,13 +16,7 @@
 
 package org.intellij.erlang.highlighting;
 
-import com.intellij.util.PlatformUtilsCore;
-
 public class ErlangSmallIdeHighlightingTest extends ErlangHighlightingTestBase {
-  public ErlangSmallIdeHighlightingTest() {
-    super(PlatformUtilsCore.PYCHARM_PREFIX);
-  }
-
   public void testIncludeFromOtpIncludeDirResolve() throws Exception {
     enableUnresolvedMacroInspection();
     doTest("smallIdeOtpInclude/src/IncludeResolve.erl",

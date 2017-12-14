@@ -16,16 +16,16 @@
 
 package org.intellij.erlang.quickfixes;
 
-import com.intellij.codeInsight.intention.IntentionAction;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.ContainerUtil;
+import java.util.List;
+
 import org.intellij.erlang.inspection.ErlangUnresolvedIncludeInspection;
 import org.intellij.erlang.inspection.ErlangUnresolvedIncludeLibInspection;
 import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-
-import java.util.List;
+import com.intellij.codeInsight.intention.IntentionAction;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.containers.ContainerUtil;
 
 public class ErlangFindIncludeQuickFixTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   @Override
@@ -46,7 +46,7 @@ public class ErlangFindIncludeQuickFixTest extends ErlangLightPlatformCodeInsigh
     ApplicationManager.getApplication().runWriteAction(new Runnable() {
       @Override
       public void run() {
-        ErlangFacet.createFacet(myFixture.getModule());
+        //ErlangFacet.createFacet(myFixture.getModule());
       }
     });
   }
@@ -58,9 +58,9 @@ public class ErlangFindIncludeQuickFixTest extends ErlangLightPlatformCodeInsigh
   private void doIncludeTest(String expectedIncludePath, String ... files) throws Exception {
     myFixture.configureByFiles(files);
     runQuickFix();
-    List<VirtualFile> includeDirectories = ErlangIncludeDirectoryUtil.getIncludeDirectories(myFixture.getModule());
-    assertEquals(1, includeDirectories.size());
-    assertTrue(includeDirectories.get(0).getPath().endsWith(expectedIncludePath));
+    VirtualFile[] includeDirectories = ErlangIncludeDirectoryUtil.getIncludeDirectories(myFixture.getModule());
+    assertEquals(1, includeDirectories.length);
+    assertTrue(includeDirectories[0].getPath().endsWith(expectedIncludePath));
   }
 
   private void runQuickFix() {

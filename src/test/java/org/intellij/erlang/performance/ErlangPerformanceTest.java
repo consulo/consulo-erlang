@@ -1,13 +1,9 @@
 package org.intellij.erlang.performance;
 
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.testFramework.LightProjectDescriptor;
-import com.intellij.testFramework.PlatformTestUtil;
-import com.intellij.testFramework.fixtures.DefaultLightProjectDescriptor;
-import com.intellij.util.ThrowableRunnable;
 import org.intellij.erlang.highlighting.ErlangHighlightingTestBase;
-import org.intellij.erlang.sdk.ErlangSdkType;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
+import com.intellij.testFramework.PlatformTestUtil;
+import com.intellij.util.ThrowableRunnable;
 
 public class ErlangPerformanceTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   @Override
@@ -15,7 +11,7 @@ public class ErlangPerformanceTest extends ErlangLightPlatformCodeInsightFixture
     return "testData/performance/";
   }
 
-  @Override
+  /*@Override
   protected LightProjectDescriptor getProjectDescriptor() {
     return new DefaultLightProjectDescriptor() {
       @Override
@@ -23,7 +19,7 @@ public class ErlangPerformanceTest extends ErlangLightPlatformCodeInsightFixture
         return ErlangSdkType.createMockSdk("testData/mockSdk-R15B02/");
       }
     };
-  }
+  } */
 
   @Override
   protected void setUp() throws Exception {

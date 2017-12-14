@@ -16,6 +16,10 @@
 
 package org.intellij.erlang.info;
 
+import org.intellij.erlang.ErlangParameterInfoHandler;
+import org.intellij.erlang.psi.ErlangArgumentList;
+import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
+import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.parameterInfo.CreateParameterInfoContext;
 import com.intellij.lang.parameterInfo.ParameterInfoHandler;
 import com.intellij.lang.parameterInfo.UpdateParameterInfoContext;
@@ -24,167 +28,218 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ArrayUtil;
-import org.intellij.erlang.ErlangParameterInfoHandler;
-import org.intellij.erlang.psi.ErlangArgumentList;
-import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-import org.jetbrains.annotations.NotNull;
 
-public class ErlangParameterInfoHandlerTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
-  private static final String FOO = "foo(Arg1, Arg2) -> ok.\n";
+public class ErlangParameterInfoHandlerTest extends ErlangLightPlatformCodeInsightFixtureTestCase
+{
+	private static final String FOO = "foo(Arg1, Arg2) -> ok.\n";
 
-  public void testEmpty()     { doTest(FOO + "bar() -> foo(<caret>)", 0); }
-  public void testSecond()    { doTest(FOO + "bar() -> foo(1, <caret>)", 1); }
-  public void testBif()       { doTest("bar() -> hash({}, <caret>)", 1); }
-  public void testModuleBif() { doTest("bar() -> math:sin(<caret>)", 0); }
+	public void testEmpty()
+	{
+		doTest(FOO + "bar() -> foo(<caret>)", 0);
+	}
 
-  private void doTest(String text, int highlightedParameterIndex) {
-    myFixture.configureByText("a.erl", text);
-    final ErlangParameterInfoHandler parameterInfoHandler = new ErlangParameterInfoHandler();
-    final CreateParameterInfoContext createContext = new MockCreateParameterInfoContext(myFixture.getEditor(), myFixture.getFile());
-    final ErlangArgumentList list = parameterInfoHandler.findElementForParameterInfo(createContext);
+	public void testSecond()
+	{
+		doTest(FOO + "bar() -> foo(1, <caret>)", 1);
+	}
 
-    if (highlightedParameterIndex >= 0) {
-      assertNotNull(list);
-      parameterInfoHandler.showParameterInfo(list, createContext);
-      Object[] itemsToShow = createContext.getItemsToShow();
-      assertNotNull(itemsToShow);
-      assertTrue(itemsToShow.length > 0);
-    }
-    MockUpdateParameterInfoContext updateContext = new MockUpdateParameterInfoContext(myFixture.getEditor(), myFixture.getFile());
-    final ErlangArgumentList element = parameterInfoHandler.findElementForUpdatingParameterInfo(updateContext);
-    if (element == null) {
-      assertEquals(-1, highlightedParameterIndex);
-    }
-    else {
-      assertNotNull(element);
-      //noinspection unchecked
-      parameterInfoHandler.updateParameterInfo(element, updateContext);
-      assertEquals(highlightedParameterIndex, updateContext.getCurrentParameter());
-    }
-  }
+	public void testBif()
+	{
+		doTest("bar() -> hash({}, <caret>)", 1);
+	}
 
-  @SuppressWarnings("UnusedDeclaration")
-  public static class MockCreateParameterInfoContext implements CreateParameterInfoContext {
-    private Object[] myItems;
-    private PsiElement myHighlightedElement;
-    private final Editor myEditor;
-    private final PsiFile myFile;
+	public void testModuleBif()
+	{
+		doTest("bar() -> math:sin(<caret>)", 0);
+	}
 
-    public MockCreateParameterInfoContext(@NotNull Editor editor, @NotNull PsiFile file) {
-      myEditor = editor;
-      myFile = file;
-    }
+	private void doTest(String text, int highlightedParameterIndex)
+	{
+		myFixture.configureByText("a.erl", text);
+		final ErlangParameterInfoHandler parameterInfoHandler = new ErlangParameterInfoHandler();
+		final CreateParameterInfoContext createContext = new MockCreateParameterInfoContext(myFixture.getEditor(), myFixture.getFile());
+		final ErlangArgumentList list = parameterInfoHandler.findElementForParameterInfo(createContext);
 
-    @Override
-    public Object[] getItemsToShow() {
-      return myItems;
-    }
+		if(highlightedParameterIndex >= 0)
+		{
+			assertNotNull(list);
+			parameterInfoHandler.showParameterInfo(list, createContext);
+			Object[] itemsToShow = createContext.getItemsToShow();
+			assertNotNull(itemsToShow);
+			assertTrue(itemsToShow.length > 0);
+		}
+		MockUpdateParameterInfoContext updateContext = new MockUpdateParameterInfoContext(myFixture.getEditor(), myFixture.getFile());
+		final ErlangArgumentList element = parameterInfoHandler.findElementForUpdatingParameterInfo(updateContext);
+		if(element == null)
+		{
+			assertEquals(-1, highlightedParameterIndex);
+		}
+		else
+		{
+			assertNotNull(element);
+			//noinspection unchecked
+			parameterInfoHandler.updateParameterInfo(element, updateContext);
+			assertEquals(highlightedParameterIndex, updateContext.getCurrentParameter());
+		}
+	}
 
-    @Override
-    public void setItemsToShow(Object[] items) {
-      myItems = items;
-    }
+	@SuppressWarnings("UnusedDeclaration")
+	public static class MockCreateParameterInfoContext implements CreateParameterInfoContext
+	{
+		private Object[] myItems;
+		private PsiElement myHighlightedElement;
+		private final Editor myEditor;
+		private final PsiFile myFile;
 
-    @Override
-    public void showHint(PsiElement element, int offset, ParameterInfoHandler handler) {}
+		public MockCreateParameterInfoContext(@NotNull Editor editor, @NotNull PsiFile file)
+		{
+			myEditor = editor;
+			myFile = file;
+		}
 
-    @Override
-    public int getParameterListStart() {
-      return myEditor.getCaretModel().getOffset();
-    }
+		@Override
+		public Object[] getItemsToShow()
+		{
+			return myItems;
+		}
 
-    @Override
-    public PsiElement getHighlightedElement() {
-      return myHighlightedElement;
-    }
+		@Override
+		public void setItemsToShow(Object[] items)
+		{
+			myItems = items;
+		}
 
-    @Override
-    public void setHighlightedElement(PsiElement elements) {
-      myHighlightedElement = elements;
-    }
+		@Override
+		public void showHint(PsiElement element, int offset, ParameterInfoHandler handler)
+		{
+		}
 
-    @Override
-    public Project getProject() {
-      return myFile.getProject();
-    }
+		@Override
+		public int getParameterListStart()
+		{
+			return myEditor.getCaretModel().getOffset();
+		}
 
-    @Override
-    public PsiFile getFile() {
-      return myFile;
-    }
+		@Override
+		public PsiElement getHighlightedElement()
+		{
+			return myHighlightedElement;
+		}
 
-    @Override
-    public int getOffset() {
-      return myEditor.getCaretModel().getOffset();
-    }
+		@Override
+		public void setHighlightedElement(Object o)
+		{
+			myHighlightedElement = (PsiElement) o;
+		}
 
-    @Override
-    @NotNull
-    public Editor getEditor() {
-      return myEditor;
-    }
-  }
+		@Override
+		public Project getProject()
+		{
+			return myFile.getProject();
+		}
 
-  @SuppressWarnings("UnusedDeclaration")
-  public static class MockUpdateParameterInfoContext implements UpdateParameterInfoContext {
-    private final Editor myEditor;
-    private final PsiFile myFile;
-    private PsiElement myParameterOwner;
-    private Object myHighlightedParameter;
-    private int myCurrentParameter;
+		@Override
+		public PsiFile getFile()
+		{
+			return myFile;
+		}
 
-    public MockUpdateParameterInfoContext(@NotNull Editor editor, @NotNull PsiFile file) {
-      myEditor = editor;
-      myFile = file;
-    }
+		@Override
+		public int getOffset()
+		{
+			return myEditor.getCaretModel().getOffset();
+		}
 
-    public void removeHint() {}
+		@Override
+		@NotNull
+		public Editor getEditor()
+		{
+			return myEditor;
+		}
+	}
 
-    public void setParameterOwner(PsiElement o) {
-      myParameterOwner = o;
-    }
+	@SuppressWarnings("UnusedDeclaration")
+	public static class MockUpdateParameterInfoContext implements UpdateParameterInfoContext
+	{
+		private final Editor myEditor;
+		private final PsiFile myFile;
+		private PsiElement myParameterOwner;
+		private Object myHighlightedParameter;
+		private int myCurrentParameter;
 
-    public PsiElement getParameterOwner() { return myParameterOwner; }
+		public MockUpdateParameterInfoContext(@NotNull Editor editor, @NotNull PsiFile file)
+		{
+			myEditor = editor;
+			myFile = file;
+		}
 
-    public void setHighlightedParameter(Object parameter) {
-      myHighlightedParameter = parameter;
-    }
+		public void removeHint()
+		{
+		}
 
-    public void setCurrentParameter(int index) {
-      myCurrentParameter = index;
-    }
+		public void setParameterOwner(PsiElement o)
+		{
+			myParameterOwner = o;
+		}
 
-    public int getCurrentParameter() {
-      return myCurrentParameter;
-    }
+		public PsiElement getParameterOwner()
+		{
+			return myParameterOwner;
+		}
 
-    public boolean isUIComponentEnabled(int index) { return false; }
+		public void setHighlightedParameter(Object parameter)
+		{
+			myHighlightedParameter = parameter;
+		}
 
-    public void setUIComponentEnabled(int index, boolean b) {}
+		public void setCurrentParameter(int index)
+		{
+			myCurrentParameter = index;
+		}
 
-    public int getParameterListStart() {
-      return myEditor.getCaretModel().getOffset();
-    }
+		public int getCurrentParameter()
+		{
+			return myCurrentParameter;
+		}
 
-    public Object[] getObjectsToView() {
-      return ArrayUtil.EMPTY_OBJECT_ARRAY;
-    }
+		public boolean isUIComponentEnabled(int index)
+		{
+			return false;
+		}
 
-    public Project getProject() {
-      return myFile.getProject();
-    }
+		public void setUIComponentEnabled(int index, boolean b)
+		{
+		}
 
-    public PsiFile getFile() {
-      return myFile;
-    }
+		public int getParameterListStart()
+		{
+			return myEditor.getCaretModel().getOffset();
+		}
 
-    public int getOffset() {
-      return myEditor.getCaretModel().getOffset();
-    }
+		public Object[] getObjectsToView()
+		{
+			return ArrayUtil.EMPTY_OBJECT_ARRAY;
+		}
 
-    @NotNull
-    public Editor getEditor() {
-      return myEditor;
-    }
-  }
+		public Project getProject()
+		{
+			return myFile.getProject();
+		}
+
+		public PsiFile getFile()
+		{
+			return myFile;
+		}
+
+		public int getOffset()
+		{
+			return myEditor.getCaretModel().getOffset();
+		}
+
+		@NotNull
+		public Editor getEditor()
+		{
+			return myEditor;
+		}
+	}
 }

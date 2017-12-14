@@ -16,21 +16,13 @@
 
 package org.intellij.erlang.documentation;
 
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkModificator;
-import com.intellij.openapi.roots.JavadocOrderRootType;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.testFramework.LightProjectDescriptor;
-import com.intellij.testFramework.fixtures.DefaultLightProjectDescriptor;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.ErlangModule;
 import org.intellij.erlang.psi.ErlangTypeDefinition;
-import org.intellij.erlang.sdk.ErlangSdkType;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 
 @SuppressWarnings("ConstantConditions")
 public class ErlangDocumentationProviderTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
@@ -502,7 +494,7 @@ public class ErlangDocumentationProviderTest extends ErlangLightPlatformCodeInsi
     assertTrue("Not a type: " + psiElement, psiElement instanceof ErlangTypeDefinition);
   }
 
-  @NotNull
+  /*@NotNull
   @Override
   protected LightProjectDescriptor getProjectDescriptor() {
     return new DefaultLightProjectDescriptor() {
@@ -517,7 +509,7 @@ public class ErlangDocumentationProviderTest extends ErlangLightPlatformCodeInsi
         return mockSdk;
       }
     };
-  }
+  }*/
 
   private void doTestGetUrls(@NotNull String expected, @NotNull String text) throws Exception {
     final PsiElement element = resolveElementAtCaret(text);

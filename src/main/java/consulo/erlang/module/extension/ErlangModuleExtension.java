@@ -8,7 +8,7 @@ import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.projectRoots.SdkType;
 import consulo.annotations.RequiredReadAction;
-import consulo.extension.impl.ModuleExtensionWithSdkImpl;
+import consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import consulo.roots.ModuleRootLayer;
 
 /**
@@ -17,7 +17,7 @@ import consulo.roots.ModuleRootLayer;
  */
 public class ErlangModuleExtension extends ModuleExtensionWithSdkImpl<ErlangModuleExtension>
 {
-	protected List<String> myParseTransforms = new ArrayList<String>();
+	protected List<String> myParseTransforms = new ArrayList<>();
 
 	public ErlangModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
 	{

@@ -16,22 +16,14 @@
 
 package org.intellij.erlang.highlighting;
 
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.testFramework.LightProjectDescriptor;
-import com.intellij.testFramework.fixtures.CodeInsightTestFixture;
-import com.intellij.testFramework.fixtures.DefaultLightProjectDescriptor;
-import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import org.intellij.erlang.inspection.*;
-import org.intellij.erlang.sdk.ErlangSdkType;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.testFramework.fixtures.CodeInsightTestFixture;
+import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 
 public abstract class ErlangHighlightingTestBase extends ErlangLightPlatformCodeInsightFixtureTestCase {
-  protected ErlangHighlightingTestBase(String platformPrefix) {
-    super(platformPrefix);
-  }
-
-  @Override
+ /* @Override
   protected LightProjectDescriptor getProjectDescriptor() {
     return new DefaultLightProjectDescriptor() {
       @Override
@@ -39,7 +31,7 @@ public abstract class ErlangHighlightingTestBase extends ErlangLightPlatformCode
         return ErlangSdkType.createMockSdk("testData/mockSdk-R15B02/");
       }
     };
-  }
+  } */
 
   @Override
   protected void setUp() throws Exception {

@@ -16,16 +16,13 @@
 
 package org.intellij.erlang.resolve;
 
+import java.util.List;
+
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 
-import java.util.List;
-
 public abstract class ErlangIncludeResolveTestBase extends ErlangLightPlatformCodeInsightFixtureTestCase {
-  public ErlangIncludeResolveTestBase(String platformPrefix) {
-    super(platformPrefix);
-  }
 
   @Override
   protected String getTestDataPath() {

@@ -3,7 +3,7 @@ package consulo.erlang.rebar.module.extension;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.projectRoots.SdkType;
 import consulo.erlang.rebar.bundle.RebarBundleType;
-import consulo.extension.impl.ModuleExtensionWithSdkImpl;
+import consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import consulo.roots.ModuleRootLayer;
 
 /**

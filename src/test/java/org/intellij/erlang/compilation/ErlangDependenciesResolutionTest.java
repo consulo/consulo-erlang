@@ -1,20 +1,13 @@
 package org.intellij.erlang.compilation;
 
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.module.ModuleType;
-import com.intellij.openapi.util.ThrowableComputable;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.VfsUtil;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.testFramework.ModuleTestCase;
-import com.intellij.testFramework.PsiTestUtil;
-import com.intellij.util.Function;
-import com.intellij.util.containers.ContainerUtil;
-import org.intellij.erlang.jps.builder.ErlangModuleBuildOrderDescriptor;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.testFramework.ModuleTestCase;
+import com.intellij.util.Function;
+import com.intellij.util.containers.ContainerUtil;
 
 public class ErlangDependenciesResolutionTest extends ModuleTestCase {
   @Override
@@ -31,11 +24,6 @@ public class ErlangDependenciesResolutionTest extends ModuleTestCase {
     }
   }
 
-  @Override
-  protected ModuleType getModuleType() {
-    return ErlangModuleType.getInstance();
-  }
-
   private void setUpSourcePath(String sourcePath) throws IOException {
     doSetUpSourcePath(sourcePath, false);
   }
@@ -45,7 +33,7 @@ public class ErlangDependenciesResolutionTest extends ModuleTestCase {
   }
 
   private void doSetUpSourcePath(final String sourcePath, boolean isTestSource) throws IOException {
-    final String sourceDirectoryName = isTestSource ? "test" : "src";
+    /*final String sourceDirectoryName = isTestSource ? "test" : "src";
     final VirtualFile moduleFile = myModule.getModuleFile();
     assertNotNull(moduleFile);
     VirtualFile moduleSourceDir = ApplicationManager.getApplication().runWriteAction(new ThrowableComputable<VirtualFile, IOException>() {
@@ -57,7 +45,7 @@ public class ErlangDependenciesResolutionTest extends ModuleTestCase {
         return moduleSourceDir;
       }
     });
-    PsiTestUtil.addSourceRoot(myModule, moduleSourceDir, isTestSource);
+    PsiTestUtil.addSourceRoot(myModule, moduleSourceDir, isTestSource);  */
   }
 
   private String getSourceDirectoryPath() {

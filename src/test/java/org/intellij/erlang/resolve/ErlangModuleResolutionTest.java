@@ -16,20 +16,16 @@
 
 package org.intellij.erlang.resolve;
 
-import com.intellij.openapi.projectRoots.Sdk;
+import org.intellij.erlang.psi.ErlangModuleRef;
+import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.testFramework.LightProjectDescriptor;
-import com.intellij.testFramework.fixtures.DefaultLightProjectDescriptor;
-import org.intellij.erlang.psi.ErlangModuleRef;
-import org.intellij.erlang.sdk.ErlangSdkType;
-import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 
 public class ErlangModuleResolutionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
-  @Override
+  /*@Override
   protected LightProjectDescriptor getProjectDescriptor() {
     return new DefaultLightProjectDescriptor() {
       @Override
@@ -37,7 +33,7 @@ public class ErlangModuleResolutionTest extends ErlangLightPlatformCodeInsightFi
         return ErlangSdkType.createMockSdk("testData/mockSdk-R15B02/");
       }
     };
-  }
+  }*/
 
   @Override
   protected void setUp() throws Exception {

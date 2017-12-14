@@ -16,13 +16,8 @@
 
 package org.intellij.erlang.completion;
 
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.testFramework.LightProjectDescriptor;
-import com.intellij.testFramework.fixtures.DefaultLightProjectDescriptor;
-import org.intellij.erlang.sdk.ErlangSdkType;
-
 public class ErlangCompletionWithSdkTest extends ErlangCompletionTestBase {
-  @Override
+  /*@Override
   protected LightProjectDescriptor getProjectDescriptor() {
     return new DefaultLightProjectDescriptor() {
       @Override
@@ -30,7 +25,7 @@ public class ErlangCompletionWithSdkTest extends ErlangCompletionTestBase {
         return ErlangSdkType.createMockSdk("testData/mockSdk-R16B/");
       }
     };
-  }  
+  } */
 
   public void testNoBifDuplicates() throws Throwable {
     doCheckResult("bar() ->crc<caret>", "bar() ->crc32(<caret>)");  

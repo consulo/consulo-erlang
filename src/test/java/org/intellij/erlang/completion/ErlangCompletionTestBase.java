@@ -16,6 +16,14 @@
 
 package org.intellij.erlang.completion;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
+import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageManagerImpl;
 import com.intellij.testFramework.UsefulTestCase;
@@ -23,23 +31,8 @@ import com.intellij.testFramework.fixtures.IdeaProjectTestFixture;
 import com.intellij.testFramework.fixtures.IdeaTestFixtureFactory;
 import com.intellij.testFramework.fixtures.TestFixtureBuilder;
 import com.intellij.testFramework.fixtures.impl.TempDirTestFixtureImpl;
-import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 abstract public class ErlangCompletionTestBase extends ErlangLightPlatformCodeInsightFixtureTestCase {
-  protected ErlangCompletionTestBase() {
-  }
-
-  protected ErlangCompletionTestBase(String platformPrefix) {
-    super(platformPrefix);
-  }
-
   protected String getTestDataPath() {
     return "testData/completion/";
   }
