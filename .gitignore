@@ -1,7 +1,4 @@
-.idea/workspace.xml
-out/
-bin/
-system-test/
-config-test/
-/dep
-/.consulo/workspace.xml
+/.consulo
+!/.consulo/codeStyleSettings.xml
+/out
+/target
