@@ -31,8 +31,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,13 +74,13 @@ public class ErlangFormattingBlock extends AbstractBlock {
   private final SpacingBuilder mySpacingBuilder;
   private List<Block> mySubBlocks;
 
-  public ErlangFormattingBlock(@NotNull ASTNode node,
+  public ErlangFormattingBlock(@Nonnull ASTNode node,
                                @Nullable Alignment alignment,
                                @Nullable AlignmentStrategy alignmentStrategy,
                                @Nullable Wrap wrap,
-                               @NotNull CommonCodeStyleSettings settings,
-                               @NotNull ErlangCodeStyleSettings erlangSettings,
-                               @NotNull SpacingBuilder spacingBuilder) {
+                               @Nonnull CommonCodeStyleSettings settings,
+                               @Nonnull ErlangCodeStyleSettings erlangSettings,
+                               @Nonnull SpacingBuilder spacingBuilder) {
     super(node, wrap, alignment);
     myAlignmentStrategy = alignmentStrategy;
     mySettings = settings;
@@ -94,7 +94,7 @@ public class ErlangFormattingBlock extends AbstractBlock {
     return myIndent;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected List<Block> buildChildren() {
     if (mySubBlocks == null) {
@@ -136,7 +136,7 @@ public class ErlangFormattingBlock extends AbstractBlock {
   }
 
   @Nullable
-  private WrapType calculateWrapType(@NotNull ASTNode parent, @NotNull ASTNode node) {
+  private WrapType calculateWrapType(@Nonnull ASTNode parent, @Nonnull ASTNode node) {
     IElementType parentType = parent.getElementType();
     PsiElement nodePsi = node.getPsi();
     PsiElement parentPsi = parent.getPsi();
@@ -153,7 +153,7 @@ public class ErlangFormattingBlock extends AbstractBlock {
   }
 
   @Nullable
-  private Alignment getAlignment(@NotNull ASTNode parent, @NotNull ASTNode child, @Nullable Alignment baseAlignment, @Nullable Alignment baseAlignment2) {
+  private Alignment getAlignment(@Nonnull ASTNode parent, @Nonnull ASTNode child, @Nullable Alignment baseAlignment, @Nullable Alignment baseAlignment2) {
     IElementType childType = child.getElementType();
     IElementType parentType = parent.getElementType();
     Alignment fromStrategy = calculateAlignmentFromStrategy(parent, child);
@@ -190,9 +190,9 @@ public class ErlangFormattingBlock extends AbstractBlock {
   }
 
   @Nullable
-  private Alignment calculateAlignmentFromStrategy(@NotNull ASTNode parent, ASTNode child) {
-    @NotNull IElementType childType = child.getElementType();
-    @NotNull IElementType parentType = parent.getElementType();
+  private Alignment calculateAlignmentFromStrategy(@Nonnull ASTNode parent, ASTNode child) {
+    @Nonnull IElementType childType = child.getElementType();
+    @Nonnull IElementType parentType = parent.getElementType();
     if (myAlignmentStrategy != null) {
       Alignment alignment = myAlignmentStrategy.getAlignment(parentType, childType);
       if (alignment != null &&
@@ -216,7 +216,7 @@ public class ErlangFormattingBlock extends AbstractBlock {
 
   @Override
   @Nullable
-  public Spacing getSpacing(@Nullable Block child1, @NotNull Block child2) {
+  public Spacing getSpacing(@Nullable Block child1, @Nonnull Block child2) {
     if (child2 instanceof ErlangFormattingBlock) {
       ASTNode node = ((ErlangFormattingBlock) child2).getNode();
       if (COMMENTS.contains(node.getElementType()) && mySettings.KEEP_FIRST_COLUMN_COMMENT) {
@@ -226,7 +226,7 @@ public class ErlangFormattingBlock extends AbstractBlock {
     return mySpacingBuilder.getSpacing(this, child1, child2);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public ChildAttributes getChildAttributes(int newChildIndex) {
     Indent childIndent = getChildIndent(myNode.getElementType(), newChildIndex);

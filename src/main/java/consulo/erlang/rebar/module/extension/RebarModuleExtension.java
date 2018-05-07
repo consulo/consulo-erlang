@@ -1,6 +1,7 @@
 package consulo.erlang.rebar.module.extension;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.projectRoots.SdkType;
 import consulo.erlang.rebar.bundle.RebarBundleType;
 import consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
@@ -12,12 +13,12 @@ import consulo.roots.ModuleRootLayer;
  */
 public class RebarModuleExtension extends ModuleExtensionWithSdkImpl<RebarModuleExtension>
 {
-	public RebarModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
+	public RebarModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer moduleRootLayer)
 	{
 		super(id, moduleRootLayer);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Class<? extends SdkType> getSdkTypeClass()
 	{

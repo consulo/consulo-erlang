@@ -21,12 +21,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.regex.Pattern;
 
-import javax.swing.Icon;
+import javax.annotation.Nonnull;
 
 import org.intellij.erlang.ErlangIcons;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import org.jetbrains.annotations.TestOnly;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
@@ -46,10 +46,11 @@ import com.intellij.util.containers.ContainerUtil;
 import consulo.roots.types.BinariesOrderRootType;
 import consulo.roots.types.DocumentationOrderRootType;
 import consulo.roots.types.SourcesOrderRootType;
+import consulo.ui.image.Image;
 
 public class ErlangSdkType extends SdkType
 {
-	@NotNull
+	@Nonnull
 	public static ErlangSdkType getInstance()
 	{
 		return EP_NAME.findExtension(ErlangSdkType.class);
@@ -60,14 +61,14 @@ public class ErlangSdkType extends SdkType
 		super("ERLANG_SDK");
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return ErlangIcons.ERLANG;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Collection<String> suggestHomePaths()
 	{
@@ -149,34 +150,34 @@ public class ErlangSdkType extends SdkType
 	}
 
 	@Override
-	public boolean isValidSdkHome(@NotNull final String path)
+	public boolean isValidSdkHome(@Nonnull final String path)
 	{
 		final File erl = getTopLevelExecutable(path);
 		final File erlc = getByteCodeCompilerExecutable(path);
 		return erl.canExecute() && erlc.canExecute();
 	}
 
-	@NotNull
-	public static File getTopLevelExecutable(@NotNull final String sdkHome)
+	@Nonnull
+	public static File getTopLevelExecutable(@Nonnull final String sdkHome)
 	{
 		return getExecutable(new File(sdkHome, "bin").getAbsolutePath(), "erl");
 	}
 
-	@NotNull
-	public static File getExecutable(@NotNull final String path, @NotNull final String command)
+	@Nonnull
+	public static File getExecutable(@Nonnull final String path, @Nonnull final String command)
 	{
 		return new File(path, SystemInfo.isWindows ? command + ".exe" : command);
 	}
 
-	@NotNull
-	public static File getByteCodeCompilerExecutable(@NotNull final String sdkHome)
+	@Nonnull
+	public static File getByteCodeCompilerExecutable(@Nonnull final String sdkHome)
 	{
 		return getExecutable(new File(sdkHome, "bin").getAbsolutePath(), "erlc");
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	public String suggestSdkName(@Nullable final String currentSdkName, @NotNull final String sdkHome)
+	public String suggestSdkName(@Nullable final String currentSdkName, @Nonnull final String sdkHome)
 	{
 		String version = getVersionString(sdkHome);
 		if(version == null)
@@ -188,19 +189,19 @@ public class ErlangSdkType extends SdkType
 
 	@Nullable
 	@Override
-	public String getVersionString(@NotNull final String sdkHome)
+	public String getVersionString(@Nonnull final String sdkHome)
 	{
 		return getReleaseString(sdkHome);
 	}
 
 	@Nullable
 	@Override
-	public String getDefaultDocumentationUrl(@NotNull Sdk sdk)
+	public String getDefaultDocumentationUrl(@Nonnull Sdk sdk)
 	{
 		return getDefaultDocumentationUrl(getRelease(sdk));
 	}
 
-	@NotNull
+	@Nonnull
 	@NonNls
 	@Override
 	public String getPresentableName()
@@ -209,7 +210,7 @@ public class ErlangSdkType extends SdkType
 	}
 
 	@Override
-	public void setupSdkPaths(@NotNull final Sdk sdk)
+	public void setupSdkPaths(@Nonnull final Sdk sdk)
 	{
 		configureSdkPaths(sdk);
 	}
@@ -222,8 +223,8 @@ public class ErlangSdkType extends SdkType
 	}
 
 	@TestOnly
-	@NotNull
-	public static Sdk createMockSdk(@NotNull final String sdkHome)
+	@Nonnull
+	public static Sdk createMockSdk(@Nonnull final String sdkHome)
 	{
 		final String release = getReleaseString(sdkHome);
 		final Sdk sdk = new SdkImpl(release, getInstance());
@@ -235,7 +236,7 @@ public class ErlangSdkType extends SdkType
 		return sdk;
 	}
 
-	private static void configureSdkPaths(@NotNull final Sdk sdk)
+	private static void configureSdkPaths(@Nonnull final Sdk sdk)
 	{
 		final SdkModificator sdkModificator = sdk.getSdkModificator();
 		setupLocalSdkPaths(sdkModificator);
@@ -250,7 +251,7 @@ public class ErlangSdkType extends SdkType
 	}
 
 	@Nullable
-	public static ErlangSdkRelease getRelease(@NotNull final Sdk sdk)
+	public static ErlangSdkRelease getRelease(@Nonnull final Sdk sdk)
 	{
 		String versionString = sdk.getVersionString();
 		try
@@ -264,7 +265,7 @@ public class ErlangSdkType extends SdkType
 	}
 
 	@Nullable
-	private static String getReleaseString(@NotNull final String sdkHome)
+	private static String getReleaseString(@Nonnull final String sdkHome)
 	{
 		Pattern pattern = Pattern.compile("R\\d+.*");
 		// determine the version from the 'releases' directory, if it exists
@@ -300,7 +301,7 @@ public class ErlangSdkType extends SdkType
 		return release == null ? null : "http://www.erlang.org/documentation/doc-" + release.getVersion();
 	}
 
-	private static void setupLocalSdkPaths(@NotNull final SdkModificator sdkModificator)
+	private static void setupLocalSdkPaths(@Nonnull final SdkModificator sdkModificator)
 	{
 		final String sdkHome = sdkModificator.getHomePath();
 
@@ -351,7 +352,7 @@ public class ErlangSdkType extends SdkType
 		tryToProcessAsStandardLibraryDir(sdkModificator, stdLibDir);
 	}
 
-	private static boolean tryToProcessAsStandardLibraryDir(@NotNull final SdkModificator sdkModificator, @NotNull final File stdLibDir)
+	private static boolean tryToProcessAsStandardLibraryDir(@Nonnull final SdkModificator sdkModificator, @Nonnull final File stdLibDir)
 	{
 		if(!isStandardLibraryDir(stdLibDir))
 		{
@@ -366,7 +367,7 @@ public class ErlangSdkType extends SdkType
 		return true;
 	}
 
-	private static boolean isStandardLibraryDir(@NotNull final File dir)
+	private static boolean isStandardLibraryDir(@Nonnull final File dir)
 	{
 		return dir.isDirectory();
 	}

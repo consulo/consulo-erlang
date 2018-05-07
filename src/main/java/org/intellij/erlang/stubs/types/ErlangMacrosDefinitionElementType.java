@@ -23,7 +23,7 @@ import com.intellij.util.ArrayFactory;
 import org.intellij.erlang.psi.ErlangMacrosDefinition;
 import org.intellij.erlang.psi.impl.ErlangMacrosDefinitionImpl;
 import org.intellij.erlang.stubs.ErlangMacrosDefinitionStub;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class ErlangMacrosDefinitionElementType extends ErlangNamedStubElementTyp
   public static final ErlangMacrosDefinition[] EMPTY_ARRAY = new ErlangMacrosDefinition[0];
 
   public static final ArrayFactory<ErlangMacrosDefinition> ARRAY_FACTORY = new ArrayFactory<ErlangMacrosDefinition>() {
-    @NotNull
+    @Nonnull
     @Override
     public ErlangMacrosDefinition[] create(final int count) {
       return count == 0 ? EMPTY_ARRAY : new ErlangMacrosDefinition[count];
@@ -43,23 +43,23 @@ public class ErlangMacrosDefinitionElementType extends ErlangNamedStubElementTyp
   }
 
   @Override
-  public ErlangMacrosDefinition createPsi(@NotNull ErlangMacrosDefinitionStub stub) {
+  public ErlangMacrosDefinition createPsi(@Nonnull ErlangMacrosDefinitionStub stub) {
     return new ErlangMacrosDefinitionImpl(stub, this);
   }
 
   @Override
-  public ErlangMacrosDefinitionStub createStub(@NotNull ErlangMacrosDefinition psi, StubElement parentStub) {
+  public ErlangMacrosDefinitionStub createStub(@Nonnull ErlangMacrosDefinition psi, StubElement parentStub) {
     return new ErlangMacrosDefinitionStub(parentStub, this, psi.getName());
   }
 
   @Override
-  public void serialize(@NotNull ErlangMacrosDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@Nonnull ErlangMacrosDefinitionStub stub, @Nonnull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getName());
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ErlangMacrosDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public ErlangMacrosDefinitionStub deserialize(@Nonnull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new ErlangMacrosDefinitionStub(parentStub, this, dataStream.readName());
   }
 }

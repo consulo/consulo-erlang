@@ -25,9 +25,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.console.ErlangConsoleUtil;
 import org.intellij.erlang.runconfig.ErlangRunningState;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.DefaultExecutionResult;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
@@ -104,8 +105,8 @@ public class ErlangUnitRunningState extends ErlangRunningState
 	}
 
 	@Override
-	@NotNull
-	public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) throws ExecutionException
+	@Nonnull
+	public ExecutionResult execute(@Nonnull Executor executor, @Nonnull ProgramRunner runner) throws ExecutionException
 	{
 		ProcessHandler processHandler = startProcess();
 		setConsoleBuilder(getConsoleBuilder());
@@ -133,7 +134,7 @@ public class ErlangUnitRunningState extends ErlangRunningState
 	}
 
 	@Override
-	@NotNull
+	@Nonnull
 	public ConsoleView createConsoleView(Executor executor)
 	{
 		ErlangUnitConsoleProperties consoleProperties = new ErlangUnitConsoleProperties(myConfiguration, executor);
@@ -148,7 +149,7 @@ public class ErlangUnitRunningState extends ErlangRunningState
 		return new ErlangEntryPoint("eunit", "test", args);
 	}
 
-	@NotNull
+	@Nonnull
 	private String getTestObjectsString(boolean debug) throws ExecutionException
 	{
 		ErlangUnitRunConfiguration.ErlangUnitRunConfigurationKind kind = myConfiguration.getConfigData().getKind();

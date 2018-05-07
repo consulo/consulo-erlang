@@ -28,8 +28,8 @@ import org.intellij.erlang.psi.ErlangArgumentDefinition;
 import org.intellij.erlang.psi.ErlangExpression;
 import org.intellij.erlang.psi.ErlangListOpExpression;
 import org.intellij.erlang.psi.ErlangParenthesizedExpression;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.Set;
 
@@ -45,7 +45,7 @@ public class ErlangIndentProcessor {
   );
   private final ErlangCodeStyleSettings myErlangSettings;
 
-  public ErlangIndentProcessor(@NotNull ErlangCodeStyleSettings erlangSettings) {
+  public ErlangIndentProcessor(@Nonnull ErlangCodeStyleSettings erlangSettings) {
     myErlangSettings = erlangSettings;
   }
 

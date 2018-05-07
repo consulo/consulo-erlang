@@ -16,10 +16,11 @@
 
 package org.intellij.erlang.stubs.index;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import org.intellij.erlang.psi.ErlangNamedElement;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangAllNameIndex extends StringStubIndexExtension<ErlangNamedElement> {
   public static final StubIndexKey<String, ErlangNamedElement> KEY = StubIndexKey.createIndexKey("erlang.all.name");
@@ -30,7 +31,7 @@ public class ErlangAllNameIndex extends StringStubIndexExtension<ErlangNamedElem
     return super.getVersion() + VERSION;
   }
 
-  @NotNull
+  @Nonnull
   public StubIndexKey<String, ErlangNamedElement> getKey() {
     return KEY;
   }

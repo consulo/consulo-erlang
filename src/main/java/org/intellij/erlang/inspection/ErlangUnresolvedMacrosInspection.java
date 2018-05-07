@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.inspection;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
@@ -25,7 +27,6 @@ import org.intellij.erlang.psi.ErlangMacrosName;
 import org.intellij.erlang.psi.ErlangRecursiveVisitor;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.quickfixes.ErlangIntroduceMacroQuickFix;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangUnresolvedMacrosInspection extends ErlangInspectionBase {
   @Override
@@ -34,7 +35,7 @@ public class ErlangUnresolvedMacrosInspection extends ErlangInspectionBase {
     file.accept(new ErlangRecursiveVisitor() {
 
       @Override
-      public void visitMacros(@NotNull ErlangMacros o) {
+      public void visitMacros(@Nonnull ErlangMacros o) {
         ErlangMacrosName macrosName = o.getMacrosName();
         if (macrosName == null) return;
         if (ErlangPsiImplUtil.KNOWN_MACROS.contains(macrosName.getText())) return;

@@ -16,7 +16,7 @@
 
 package org.intellij.erlang.utils;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,8 +27,8 @@ public final class ExtProcessUtil {
   private ExtProcessUtil() {
   }
 
-  @NotNull
-  public static String restrictedTimeExec(@NotNull String cmd, int timeout) {
+  @Nonnull
+  public static String restrictedTimeExec(@Nonnull String cmd, int timeout) {
     try {
       final Process cmdRunner = Runtime.getRuntime().exec(cmd);
       ExecutorService singleTreadExecutor = Executors.newSingleThreadExecutor();

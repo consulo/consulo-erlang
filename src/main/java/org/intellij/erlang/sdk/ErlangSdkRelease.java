@@ -16,8 +16,9 @@
 
 package org.intellij.erlang.sdk;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.util.text.VersionComparatorUtil;
-import org.jetbrains.annotations.NotNull;
 
 public enum ErlangSdkRelease {
   R16B03("5.10.4"),
@@ -42,19 +43,19 @@ public enum ErlangSdkRelease {
   R13B  ("5.7.1" ),
   R13A  ("5.7"   );
 
-  @NotNull
+  @Nonnull
   private final String myVersion;
 
-  private ErlangSdkRelease(@NotNull String version) {
+  private ErlangSdkRelease(@Nonnull String version) {
     myVersion = version;
   }
 
-  @NotNull
+  @Nonnull
   public String getVersion() {
     return myVersion;
   }
 
-  public boolean needBifCompletion(@NotNull String moduleName) {
+  public boolean needBifCompletion(@Nonnull String moduleName) {
     return VersionComparatorUtil.compare(myVersion, "5.10") < 0  || "lager".equals(moduleName) || moduleName.isEmpty();
   }
 }

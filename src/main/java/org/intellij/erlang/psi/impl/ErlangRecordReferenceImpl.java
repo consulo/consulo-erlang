@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -24,10 +26,9 @@ import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangQAtom;
 import org.intellij.erlang.psi.ErlangRecordDefinition;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangRecordReferenceImpl<T extends ErlangQAtom> extends ErlangAtomBasedReferenceImpl<T> {
-  public ErlangRecordReferenceImpl(@NotNull T element, TextRange range, String name) {
+  public ErlangRecordReferenceImpl(@Nonnull T element, TextRange range, String name) {
     super(element, range, name);
   }
 
@@ -43,7 +44,7 @@ public class ErlangRecordReferenceImpl<T extends ErlangQAtom> extends ErlangAtom
     return null;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public Object[] getVariants() {
     return ArrayUtil.toObjectArray(ErlangPsiImplUtil.getRecordLookupElements(myElement.getContainingFile()));

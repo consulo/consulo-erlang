@@ -32,7 +32,7 @@ import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangQVar;
 import org.intellij.erlang.psi.ErlangRecursiveVisitor;
 import org.intellij.erlang.quickfixes.ErlangQuickFixBase;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import static org.intellij.erlang.psi.impl.ErlangPsiImplUtil.*;
 
@@ -42,7 +42,7 @@ public class ErlangUnboundVariableInspection extends ErlangInspectionBase {
     if (!(file instanceof ErlangFile)) return;
     file.accept(new ErlangRecursiveVisitor() {
       @Override
-      public void visitQVar(@NotNull ErlangQVar o) {
+      public void visitQVar(@Nonnull ErlangQVar o) {
         if ((inArgumentDefinition(o) && !inArgumentList(o))
           || inDefinitionBeforeArgumentList(o)
           || inLeftPartOfAssignment(o) || inAtomAttribute(o) || isMacros(o)
@@ -59,14 +59,14 @@ public class ErlangUnboundVariableInspection extends ErlangInspectionBase {
   }
 
   private static class ErlangIntroduceVariableQuickFix extends ErlangQuickFixBase {
-    @NotNull
+    @Nonnull
     @Override
     public String getFamilyName() {
       return "Introduce variable";
     }
 
     @Override
-    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+    public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor descriptor) {
       PsiElement psiElement = descriptor.getPsiElement();
       if (!(psiElement instanceof ErlangQVar)) return;
 

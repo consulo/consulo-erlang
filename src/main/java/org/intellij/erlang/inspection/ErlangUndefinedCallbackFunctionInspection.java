@@ -31,7 +31,7 @@ import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -91,16 +91,16 @@ public class ErlangUndefinedCallbackFunctionInspection extends ErlangInspectionB
   }
 
   private static class MyLocalQuickFixBase extends LocalQuickFixBase {
-    @NotNull
+    @Nonnull
     private final Collection<ErlangCallbackSpec> myCallbackSpecs;
 
-    protected MyLocalQuickFixBase(@NotNull Collection<ErlangCallbackSpec> callbackSpecs) {
+    protected MyLocalQuickFixBase(@Nonnull Collection<ErlangCallbackSpec> callbackSpecs) {
       super("Implement all callbacks");
       myCallbackSpecs = callbackSpecs;
     }
 
     @Override
-    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor problemDescriptor) {
+    public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor problemDescriptor) {
       PsiFile file = problemDescriptor.getPsiElement().getContainingFile();
 
       for (ErlangCallbackSpec spec : myCallbackSpecs) {

@@ -10,8 +10,8 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Consumer;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 
@@ -19,8 +19,8 @@ public final class RebarConfigUtil {
   private RebarConfigUtil() {
   }
 
-  @NotNull
-  public static List<String> getIncludePaths(@NotNull ErlangFile rebarConfig) {
+  @Nonnull
+  public static List<String> getIncludePaths(@Nonnull ErlangFile rebarConfig) {
     final List<String> includePaths = ContainerUtil.newArrayList();
     ErlangTermFileUtil.processConfigSection(rebarConfig, "erl_opts", new Consumer<ErlangExpression>() {
       @Override
@@ -43,8 +43,8 @@ public final class RebarConfigUtil {
     return includePaths;
   }
 
-  @NotNull
-  public static List<String> getDependencyAppNames(@NotNull ErlangFile rebarConfig) {
+  @Nonnull
+  public static List<String> getDependencyAppNames(@Nonnull ErlangFile rebarConfig) {
     final List<String> dependencyAppNames = ContainerUtil.newArrayList();
     ErlangTermFileUtil.processConfigSection(rebarConfig, "deps", new Consumer<ErlangExpression>() {
       @Override
@@ -58,7 +58,7 @@ public final class RebarConfigUtil {
     return dependencyAppNames;
   }
 
-  @NotNull
+  @Nonnull
   public static List<String> getParseTransforms(@Nullable ErlangFile rebarConfig) {
     final List<String> parseTransforms = ContainerUtil.newArrayList();
     ErlangTermFileUtil.processConfigSection(rebarConfig, "erl_opts", new Consumer<ErlangExpression>() {
@@ -79,13 +79,13 @@ public final class RebarConfigUtil {
     return parseTransforms;
   }
 
-  @NotNull
-  private static String getStringLiteralText(@NotNull ErlangStringLiteral literal) {
+  @Nonnull
+  private static String getStringLiteralText(@Nonnull ErlangStringLiteral literal) {
     return StringUtil.unquoteString(literal.getString().getText());
   }
 
   @Nullable
-  public static ErlangFile getRebarConfig(@NotNull Project project, @Nullable VirtualFile otpAppRoot) {
+  public static ErlangFile getRebarConfig(@Nonnull Project project, @Nullable VirtualFile otpAppRoot) {
     VirtualFile rebarConfig = otpAppRoot != null ? otpAppRoot.findChild("rebar.config") : null;
     PsiFile rebarConfigPsi = rebarConfig != null && !rebarConfig.isDirectory() ? PsiManager.getInstance(project).findFile(rebarConfig) : null;
     return rebarConfigPsi instanceof ErlangFile ? (ErlangFile) rebarConfigPsi : null;

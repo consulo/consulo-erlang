@@ -16,12 +16,12 @@
 
 package org.intellij.erlang.debugger.remote.ui;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.intellij.erlang.debugger.remote.ErlangRemoteDebugRunConfiguration;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.roots.ui.configuration.ModulesCombobox;
@@ -47,7 +47,7 @@ public class ErlangRemoteDebugConfigurationEditorForm extends SettingsEditor<Erl
     configuration.setCookie(myCookieTextField.getText());
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected JComponent createEditor() {
     return myComponent;

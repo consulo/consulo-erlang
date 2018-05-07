@@ -23,7 +23,7 @@ import com.intellij.util.ArrayFactory;
 import org.intellij.erlang.psi.ErlangModule;
 import org.intellij.erlang.psi.impl.ErlangModuleImpl;
 import org.intellij.erlang.stubs.ErlangModuleStub;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class ErlangModuleStubElementType extends ErlangNamedStubElementType<Erla
   public static final ErlangModule[] EMPTY_ARRAY = new ErlangModule[0];
 
   public static final ArrayFactory<ErlangModule> ARRAY_FACTORY = new ArrayFactory<ErlangModule>() {
-    @NotNull
+    @Nonnull
     @Override
     public ErlangModule[] create(final int count) {
       return count == 0 ? EMPTY_ARRAY : new ErlangModule[count];
@@ -43,23 +43,23 @@ public class ErlangModuleStubElementType extends ErlangNamedStubElementType<Erla
   }
 
   @Override
-  public ErlangModule createPsi(@NotNull ErlangModuleStub stub) {
+  public ErlangModule createPsi(@Nonnull ErlangModuleStub stub) {
     return new ErlangModuleImpl(stub, this);
   }
 
   @Override
-  public ErlangModuleStub createStub(@NotNull ErlangModule psi, StubElement parentStub) {
+  public ErlangModuleStub createStub(@Nonnull ErlangModule psi, StubElement parentStub) {
     return new ErlangModuleStub(parentStub, this, psi.getName());
   }
 
   @Override
-  public void serialize(@NotNull ErlangModuleStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@Nonnull ErlangModuleStub stub, @Nonnull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getName());
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ErlangModuleStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public ErlangModuleStub deserialize(@Nonnull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new ErlangModuleStub(parentStub, this, dataStream.readName());
   }
 }

@@ -23,7 +23,7 @@ import com.intellij.util.ArrayFactory;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.impl.ErlangFunctionImpl;
 import org.intellij.erlang.stubs.ErlangFunctionStub;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class ErlangFunctionStubElementType extends ErlangNamedStubElementType<Er
   public static final ErlangFunction[] EMPTY_ARRAY = new ErlangFunction[0];
 
   public static final ArrayFactory<ErlangFunction> ARRAY_FACTORY = new ArrayFactory<ErlangFunction>() {
-    @NotNull
+    @Nonnull
     @Override
     public ErlangFunction[] create(final int count) {
       return count == 0 ? EMPTY_ARRAY : new ErlangFunction[count];
@@ -43,25 +43,25 @@ public class ErlangFunctionStubElementType extends ErlangNamedStubElementType<Er
   }
 
   @Override
-  public ErlangFunction createPsi(@NotNull ErlangFunctionStub stub) {
+  public ErlangFunction createPsi(@Nonnull ErlangFunctionStub stub) {
     return new ErlangFunctionImpl(stub, this);
   }
 
   @Override
-  public ErlangFunctionStub createStub(@NotNull ErlangFunction psi, StubElement parentStub) {
+  public ErlangFunctionStub createStub(@Nonnull ErlangFunction psi, StubElement parentStub) {
     return new ErlangFunctionStub(parentStub, this, psi.getName(), psi.getArity(), psi.isExported());
   }
 
   @Override
-  public void serialize(@NotNull ErlangFunctionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@Nonnull ErlangFunctionStub stub, @Nonnull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getName());
     dataStream.writeInt(stub.getArity());
     dataStream.writeBoolean(stub.isExported());
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ErlangFunctionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public ErlangFunctionStub deserialize(@Nonnull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new ErlangFunctionStub(parentStub, this, dataStream.readName(), dataStream.readInt(), dataStream.readBoolean());
   }
 }

@@ -30,7 +30,7 @@ import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import org.intellij.erlang.psi.ErlangFile;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class ErlangTypedHandler extends TypedHandlerDelegate {
   @Override
@@ -47,7 +47,7 @@ public class ErlangTypedHandler extends TypedHandlerDelegate {
   }
 
   @Override
-  public Result charTyped(char c, Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+  public Result charTyped(char c, Project project, @Nonnull Editor editor, @Nonnull PsiFile file) {
     if (!(file instanceof ErlangFile)) return super.charTyped(c, project, editor, file);
 
     if (c != '<' || !CodeInsightSettings.getInstance().AUTOINSERT_PAIR_BRACKET) {

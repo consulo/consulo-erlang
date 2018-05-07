@@ -16,13 +16,13 @@
 
 package org.intellij.erlang.console;
 
+import javax.annotation.Nonnull;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.module.Module;
@@ -41,9 +41,10 @@ public final class ErlangConsoleRunConfigurationForm extends SettingsEditor<Erla
   private TextFieldWithBrowseButton myWorkingDirPathField;
   private JComboBox myModuleComboBox;
 
-  @Nullable private final Module myInitialModule;
+  @Nullable
+  private final Module myInitialModule;
 
-  public ErlangConsoleRunConfigurationForm(@NotNull Project project, @Nullable Module module) {
+  public ErlangConsoleRunConfigurationForm(@Nonnull Project project, @Nullable Module module) {
     myInitialModule = module;
     myModuleComboBox.setEnabled(true);
     addFileChooser("Choose Working Directory", myWorkingDirPathField, project);
@@ -51,7 +52,7 @@ public final class ErlangConsoleRunConfigurationForm extends SettingsEditor<Erla
   }
 
   @Override
-  protected void resetEditorFrom(@NotNull ErlangConsoleRunConfiguration config) {
+  protected void resetEditorFrom(@Nonnull ErlangConsoleRunConfiguration config) {
     myModuleComboBox.removeAllItems();
     for (final Module module : config.getValidModules()) {
       if (ModuleUtilCore.getExtension(module, ErlangModuleExtension.class) != null) {
@@ -68,13 +69,13 @@ public final class ErlangConsoleRunConfigurationForm extends SettingsEditor<Erla
   }
 
   @Override
-  protected void applyEditorTo(@NotNull ErlangConsoleRunConfiguration config) throws ConfigurationException {
+  protected void applyEditorTo(@Nonnull ErlangConsoleRunConfiguration config) throws ConfigurationException {
     config.setModule((Module) myModuleComboBox.getSelectedItem());
     config.setWorkingDirPath(myWorkingDirPathField.getText());
     config.setConsoleArgs(myConsoleArgsEditor.getText());
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected JComponent createEditor() {
     return myPanel;
@@ -85,10 +86,10 @@ public final class ErlangConsoleRunConfigurationForm extends SettingsEditor<Erla
     myPanel.setVisible(false);
   }
 
-  @NotNull
-  private static FileChooserDescriptor addFileChooser(@NotNull final String title,
-                                                      @NotNull final TextFieldWithBrowseButton textField,
-                                                      @NotNull final Project project) {
+  @Nonnull
+  private static FileChooserDescriptor addFileChooser(@Nonnull final String title,
+                                                      @Nonnull final TextFieldWithBrowseButton textField,
+                                                      @Nonnull final Project project) {
     final FileChooserDescriptor fileChooserDescriptor = new FileChooserDescriptor(
       false, true, false, false, false, false) {
       @Override
@@ -101,7 +102,7 @@ public final class ErlangConsoleRunConfigurationForm extends SettingsEditor<Erla
     return fileChooserDescriptor;
   }
 
-  @NotNull
+  @Nonnull
   public static ListCellRendererWrapper<Module> getListCellRendererWrapper() {
     return new ListCellRendererWrapper<Module>() {
       @Override

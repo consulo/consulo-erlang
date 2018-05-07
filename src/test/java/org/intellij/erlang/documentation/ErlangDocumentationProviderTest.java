@@ -16,11 +16,12 @@
 
 package org.intellij.erlang.documentation;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.ErlangModule;
 import org.intellij.erlang.psi.ErlangTypeDefinition;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 
@@ -511,12 +512,12 @@ public class ErlangDocumentationProviderTest extends ErlangLightPlatformCodeInsi
     };
   }*/
 
-  private void doTestGetUrls(@NotNull String expected, @NotNull String text) throws Exception {
+  private void doTestGetUrls(@Nonnull String expected, @Nonnull String text) throws Exception {
     final PsiElement element = resolveElementAtCaret(text);
     assertEquals(expected, myErlangDocProvider.getUrlFor(element, null).get(0));
   }
 
-  private void doTestGenerateDoc(@NotNull String expected, @NotNull String text) throws Exception {
+  private void doTestGenerateDoc(@Nonnull String expected, @Nonnull String text) throws Exception {
     final PsiElement element = resolveElementAtCaret(text);
     assertEquals(expected, myErlangDocProvider.generateDoc(element, null));
   }

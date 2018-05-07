@@ -4,7 +4,7 @@ import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
 import org.intellij.erlang.psi.ErlangQAtom;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
@@ -25,9 +25,9 @@ public class ErlangReferenceContributor extends PsiReferenceContributor {
     registrar.registerReferenceProvider(psiElement(ErlangQAtom.class).with(
       new ErlangPsiImplUtil.ErlangFunctionCallParameter<PsiElement>(function, module, arity, position)),
       new PsiReferenceProvider() {
-        @NotNull
+        @Nonnull
         @Override
-        public PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+        public PsiReference[] getReferencesByElement(@Nonnull PsiElement element, @Nonnull ProcessingContext context) {
           return element instanceof ErlangQAtom ? new PsiReference[]{createReference((ErlangQAtom) element)} : PsiReference.EMPTY_ARRAY;
         }
 

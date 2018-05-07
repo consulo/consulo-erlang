@@ -27,6 +27,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
 import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
@@ -38,8 +39,8 @@ import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.psi.impl.ErlangVariableReferenceImpl;
 import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
 import org.intellij.erlang.types.ErlangExpressionType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.completion.util.ParenthesesInsertHandler;
 import com.intellij.codeInsight.lookup.LookupElement;
@@ -89,7 +90,7 @@ public class ErlangCompletionContributor extends CompletionContributor {
   );
 
   @Override
-  public void beforeCompletion(@NotNull CompletionInitializationContext context) {
+  public void beforeCompletion(@Nonnull CompletionInitializationContext context) {
     PsiFile file = context.getFile();
     if (ErlangParserUtil.isApplicationConfigFileType(file)) return;
     int startOffset = context.getStartOffset();
@@ -125,7 +126,7 @@ public class ErlangCompletionContributor extends CompletionContributor {
   public ErlangCompletionContributor() {
     extend(CompletionType.BASIC, psiElement().inFile(instanceOf(ErlangFileImpl.class)), new CompletionProvider() {
       @Override
-	  public void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+	  public void addCompletions(@Nonnull CompletionParameters parameters, ProcessingContext context, @Nonnull CompletionResultSet result) {
         PsiElement position = parameters.getPosition();
         PsiFile file = position.getContainingFile();
         if (ErlangParserUtil.isApplicationConfigFileType(file)) return;
@@ -204,14 +205,14 @@ public class ErlangCompletionContributor extends CompletionContributor {
         }
       }
 
-      private boolean isDot(@NotNull PsiElement position) {
+      private boolean isDot(@Nonnull PsiElement position) {
         PsiElement dot = PsiTreeUtil.prevVisibleLeaf(position);
         return dot != null && dot.getNode().getElementType() == ErlangTypes.ERL_DOT;
       }
     });
     extend(CompletionType.SMART, psiElement().inside(true, psiElement(ErlangArgumentList.class)), new CompletionProvider() {
       @Override
-      public void addCompletions(@NotNull CompletionParameters parameters, ProcessingContext context, @NotNull CompletionResultSet result) {
+      public void addCompletions(@Nonnull CompletionParameters parameters, ProcessingContext context, @Nonnull CompletionResultSet result) {
         PsiElement position = parameters.getPosition();
         ErlangQVar var = PsiTreeUtil.getParentOfType(position, ErlangQVar.class);
         PsiReference reference = var == null ? null : var.getReference();
@@ -263,8 +264,8 @@ public class ErlangCompletionContributor extends CompletionContributor {
         return false;
       }
 
-      @NotNull
-      private Set<ErlangExpressionType> getExpectedTypes(@NotNull PsiElement argList, int pos) {
+      @Nonnull
+      private Set<ErlangExpressionType> getExpectedTypes(@Nonnull PsiElement argList, int pos) {
         Set<ErlangExpressionType> expectedTypes = ContainerUtil.newHashSet();
 
         PsiElement call = argList.getParent();
@@ -293,7 +294,7 @@ public class ErlangCompletionContributor extends CompletionContributor {
         return expectedTypes;
       }
 
-      private void processType(@NotNull ErlangType type, @NotNull Set<ErlangExpressionType> expectedTypes) {
+      private void processType(@Nonnull ErlangType type, @Nonnull Set<ErlangExpressionType> expectedTypes) {
         for (PsiElement childType : type.getChildren()) {
           if (childType instanceof ErlangType) processType((ErlangType) childType, expectedTypes);
         }
@@ -305,14 +306,14 @@ public class ErlangCompletionContributor extends CompletionContributor {
     });
   }
 
-  private static LookupElement createFieldLookupElement(@NotNull Project project, @NotNull String text, boolean withoutEq) {
+  private static LookupElement createFieldLookupElement(@Nonnull Project project, @Nonnull String text, boolean withoutEq) {
     ErlangCodeStyleSettings customSettings = CodeStyleSettingsManager.getSettings(project).getCustomSettings(ErlangCodeStyleSettings.class);
     boolean surroundWithSpaces = customSettings.SPACE_AROUND_EQ_IN_RECORDS;
     return LookupElementBuilder.create(text).withIcon(ErlangIcons.FIELD).withInsertHandler(withoutEq ? null : new SingleCharInsertHandler('=', surroundWithSpaces));
   }
 
-  @NotNull
-  private static LookupElement createKeywordLookupElement(@NotNull String keyword) {
+  @Nonnull
+  private static LookupElement createKeywordLookupElement(@Nonnull String keyword) {
     boolean needHandler = KEYWORDS_WITH_PARENTHESIS.contains(keyword);
     boolean needQuotas = "include".equalsIgnoreCase(keyword) || "include_lib".equalsIgnoreCase(keyword);
     boolean needBrackets = "export".equalsIgnoreCase(keyword) || "export_type".equalsIgnoreCase(keyword);
@@ -396,7 +397,7 @@ public class ErlangCompletionContributor extends CompletionContributor {
     return result;
   }
 
-  private static List<LookupElement> getModulePathLookupElements(@Nullable VirtualFile includeDir, @Nullable final VirtualFile includeOwner, @NotNull final String includeText) {
+  private static List<LookupElement> getModulePathLookupElements(@Nullable VirtualFile includeDir, @Nullable final VirtualFile includeOwner, @Nonnull final String includeText) {
     if (includeDir == null || !includeDir.isDirectory()) return ContainerUtil.emptyList();
     List<VirtualFile> matchingFiles = new ArrayList<VirtualFile>();
     addMatchingFiles(includeDir, includeText, matchingFiles);

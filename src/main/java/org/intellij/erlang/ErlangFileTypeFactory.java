@@ -16,8 +16,9 @@
 
 package org.intellij.erlang;
 
+import javax.annotation.Nonnull;
+
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.FileNameMatcher;
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
@@ -27,16 +28,16 @@ public class ErlangFileTypeFactory extends FileTypeFactory {
   private static final class ExtensionFileNameMatcher implements FileNameMatcher {
     private final String myDotExtension;
 
-    private ExtensionFileNameMatcher(@NonNls @NotNull String extension) {
+    private ExtensionFileNameMatcher(@NonNls @Nonnull String extension) {
       myDotExtension = "." + extension;
     }
 
     @Override
-    public boolean accept(@NonNls @NotNull CharSequence fileName) {
+    public boolean accept(@NonNls @Nonnull CharSequence fileName) {
       return StringUtil.endsWith(fileName, myDotExtension);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getPresentableString() {
       return "*" + myDotExtension;
@@ -44,7 +45,7 @@ public class ErlangFileTypeFactory extends FileTypeFactory {
   }
 
   @Override
-  public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
+  public void createFileTypes(@Nonnull FileTypeConsumer fileTypeConsumer) {
     fileTypeConsumer.consume(ErlangFileType.MODULE);
     fileTypeConsumer.consume(ErlangFileType.HEADER);
     fileTypeConsumer.consume(ErlangFileType.APP,

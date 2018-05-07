@@ -22,8 +22,8 @@ import com.intellij.openapi.ui.ValidationInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.DocumentAdapter;
 import org.intellij.erlang.psi.ErlangNamedElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -35,7 +35,7 @@ public class ErlangExtractFunctionDialog extends DialogWrapper {
   private JPanel myMainPanel;
   private JTextField myFunctionNameField;
 
-  protected ErlangExtractFunctionDialog(@NotNull Project project, @NotNull String functionName, @NotNull List<ErlangNamedElement> inParams) {
+  protected ErlangExtractFunctionDialog(@Nonnull Project project, @Nonnull String functionName, @Nonnull List<ErlangNamedElement> inParams) {
     super(project);
     myInParams = inParams;
     myFunctionNameField.getDocument().addDocumentListener(new DocumentAdapter() {

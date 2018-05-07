@@ -1,7 +1,8 @@
 package org.intellij.erlang.rebar.runner;
 
+import javax.annotation.Nonnull;
+
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationFactory;
@@ -18,22 +19,22 @@ import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.xmlb.XmlSerializer;
 
 public abstract class RebarRunConfigurationBase extends RuntimeConfiguration implements RunConfigurationWithSuppressedDefaultRunAction {
-  @NotNull
+  @Nonnull
   private String myCommand = "";
   private boolean mySkipDependencies = false;
 
-  protected RebarRunConfigurationBase(@NotNull String name, @NotNull Project project, @NotNull ConfigurationFactory configurationFactory) {
+  protected RebarRunConfigurationBase(@Nonnull String name, @Nonnull Project project, @Nonnull ConfigurationFactory configurationFactory) {
     super(name, project, configurationFactory);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
     return new RebarRunConfigurationEditorForm();
   }
 
-  @NotNull
-  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment env) throws ExecutionException {
+  @Nonnull
+  public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment env) throws ExecutionException {
     return new RebarRunningState(env, this);
   }
 
@@ -42,22 +43,22 @@ public abstract class RebarRunConfigurationBase extends RuntimeConfiguration imp
     // TODO parse rebar command line to check if it is valid
   }
 
-  public void writeExternal(@NotNull final Element element) throws WriteExternalException {
+  public void writeExternal(@Nonnull final Element element) throws WriteExternalException {
     super.writeExternal(element);
     XmlSerializer.serializeInto(this, element);
   }
 
-  public void readExternal(@NotNull final Element element) throws InvalidDataException {
+  public void readExternal(@Nonnull final Element element) throws InvalidDataException {
     super.readExternal(element);
     XmlSerializer.deserializeInto(this, element);
   }
 
-  @NotNull
+  @Nonnull
   public String getCommand() {
     return myCommand;
   }
 
-  public void setCommand(@NotNull String command) {
+  public void setCommand(@Nonnull String command) {
     myCommand = command;
   }
 

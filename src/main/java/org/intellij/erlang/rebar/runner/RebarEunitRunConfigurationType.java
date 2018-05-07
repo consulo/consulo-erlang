@@ -4,7 +4,7 @@ import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationTypeBase;
 import com.intellij.openapi.extensions.Extensions;
 import org.intellij.erlang.ErlangIcons;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class RebarEunitRunConfigurationType extends ConfigurationTypeBase {
   RebarEunitRunConfigurationType() {
@@ -15,7 +15,7 @@ public class RebarEunitRunConfigurationType extends ConfigurationTypeBase {
     return Extensions.findExtension(CONFIGURATION_TYPE_EP, RebarEunitRunConfigurationType.class);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public ConfigurationFactory[] getConfigurationFactories() {
     return new ConfigurationFactory[]{RebarEunitRunConfigurationFactory.getInstance()};

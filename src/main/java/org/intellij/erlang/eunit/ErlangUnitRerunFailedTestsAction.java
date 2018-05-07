@@ -18,10 +18,11 @@ package org.intellij.erlang.eunit;
 
 import java.util.LinkedHashSet;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.Location;
@@ -42,15 +43,15 @@ import com.intellij.psi.search.GlobalSearchScope;
 @SuppressWarnings("ComponentNotRegistered")
 public class ErlangUnitRerunFailedTestsAction extends AbstractRerunFailedTestsAction
 {
-	public ErlangUnitRerunFailedTestsAction(@NotNull ComponentContainer componentContainer, TestConsoleProperties consoleProperties)
+	public ErlangUnitRerunFailedTestsAction(@Nonnull ComponentContainer componentContainer, TestConsoleProperties consoleProperties)
 	{
 		super(componentContainer);
 		init(consoleProperties);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	protected Filter getFilter(@NotNull Project project, @NotNull GlobalSearchScope scope)
+	protected Filter getFilter(@Nonnull Project project, @Nonnull GlobalSearchScope scope)
 	{
 		return new Filter()
 		{
@@ -64,7 +65,7 @@ public class ErlangUnitRerunFailedTestsAction extends AbstractRerunFailedTestsAc
 
 	@Nullable
 	@Override
-	public MyRunProfile getRunProfile(@NotNull ExecutionEnvironment executionEnvironment)
+	public MyRunProfile getRunProfile(@Nonnull ExecutionEnvironment executionEnvironment)
 	{
 		TestFrameworkRunningModel model = getModel();
 		if(model == null)
@@ -73,7 +74,7 @@ public class ErlangUnitRerunFailedTestsAction extends AbstractRerunFailedTestsAc
 		}
 		return new MyRunProfile((RunConfigurationBase) model.getProperties().getConfiguration())
 		{
-			@NotNull
+			@Nonnull
 			@Override
 			public Module[] getModules()
 			{
@@ -82,7 +83,7 @@ public class ErlangUnitRerunFailedTestsAction extends AbstractRerunFailedTestsAc
 
 			@Nullable
 			@Override
-			public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment env) throws ExecutionException
+			public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment env) throws ExecutionException
 			{
 				ErlangUnitRunConfiguration runConfiguration = createRerunFailedTestsRunConfiguration();
 

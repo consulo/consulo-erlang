@@ -23,8 +23,8 @@ import com.intellij.psi.scope.BaseScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class ErlangVarProcessor extends BaseScopeProcessor {
   }
 
   @Override
-  public boolean execute(@NotNull PsiElement psiElement, ResolveState resolveState) {
+  public boolean execute(@Nonnull PsiElement psiElement, ResolveState resolveState) {
     Map<String, ErlangQVar> variableContext = psiElement.getContainingFile().getOriginalFile().getUserData(ERLANG_VARIABLE_CONTEXT);
     if (variableContext != null) {
       ContainerUtil.addIfNotNull(variableContext.get(myRequestedName), myVarList);

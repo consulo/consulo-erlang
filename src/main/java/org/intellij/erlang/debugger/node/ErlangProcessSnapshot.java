@@ -19,8 +19,8 @@ package org.intellij.erlang.debugger.node;
 import com.ericsson.otp.erlang.OtpErlangPid;
 import org.intellij.erlang.debugger.xdebug.ErlangSourcePosition;
 import org.intellij.erlang.psi.ErlangFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 
@@ -32,13 +32,13 @@ public class ErlangProcessSnapshot {
   private final String myExitReason;
   private final List<ErlangTraceElement> myStack;
 
-  public ErlangProcessSnapshot(@NotNull OtpErlangPid pid, 
-                               @NotNull ErlangTraceElement init,
-                               @NotNull String status, 
+  public ErlangProcessSnapshot(@Nonnull OtpErlangPid pid,
+                               @Nonnull ErlangTraceElement init,
+                               @Nonnull String status,
                                @Nullable ErlangFile breakModule,
                                int breakLine, 
                                @Nullable String exitReason,
-                               @NotNull List<ErlangTraceElement> stack) {
+                               @Nonnull List<ErlangTraceElement> stack) {
     myPid = pid;
     myInit = init;
     myStatus = status;
@@ -47,22 +47,22 @@ public class ErlangProcessSnapshot {
     myStack = stack;
   }
 
-  @NotNull
+  @Nonnull
   public OtpErlangPid getPid() {
     return myPid;
   }
 
-  @NotNull
+  @Nonnull
   public String getPidString() {
     return myPid.toString();
   }
 
-  @NotNull
+  @Nonnull
   public ErlangTraceElement getInit() {
     return myInit;
   }
 
-  @NotNull
+  @Nonnull
   public String getStatus() {
     return myStatus;
   }
@@ -77,7 +77,7 @@ public class ErlangProcessSnapshot {
     return myExitReason;
   }
 
-  @NotNull
+  @Nonnull
   public List<ErlangTraceElement> getStack() {
     return myStack;
   }

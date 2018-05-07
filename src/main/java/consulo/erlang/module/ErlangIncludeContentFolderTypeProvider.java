@@ -2,10 +2,10 @@ package consulo.erlang.module;
 
 import java.awt.Color;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
 import org.intellij.erlang.ErlangIcons;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.ui.JBColor;
 import consulo.roots.ContentFolderTypeProvider;
 
@@ -17,7 +17,7 @@ public class ErlangIncludeContentFolderTypeProvider extends ContentFolderTypePro
 {
 	public static final Color COLOR = new JBColor(new Color(140, 123, 79), new Color(140, 123, 79));
 
-	@NotNull
+	@Nonnull
 	public static ErlangIncludeContentFolderTypeProvider getInstance()
 	{
 		return EP_NAME.findExtension(ErlangIncludeContentFolderTypeProvider.class);
@@ -34,21 +34,21 @@ public class ErlangIncludeContentFolderTypeProvider extends ContentFolderTypePro
 		return 125;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Icon getIcon()
 	{
 		return ErlangIcons.IncludeRoot;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getName()
 	{
 		return "Includes";
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Color getGroupColor()
 	{

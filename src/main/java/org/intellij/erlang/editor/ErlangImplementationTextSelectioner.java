@@ -22,16 +22,16 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.intellij.erlang.psi.ErlangAttribute;
 import org.intellij.erlang.psi.ErlangFunctionClause;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class ErlangImplementationTextSelectioner implements ImplementationTextSelectioner {
   @Override
-  public int getTextStartOffset(@NotNull PsiElement psiElement) {
+  public int getTextStartOffset(@Nonnull PsiElement psiElement) {
     return getTextRange(psiElement).getStartOffset();
   }
 
   @Override
-  public int getTextEndOffset(@NotNull PsiElement psiElement) {
+  public int getTextEndOffset(@Nonnull PsiElement psiElement) {
     return getTextRange(psiElement).getEndOffset();
   }
 

@@ -1,13 +1,14 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi.impl;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
+
 import static org.intellij.erlang.ErlangTypes.*;
+
+import javax.annotation.*;
+
 import org.intellij.erlang.stubs.ErlangMacrosDefinitionStub;
 import org.intellij.erlang.psi.*;
 import com.intellij.psi.stubs.IStubElementType;
@@ -22,7 +23,7 @@ public class ErlangMacrosDefinitionImpl extends ErlangStubbedPsiElementBase<Erla
     super(stub, nodeType);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ErlangVisitor) ((ErlangVisitor)visitor).visitMacrosDefinition(this);
     else super.accept(visitor);
   }
@@ -52,7 +53,7 @@ public class ErlangMacrosDefinitionImpl extends ErlangStubbedPsiElementBase<Erla
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public PsiElement getOpMinus() {
     return findNotNullChildByType(ERL_OP_MINUS);
   }
@@ -69,17 +70,17 @@ public class ErlangMacrosDefinitionImpl extends ErlangStubbedPsiElementBase<Erla
     return findChildByType(ERL_PAR_RIGHT);
   }
 
-  @NotNull
+  @Nonnull
   public String getName() {
     return ErlangPsiImplUtil.getName(this);
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement setName(String newName) {
     return ErlangPsiImplUtil.setName(this, newName);
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement getNameIdentifier() {
     return ErlangPsiImplUtil.getNameIdentifier(this);
   }

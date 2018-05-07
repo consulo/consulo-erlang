@@ -13,8 +13,8 @@ import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,19 +23,19 @@ public final class ErlangTermFileUtil {
   private ErlangTermFileUtil() {
   }
 
-  @NotNull
+  @Nonnull
   public static List<ErlangTupleExpression> findNamedTuples(@Nullable ErlangExpression listExpression) {
     return findNamedTuples(listExpression, null);
   }
 
-  @NotNull
+  @Nonnull
   public static List<ErlangTupleExpression> findNamedTuples(@Nullable ErlangExpression listExpression, @Nullable String name) {
     ErlangListExpression propList = listExpression instanceof ErlangListExpression ? (ErlangListExpression) listExpression : null;
     return propList != null ? findNamedTuples(propList.getExpressionList(), name) : ContainerUtil.<ErlangTupleExpression>emptyList();
   }
 
-  @NotNull
-  public static List<ErlangTupleExpression> findNamedTuples(@NotNull List<ErlangExpression> configExpressions, @Nullable final String name) {
+  @Nonnull
+  public static List<ErlangTupleExpression> findNamedTuples(@Nonnull List<ErlangExpression> configExpressions, @Nullable final String name) {
     return ContainerUtil.mapNotNull(configExpressions, new Function<ErlangExpression, ErlangTupleExpression>() {
       @Nullable
       @Override
@@ -58,7 +58,7 @@ public final class ErlangTermFileUtil {
   }
 
   @Nullable
-  public static ErlangFile createPsi(@NotNull VirtualFile file) {
+  public static ErlangFile createPsi(@Nonnull VirtualFile file) {
     if (file.getFileType() != ErlangFileType.APP && file.getFileType() != ErlangFileType.TERMS) return null;
     try {
       String text = StringUtil.convertLineSeparators(VfsUtilCore.loadText(file));
@@ -69,7 +69,7 @@ public final class ErlangTermFileUtil {
     }
   }
 
-  public static void processConfigSection(@Nullable PsiElement configRoot, @NotNull String sectionName, @NotNull Consumer<ErlangExpression> sectionConsumer) {
+  public static void processConfigSection(@Nullable PsiElement configRoot, @Nonnull String sectionName, @Nonnull Consumer<ErlangExpression> sectionConsumer) {
     List<ErlangTupleExpression> erlOptTuples = findNamedTuples(PsiTreeUtil.getChildrenOfTypeAsList(configRoot, ErlangExpression.class), sectionName);
     for (ErlangTupleExpression erlOptTuple : erlOptTuples) {
       List<ErlangExpression> expressions = erlOptTuple.getExpressionList();

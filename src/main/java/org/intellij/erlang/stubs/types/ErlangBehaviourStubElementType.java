@@ -23,7 +23,7 @@ import com.intellij.util.ArrayFactory;
 import org.intellij.erlang.psi.ErlangBehaviour;
 import org.intellij.erlang.psi.impl.ErlangBehaviourImpl;
 import org.intellij.erlang.stubs.ErlangBehaviourStub;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class ErlangBehaviourStubElementType extends ErlangStubElementType<Erlang
   public static final ErlangBehaviour[] EMPTY_ARRAY = new ErlangBehaviour[0];
 
   public static final ArrayFactory<ErlangBehaviour> ARRAY_FACTORY = new ArrayFactory<ErlangBehaviour>() {
-    @NotNull
+    @Nonnull
     @Override
     public ErlangBehaviour[] create(final int count) {
       return count == 0 ? EMPTY_ARRAY : new ErlangBehaviour[count];
@@ -43,23 +43,23 @@ public class ErlangBehaviourStubElementType extends ErlangStubElementType<Erlang
   }
 
   @Override
-  public ErlangBehaviour createPsi(@NotNull ErlangBehaviourStub stub) {
+  public ErlangBehaviour createPsi(@Nonnull ErlangBehaviourStub stub) {
     return new ErlangBehaviourImpl(stub, this);
   }
 
   @Override
-  public ErlangBehaviourStub createStub(@NotNull ErlangBehaviour psi, StubElement parentStub) {
+  public ErlangBehaviourStub createStub(@Nonnull ErlangBehaviour psi, StubElement parentStub) {
     return new ErlangBehaviourStub(parentStub, this, psi.getName());
   }
 
   @Override
-  public void serialize(@NotNull ErlangBehaviourStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@Nonnull ErlangBehaviourStub stub, @Nonnull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getName());
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ErlangBehaviourStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public ErlangBehaviourStub deserialize(@Nonnull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new ErlangBehaviourStub(parentStub, this, dataStream.readName());
   }
 }

@@ -20,12 +20,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.ErlangIcons;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.ErlangFunctionCallExpression;
 import org.intellij.erlang.psi.ErlangFunctionWithArity;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.codeHighlighting.Pass;
 import com.intellij.codeInsight.daemon.LineMarkerInfo;
 import com.intellij.codeInsight.daemon.LineMarkerProvider;
@@ -41,12 +42,12 @@ import com.intellij.util.containers.HashSet;
 public class ErlangRecursiveCallLineMarkerProvider implements LineMarkerProvider, DumbAware {
 
   @Override
-  public LineMarkerInfo getLineMarkerInfo(@NotNull PsiElement element) {
+  public LineMarkerInfo getLineMarkerInfo(@Nonnull PsiElement element) {
     return null; //do nothing
   }
 
   @Override
-  public void collectSlowLineMarkers(@NotNull List<PsiElement> elements, @NotNull Collection<LineMarkerInfo> result) {
+  public void collectSlowLineMarkers(@Nonnull List<PsiElement> elements, @Nonnull Collection<LineMarkerInfo> result) {
     Set<Integer> lines = new HashSet<Integer>();
     for (PsiElement element : elements) {
       if (element instanceof ErlangFunctionCallExpression || element instanceof ErlangFunctionWithArity) {
@@ -70,7 +71,7 @@ public class ErlangRecursiveCallLineMarkerProvider implements LineMarkerProvider
   }
 
   private static class RecursiveMethodCallMarkerInfo extends LineMarkerInfo<PsiElement> {
-    private RecursiveMethodCallMarkerInfo(@NotNull PsiElement methodCall) {
+    private RecursiveMethodCallMarkerInfo(@Nonnull PsiElement methodCall) {
 
       super(methodCall,
         methodCall.getTextRange(),

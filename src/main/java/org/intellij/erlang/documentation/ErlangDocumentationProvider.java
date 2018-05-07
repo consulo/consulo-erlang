@@ -24,8 +24,8 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import org.intellij.erlang.psi.ErlangFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -36,7 +36,7 @@ public class ErlangDocumentationProvider extends AbstractDocumentationProvider {
 
   @Nullable
   @Override
-  public List<String> getUrlFor(@NotNull PsiElement element, @Nullable PsiElement originalElement) {
+  public List<String> getUrlFor(@Nonnull PsiElement element, @Nullable PsiElement originalElement) {
     final ElementDocProvider elementDocProvider = ElementDocProviderFactory.create(element);
     if (elementDocProvider != null) {
       return elementDocProvider.getExternalDocUrls();
@@ -46,7 +46,7 @@ public class ErlangDocumentationProvider extends AbstractDocumentationProvider {
 
   @Nullable
   @Override
-  public String generateDoc(@NotNull PsiElement element, @Nullable PsiElement originalElement) {
+  public String generateDoc(@Nonnull PsiElement element, @Nullable PsiElement originalElement) {
     final ElementDocProvider elementDocProvider = ElementDocProviderFactory.create(element);
     if (elementDocProvider != null) {
       return elementDocProvider.getDocText();
@@ -56,8 +56,8 @@ public class ErlangDocumentationProvider extends AbstractDocumentationProvider {
 
   @Nullable
   @Override
-  public PsiElement getDocumentationElementForLink(@NotNull PsiManager psiManager,
-                                                   @NotNull String link,
+  public PsiElement getDocumentationElementForLink(@Nonnull PsiManager psiManager,
+                                                   @Nonnull String link,
                                                    @Nullable PsiElement context) {
     final Project project = psiManager.getProject();
     final Matcher linkMatcher = PATTERN_PSI_LINK.matcher(link);

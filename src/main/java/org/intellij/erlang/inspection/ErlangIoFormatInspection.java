@@ -24,7 +24,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 import java.util.Set;
@@ -52,7 +52,7 @@ public class ErlangIoFormatInspection extends ErlangInspectionBase {
 
     file.accept(new ErlangRecursiveVisitor() {
       @Override
-      public void visitGlobalFunctionCallExpression(@NotNull ErlangGlobalFunctionCallExpression o) {
+      public void visitGlobalFunctionCallExpression(@Nonnull ErlangGlobalFunctionCallExpression o) {
         ErlangFunctionCallExpression expression = o.getFunctionCallExpression();
         List<ErlangExpression> expressionList = expression.getArgumentList().getExpressionList();
         int size = expressionList.size();

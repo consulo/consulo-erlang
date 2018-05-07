@@ -29,16 +29,16 @@ import org.intellij.erlang.psi.ErlangExpression;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public abstract class ErlangContextType extends TemplateContextType {
-  protected ErlangContextType(@NotNull @NonNls String id, @NotNull String presentableName, @Nullable Class<? extends TemplateContextType> baseContextType) {
+  protected ErlangContextType(@Nonnull @NonNls String id, @Nonnull String presentableName, @Nullable Class<? extends TemplateContextType> baseContextType) {
     super(id, presentableName, baseContextType);
   }
 
   @Override
-  public boolean isInContext(@NotNull PsiFile file, int offset) {
+  public boolean isInContext(@Nonnull PsiFile file, int offset) {
     if (!PsiUtilCore.getLanguageAtOffset(file, offset).isKindOf(ErlangLanguage.INSTANCE)) return false;
     PsiElement element = file.findElementAt(offset);
     if (element instanceof PsiWhiteSpace) {

@@ -2,15 +2,17 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangClauseBody extends ErlangCompositeElement {
 
-  @NotNull
+  @Nonnull
   List<ErlangExpression> getExpressionList();
 
-  @NotNull
+  @Nonnull
   PsiElement getArrow();
 
 }

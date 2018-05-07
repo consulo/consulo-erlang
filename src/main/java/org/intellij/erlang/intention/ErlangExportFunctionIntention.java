@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.intention;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInsight.intention.impl.BaseIntentionAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
@@ -27,24 +29,24 @@ import com.intellij.util.IncorrectOperationException;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.quickfixes.ErlangExportFunctionFix;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public class ErlangExportFunctionIntention extends BaseIntentionAction {
-  @NotNull
+  @Nonnull
   @Override
   public String getFamilyName() {
     return "Export function";
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public String getText() {
     return "Export function";
   }
 
   @Override
-  public boolean isAvailable(@NotNull Project project, Editor editor, PsiFile file) {
+  public boolean isAvailable(@Nonnull Project project, Editor editor, PsiFile file) {
     if (!file.getManager().isInProject(file)) return false;
     ErlangFunction function = findFunction(file, editor.getCaretModel().getOffset());
     if (function != null && file instanceof ErlangFile) {
@@ -54,7 +56,7 @@ public class ErlangExportFunctionIntention extends BaseIntentionAction {
   }
 
   @Override
-  public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+  public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
     ErlangFunction function = findFunction(file, editor.getCaretModel().getOffset());
     if (function != null) {
       ErlangExportFunctionFix.processFunction(project, function);

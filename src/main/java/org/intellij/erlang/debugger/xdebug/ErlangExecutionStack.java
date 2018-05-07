@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.intellij.erlang.debugger.node.ErlangProcessSnapshot;
 import org.intellij.erlang.debugger.node.ErlangTraceElement;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;

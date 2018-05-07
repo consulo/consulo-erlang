@@ -2,12 +2,15 @@
 package org.intellij.erlang.psi.impl;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.intellij.erlang.ErlangTypes.*;
+
+import javax.annotation.*;
+
 import org.intellij.erlang.psi.*;
 
 public class ErlangGenericFunctionCallExpressionImpl extends ErlangExpressionImpl implements ErlangGenericFunctionCallExpression {
@@ -16,13 +19,13 @@ public class ErlangGenericFunctionCallExpressionImpl extends ErlangExpressionImp
     super(node);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ErlangVisitor) ((ErlangVisitor)visitor).visitGenericFunctionCallExpression(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public ErlangArgumentList getArgumentList() {
     return findNotNullChildByClass(ErlangArgumentList.class);
   }
@@ -34,13 +37,13 @@ public class ErlangGenericFunctionCallExpressionImpl extends ErlangExpressionImp
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<ErlangQAtom> getQAtomList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangQAtom.class);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<ErlangQVar> getQVarList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangQVar.class);
   }

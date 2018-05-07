@@ -25,20 +25,20 @@ import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangElementFactory;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ErlangIntroduceRecordFix extends ErlangQuickFixBase {
-  @NotNull
+  @Nonnull
   @Override
   public String getFamilyName() {
     return "Introduce new record";
   }
 
   @Override
-  public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+  public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor descriptor) {
     PsiElement element = descriptor.getPsiElement();
 
     List<String> fieldNames = element instanceof ErlangRecordRef ? getFieldNames((ErlangRecordRef) element) : ContainerUtil.<String>emptyList();
@@ -56,14 +56,14 @@ public class ErlangIntroduceRecordFix extends ErlangQuickFixBase {
     }
   }
 
-  private static List<String> getFieldNames(@NotNull ErlangRecordRef recordRef) {
+  private static List<String> getFieldNames(@Nonnull ErlangRecordRef recordRef) {
     ErlangRecordTuple tuple = PsiTreeUtil.getNextSiblingOfType(recordRef, ErlangRecordTuple.class);
     final List<String> fieldNames = new ArrayList<String>();
 
     if (tuple != null) {
       tuple.accept(new ErlangRecursiveVisitor() {
         @Override
-        public void visitRecordField(@NotNull ErlangRecordField o) {
+        public void visitRecordField(@Nonnull ErlangRecordField o) {
           ErlangQAtom fieldNameAtom = o.getFieldNameAtom();
           String text = fieldNameAtom != null ? fieldNameAtom.getText() : null;
           ContainerUtil.addIfNotNull(fieldNames, text);

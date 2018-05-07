@@ -18,7 +18,7 @@ package org.intellij.erlang.runconfig;
 
 import org.intellij.erlang.application.ErlangApplicationConfiguration;
 import org.intellij.erlang.eunit.ErlangUnitRunConfiguration;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
@@ -39,13 +39,13 @@ public class ErlangRunner extends DefaultProgramRunner
 	public static final RunProfileState EMPTY_RUN_STATE = new RunProfileState()
 	{
 		@Override
-		public ExecutionResult execute(final Executor executor, @NotNull final ProgramRunner runner) throws ExecutionException
+		public ExecutionResult execute(final Executor executor, @Nonnull final ProgramRunner runner) throws ExecutionException
 		{
 			return null;
 		}
 	};
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getRunnerId()
 	{
@@ -53,7 +53,7 @@ public class ErlangRunner extends DefaultProgramRunner
 	}
 
 	@Override
-	public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile)
+	public boolean canRun(@Nonnull String executorId, @Nonnull RunProfile profile)
 	{
 		return DefaultRunExecutor.EXECUTOR_ID.equals(executorId) && (profile instanceof ErlangApplicationConfiguration || profile instanceof ErlangUnitRunConfiguration);
 	}

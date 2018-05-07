@@ -2,18 +2,20 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangImportFunctions extends ErlangCompositeElement {
 
-  @NotNull
+  @Nonnull
   List<ErlangImportFunction> getImportFunctionList();
 
-  @NotNull
+  @Nonnull
   PsiElement getBracketLeft();
 
-  @NotNull
+  @Nonnull
   PsiElement getBracketRight();
 
 }

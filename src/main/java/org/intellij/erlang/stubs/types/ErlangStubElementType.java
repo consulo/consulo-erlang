@@ -16,23 +16,24 @@
 
 package org.intellij.erlang.stubs.types;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.IndexSink;
 import com.intellij.psi.stubs.StubElement;
 import org.intellij.erlang.ErlangLanguage;
 import org.intellij.erlang.psi.ErlangCompositeElement;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class ErlangStubElementType<S extends StubElement<T>, T extends ErlangCompositeElement> extends IStubElementType<S, T> {
-  public ErlangStubElementType(@NonNls @NotNull String debugName) {
+  public ErlangStubElementType(@NonNls @Nonnull String debugName) {
     super(debugName, ErlangLanguage.INSTANCE);
   }
 
-  public void indexStub(@NotNull final S stub, @NotNull final IndexSink sink) {
+  public void indexStub(@Nonnull final S stub, @Nonnull final IndexSink sink) {
   }
 
-  @NotNull
+  @Nonnull
   public String getExternalId() {
     return "erlang." + super.toString();
   }

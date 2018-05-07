@@ -47,13 +47,13 @@ import org.intellij.erlang.psi.*;
 import org.intellij.erlang.stubs.ErlangCallbackSpecStub;
 import org.intellij.erlang.stubs.ErlangFileStub;
 import org.intellij.erlang.stubs.types.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.*;
 
 public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameIdentifierOwner {
-  public ErlangFileImpl(@NotNull FileViewProvider viewProvider) {
+  public ErlangFileImpl(@Nonnull FileViewProvider viewProvider) {
     super(viewProvider, ErlangLanguage.INSTANCE);
   }
 
@@ -76,7 +76,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
   }
 
   @Override
-  public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+  public PsiElement setName(@Nonnull String name) throws IncorrectOperationException {
     String nameWithoutExtension = FileUtil.getNameWithoutExtension(name);
 
     for (ErlangAttribute moduleAttributes : getAttributes()) {
@@ -115,7 +115,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
   private CachedValue<Boolean> myExportAll;
   private CachedValue<Set<String>> myExportedFunctionsSignatures;
 
-  @NotNull
+  @Nonnull
   @Override
   public FileType getFileType() {
     return ErlangFileType.MODULE;
@@ -129,7 +129,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
   }
 
   @Override
-  public boolean isExported(@NotNull String signature) {
+  public boolean isExported(@Nonnull String signature) {
     if (isExportedAll()) return true;
     if (myExportedFunctionsSignatures == null) {
       myExportedFunctionsSignatures = CachedValuesManager.getManager(getProject()).createCachedValue(new CachedValueProvider<Set<String>>() {
@@ -142,7 +142,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return myExportedFunctionsSignatures.getValue().contains(signature);
   }
 
-  @NotNull
+  @Nonnull
   private Set<String> calcExportedSignatures() {
     Set<String> result = ContainerUtil.newHashSet();
     for (ErlangAttribute attribute : getAttributes()) {
@@ -202,7 +202,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return false;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<ErlangRule> getRules() {
     if (myRulesValue == null) {
@@ -216,7 +216,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return myRulesValue.getValue();
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<ErlangAttribute> getAttributes() {
     if (myAttributeValue == null) {
@@ -232,11 +232,11 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
 
   @Nullable
   @Override
-  public ErlangCallbackSpec getCallbackByName(@NotNull String fullName) {
+  public ErlangCallbackSpec getCallbackByName(@Nonnull String fullName) {
     return getCallbackMap().get(fullName);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public Map<String, ErlangCallbackSpec> getCallbackMap() {
     ErlangFileStub stub = getStub();
@@ -264,7 +264,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return myCallbackMap.getValue();
   }
 
-  @NotNull
+  @Nonnull
   private Map<String, ErlangCallbackSpec> calcCallbacks() {
     Map<String, ErlangCallbackSpec> callbacksMap = new LinkedHashMap<String, ErlangCallbackSpec>();
 
@@ -279,7 +279,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return callbacksMap;
   }
   
-  @NotNull
+  @Nonnull
   @Override
   public List<ErlangFunction> getFunctions() {
     if (myFunctionValue == null) {
@@ -293,7 +293,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return myFunctionValue.getValue();
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public Collection<ErlangFunction> getExportedFunctions() {
     if (myExportedFunctionValue == null) {
@@ -329,7 +329,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
 
   @Nullable
   @Override
-  public ErlangFunction getFunction(@NotNull String name, final int argsCount) {
+  public ErlangFunction getFunction(@Nonnull String name, final int argsCount) {
     initFunctionsMap();
     MultiMap<String, ErlangFunction> value = myFunctionsMap.getValue();
     ErlangFunction byName = getFunctionFromMap(value, name, argsCount);
@@ -353,8 +353,8 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
   }
 
   @Override
-  @NotNull
-  public Collection<ErlangFunction> getFunctionsByName(@NotNull String name) {
+  @Nonnull
+  public Collection<ErlangFunction> getFunctionsByName(@Nonnull String name) {
     initFunctionsMap();
     // todo: quotation
     return myFunctionsMap.getValue().get(name);
@@ -372,7 +372,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     }));
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<ErlangRecordDefinition> getRecords() {
     if (myRecordValue == null) {
@@ -386,7 +386,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return myRecordValue.getValue();
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<ErlangTypeDefinition> getTypes() {
     if (myTypeValue == null) {
@@ -424,7 +424,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
   }
 
   @Override
-  public ErlangTypeDefinition getType(@NotNull String name) {
+  public ErlangTypeDefinition getType(@Nonnull String name) {
     if (myTypeMap == null) {
       myTypeMap = CachedValuesManager.getManager(getProject()).createCachedValue(new CachedValueProvider<Map<String, ErlangTypeDefinition>>() {
         @Override
@@ -447,7 +447,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return byUnquote == null ? value.get("'" + name + "'") : byUnquote;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<ErlangMacrosDefinition> getMacroses() {
     if (myMacrosValue == null) {
@@ -481,7 +481,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
   }
 
   @Override
-  public ErlangMacrosDefinition getMacros(@NotNull String name) {
+  public ErlangMacrosDefinition getMacros(@Nonnull String name) {
     if (myMacrosesMap == null) {
       myMacrosesMap = CachedValuesManager.getManager(getProject()).createCachedValue(new CachedValueProvider<Map<String, ErlangMacrosDefinition>>() {
         @Override
@@ -525,7 +525,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return result;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<ErlangInclude> getIncludes() {
     if (myIncludeValue == null) {
@@ -539,7 +539,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return myIncludeValue.getValue();
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<ErlangIncludeLib> getIncludeLibs() {
     if (myIncludeLibValue == null) {
@@ -591,7 +591,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return result;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<ErlangBehaviour> getBehaviours() {
     if (myBehavioursValue == null) {
@@ -624,7 +624,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return result;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<ErlangSpecification> getSpecifications() {
       if (mySpecificationsValue == null) {
@@ -676,7 +676,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
     return byUnquote == null ? value.get("'" + name + "'") : byUnquote;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public ArrayList<ErlangImportFunction> getImportedFunctions() {
     ArrayList<ErlangImportFunction> result = new ArrayList<ErlangImportFunction>();
@@ -743,7 +743,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
   }
 
   @Override
-  public void addDeclaredParseTransforms(@NotNull Set<String> parseTransforms) {
+  public void addDeclaredParseTransforms(@Nonnull Set<String> parseTransforms) {
     ErlangFileStub stub = getStub();
     if (stub != null) {
       String fromStub = stub.getParseTransforms();

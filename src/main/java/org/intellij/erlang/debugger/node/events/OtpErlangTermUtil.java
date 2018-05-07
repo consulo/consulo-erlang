@@ -2,8 +2,8 @@ package org.intellij.erlang.debugger.node.events;
 
 import com.ericsson.otp.erlang.*;
 import com.intellij.openapi.util.text.StringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 final class OtpErlangTermUtil {
   private OtpErlangTermUtil() {
@@ -60,11 +60,11 @@ final class OtpErlangTermUtil {
     return isAtom("error", errorObject);
   }
 
-  public static boolean isAtom(@NotNull String expectedAtom, @Nullable OtpErlangObject atomObject) {
+  public static boolean isAtom(@Nonnull String expectedAtom, @Nullable OtpErlangObject atomObject) {
     return StringUtil.equals(expectedAtom, getAtomText(atomObject));
   }
 
-  @NotNull
+  @Nonnull
   public static String toString(@Nullable OtpErlangObject object) {
     return null != object ? object.toString() : "";
   }

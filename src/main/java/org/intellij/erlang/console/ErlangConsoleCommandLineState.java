@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.console;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.CommandLineState;
 import com.intellij.execution.configurations.GeneralCommandLine;
@@ -29,13 +31,13 @@ import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangConsoleCommandLineState extends CommandLineState {
-  @NotNull private final ErlangConsoleRunConfiguration myConfig;
+  @Nonnull
+  private final ErlangConsoleRunConfiguration myConfig;
 
-  public ErlangConsoleCommandLineState(@NotNull ErlangConsoleRunConfiguration config,
-                                       @NotNull ExecutionEnvironment env) {
+  public ErlangConsoleCommandLineState(@Nonnull ErlangConsoleRunConfiguration config,
+                                       @Nonnull ExecutionEnvironment env) {
     super(env);
     myConfig = config;
     TextConsoleBuilder consoleBuilder = new TextConsoleBuilderImpl(myConfig.getProject()) {
@@ -49,7 +51,7 @@ public class ErlangConsoleCommandLineState extends CommandLineState {
     setConsoleBuilder(consoleBuilder);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected ProcessHandler startProcess() throws ExecutionException {
     Project project = myConfig.getProject();

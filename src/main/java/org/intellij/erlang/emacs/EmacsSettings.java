@@ -16,19 +16,21 @@
 
 package org.intellij.erlang.emacs;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 @State(name = "EmacsSettings", storages = @Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/emacs.xml"))
 public final class EmacsSettings implements PersistentStateComponent<EmacsSettings> {
-  @NotNull
+  @Nonnull
   private String myEmacsPath = "";
 
-  @NotNull
-  public static EmacsSettings getInstance(@NotNull Project project) {
+  @Nonnull
+  public static EmacsSettings getInstance(@Nonnull Project project) {
     final EmacsSettings persisted = ServiceManager.getService(project, EmacsSettings.class);
     return persisted != null ? persisted : new EmacsSettings();
   }
@@ -40,16 +42,16 @@ public final class EmacsSettings implements PersistentStateComponent<EmacsSettin
   }
 
   @Override
-  public void loadState(@NotNull EmacsSettings emacsSettings) {
+  public void loadState(@Nonnull EmacsSettings emacsSettings) {
     XmlSerializerUtil.copyBean(emacsSettings, this);
   }
 
-  @NotNull
+  @Nonnull
   public String getEmacsPath() {
     return myEmacsPath;
   }
 
-  public void setEmacsPath(@NotNull String emacsPath) {
+  public void setEmacsPath(@Nonnull String emacsPath) {
     myEmacsPath = emacsPath;
   }
 

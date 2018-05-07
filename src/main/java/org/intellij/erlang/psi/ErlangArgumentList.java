@@ -2,18 +2,20 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangArgumentList extends ErlangCompositeElement {
 
-  @NotNull
+  @Nonnull
   List<ErlangClauseGuard> getClauseGuardList();
 
-  @NotNull
+  @Nonnull
   List<ErlangExpression> getExpressionList();
 
-  @NotNull
+  @Nonnull
   PsiElement getParLeft();
 
   @Nullable

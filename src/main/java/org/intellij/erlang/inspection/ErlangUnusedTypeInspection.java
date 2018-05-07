@@ -28,7 +28,7 @@ import org.intellij.erlang.psi.ErlangRecursiveVisitor;
 import org.intellij.erlang.psi.ErlangTypeDefinition;
 import org.intellij.erlang.quickfixes.ErlangExportTypeFix;
 import org.intellij.erlang.quickfixes.ErlangRemoveTypeFix;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class ErlangUnusedTypeInspection extends ErlangInspectionBase {
   @Override
@@ -36,7 +36,7 @@ public class ErlangUnusedTypeInspection extends ErlangInspectionBase {
     if (!(file instanceof ErlangFile)) return;
     file.accept(new ErlangRecursiveVisitor() {
       @Override
-      public void visitTypeDefinition(@NotNull ErlangTypeDefinition o) {
+      public void visitTypeDefinition(@Nonnull ErlangTypeDefinition o) {
         Query<PsiReference> search = ReferencesSearch.search(o, new LocalSearchScope(o.getContainingFile()));
         if (search.findFirst() == null) {
           problemsHolder.registerProblem(o.getNameIdentifier(),

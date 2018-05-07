@@ -32,7 +32,7 @@ import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangModule;
 import org.intellij.erlang.psi.ErlangRecursiveVisitor;
 import org.intellij.erlang.psi.impl.ErlangElementFactory;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -42,7 +42,7 @@ public class ErlangIncorrectModuleNameInspection extends ErlangInspectionBase {
     if (!(file instanceof ErlangFile)) return;
     file.accept(new ErlangRecursiveVisitor() {
       @Override
-      public void visitModule(@NotNull ErlangModule o) {
+      public void visitModule(@Nonnull ErlangModule o) {
         String ext = FileUtilRt.getExtension(o.getContainingFile().getName());
         String withoutExtension = FileUtil.getNameWithoutExtension(o.getContainingFile().getName());
         String moduleName = StringUtil.replace(o.getName(), "'", "");
@@ -67,20 +67,20 @@ public class ErlangIncorrectModuleNameInspection extends ErlangInspectionBase {
       myShouldBeName = shouldBeName;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getName() {
       return "Rename module";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getFamilyName() {
       return "Rename module";
     }
 
     @Override
-    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor problemDescriptor) {
+    public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor problemDescriptor) {
       final AccessToken token = WriteAction.start();
       String name;
       try {
@@ -106,20 +106,20 @@ public class ErlangIncorrectModuleNameInspection extends ErlangInspectionBase {
       myExtension = FileUtilRt.getExtension(myModule.getContainingFile().getName());
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getName() {
       return "Rename file";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getFamilyName() {
       return "Rename containing file";
     }
 
     @Override
-    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor problemDescriptor) {
+    public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor problemDescriptor) {
       final AccessToken token = WriteAction.start();
       try {
         VirtualFile virtualFile = myModule.getContainingFile().getVirtualFile();

@@ -30,7 +30,7 @@ import org.intellij.erlang.psi.ErlangModuleRef;
 import org.intellij.erlang.psi.ErlangSpecFun;
 import org.intellij.erlang.psi.impl.ErlangCompositeElementImpl;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;

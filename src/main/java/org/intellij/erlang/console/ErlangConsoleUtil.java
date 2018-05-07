@@ -23,8 +23,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.module.Module;
@@ -48,25 +49,25 @@ public final class ErlangConsoleUtil {
   private ErlangConsoleUtil() {
   }
 
-  public static void attachFilters(@NotNull Project project, @NotNull ConsoleView consoleView) {
+  public static void attachFilters(@Nonnull Project project, @Nonnull ConsoleView consoleView) {
     consoleView.addMessageFilter(new FileReferenceFilter(project, COMPILATION_ERROR_PATH));
     consoleView.addMessageFilter(new FileReferenceFilter(project, EUNIT_ERROR_PATH));
     consoleView.addMessageFilter(new FileReferenceFilter(project, EUNIT_FAILURE_PATH));
   }
 
-  @NotNull
-  public static List<String> getCodePath(@NotNull Module module, boolean forTests) {
+  @Nonnull
+  public static List<String> getCodePath(@Nonnull Module module, boolean forTests) {
     return getCodePath(module.getProject(), module, forTests);
   }
 
-  @NotNull
-  public static List<String> getCodePath(@NotNull Project project, @Nullable Module module, boolean useTestOutputPath) {
+  @Nonnull
+  public static List<String> getCodePath(@Nonnull Project project, @Nullable Module module, boolean useTestOutputPath) {
     final Set<Module> codePathModules = new HashSet<Module>();
     if (module != null) {
       final ModuleRootManager moduleRootMgr = ModuleRootManager.getInstance(module);
       moduleRootMgr.orderEntries().recursively().forEachModule(new Processor<Module>() {
         @Override
-        public boolean process(@NotNull Module dependencyModule) {
+        public boolean process(@Nonnull Module dependencyModule) {
           codePathModules.add(dependencyModule);
           return true;
         }
@@ -102,16 +103,16 @@ public final class ErlangConsoleUtil {
     return testPath == null || !testPath.exists() ? module.getCompilerOutput(ProductionContentFolderTypeProvider.getInstance()) : testPath;
   }
 
-  @NotNull
-  static String getWorkingDirPath(@NotNull Project project, @NotNull String workingDirPath) {
+  @Nonnull
+  static String getWorkingDirPath(@Nonnull Project project, @Nonnull String workingDirPath) {
     if (workingDirPath.isEmpty()) {
       return project.getBasePath();
     }
     return workingDirPath;
   }
 
-  @NotNull
-  static String getErlPath(@NotNull Project project, @Nullable Module module) throws ExecutionException {
+  @Nonnull
+  static String getErlPath(@Nonnull Project project, @Nullable Module module) throws ExecutionException {
     Sdk sdk = module != null ? ModuleUtilCore.getSdk(module, ErlangModuleExtension.class) : null;
 
     if (sdk == null) {

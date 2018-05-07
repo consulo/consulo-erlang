@@ -16,15 +16,16 @@
 
 package org.intellij.erlang.formatter.settings;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.application.options.CodeStyleAbstractConfigurable;
 import com.intellij.application.options.CodeStyleAbstractPanel;
 import com.intellij.application.options.TabbedLanguageCodeStylePanel;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import org.intellij.erlang.ErlangLanguage;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangCodeStyleConfigurable extends CodeStyleAbstractConfigurable {
-  public ErlangCodeStyleConfigurable(@NotNull CodeStyleSettings settings, CodeStyleSettings cloneSettings) {
+  public ErlangCodeStyleConfigurable(@Nonnull CodeStyleSettings settings, CodeStyleSettings cloneSettings) {
     super(settings, cloneSettings, "Erlang");
   }
 

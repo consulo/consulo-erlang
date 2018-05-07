@@ -18,8 +18,8 @@ package org.intellij.erlang;
 
 import javax.swing.Icon;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 
 public class ErlangFileType extends LanguageFileType {
@@ -32,19 +32,19 @@ public class ErlangFileType extends LanguageFileType {
     super(ErlangLanguage.INSTANCE);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public String getName() {
     return "Erlang";
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public String getDescription() {
     return "Erlang";
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public String getDefaultExtension() {
     return "erl";
@@ -56,19 +56,19 @@ public class ErlangFileType extends LanguageFileType {
   }
 
   public static class HrlFileType extends ErlangFileType {
-    @NotNull
+    @Nonnull
     @Override
     public String getName() {
       return "Erlang Header";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getDescription() {
       return "Erlang/OTP Header File";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getDefaultExtension() {
       return "hrl";
@@ -81,19 +81,19 @@ public class ErlangFileType extends LanguageFileType {
   }
 
   public static class AppFileType extends ErlangFileType {
-    @NotNull
+    @Nonnull
     @Override
     public String getName() {
       return "Erlang/OTP app";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getDescription() {
       return "Erlang/OTP Application Resource File";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getDefaultExtension() {
       return "app";
@@ -106,19 +106,19 @@ public class ErlangFileType extends LanguageFileType {
   }
 
   public static class ErlangTermsFileType extends ErlangFileType {
-    @NotNull
+    @Nonnull
     @Override
     public String getName() {
       return "Erlang Terms";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getDescription() {
       return "Erlang Terms File";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getDefaultExtension() {
       return "config";

@@ -2,11 +2,12 @@ package org.intellij.erlang.eunit;
 
 import java.util.Collection;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.util.Key;
@@ -82,7 +83,7 @@ public class ErlangUnitTestElementUtilTest extends ErlangLightPlatformCodeInsigh
 
 		@Nullable
 		@Override
-		public <T> T getData(@NotNull Key<T> key)
+		public <T> T getData(@Nonnull Key<T> key)
 		{
 			if(CommonDataKeys.VIRTUAL_FILE_ARRAY == key)
 			{

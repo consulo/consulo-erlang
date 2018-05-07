@@ -3,9 +3,10 @@ package consulo.erlang.module.extension;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.sdk.ErlangSdkType;
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.projectRoots.SdkType;
 import consulo.annotations.RequiredReadAction;
 import consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
@@ -19,13 +20,13 @@ public class ErlangModuleExtension extends ModuleExtensionWithSdkImpl<ErlangModu
 {
 	protected List<String> myParseTransforms = new ArrayList<>();
 
-	public ErlangModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
+	public ErlangModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer moduleRootLayer)
 	{
 		super(id, moduleRootLayer);
 	}
 
 	@Override
-	protected void getStateImpl(@NotNull Element element)
+	protected void getStateImpl(@Nonnull Element element)
 	{
 		super.getStateImpl(element);
 
@@ -37,7 +38,7 @@ public class ErlangModuleExtension extends ModuleExtensionWithSdkImpl<ErlangModu
 
 	@RequiredReadAction
 	@Override
-	protected void loadStateImpl(@NotNull Element element)
+	protected void loadStateImpl(@Nonnull Element element)
 	{
 		super.loadStateImpl(element);
 
@@ -48,7 +49,7 @@ public class ErlangModuleExtension extends ModuleExtensionWithSdkImpl<ErlangModu
 	}
 
 	@Override
-	public void commit(@NotNull ErlangModuleExtension mutableModuleExtension)
+	public void commit(@Nonnull ErlangModuleExtension mutableModuleExtension)
 	{
 		super.commit(mutableModuleExtension);
 
@@ -56,13 +57,13 @@ public class ErlangModuleExtension extends ModuleExtensionWithSdkImpl<ErlangModu
 		myParseTransforms.addAll(mutableModuleExtension.myParseTransforms);
 	}
 
-	@NotNull
+	@Nonnull
 	public List<String> getParseTransforms()
 	{
 		return myParseTransforms;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public Class<? extends SdkType> getSdkTypeClass()
 	{

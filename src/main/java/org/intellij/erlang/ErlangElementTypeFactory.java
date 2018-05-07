@@ -16,15 +16,16 @@
 
 package org.intellij.erlang;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.tree.IElementType;
 import org.intellij.erlang.stubs.types.*;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangElementTypeFactory {
   private ErlangElementTypeFactory() {
   }
 
-  public static IElementType factory(@NotNull String name) {
+  public static IElementType factory(@Nonnull String name) {
     if (name.equals("ERL_FUNCTION"))                return new ErlangFunctionStubElementType(name);
     else if (name.equals("ERL_BEHAVIOUR"))          return new ErlangBehaviourStubElementType(name);
     else if (name.equals("ERL_MODULE"))             return new ErlangModuleStubElementType(name);

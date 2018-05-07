@@ -25,8 +25,8 @@ import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.debugger.node.*;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.utils.ErlangModulesUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,7 +40,7 @@ class BreakpointReachedEvent implements ErlangDebuggerEvent {
   private final OtpErlangPid myActivePid;
   private final List<ErlangProcessSnapshot> mySnapshots;
 
-  public BreakpointReachedEvent(@NotNull Project project, OtpErlangTuple breakpointReachedMessage) throws DebuggerEventFormatException {
+  public BreakpointReachedEvent(@Nonnull Project project, OtpErlangTuple breakpointReachedMessage) throws DebuggerEventFormatException {
     OtpErlangPid activePid = getPidValue(elementAt(breakpointReachedMessage, 1));
     OtpErlangList snapshots = getListValue(elementAt(breakpointReachedMessage, 2));
     if (activePid == null || snapshots == null) throw new DebuggerEventFormatException();
@@ -79,13 +79,13 @@ class BreakpointReachedEvent implements ErlangDebuggerEvent {
   }
 
   @Override
-  public void process(@NotNull ErlangDebuggerNode debuggerNode, @NotNull ErlangDebuggerEventListener eventListener) {
+  public void process(@Nonnull ErlangDebuggerNode debuggerNode, @Nonnull ErlangDebuggerEventListener eventListener) {
     debuggerNode.processSuspended(myActivePid);
     eventListener.breakpointReached(myActivePid, mySnapshots);
   }
 
   @Nullable
-  private static List<ErlangTraceElement> getStack(@NotNull Project project, @Nullable OtpErlangList traceElementsList) {
+  private static List<ErlangTraceElement> getStack(@Nonnull Project project, @Nullable OtpErlangList traceElementsList) {
     if (traceElementsList == null) return null;
     List<ErlangTraceElement> stack = new ArrayList<ErlangTraceElement>(traceElementsList.arity());
     for (OtpErlangObject traceElementObject : traceElementsList) {
@@ -101,7 +101,7 @@ class BreakpointReachedEvent implements ErlangDebuggerEvent {
   }
 
   @Nullable
-  private static ErlangTraceElement getTraceElement(@NotNull Project project,
+  private static ErlangTraceElement getTraceElement(@Nonnull Project project,
                                                     @Nullable OtpErlangTuple moduleFunctionArgsTuple,
                                                     @Nullable OtpErlangList bindingsList) {
     String moduleName = getAtomText(elementAt(moduleFunctionArgsTuple, 0));
@@ -113,7 +113,7 @@ class BreakpointReachedEvent implements ErlangDebuggerEvent {
     return new ErlangTraceElement(module, functionName, args, bindings);
   }
 
-  @NotNull
+  @Nonnull
   private static Collection<ErlangVariableBinding> getBindings(@Nullable OtpErlangList bindingsList) {
     if (bindingsList == null) return ContainerUtil.emptyList();
     Collection<ErlangVariableBinding> bindings = new ArrayList<ErlangVariableBinding>(bindingsList.arity());

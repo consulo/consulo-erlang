@@ -2,12 +2,14 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangCompOpExpression extends ErlangFakeBinaryExpression {
 
-  @NotNull
+  @Nonnull
   List<ErlangExpression> getExpressionList();
 
   @Nullable

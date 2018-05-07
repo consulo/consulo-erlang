@@ -24,7 +24,7 @@ import com.intellij.openapi.options.colors.ColorSettingsPage;
 import gnu.trove.THashMap;
 import org.intellij.erlang.ErlangIcons;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 import java.util.Map;
@@ -62,7 +62,7 @@ public class ErlangColorSettingsPage implements ColorSettingsPage {
     };
   }
 
-  @NotNull
+  @Nonnull
   public String getDisplayName() {
     return "Erlang";
   }
@@ -71,22 +71,22 @@ public class ErlangColorSettingsPage implements ColorSettingsPage {
     return ErlangIcons.FILE;
   }
 
-  @NotNull
+  @Nonnull
   public AttributesDescriptor[] getAttributeDescriptors() {
     return ATTRS;
   }
 
-  @NotNull
+  @Nonnull
   public ColorDescriptor[] getColorDescriptors() {
     return ColorDescriptor.EMPTY_ARRAY;
   }
 
-  @NotNull
+  @Nonnull
   public SyntaxHighlighter getHighlighter() {
     return new ErlangSyntaxHighlighter();
   }
 
-  @NotNull
+  @Nonnull
   public String getDemoText() {
     return "%%% Module fact documentation\n" +
       "<m_att>-module</m_att>(fact).\n" +

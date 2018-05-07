@@ -1,7 +1,7 @@
 package org.intellij.erlang.bif;
 
 import com.intellij.util.containers.MultiMap;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -416,13 +416,13 @@ public final class ErlangBifTable {
   private ErlangBifTable() {
   }
 
-  @NotNull
-  public static Collection<ErlangBifDescriptor> getBifs(@NotNull String moduleName) {
+  @Nonnull
+  public static Collection<ErlangBifDescriptor> getBifs(@Nonnull String moduleName) {
     return bifMap.get(moduleName);
   }
 
-  @NotNull
-  public static List<ErlangBifDescriptor> getBifs(@NotNull String moduleName, @NotNull String functionName) {
+  @Nonnull
+  public static List<ErlangBifDescriptor> getBifs(@Nonnull String moduleName, @Nonnull String functionName) {
     final List<ErlangBifDescriptor> bifDescriptors = new ArrayList<ErlangBifDescriptor>();
     for (ErlangBifDescriptor bifDescriptor : bifMap.get(moduleName)) {
       if (functionName.equals(bifDescriptor.getName())) {
@@ -433,7 +433,7 @@ public final class ErlangBifTable {
   }
 
 
-  public static boolean isBif(@NotNull String moduleName, @NotNull String functionName, int arity) {
+  public static boolean isBif(@Nonnull String moduleName, @Nonnull String functionName, int arity) {
     final Collection<ErlangBifDescriptor> erlangBifDescriptors = bifMap.get(moduleName);
     for (ErlangBifDescriptor bifDescriptor : erlangBifDescriptors) {
       if (bifDescriptor.getModule().equals(moduleName) && bifDescriptor.getName().equals(functionName) &&

@@ -21,18 +21,18 @@ import com.intellij.psi.stubs.NamedStubBase;
 import org.intellij.erlang.psi.ErlangNamedElement;
 import org.intellij.erlang.stubs.index.ErlangAllNameIndex;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public abstract class ErlangNamedStubElementType<S extends NamedStubBase<T>, T extends ErlangNamedElement> extends ErlangStubElementType<S, T> {
-  public ErlangNamedStubElementType(@NonNls @NotNull String debugName) {
+  public ErlangNamedStubElementType(@NonNls @Nonnull String debugName) {
     super(debugName);
   }
 
-  public void indexStub(@NotNull final S stub, @NotNull final IndexSink sink) {
+  public void indexStub(@Nonnull final S stub, @Nonnull final IndexSink sink) {
     sink.occurrence(ErlangAllNameIndex.KEY, stub.getName());
   }
 
-  @NotNull
+  @Nonnull
   public String getExternalId() {
     return "erlang." + super.toString();
   }

@@ -1,7 +1,7 @@
 package org.intellij.erlang.debugger.xdebug;
 
 import com.intellij.xdebugger.breakpoints.XBreakpointProperties;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 public class ErlangLineBreakpointProperties extends XBreakpointProperties<ErlangLineBreakpointProperties> {
   @Nullable

@@ -16,21 +16,22 @@
 
 package org.intellij.erlang.quickfixes;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import org.intellij.erlang.psi.ErlangQVar;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangRenameVariableFix extends ErlangQuickFixBase {
-  @NotNull
+  @Nonnull
   @Override
   public String getFamilyName() {
     return "Rename variable (will start with _)";
   }
 
   @Override
-  public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+  public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor descriptor) {
     PsiElement element = descriptor.getPsiElement();
 
     if (element instanceof ErlangQVar) {

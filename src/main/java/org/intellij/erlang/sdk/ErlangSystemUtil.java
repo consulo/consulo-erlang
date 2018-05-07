@@ -23,7 +23,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.CapturingProcessHandler;
@@ -39,18 +40,18 @@ public class ErlangSystemUtil {
   private ErlangSystemUtil() {
   }
 
-  @NotNull
-  public static ProcessOutput getProcessOutput(@NotNull final String workDir,
-                                               @NotNull final String exePath,
-                                               @NotNull final String... arguments) throws ExecutionException {
+  @Nonnull
+  public static ProcessOutput getProcessOutput(@Nonnull final String workDir,
+                                               @Nonnull final String exePath,
+                                               @Nonnull final String... arguments) throws ExecutionException {
     return getProcessOutput(STANDARD_TIMEOUT, workDir, exePath, arguments);
   }
 
-  @NotNull
+  @Nonnull
   public static ProcessOutput getProcessOutput(final int timeout,
-                                               @NotNull final String workDir,
-                                               @NotNull final String exePath,
-                                               @NotNull final String... arguments) throws ExecutionException {
+                                               @Nonnull final String workDir,
+                                               @Nonnull final String exePath,
+                                               @Nonnull final String... arguments) throws ExecutionException {
     if (!new File(workDir).isDirectory() || !new File(exePath).canExecute()) {
       return new ProcessOutput();
     }
@@ -63,18 +64,18 @@ public class ErlangSystemUtil {
     return execute(cmd, timeout);
   }
 
-  @NotNull
-  public static ProcessOutput execute(@NotNull final GeneralCommandLine cmd) throws ExecutionException {
+  @Nonnull
+  public static ProcessOutput execute(@Nonnull final GeneralCommandLine cmd) throws ExecutionException {
     return execute(cmd, STANDARD_TIMEOUT);
   }
 
-  @NotNull
-  public static ProcessOutput execute(@NotNull final GeneralCommandLine cmd, final int timeout) throws ExecutionException {
+  @Nonnull
+  public static ProcessOutput execute(@Nonnull final GeneralCommandLine cmd, final int timeout) throws ExecutionException {
     final CapturingProcessHandler processHandler = new CapturingProcessHandler(cmd);
     return timeout < 0 ? processHandler.runProcess() : processHandler.runProcess(timeout);
   }
 
-  public static void addStdPaths(@NotNull final GeneralCommandLine cmd, @NotNull final Sdk sdk) {
+  public static void addStdPaths(@Nonnull final GeneralCommandLine cmd, @Nonnull final Sdk sdk) {
     final List<VirtualFile> files = new ArrayList<VirtualFile>();
     files.addAll(Arrays.asList(sdk.getRootProvider().getFiles(OrderRootType.SOURCES)));
     files.addAll(Arrays.asList(sdk.getRootProvider().getFiles(OrderRootType.CLASSES)));

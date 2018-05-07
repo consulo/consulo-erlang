@@ -16,6 +16,9 @@
 
 package org.intellij.erlang.debugger.remote;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -29,8 +32,6 @@ import org.intellij.erlang.debugger.remote.ui.ErlangRemoteDebugConfigurationEdit
 import org.intellij.erlang.runconfig.ErlangModuleBasedConfiguration;
 import org.intellij.erlang.runconfig.ErlangRunConfigurationBase;
 import org.intellij.erlang.runconfig.ErlangRunner;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ErlangRemoteDebugRunConfiguration extends ErlangRunConfigurationBase<ErlangRemoteDebugRunningState> implements RunConfigurationWithSuppressedDefaultRunAction {
   private String myErlangNode;
@@ -50,7 +51,7 @@ public class ErlangRemoteDebugRunConfiguration extends ErlangRunConfigurationBas
     return new ErlangRemoteDebugRunningState(env, module);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
     return new ErlangRemoteDebugConfigurationEditorForm();
@@ -58,7 +59,7 @@ public class ErlangRemoteDebugRunConfiguration extends ErlangRunConfigurationBas
 
   @Nullable
   @Override
-  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment env) throws ExecutionException {
+  public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment env) throws ExecutionException {
     return ErlangRunner.EMPTY_RUN_STATE;
   }
 

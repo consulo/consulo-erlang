@@ -2,18 +2,20 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangBinaryExpression extends ErlangExpression {
 
-  @NotNull
+  @Nonnull
   List<ErlangBinElement> getBinElementList();
 
   @Nullable
   PsiElement getBinEnd();
 
-  @NotNull
+  @Nonnull
   PsiElement getBinStart();
 
 }

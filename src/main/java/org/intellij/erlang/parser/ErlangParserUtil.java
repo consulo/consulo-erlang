@@ -28,10 +28,12 @@ import com.intellij.psi.impl.source.resolve.FileContextUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import gnu.trove.TObjectIntHashMap;
+
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.ErlangTypes;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangParserUtil extends GeneratedParserUtilBase {
   public static boolean isApplicationLanguage(PsiBuilder builder_, @SuppressWarnings("UnusedParameters") int level) {
@@ -46,11 +48,11 @@ public class ErlangParserUtil extends GeneratedParserUtilBase {
     return isConsole(file);
   }
 
-  public static boolean isConsole(@NotNull PsiFile file) {
+  public static boolean isConsole(@Nonnull PsiFile file) {
     return file.getOriginalFile().getUserData(ErlangPsiImplUtil.ERLANG_CONSOLE) != null;
   }
 
-  public static boolean isApplicationConfigFileType(@NotNull PsiFile file) {
+  public static boolean isApplicationConfigFileType(@Nonnull PsiFile file) {
     FileType fileType = file.getViewProvider().getVirtualFile().getFileType();
     return fileType == ErlangFileType.APP || fileType == ErlangFileType.TERMS ||
       (ApplicationManager.getApplication().isUnitTestMode() && (fileType.getDefaultExtension().equals("app") || fileType.getDefaultExtension().equals("config")));

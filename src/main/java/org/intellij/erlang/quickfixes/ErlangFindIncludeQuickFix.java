@@ -36,8 +36,8 @@ import com.intellij.util.FileContentUtilCore;
 import org.intellij.erlang.ErlangIcons;
 import org.intellij.erlang.psi.impl.ErlangElementFactory;
 import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -60,14 +60,14 @@ public class ErlangFindIncludeQuickFix extends ErlangQuickFixBase {
     this.setDirectHrlLink = setDirectHrlLink;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public String getFamilyName() {
     return "Find include";
   }
 
-  public void applyFix(@NotNull Project project,
-                       @NotNull ProblemDescriptor problemDescriptor) {
+  public void applyFix(@Nonnull Project project,
+                       @Nonnull ProblemDescriptor problemDescriptor) {
 
     PsiElement problem = problemDescriptor.getPsiElement();
     if (problem == null) return;
@@ -116,7 +116,7 @@ public class ErlangFindIncludeQuickFix extends ErlangQuickFixBase {
     }
     ListPopup p = JBPopupFactory.getInstance().createListPopup(new ListPopupStep() {
 
-      @NotNull
+      @Nonnull
       @Override
       public List getValues() {
         return Arrays.asList(files);
@@ -133,7 +133,7 @@ public class ErlangFindIncludeQuickFix extends ErlangQuickFixBase {
         return ErlangIcons.HEADER;
       }
 
-      @NotNull
+      @Nonnull
       @Override
       public String getTextFor(Object o) {
         //Uses relative path to project root if possible (if not - full path)

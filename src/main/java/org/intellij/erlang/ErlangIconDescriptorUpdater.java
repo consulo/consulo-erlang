@@ -16,14 +16,15 @@
 
 package org.intellij.erlang;
 
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
 import org.intellij.erlang.psi.ErlangBehaviour;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangModule;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.text.StringUtil;
@@ -35,7 +36,7 @@ import consulo.ide.IconDescriptorUpdater;
 public class ErlangIconDescriptorUpdater implements IconDescriptorUpdater, DumbAware
 {
 	@Nullable
-	public static Icon getIcon(@NotNull ErlangFile file)
+	public static Icon getIcon(@Nonnull ErlangFile file)
 	{
 		if(!file.isValid())
 		{
@@ -52,8 +53,8 @@ public class ErlangIconDescriptorUpdater implements IconDescriptorUpdater, DumbA
 		return fileType.getIcon();
 	}
 
-	@NotNull
-	public static ModuleType getModuleType(@NotNull ErlangFile file)
+	@Nonnull
+	public static ModuleType getModuleType(@Nonnull ErlangFile file)
 	{
 		ModuleType type = ModuleType.REGULAR;
 		for(ErlangBehaviour behaviour : file.getBehaviours())
@@ -68,7 +69,7 @@ public class ErlangIconDescriptorUpdater implements IconDescriptorUpdater, DumbA
 	}
 
 	@Override
-	public void updateIcon(@NotNull IconDescriptor iconDescriptor, @NotNull PsiElement element, int i)
+	public void updateIcon(@Nonnull IconDescriptor iconDescriptor, @Nonnull PsiElement element, int i)
 	{
 		if(element instanceof ErlangFile)
 		{
@@ -99,8 +100,8 @@ public class ErlangIconDescriptorUpdater implements IconDescriptorUpdater, DumbA
 			this.icon = ErlangIcons.FILE;
 		}
 
-		@NotNull
-		public static ModuleType getType(@NotNull String behaviourName)
+		@Nonnull
+		public static ModuleType getType(@Nonnull String behaviourName)
 		{
 			for(ModuleType type : ModuleType.values())
 			{

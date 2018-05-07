@@ -27,8 +27,8 @@ import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.rebar.util.ErlangTermFileUtil;
 import org.intellij.erlang.rebar.util.RebarConfigUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -42,7 +42,7 @@ final class ImportedOtpApp {
   private VirtualFile myIdeaModuleFile;
   private Module myModule;
 
-  public ImportedOtpApp(@NotNull VirtualFile root, @NotNull VirtualFile appConfig) {
+  public ImportedOtpApp(@Nonnull VirtualFile root, @Nonnull VirtualFile appConfig) {
     myName = StringUtil.trimEnd(StringUtil.trimEnd(appConfig.getName(), ".src"), ".app");
     myRoot = root;
     addDependenciesFromAppFile(appConfig);
@@ -50,17 +50,17 @@ final class ImportedOtpApp {
     addIncludePath("include");
   }
 
-  @NotNull
+  @Nonnull
   public String getName() {
     return myName;
   }
 
-  @NotNull
+  @Nonnull
   public VirtualFile getRoot() {
     return myRoot;
   }
 
-  @NotNull
+  @Nonnull
   public Set<String> getDeps() {
     return myDeps;
   }
@@ -124,7 +124,7 @@ final class ImportedOtpApp {
     addParseTransformsFromRebarConfig(rebarConfigPsi);
   }
 
-  private void addDependenciesFromAppFile(@NotNull VirtualFile appFile) {
+  private void addDependenciesFromAppFile(@Nonnull VirtualFile appFile) {
     ErlangFile appConfigPsi = ErlangTermFileUtil.createPsi(appFile);
     if (appConfigPsi == null) return;
     List<ErlangTupleExpression> applicationDescriptors =

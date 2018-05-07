@@ -20,7 +20,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.file.UpdateAddedFileProcessor;
 import com.intellij.util.IncorrectOperationException;
 import org.intellij.erlang.psi.ErlangFile;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 public class ErlangUpdateAddedFileProcessor extends UpdateAddedFileProcessor {
   @Override

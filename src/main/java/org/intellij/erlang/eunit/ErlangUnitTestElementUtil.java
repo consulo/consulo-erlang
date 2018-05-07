@@ -5,10 +5,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.project.Project;
@@ -23,7 +25,7 @@ public class ErlangUnitTestElementUtil {
   private ErlangUnitTestElementUtil() {
   }
 
-  @NotNull
+  @Nonnull
   public static Collection<ErlangFunction> findFunctionTestElements(@Nullable PsiElement element) {
     return ContainerUtil.createMaybeSingletonList(getZeroArityFunction(element));
   }

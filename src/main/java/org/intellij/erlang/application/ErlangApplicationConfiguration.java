@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.application;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.*;
@@ -34,7 +36,6 @@ import org.intellij.erlang.runconfig.ErlangRunConfigurationBase;
 import org.intellij.erlang.runconfig.ErlangRunner;
 import org.intellij.erlang.runconfig.ErlangRunningState;
 import org.intellij.erlang.utils.ErlangModulesUtil;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangApplicationConfiguration extends ErlangRunConfigurationBase<ErlangApplicationRunningState> {
   private String myParams = "";
@@ -51,14 +52,14 @@ public class ErlangApplicationConfiguration extends ErlangRunConfigurationBase<E
     return new ErlangApplicationConfiguration(getProject(), getName(), ErlangApplicationRunConfigurationType.getInstance());
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
     return new ErlangRunConfigurationEditorForm();
   }
 
   @Override
-  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment env) throws ExecutionException {
+  public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment env) throws ExecutionException {
     return ErlangRunner.EMPTY_RUN_STATE; // todo: CommandLineState
   }
 

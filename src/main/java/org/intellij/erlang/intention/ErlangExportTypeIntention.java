@@ -16,6 +16,9 @@
 
 package org.intellij.erlang.intention;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.codeInsight.intention.impl.BaseIntentionAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
@@ -26,24 +29,22 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import org.intellij.erlang.psi.ErlangTypeDefinition;
 import org.intellij.erlang.quickfixes.ErlangExportTypeFix;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ErlangExportTypeIntention extends BaseIntentionAction {
-  @NotNull
+  @Nonnull
   @Override
   public String getFamilyName() {
     return "Export type";
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public String getText() {
     return "Export type";
   }
 
   @Override
-  public boolean isAvailable(@NotNull Project project, Editor editor, PsiFile file) {
+  public boolean isAvailable(@Nonnull Project project, Editor editor, PsiFile file) {
     if (!file.getManager().isInProject(file)) return false;
     ErlangTypeDefinition type = findType(file, editor.getCaretModel().getOffset());
     return type != null;
@@ -53,7 +54,7 @@ public class ErlangExportTypeIntention extends BaseIntentionAction {
   }
 
   @Override
-  public void invoke(@NotNull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
+  public void invoke(@Nonnull Project project, Editor editor, PsiFile file) throws IncorrectOperationException {
     ErlangTypeDefinition type = findType(file, editor.getCaretModel().getOffset());
     if (type != null) {
       ErlangExportTypeFix.processType(project, type);

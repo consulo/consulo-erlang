@@ -25,8 +25,8 @@ import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.util.text.StringUtil;
 import org.intellij.erlang.runconfig.ErlangRunningState;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 
@@ -68,7 +68,7 @@ public class ErlangApplicationRunningState extends ErlangRunningState {
     return entryPoint;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public ConsoleView createConsoleView(Executor executor) {
     final TextConsoleBuilder consoleBuilder = TextConsoleBuilderFactory.getInstance().createBuilder(myConfiguration.getProject());

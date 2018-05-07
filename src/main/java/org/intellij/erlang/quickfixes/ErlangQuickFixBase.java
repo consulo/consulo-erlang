@@ -16,11 +16,12 @@
 
 package org.intellij.erlang.quickfixes;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class ErlangQuickFixBase implements LocalQuickFix {
   @Nullable
@@ -30,7 +31,7 @@ public abstract class ErlangQuickFixBase implements LocalQuickFix {
       ErlangRecordDefinition.class, ErlangFunction.class, ErlangSpecification.class, ErlangTypeDefinition.class);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public String getName() {
     return getFamilyName();

@@ -30,8 +30,8 @@ import com.intellij.refactoring.IntroduceTargetChooser;
 import com.intellij.util.Function;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,14 +41,14 @@ public class ErlangRefactoringUtil {
   private ErlangRefactoringUtil() {
   }
 
-  @NotNull
-  public static List<PsiElement> getOccurrences(@NotNull final PsiElement pattern, @Nullable final PsiElement context) {
+  @Nonnull
+  public static List<PsiElement> getOccurrences(@Nonnull final PsiElement pattern, @Nullable final PsiElement context) {
     if (context == null) {
       return Collections.emptyList();
     }
     final List<PsiElement> occurrences = new ArrayList<PsiElement>();
     final PsiRecursiveElementVisitor visitor = new PsiRecursiveElementVisitor() {
-      public void visitElement(@NotNull final PsiElement element) {
+      public void visitElement(@Nonnull final PsiElement element) {
         if (PsiEquivalenceUtil.areElementsEquivalent(element, pattern)) {
           occurrences.add(element);
           return;
@@ -60,8 +60,8 @@ public class ErlangRefactoringUtil {
     return occurrences;
   }
 
-  @NotNull
-  public static Pair<PsiElement, PsiElement> selectionToElements(@NotNull PsiFile file, @NotNull SelectionModel selectionModel) {
+  @Nonnull
+  public static Pair<PsiElement, PsiElement> selectionToElements(@Nonnull PsiFile file, @Nonnull SelectionModel selectionModel) {
     PsiElement element1 = file.findElementAt(selectionModel.getSelectionStart());
     PsiElement element2 = file.findElementAt(selectionModel.getSelectionEnd() - 1);
     if (element1 instanceof PsiWhiteSpace) {
@@ -73,22 +73,22 @@ public class ErlangRefactoringUtil {
     return Pair.create(element1, element2);
   }
 
-  public static String shorten(@NotNull ErlangExpression o, @NotNull String defaultValue) {
+  public static String shorten(@Nonnull ErlangExpression o, @Nonnull String defaultValue) {
     VariableTextBuilder visitor = new VariableTextBuilder();
     o.accept(visitor);
     return visitor.result(defaultValue);
   }
 
-  @NotNull
-  public static String shorten(@NotNull ErlangExpression o) { // maybe better to return List<String>
+  @Nonnull
+  public static String shorten(@Nonnull ErlangExpression o) { // maybe better to return List<String>
     VariableTextBuilder visitor = new VariableTextBuilder();
     o.accept(visitor);
     return visitor.result();
   }
 
-  public static void smartIntroduce(@NotNull final Editor editor, 
-                                    @NotNull PsiFile file, 
-                                    @NotNull final Extractor extractor) {
+  public static void smartIntroduce(@Nonnull final Editor editor,
+                                    @Nonnull PsiFile file,
+                                    @Nonnull final Extractor extractor) {
     int offset = editor.getCaretModel().getOffset();
     PsiElement element = file.findElementAt(offset);
     if (!extractor.checkContext(file, editor, element)) return;
@@ -113,12 +113,12 @@ public class ErlangRefactoringUtil {
       IntroduceTargetChooser.showChooser(editor, expressions,
         new Pass<ErlangExpression>() {
           @Override
-          public void pass(@NotNull ErlangExpression expression) {
+          public void pass(@Nonnull ErlangExpression expression) {
             extractor.process(editor, expression);
           }
         },
         new Function<ErlangExpression, String>() {
-          public String fun(@NotNull ErlangExpression expression) {
+          public String fun(@Nonnull ErlangExpression expression) {
             return expression.getText();
           }
         }
@@ -127,7 +127,7 @@ public class ErlangRefactoringUtil {
   }
 
   public interface Extractor {
-    boolean checkContext(@NotNull PsiFile file, @NotNull Editor editor, @Nullable PsiElement element);
-    void process(@NotNull Editor editor, @NotNull ErlangExpression expression);
+    boolean checkContext(@Nonnull PsiFile file, @Nonnull Editor editor, @Nullable PsiElement element);
+    void process(@Nonnull Editor editor, @Nonnull ErlangExpression expression);
   }
 }

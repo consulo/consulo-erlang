@@ -16,11 +16,12 @@
 
 package org.intellij.erlang.rebar.runner;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.project.Project;
-import org.jetbrains.annotations.NotNull;
 
 public final class RebarRunConfiguration extends RebarRunConfigurationBase {
-  public RebarRunConfiguration(@NotNull String name, @NotNull Project project) {
+  public RebarRunConfiguration(@Nonnull String name, @Nonnull Project project) {
     super(name, project, RebarRunConfigurationFactory.getInstance());
   }
 }

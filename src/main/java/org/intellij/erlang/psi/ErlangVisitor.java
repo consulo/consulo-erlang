@@ -1,505 +1,505 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi;
 
-import org.jetbrains.annotations.*;
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiLanguageInjectionHost;
 
 public class ErlangVisitor extends PsiElementVisitor {
 
-  public void visitAdditiveExpression(@NotNull ErlangAdditiveExpression o) {
+  public void visitAdditiveExpression(@Nonnull ErlangAdditiveExpression o) {
     visitFakeBinaryExpression(o);
   }
 
-  public void visitAfterClause(@NotNull ErlangAfterClause o) {
+  public void visitAfterClause(@Nonnull ErlangAfterClause o) {
     visitCompositeElement(o);
   }
 
-  public void visitAfterClauseBody(@NotNull ErlangAfterClauseBody o) {
+  public void visitAfterClauseBody(@Nonnull ErlangAfterClauseBody o) {
     visitCompositeElement(o);
   }
 
-  public void visitAndalsoExpression(@NotNull ErlangAndalsoExpression o) {
+  public void visitAndalsoExpression(@Nonnull ErlangAndalsoExpression o) {
     visitFakeBinaryExpression(o);
   }
 
-  public void visitAnonymousCallExpression(@NotNull ErlangAnonymousCallExpression o) {
+  public void visitAnonymousCallExpression(@Nonnull ErlangAnonymousCallExpression o) {
     visitExpression(o);
   }
 
-  public void visitArgumentDefinition(@NotNull ErlangArgumentDefinition o) {
+  public void visitArgumentDefinition(@Nonnull ErlangArgumentDefinition o) {
     visitCompositeElement(o);
   }
 
-  public void visitArgumentDefinitionList(@NotNull ErlangArgumentDefinitionList o) {
+  public void visitArgumentDefinitionList(@Nonnull ErlangArgumentDefinitionList o) {
     visitCompositeElement(o);
   }
 
-  public void visitArgumentList(@NotNull ErlangArgumentList o) {
+  public void visitArgumentList(@Nonnull ErlangArgumentList o) {
     visitCompositeElement(o);
   }
 
-  public void visitAssignmentExpression(@NotNull ErlangAssignmentExpression o) {
+  public void visitAssignmentExpression(@Nonnull ErlangAssignmentExpression o) {
     visitFakeBinaryExpression(o);
   }
 
-  public void visitAtomAttribute(@NotNull ErlangAtomAttribute o) {
+  public void visitAtomAttribute(@Nonnull ErlangAtomAttribute o) {
     visitCompositeElement(o);
   }
 
-  public void visitAttrVal(@NotNull ErlangAttrVal o) {
+  public void visitAttrVal(@Nonnull ErlangAttrVal o) {
     visitCompositeElement(o);
   }
 
-  public void visitAttribute(@NotNull ErlangAttribute o) {
+  public void visitAttribute(@Nonnull ErlangAttribute o) {
     visitCompositeElement(o);
   }
 
-  public void visitBeginEndBody(@NotNull ErlangBeginEndBody o) {
+  public void visitBeginEndBody(@Nonnull ErlangBeginEndBody o) {
     visitCompositeElement(o);
   }
 
-  public void visitBeginEndExpression(@NotNull ErlangBeginEndExpression o) {
+  public void visitBeginEndExpression(@Nonnull ErlangBeginEndExpression o) {
     visitExpression(o);
   }
 
-  public void visitBehaviour(@NotNull ErlangBehaviour o) {
+  public void visitBehaviour(@Nonnull ErlangBehaviour o) {
     visitCompositeElement(o);
   }
 
-  public void visitBinBaseType(@NotNull ErlangBinBaseType o) {
+  public void visitBinBaseType(@Nonnull ErlangBinBaseType o) {
     visitType(o);
   }
 
-  public void visitBinElement(@NotNull ErlangBinElement o) {
+  public void visitBinElement(@Nonnull ErlangBinElement o) {
     visitCompositeElement(o);
   }
 
-  public void visitBinUnitType(@NotNull ErlangBinUnitType o) {
+  public void visitBinUnitType(@Nonnull ErlangBinUnitType o) {
     visitType(o);
   }
 
-  public void visitBinaryExpression(@NotNull ErlangBinaryExpression o) {
+  public void visitBinaryExpression(@Nonnull ErlangBinaryExpression o) {
     visitExpression(o);
   }
 
-  public void visitBinaryType(@NotNull ErlangBinaryType o) {
+  public void visitBinaryType(@Nonnull ErlangBinaryType o) {
     visitType(o);
   }
 
-  public void visitBitType(@NotNull ErlangBitType o) {
+  public void visitBitType(@Nonnull ErlangBitType o) {
     visitCompositeElement(o);
   }
 
-  public void visitCallbackSpec(@NotNull ErlangCallbackSpec o) {
+  public void visitCallbackSpec(@Nonnull ErlangCallbackSpec o) {
     visitCompositeElement(o);
   }
 
-  public void visitCaseExpression(@NotNull ErlangCaseExpression o) {
+  public void visitCaseExpression(@Nonnull ErlangCaseExpression o) {
     visitExpression(o);
     // visitClauseOwner(o);
   }
 
-  public void visitCatchExpression(@NotNull ErlangCatchExpression o) {
+  public void visitCatchExpression(@Nonnull ErlangCatchExpression o) {
     visitExpression(o);
   }
 
-  public void visitClauseBody(@NotNull ErlangClauseBody o) {
+  public void visitClauseBody(@Nonnull ErlangClauseBody o) {
     visitCompositeElement(o);
   }
 
-  public void visitClauseGuard(@NotNull ErlangClauseGuard o) {
+  public void visitClauseGuard(@Nonnull ErlangClauseGuard o) {
     visitCompositeElement(o);
   }
 
-  public void visitColonQualifiedExpression(@NotNull ErlangColonQualifiedExpression o) {
+  public void visitColonQualifiedExpression(@Nonnull ErlangColonQualifiedExpression o) {
     visitExpression(o);
   }
 
-  public void visitCompOpExpression(@NotNull ErlangCompOpExpression o) {
+  public void visitCompOpExpression(@Nonnull ErlangCompOpExpression o) {
     visitFakeBinaryExpression(o);
   }
 
-  public void visitConfigCallExpression(@NotNull ErlangConfigCallExpression o) {
+  public void visitConfigCallExpression(@Nonnull ErlangConfigCallExpression o) {
     visitExpression(o);
   }
 
-  public void visitConfigExpression(@NotNull ErlangConfigExpression o) {
+  public void visitConfigExpression(@Nonnull ErlangConfigExpression o) {
     visitExpression(o);
   }
 
-  public void visitCrClause(@NotNull ErlangCrClause o) {
+  public void visitCrClause(@Nonnull ErlangCrClause o) {
     visitCompositeElement(o);
   }
 
-  public void visitExport(@NotNull ErlangExport o) {
+  public void visitExport(@Nonnull ErlangExport o) {
     visitCompositeElement(o);
   }
 
-  public void visitExportFunction(@NotNull ErlangExportFunction o) {
+  public void visitExportFunction(@Nonnull ErlangExportFunction o) {
     visitCompositeElement(o);
   }
 
-  public void visitExportFunctions(@NotNull ErlangExportFunctions o) {
+  public void visitExportFunctions(@Nonnull ErlangExportFunctions o) {
     visitCompositeElement(o);
   }
 
-  public void visitExportType(@NotNull ErlangExportType o) {
+  public void visitExportType(@Nonnull ErlangExportType o) {
     visitCompositeElement(o);
   }
 
-  public void visitExportTypeAttribute(@NotNull ErlangExportTypeAttribute o) {
+  public void visitExportTypeAttribute(@Nonnull ErlangExportTypeAttribute o) {
     visitCompositeElement(o);
   }
 
-  public void visitExportTypes(@NotNull ErlangExportTypes o) {
+  public void visitExportTypes(@Nonnull ErlangExportTypes o) {
     visitCompositeElement(o);
   }
 
-  public void visitExpression(@NotNull ErlangExpression o) {
+  public void visitExpression(@Nonnull ErlangExpression o) {
     visitCompositeElement(o);
   }
 
-  public void visitFakeBinaryExpression(@NotNull ErlangFakeBinaryExpression o) {
+  public void visitFakeBinaryExpression(@Nonnull ErlangFakeBinaryExpression o) {
     visitExpression(o);
   }
 
-  public void visitFieldType(@NotNull ErlangFieldType o) {
+  public void visitFieldType(@Nonnull ErlangFieldType o) {
     visitType(o);
   }
 
-  public void visitFunClause(@NotNull ErlangFunClause o) {
+  public void visitFunClause(@Nonnull ErlangFunClause o) {
     visitCompositeElement(o);
   }
 
-  public void visitFunClauses(@NotNull ErlangFunClauses o) {
+  public void visitFunClauses(@Nonnull ErlangFunClauses o) {
     visitCompositeElement(o);
   }
 
-  public void visitFunExpression(@NotNull ErlangFunExpression o) {
+  public void visitFunExpression(@Nonnull ErlangFunExpression o) {
     visitExpression(o);
   }
 
-  public void visitFunType(@NotNull ErlangFunType o) {
+  public void visitFunType(@Nonnull ErlangFunType o) {
     visitType(o);
   }
 
-  public void visitFunType100T(@NotNull ErlangFunType100T o) {
+  public void visitFunType100T(@Nonnull ErlangFunType100T o) {
     visitType(o);
   }
 
-  public void visitFunTypeArguments(@NotNull ErlangFunTypeArguments o) {
+  public void visitFunTypeArguments(@Nonnull ErlangFunTypeArguments o) {
     visitCompositeElement(o);
   }
 
-  public void visitFunTypeSigs(@NotNull ErlangFunTypeSigs o) {
+  public void visitFunTypeSigs(@Nonnull ErlangFunTypeSigs o) {
     visitCompositeElement(o);
   }
 
-  public void visitFunTypeSigsBraces(@NotNull ErlangFunTypeSigsBraces o) {
+  public void visitFunTypeSigsBraces(@Nonnull ErlangFunTypeSigsBraces o) {
     visitCompositeElement(o);
   }
 
-  public void visitFunction(@NotNull ErlangFunction o) {
+  public void visitFunction(@Nonnull ErlangFunction o) {
     visitNamedElement(o);
   }
 
-  public void visitFunctionCallExpression(@NotNull ErlangFunctionCallExpression o) {
+  public void visitFunctionCallExpression(@Nonnull ErlangFunctionCallExpression o) {
     visitExpression(o);
   }
 
-  public void visitFunctionClause(@NotNull ErlangFunctionClause o) {
+  public void visitFunctionClause(@Nonnull ErlangFunctionClause o) {
     visitCompositeElement(o);
   }
 
-  public void visitFunctionWithArity(@NotNull ErlangFunctionWithArity o) {
+  public void visitFunctionWithArity(@Nonnull ErlangFunctionWithArity o) {
     visitCompositeElement(o);
   }
 
-  public void visitFunctionWithArityVariables(@NotNull ErlangFunctionWithArityVariables o) {
+  public void visitFunctionWithArityVariables(@Nonnull ErlangFunctionWithArityVariables o) {
     visitCompositeElement(o);
   }
 
-  public void visitGenericFunctionCallExpression(@NotNull ErlangGenericFunctionCallExpression o) {
+  public void visitGenericFunctionCallExpression(@Nonnull ErlangGenericFunctionCallExpression o) {
     visitExpression(o);
   }
 
-  public void visitGlobalFunctionCallExpression(@NotNull ErlangGlobalFunctionCallExpression o) {
+  public void visitGlobalFunctionCallExpression(@Nonnull ErlangGlobalFunctionCallExpression o) {
     visitExpression(o);
   }
 
-  public void visitGuard(@NotNull ErlangGuard o) {
+  public void visitGuard(@Nonnull ErlangGuard o) {
     visitCompositeElement(o);
   }
 
-  public void visitIfClause(@NotNull ErlangIfClause o) {
+  public void visitIfClause(@Nonnull ErlangIfClause o) {
     visitCompositeElement(o);
   }
 
-  public void visitIfExpression(@NotNull ErlangIfExpression o) {
+  public void visitIfExpression(@Nonnull ErlangIfExpression o) {
     visitExpression(o);
   }
 
-  public void visitImportDirective(@NotNull ErlangImportDirective o) {
+  public void visitImportDirective(@Nonnull ErlangImportDirective o) {
     visitCompositeElement(o);
   }
 
-  public void visitImportFunction(@NotNull ErlangImportFunction o) {
+  public void visitImportFunction(@Nonnull ErlangImportFunction o) {
     visitCompositeElement(o);
   }
 
-  public void visitImportFunctions(@NotNull ErlangImportFunctions o) {
+  public void visitImportFunctions(@Nonnull ErlangImportFunctions o) {
     visitCompositeElement(o);
   }
 
-  public void visitInclude(@NotNull ErlangInclude o) {
+  public void visitInclude(@Nonnull ErlangInclude o) {
     visitCompositeElement(o);
   }
 
-  public void visitIncludeLib(@NotNull ErlangIncludeLib o) {
+  public void visitIncludeLib(@Nonnull ErlangIncludeLib o) {
     visitCompositeElement(o);
   }
 
-  public void visitIncludeString(@NotNull ErlangIncludeString o) {
+  public void visitIncludeString(@Nonnull ErlangIncludeString o) {
     visitCompositeElement(o);
   }
 
-  public void visitIntType(@NotNull ErlangIntType o) {
+  public void visitIntType(@Nonnull ErlangIntType o) {
     visitType(o);
   }
 
-  public void visitLcExpression(@NotNull ErlangLcExpression o) {
+  public void visitLcExpression(@Nonnull ErlangLcExpression o) {
     visitExpression(o);
   }
 
-  public void visitLcExprs(@NotNull ErlangLcExprs o) {
+  public void visitLcExprs(@Nonnull ErlangLcExprs o) {
     visitCompositeElement(o);
   }
 
-  public void visitListComprehension(@NotNull ErlangListComprehension o) {
+  public void visitListComprehension(@Nonnull ErlangListComprehension o) {
     visitExpression(o);
   }
 
-  public void visitListExpression(@NotNull ErlangListExpression o) {
+  public void visitListExpression(@Nonnull ErlangListExpression o) {
     visitExpression(o);
   }
 
-  public void visitListOpExpression(@NotNull ErlangListOpExpression o) {
+  public void visitListOpExpression(@Nonnull ErlangListOpExpression o) {
     visitFakeBinaryExpression(o);
   }
 
-  public void visitMacros(@NotNull ErlangMacros o) {
+  public void visitMacros(@Nonnull ErlangMacros o) {
     visitCompositeElement(o);
   }
 
-  public void visitMacrosArg(@NotNull ErlangMacrosArg o) {
+  public void visitMacrosArg(@Nonnull ErlangMacrosArg o) {
     visitCompositeElement(o);
   }
 
-  public void visitMacrosBody(@NotNull ErlangMacrosBody o) {
+  public void visitMacrosBody(@Nonnull ErlangMacrosBody o) {
     visitCompositeElement(o);
   }
 
-  public void visitMacrosCall(@NotNull ErlangMacrosCall o) {
+  public void visitMacrosCall(@Nonnull ErlangMacrosCall o) {
     visitCompositeElement(o);
   }
 
-  public void visitMacrosDefinition(@NotNull ErlangMacrosDefinition o) {
+  public void visitMacrosDefinition(@Nonnull ErlangMacrosDefinition o) {
     visitNamedElement(o);
   }
 
-  public void visitMacrosName(@NotNull ErlangMacrosName o) {
+  public void visitMacrosName(@Nonnull ErlangMacrosName o) {
     visitCompositeElement(o);
   }
 
-  public void visitMaxExpression(@NotNull ErlangMaxExpression o) {
+  public void visitMaxExpression(@Nonnull ErlangMaxExpression o) {
     visitExpression(o);
   }
 
-  public void visitModelFieldList(@NotNull ErlangModelFieldList o) {
+  public void visitModelFieldList(@Nonnull ErlangModelFieldList o) {
     visitCompositeElement(o);
   }
 
-  public void visitModule(@NotNull ErlangModule o) {
+  public void visitModule(@Nonnull ErlangModule o) {
     visitNamedElement(o);
   }
 
-  public void visitModuleRef(@NotNull ErlangModuleRef o) {
+  public void visitModuleRef(@Nonnull ErlangModuleRef o) {
     visitCompositeElement(o);
   }
 
-  public void visitMultiplicativeExpression(@NotNull ErlangMultiplicativeExpression o) {
+  public void visitMultiplicativeExpression(@Nonnull ErlangMultiplicativeExpression o) {
     visitFakeBinaryExpression(o);
   }
 
-  public void visitOptBitTypeList(@NotNull ErlangOptBitTypeList o) {
+  public void visitOptBitTypeList(@Nonnull ErlangOptBitTypeList o) {
     visitCompositeElement(o);
   }
 
-  public void visitOrelseExpression(@NotNull ErlangOrelseExpression o) {
+  public void visitOrelseExpression(@Nonnull ErlangOrelseExpression o) {
     visitFakeBinaryExpression(o);
   }
 
-  public void visitParenthesizedExpression(@NotNull ErlangParenthesizedExpression o) {
+  public void visitParenthesizedExpression(@Nonnull ErlangParenthesizedExpression o) {
     visitExpression(o);
   }
 
-  public void visitPrefixExpression(@NotNull ErlangPrefixExpression o) {
+  public void visitPrefixExpression(@Nonnull ErlangPrefixExpression o) {
     visitExpression(o);
   }
 
-  public void visitQAtom(@NotNull ErlangQAtom o) {
+  public void visitQAtom(@Nonnull ErlangQAtom o) {
     visitCompositeElement(o);
   }
 
-  public void visitQVar(@NotNull ErlangQVar o) {
+  public void visitQVar(@Nonnull ErlangQVar o) {
     visitNamedElement(o);
   }
 
-  public void visitQualifiedExpression(@NotNull ErlangQualifiedExpression o) {
+  public void visitQualifiedExpression(@Nonnull ErlangQualifiedExpression o) {
     visitExpression(o);
   }
 
-  public void visitReceiveExpression(@NotNull ErlangReceiveExpression o) {
+  public void visitReceiveExpression(@Nonnull ErlangReceiveExpression o) {
     visitExpression(o);
     // visitClauseOwner(o);
   }
 
-  public void visitRecordDefinition(@NotNull ErlangRecordDefinition o) {
+  public void visitRecordDefinition(@Nonnull ErlangRecordDefinition o) {
     visitNamedElement(o);
   }
 
-  public void visitRecordExpression(@NotNull ErlangRecordExpression o) {
+  public void visitRecordExpression(@Nonnull ErlangRecordExpression o) {
     visitExpression(o);
   }
 
-  public void visitRecordField(@NotNull ErlangRecordField o) {
+  public void visitRecordField(@Nonnull ErlangRecordField o) {
     visitCompositeElement(o);
   }
 
-  public void visitRecordFields(@NotNull ErlangRecordFields o) {
+  public void visitRecordFields(@Nonnull ErlangRecordFields o) {
     visitCompositeElement(o);
   }
 
-  public void visitRecordLikeType(@NotNull ErlangRecordLikeType o) {
+  public void visitRecordLikeType(@Nonnull ErlangRecordLikeType o) {
     visitType(o);
   }
 
-  public void visitRecordRef(@NotNull ErlangRecordRef o) {
+  public void visitRecordRef(@Nonnull ErlangRecordRef o) {
     visitCompositeElement(o);
   }
 
-  public void visitRecordTuple(@NotNull ErlangRecordTuple o) {
+  public void visitRecordTuple(@Nonnull ErlangRecordTuple o) {
     visitCompositeElement(o);
   }
 
-  public void visitRule(@NotNull ErlangRule o) {
+  public void visitRule(@Nonnull ErlangRule o) {
     visitCompositeElement(o);
   }
 
-  public void visitRuleBody(@NotNull ErlangRuleBody o) {
+  public void visitRuleBody(@Nonnull ErlangRuleBody o) {
     visitCompositeElement(o);
   }
 
-  public void visitRuleClause(@NotNull ErlangRuleClause o) {
+  public void visitRuleClause(@Nonnull ErlangRuleClause o) {
     visitCompositeElement(o);
   }
 
-  public void visitSendExpression(@NotNull ErlangSendExpression o) {
+  public void visitSendExpression(@Nonnull ErlangSendExpression o) {
     visitFakeBinaryExpression(o);
   }
 
-  public void visitSpecFun(@NotNull ErlangSpecFun o) {
+  public void visitSpecFun(@Nonnull ErlangSpecFun o) {
     visitCompositeElement(o);
   }
 
-  public void visitSpecification(@NotNull ErlangSpecification o) {
+  public void visitSpecification(@Nonnull ErlangSpecification o) {
     visitCompositeElement(o);
   }
 
-  public void visitStringLiteral(@NotNull ErlangStringLiteral o) {
+  public void visitStringLiteral(@Nonnull ErlangStringLiteral o) {
     visitExpression(o);
     // visitPsiLanguageInjectionHost(o);
   }
 
-  public void visitTopType(@NotNull ErlangTopType o) {
+  public void visitTopType(@Nonnull ErlangTopType o) {
     visitCompositeElement(o);
   }
 
-  public void visitTopType100T(@NotNull ErlangTopType100T o) {
+  public void visitTopType100T(@Nonnull ErlangTopType100T o) {
     visitType(o);
   }
 
-  public void visitTopTypeClause(@NotNull ErlangTopTypeClause o) {
+  public void visitTopTypeClause(@Nonnull ErlangTopTypeClause o) {
     visitCompositeElement(o);
   }
 
-  public void visitTryCatch(@NotNull ErlangTryCatch o) {
+  public void visitTryCatch(@Nonnull ErlangTryCatch o) {
     visitCompositeElement(o);
   }
 
-  public void visitTryClause(@NotNull ErlangTryClause o) {
+  public void visitTryClause(@Nonnull ErlangTryClause o) {
     visitCompositeElement(o);
   }
 
-  public void visitTryClauses(@NotNull ErlangTryClauses o) {
+  public void visitTryClauses(@Nonnull ErlangTryClauses o) {
     visitCompositeElement(o);
   }
 
-  public void visitTryExpression(@NotNull ErlangTryExpression o) {
+  public void visitTryExpression(@Nonnull ErlangTryExpression o) {
     visitExpression(o);
     // visitClauseOwner(o);
   }
 
-  public void visitTryExpressionsClause(@NotNull ErlangTryExpressionsClause o) {
+  public void visitTryExpressionsClause(@Nonnull ErlangTryExpressionsClause o) {
     visitCompositeElement(o);
   }
 
-  public void visitTupleExpression(@NotNull ErlangTupleExpression o) {
+  public void visitTupleExpression(@Nonnull ErlangTupleExpression o) {
     visitExpression(o);
   }
 
-  public void visitType(@NotNull ErlangType o) {
+  public void visitType(@Nonnull ErlangType o) {
     visitCompositeElement(o);
   }
 
-  public void visitTypeDefinition(@NotNull ErlangTypeDefinition o) {
+  public void visitTypeDefinition(@Nonnull ErlangTypeDefinition o) {
     visitNamedElement(o);
   }
 
-  public void visitTypeGuard(@NotNull ErlangTypeGuard o) {
+  public void visitTypeGuard(@Nonnull ErlangTypeGuard o) {
     visitCompositeElement(o);
   }
 
-  public void visitTypeRef(@NotNull ErlangTypeRef o) {
+  public void visitTypeRef(@Nonnull ErlangTypeRef o) {
     visitCompositeElement(o);
   }
 
-  public void visitTypeSig(@NotNull ErlangTypeSig o) {
+  public void visitTypeSig(@Nonnull ErlangTypeSig o) {
     visitCompositeElement(o);
   }
 
-  public void visitTypeSigGuard(@NotNull ErlangTypeSigGuard o) {
+  public void visitTypeSigGuard(@Nonnull ErlangTypeSigGuard o) {
     visitCompositeElement(o);
   }
 
-  public void visitTypedAttrVal(@NotNull ErlangTypedAttrVal o) {
+  public void visitTypedAttrVal(@Nonnull ErlangTypedAttrVal o) {
     visitCompositeElement(o);
   }
 
-  public void visitTypedExpr(@NotNull ErlangTypedExpr o) {
+  public void visitTypedExpr(@Nonnull ErlangTypedExpr o) {
     visitNamedElement(o);
   }
 
-  public void visitTypedRecordFields(@NotNull ErlangTypedRecordFields o) {
+  public void visitTypedRecordFields(@Nonnull ErlangTypedRecordFields o) {
     visitCompositeElement(o);
   }
 
-  public void visitNamedElement(@NotNull ErlangNamedElement o) {
+  public void visitNamedElement(@Nonnull ErlangNamedElement o) {
     visitCompositeElement(o);
   }
 
-  public void visitCompositeElement(@NotNull ErlangCompositeElement o) {
+  public void visitCompositeElement(@Nonnull ErlangCompositeElement o) {
     visitElement(o);
   }
 

@@ -30,7 +30,7 @@ import org.intellij.erlang.psi.ErlangCallbackSpec;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class ErlangGotoSuperHandler implements LanguageCodeInsightActionHandler 
   }
 
   @Override
-  public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+  public void invoke(@Nonnull Project project, @Nonnull Editor editor, @Nonnull PsiFile file) {
     PsiElement focusedElement = file.findElementAt(editor.getCaretModel().getOffset());
     ErlangFunction function = focusedElement == null ? null : PsiTreeUtil.getParentOfType(focusedElement, ErlangFunction.class);
 

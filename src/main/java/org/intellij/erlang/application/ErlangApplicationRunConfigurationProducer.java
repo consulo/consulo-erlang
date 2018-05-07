@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.application;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.RunConfigurationProducer;
 import com.intellij.openapi.module.Module;
@@ -29,7 +31,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangApplicationRunConfigurationProducer extends RunConfigurationProducer<ErlangApplicationConfiguration> {
   public ErlangApplicationRunConfigurationProducer() {
@@ -90,8 +91,8 @@ public class ErlangApplicationRunConfigurationProducer extends RunConfigurationP
       moduleNameAndFunction(vFile.getNameWithoutExtension(), function.getName()));
   }
 
-  @NotNull
-  private static String moduleNameAndFunction(@NotNull String moduleName, @NotNull String functionName) {
+  @Nonnull
+  private static String moduleNameAndFunction(@Nonnull String moduleName, @Nonnull String functionName) {
     return moduleName + " " + functionName;
   }
 }

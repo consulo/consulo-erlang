@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.inspection;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiFile;
@@ -24,7 +26,6 @@ import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.psi.ErlangFunTypeSigs;
 import org.intellij.erlang.psi.ErlangRecursiveVisitor;
 import org.intellij.erlang.psi.ErlangSpecification;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangSpecificationForUndefinedFunctionInspection extends ErlangInspectionBase {
   @Override
@@ -33,7 +34,7 @@ public class ErlangSpecificationForUndefinedFunctionInspection extends ErlangIns
 
     file.accept(new ErlangRecursiveVisitor() {
       @Override
-      public void visitSpecification(@NotNull ErlangSpecification o) {
+      public void visitSpecification(@Nonnull ErlangSpecification o) {
         //supported functions without modules only for now
         ErlangFunTypeSigs signature = o.getSignature();
         if (signature != null) {

@@ -3,12 +3,13 @@ package org.intellij.erlang.rebar.runner;
 import java.io.File;
 import java.io.IOException;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.console.ErlangConsoleUtil;
 import org.intellij.erlang.console.FileReferenceFilter;
 import org.intellij.erlang.eunit.ErlangEunitReporterModule;
 import org.intellij.erlang.eunit.ErlangTestLocationProvider;
 import org.intellij.erlang.eunit.ErlangUnitConsoleProperties;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.execution.DefaultExecutionResult;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
@@ -35,15 +36,15 @@ public class RebarEunitRunningState extends CommandLineState
 
 	private final RebarEunitRunConfiguration myConfiguration;
 
-	public RebarEunitRunningState(@NotNull final ExecutionEnvironment env, @NotNull RebarEunitRunConfiguration configuration)
+	public RebarEunitRunningState(@Nonnull final ExecutionEnvironment env, @Nonnull RebarEunitRunConfiguration configuration)
 	{
 		super(env);
 		myConfiguration = configuration;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) throws ExecutionException
+	public ExecutionResult execute(@Nonnull Executor executor, @Nonnull ProgramRunner runner) throws ExecutionException
 	{
 		ProcessHandler processHandler = startProcess();
 		setConsoleBuilder(getConsoleBuilder());
@@ -68,7 +69,7 @@ public class RebarEunitRunningState extends CommandLineState
 		return executionResult;
 	}
 
-	@NotNull
+	@Nonnull
 	private ConsoleView createConsoleView(Executor executor)
 	{
 		ErlangUnitConsoleProperties consoleProperties = new ErlangUnitConsoleProperties(myConfiguration, executor);
@@ -79,7 +80,7 @@ public class RebarEunitRunningState extends CommandLineState
 				new ErlangTestLocationProvider());
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	protected ProcessHandler startProcess() throws ExecutionException
 	{

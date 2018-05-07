@@ -17,8 +17,8 @@
 package org.intellij.erlang.psi;
 
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.*;
 
@@ -26,66 +26,66 @@ public interface ErlangFile extends PsiFile {
   @Nullable
   ErlangModule getModule();
 
-  @NotNull
+  @Nonnull
   List<ErlangRule> getRules();
 
-  @NotNull
+  @Nonnull
   List<ErlangAttribute> getAttributes();
 
   @Nullable
-  ErlangCallbackSpec getCallbackByName(@NotNull String fullName);
+  ErlangCallbackSpec getCallbackByName(@Nonnull String fullName);
 
-  @NotNull
+  @Nonnull
   List<ErlangFunction> getFunctions();
 
   @Nullable
-  ErlangFunction getFunction(@NotNull String name, final int argsCount);
+  ErlangFunction getFunction(@Nonnull String name, final int argsCount);
 
-  @NotNull
-  Collection<ErlangFunction> getFunctionsByName(@NotNull String name);
+  @Nonnull
+  Collection<ErlangFunction> getFunctionsByName(@Nonnull String name);
 
-  @NotNull
+  @Nonnull
   List<ErlangRecordDefinition> getRecords();
 
-  @NotNull
+  @Nonnull
   List<ErlangMacrosDefinition> getMacroses();
 
   @Nullable
-  ErlangMacrosDefinition getMacros(@NotNull String name);
+  ErlangMacrosDefinition getMacros(@Nonnull String name);
 
-  @NotNull
+  @Nonnull
   List<ErlangTypeDefinition> getTypes();
 
   @Nullable
-  ErlangTypeDefinition getType(@NotNull String name);
+  ErlangTypeDefinition getType(@Nonnull String name);
 
   @Nullable
   ErlangRecordDefinition getRecord(String name);
 
-  @NotNull
+  @Nonnull
   List<ErlangInclude> getIncludes();
 
-  @NotNull
+  @Nonnull
   List<ErlangIncludeLib> getIncludeLibs();
 
-  @NotNull
+  @Nonnull
   List<ErlangBehaviour> getBehaviours();
 
-  @NotNull
+  @Nonnull
   List<ErlangSpecification> getSpecifications();
 
-  @NotNull
+  @Nonnull
   Collection<ErlangFunction> getExportedFunctions();
 
-  boolean isExported(@NotNull String signature);
+  boolean isExported(@Nonnull String signature);
 
   boolean isExportedAll();
 
-  @NotNull
+  @Nonnull
   ArrayList<ErlangImportFunction> getImportedFunctions();
 
-  @NotNull
+  @Nonnull
   Map<String, ErlangCallbackSpec> getCallbackMap();
 
-  void addDeclaredParseTransforms(@NotNull Set<String> parseTransforms);
+  void addDeclaredParseTransforms(@Nonnull Set<String> parseTransforms);
 }

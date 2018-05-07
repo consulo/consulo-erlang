@@ -32,8 +32,8 @@ import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.ErlangModuleIndex;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -43,8 +43,8 @@ import java.util.regex.Pattern;
 public class ErlangTestLocationProvider implements TestLocationProvider {
   private static final Pattern LOCATION_PATTERN = Pattern.compile("^(\\w+)(?::(\\w+)(?::(\\d+))?)?$");
 
-  @NotNull
-  public List<Location> getLocation(@NotNull String protocolId, @NotNull String locationData, Project project) {
+  @Nonnull
+  public List<Location> getLocation(@Nonnull String protocolId, @Nonnull String locationData, Project project) {
     if (!ErlangUnitRunConfigurationType.PROTOCOL.equals(protocolId)) return ContainerUtil.emptyList();
 
     Matcher matcher = LOCATION_PATTERN.matcher(locationData);

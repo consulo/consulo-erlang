@@ -19,7 +19,7 @@ import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.ErlangSpecification;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.List;

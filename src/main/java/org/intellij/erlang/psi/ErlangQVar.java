@@ -1,8 +1,8 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveState;
@@ -22,16 +22,16 @@ public interface ErlangQVar extends ErlangNamedElement {
 
   boolean processDeclarations(PsiScopeProcessor processor, ResolveState state, PsiElement lastParent, PsiElement place);
 
-  @NotNull
+  @Nonnull
   String getName();
 
-  @NotNull
+  @Nonnull
   PsiElement setName(String newName);
 
-  @NotNull
+  @Nonnull
   PsiElement getNameIdentifier();
 
-  @NotNull
+  @Nonnull
   SearchScope getUseScope();
 
 }

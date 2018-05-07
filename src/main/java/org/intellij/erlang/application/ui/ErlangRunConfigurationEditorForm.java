@@ -16,13 +16,13 @@
 
 package org.intellij.erlang.application.ui;
 
+import javax.annotation.Nonnull;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.intellij.erlang.application.ErlangApplicationConfiguration;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.roots.ui.configuration.ModulesCombobox;
@@ -55,7 +55,7 @@ public class ErlangRunConfigurationEditorForm extends SettingsEditor<ErlangAppli
     configuration.setStopErlang(myStopErlangInterpreterCheckBox.isSelected());
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected JComponent createEditor() {
     return component;

@@ -26,8 +26,8 @@ import com.intellij.testIntegration.TestFinder;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -37,13 +37,13 @@ public class ErlangTestFinder implements TestFinder {
   public static String[] SUFFIXES = new String[]{"_test", "_tests"};
 
   @Override
-  public PsiFile findSourceElement(@NotNull PsiElement from) {
+  public PsiFile findSourceElement(@Nonnull PsiElement from) {
     return from.getContainingFile();
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public Collection<PsiElement> findTestsForClass(@NotNull PsiElement element) {
+  public Collection<PsiElement> findTestsForClass(@Nonnull PsiElement element) {
     VirtualFile virtualFile = getVirtualFile(element);
     if (virtualFile == null) return ContainerUtil.emptyList();
     Collection<PsiElement> result = ContainerUtil.newTroveSet();
@@ -55,9 +55,9 @@ public class ErlangTestFinder implements TestFinder {
     return result;
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public Collection<PsiElement> findClassesForTest(@NotNull PsiElement element) {
+  public Collection<PsiElement> findClassesForTest(@Nonnull PsiElement element) {
     VirtualFile virtualFile = getVirtualFile(element);
     if (virtualFile == null) return ContainerUtil.emptyList();
     Collection<PsiElement> result = ContainerUtil.newTroveSet();
@@ -85,7 +85,7 @@ public class ErlangTestFinder implements TestFinder {
   }
 
   @Override
-  public boolean isTest(@NotNull PsiElement element) {
+  public boolean isTest(@Nonnull PsiElement element) {
     PsiFile containingFile = findSourceElement(element);
     if (!(containingFile instanceof ErlangFile)) return false;
     return ErlangPsiImplUtil.isEunitTestFile((ErlangFile) containingFile);

@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +57,9 @@ public final class ErlangDocUtil {
   private ErlangDocUtil() {
   }
 
-  public static String getCommentsText(@NotNull List<PsiComment> comments,
-                                       @NotNull final String commentStartsWith,
-                                       @NotNull final Set<String> contextTags) {
+  public static String getCommentsText(@Nonnull List<PsiComment> comments,
+                                       @Nonnull final String commentStartsWith,
+                                       @Nonnull final Set<String> contextTags) {
     List<String> lines = ContainerUtil.map(comments, new Function<PsiComment, String>() {
       @Override
       public String fun(PsiComment psiComment) {
@@ -78,8 +78,8 @@ public final class ErlangDocUtil {
     }), "<br/>");
   }
 
-  @NotNull
-  static List<PsiComment> collectPrevComments(@NotNull PsiComment comment) {
+  @Nonnull
+  static List<PsiComment> collectPrevComments(@Nonnull PsiComment comment) {
     ArrayList<PsiComment> result = new ArrayList<PsiComment>();
     PsiElement current = comment;
     while (current instanceof PsiComment) {

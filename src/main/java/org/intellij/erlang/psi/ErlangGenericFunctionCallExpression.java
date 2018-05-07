@@ -2,21 +2,23 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangGenericFunctionCallExpression extends ErlangExpression {
 
-  @NotNull
+  @Nonnull
   ErlangArgumentList getArgumentList();
 
   @Nullable
   ErlangMacros getMacros();
 
-  @NotNull
+  @Nonnull
   List<ErlangQAtom> getQAtomList();
 
-  @NotNull
+  @Nonnull
   List<ErlangQVar> getQVarList();
 
   @Nullable

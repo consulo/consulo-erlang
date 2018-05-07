@@ -28,8 +28,8 @@ import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.ProjectScope;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.io.File;
 import java.util.TreeMap;
@@ -52,7 +52,7 @@ public final class FileReferenceFilter implements Filter {
   private final int myLineMatchGroup;
   private final int myColumnMatchGroup;
 
-  public FileReferenceFilter(@NotNull Project project, @NonNls @NotNull String expression) {
+  public FileReferenceFilter(@Nonnull Project project, @NonNls @Nonnull String expression) {
     myProject = project;
     if (StringUtil.isEmpty(expression)) {
       throw new InvalidExpressionException("expression is empty");
@@ -101,7 +101,7 @@ public final class FileReferenceFilter implements Filter {
     myPattern = Pattern.compile(expression, Pattern.MULTILINE);
   }
 
-  public Result applyFilter(@NotNull String line, int entireLength) {
+  public Result applyFilter(@Nonnull String line, int entireLength) {
     final Matcher matcher = myPattern.matcher(line);
     if (!matcher.find()) {
       return null;
@@ -117,7 +117,7 @@ public final class FileReferenceFilter implements Filter {
     return new Result(highlightStartOffset, highlightEndOffset, hyperLink);
   }
 
-  private static int matchGroupToNumber(@NotNull Matcher matcher, int matchGroup) {
+  private static int matchGroupToNumber(@Nonnull Matcher matcher, int matchGroup) {
     int number = 0;
     if (matchGroup != -1) {
       try {
@@ -129,7 +129,7 @@ public final class FileReferenceFilter implements Filter {
   }
 
   @Nullable
-  private VirtualFile resolveAbsolutePath(@NotNull String path) {
+  private VirtualFile resolveAbsolutePath(@Nonnull String path) {
     final VirtualFile asIsFile = pathToVirtualFile(path);
     if (asIsFile != null) {
       return asIsFile;
@@ -158,7 +158,7 @@ public final class FileReferenceFilter implements Filter {
   }
 
   @Nullable
-  private static VirtualFile pathToVirtualFile(@NotNull String path) {
+  private static VirtualFile pathToVirtualFile(@Nonnull String path) {
     final String normalizedPath = path.replace(File.separatorChar, '/');
     return LocalFileSystem.getInstance().findFileByPath(normalizedPath);
   }

@@ -2,15 +2,17 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangQualifiedExpression extends ErlangExpression {
 
-  @NotNull
+  @Nonnull
   List<ErlangQAtom> getQAtomList();
 
-  @NotNull
+  @Nonnull
   PsiElement getDot();
 
 }

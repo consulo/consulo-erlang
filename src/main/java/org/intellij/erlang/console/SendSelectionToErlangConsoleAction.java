@@ -16,9 +16,10 @@
 
 package org.intellij.erlang.console;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.ErlangIcons;
 import org.intellij.erlang.psi.ErlangFile;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
@@ -30,7 +31,7 @@ import com.intellij.psi.PsiFile;
 
 public class SendSelectionToErlangConsoleAction extends AnAction {
   @Override
-  public void update(@NotNull AnActionEvent actionEvent) {
+  public void update(@Nonnull AnActionEvent actionEvent) {
     final Presentation presentation = actionEvent.getPresentation();
     presentation.setIcon(ErlangIcons.ERLANG_CONSOLE);
     presentation.setVisible(true);
@@ -55,7 +56,7 @@ public class SendSelectionToErlangConsoleAction extends AnAction {
   }
 
   @Override
-  public void actionPerformed(@NotNull AnActionEvent actionEvent) {
+  public void actionPerformed(@Nonnull AnActionEvent actionEvent) {
     final DataContext dataContext = actionEvent.getDataContext();
     final Editor editor = dataContext.getData(CommonDataKeys.EDITOR);
     if (editor == null) {

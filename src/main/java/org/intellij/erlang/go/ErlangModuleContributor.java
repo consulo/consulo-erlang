@@ -25,13 +25,13 @@ import org.intellij.erlang.ErlangModuleIndex;
 import org.intellij.erlang.ErlangStructureViewFactory;
 import org.intellij.erlang.psi.ErlangModule;
 import org.intellij.erlang.psi.ErlangNamedElement;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ErlangModuleContributor implements ChooseByNameContributor {
-  @NotNull
+  @Nonnull
   @Override
   public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
     GlobalSearchScope scope = includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
@@ -43,7 +43,7 @@ public class ErlangModuleContributor implements ChooseByNameContributor {
     return items.toArray(new NavigationItem[items.size()]);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public String[] getNames(Project project, boolean includeNonProjectItems) {
     return ArrayUtil.toStringArray(ErlangModuleIndex.getNames(project));

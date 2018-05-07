@@ -1,9 +1,9 @@
 package consulo.erlang.rebar.module.extension;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.JComponent;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ui.JBUI;
 import consulo.annotations.RequiredDispatchThread;
@@ -18,12 +18,12 @@ import consulo.roots.ModuleRootLayer;
  */
 public class RebarMutableModuleExtension extends RebarModuleExtension implements MutableModuleExtensionWithSdk<RebarModuleExtension>
 {
-	public RebarMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
+	public RebarMutableModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer moduleRootLayer)
 	{
 		super(id, moduleRootLayer);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public MutableModuleInheritableNamedPointer<Sdk> getInheritableSdk()
 	{
@@ -46,7 +46,7 @@ public class RebarMutableModuleExtension extends RebarModuleExtension implements
 	}
 
 	@Override
-	public boolean isModified(@NotNull RebarModuleExtension rebarModuleExtension)
+	public boolean isModified(@Nonnull RebarModuleExtension rebarModuleExtension)
 	{
 		return isModifiedImpl(rebarModuleExtension);
 	}

@@ -16,6 +16,9 @@
 
 package org.intellij.erlang.refactor;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.lang.refactoring.RefactoringSupportProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.LocalSearchScope;
@@ -23,12 +26,10 @@ import com.intellij.refactoring.RefactoringActionHandler;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.refactor.introduce.ErlangExtractFunctionHandler;
 import org.intellij.erlang.refactor.introduce.ErlangIntroduceVariableHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ErlangRefactoringSupportProvider extends RefactoringSupportProvider {
   @Override
-  public boolean isSafeDeleteAvailable(@NotNull PsiElement element) {
+  public boolean isSafeDeleteAvailable(@Nonnull PsiElement element) {
     return
       element instanceof ErlangFunction ||
       element instanceof ErlangRecordDefinition ||
@@ -43,12 +44,12 @@ public class ErlangRefactoringSupportProvider extends RefactoringSupportProvider
   }
 
   @Override
-  public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
+  public boolean isInplaceRenameAvailable(@Nonnull PsiElement element, PsiElement context) {
     return element instanceof ErlangNamedElement && element.getUseScope() instanceof LocalSearchScope;
   }
 
   @Override
-  public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
+  public boolean isMemberInplaceRenameAvailable(@Nonnull PsiElement element, PsiElement context) {
     return element instanceof ErlangNamedElement;
   }
 

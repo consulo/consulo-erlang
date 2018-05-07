@@ -19,10 +19,11 @@ package org.intellij.erlang.go;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.ErlangStructureViewFactory;
 import org.intellij.erlang.psi.ErlangNamedElement;
 import org.intellij.erlang.stubs.index.ErlangAllNameIndex;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.navigation.ChooseByNameContributor;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
@@ -32,13 +33,13 @@ import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 
 public class ErlangSymbolContributor implements ChooseByNameContributor {
-  @NotNull
+  @Nonnull
   @Override
   public String[] getNames(Project project, boolean includeNonProjectItems) {
     return ArrayUtil.toStringArray(StubIndex.getInstance().getAllKeys(ErlangAllNameIndex.KEY, project));
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public NavigationItem[] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
     GlobalSearchScope scope = includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);

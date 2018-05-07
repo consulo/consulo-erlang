@@ -18,7 +18,7 @@ package org.intellij.erlang.documentation;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,22 +30,23 @@ final class ErlangSdkFunctionDocProvider extends ErlangSdkDocProviderBase {
     "<a name=\"(.*?)\"><span class=\"bold_code\">.*?</span></a><br>");
   private static final Pattern PATTERN_END_OF_DOC = Pattern.compile("^<div class=\"footer\">$");
 
-  @NotNull private final String myFuncSignature;
+  @Nonnull
+  private final String myFuncSignature;
 
-  public ErlangSdkFunctionDocProvider(@NotNull Project project, @NotNull String functionName, int functionArity,
-                                      @NotNull VirtualFile virtualFile) {
+  public ErlangSdkFunctionDocProvider(@Nonnull Project project, @Nonnull String functionName, int functionArity,
+                                      @Nonnull VirtualFile virtualFile) {
     super(project, virtualFile);
     myFuncSignature = functionName + "-" + functionArity;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected String getInDocRef() {
     return "#" + myFuncSignature;
   }
 
   @Override
-  public boolean isDocBegin(@NotNull String line) {
+  public boolean isDocBegin(@Nonnull String line) {
     Matcher matcher = PATTERN_FUNC_BEGIN.matcher(line);
     while (matcher.find()) {
       if (matcher.group(1).equals(myFuncSignature)) {
@@ -62,7 +63,7 @@ final class ErlangSdkFunctionDocProvider extends ErlangSdkDocProviderBase {
   }
 
   @Override
-  public boolean isDocEnd(@NotNull String line) {
+  public boolean isDocEnd(@Nonnull String line) {
     return PATTERN_FUNC_BEGIN.matcher(line).find() || PATTERN_BIF_BEGIN.matcher(line).find()
       || PATTERN_END_OF_DOC.matcher(line).matches();
   }

@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import org.intellij.erlang.psi.ErlangCompositeElement;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class ErlangCompositeElementImpl extends ASTWrapperPsiElement implements ErlangCompositeElement {
   public ErlangCompositeElementImpl(ASTNode node) {
@@ -35,7 +35,7 @@ public class ErlangCompositeElementImpl extends ASTWrapperPsiElement implements 
   }
 
   @Override
-  public boolean processDeclarations(@NotNull PsiScopeProcessor processor, @NotNull ResolveState state, PsiElement lastParent, @NotNull PsiElement place) {
+  public boolean processDeclarations(@Nonnull PsiScopeProcessor processor, @Nonnull ResolveState state, PsiElement lastParent, @Nonnull PsiElement place) {
     if (!processor.execute(this, state)) {
       return false;
     }

@@ -2,7 +2,9 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangReceiveExpression extends ErlangExpression, ErlangClauseOwner {
@@ -10,13 +12,13 @@ public interface ErlangReceiveExpression extends ErlangExpression, ErlangClauseO
   @Nullable
   ErlangAfterClause getAfterClause();
 
-  @NotNull
+  @Nonnull
   List<ErlangCrClause> getCrClauseList();
 
   @Nullable
   PsiElement getEnd();
 
-  @NotNull
+  @Nonnull
   PsiElement getReceive();
 
 }

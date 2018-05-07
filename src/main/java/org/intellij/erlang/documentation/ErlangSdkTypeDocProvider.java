@@ -18,7 +18,7 @@ package org.intellij.erlang.documentation;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,27 +28,28 @@ final class ErlangSdkTypeDocProvider extends ErlangSdkDocProviderBase {
     "^      <span class=\"bold_code\"><a name=\"type-(.*?)\">.*?</span><br></p>$");
   private static final Pattern PATTERN_FUNC_BEGIN = Pattern.compile("^  <h3>EXPORTS</h3>$");
 
-  @NotNull private final String myTypeName;
+  @Nonnull
+  private final String myTypeName;
 
-  public ErlangSdkTypeDocProvider(@NotNull Project project, @NotNull VirtualFile virtualFile, @NotNull String typeName) {
+  public ErlangSdkTypeDocProvider(@Nonnull Project project, @Nonnull VirtualFile virtualFile, @Nonnull String typeName) {
     super(project, virtualFile);
     myTypeName = typeName;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected String getInDocRef() {
     return "#type-" + myTypeName;
   }
 
   @Override
-  protected boolean isDocBegin(@NotNull String line) {
+  protected boolean isDocBegin(@Nonnull String line) {
     final Matcher matcher = PATTERN_TYPE_BEGIN.matcher(line);
     return (matcher.matches() && matcher.group(1).equals(myTypeName));
   }
 
   @Override
-  protected boolean isDocEnd(@NotNull String line) {
+  protected boolean isDocEnd(@Nonnull String line) {
     return PATTERN_TYPE_BEGIN.matcher(line).matches() || PATTERN_FUNC_BEGIN.matcher(line).matches();
   }
 }

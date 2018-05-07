@@ -21,15 +21,16 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.intellij.erlang.ErlangParserDefinition;
 import org.intellij.erlang.psi.ErlangModule;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 
 final class ErlangModuleDocProvider implements ElementDocProvider {
-  @NotNull private final ErlangModule myErlangModule;
+  @Nonnull
+  private final ErlangModule myErlangModule;
 
-  public ErlangModuleDocProvider(@NotNull ErlangModule erlangModule) {
+  public ErlangModuleDocProvider(@Nonnull ErlangModule erlangModule) {
     myErlangModule = erlangModule;
   }
 

@@ -1,8 +1,9 @@
 package org.intellij.erlang.debugger.xdebug;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.xdebugger.breakpoints.XBreakpointHandler;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangLineBreakpointHandler extends XBreakpointHandler<XLineBreakpoint<ErlangLineBreakpointProperties>> {
   private final ErlangXDebugProcess myDebugProcess;
@@ -13,12 +14,12 @@ public class ErlangLineBreakpointHandler extends XBreakpointHandler<XLineBreakpo
   }
 
   @Override
-  public void registerBreakpoint(@NotNull XLineBreakpoint<ErlangLineBreakpointProperties> breakpoint) {
+  public void registerBreakpoint(@Nonnull XLineBreakpoint<ErlangLineBreakpointProperties> breakpoint) {
     myDebugProcess.addBreakpoint(breakpoint);
   }
 
   @Override
-  public void unregisterBreakpoint(@NotNull XLineBreakpoint<ErlangLineBreakpointProperties> breakpoint, boolean temporary) {
+  public void unregisterBreakpoint(@Nonnull XLineBreakpoint<ErlangLineBreakpointProperties> breakpoint, boolean temporary) {
     myDebugProcess.removeBreakpoint(breakpoint, temporary);
   }
 }

@@ -1,22 +1,20 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
-import com.intellij.psi.PsiElement;
+import javax.annotation.*;
 
 public interface ErlangRuleClause extends ErlangCompositeElement {
 
-  @NotNull
+  @Nonnull
   ErlangArgumentList getArgumentList();
 
   @Nullable
   ErlangClauseGuard getClauseGuard();
 
-  @NotNull
+  @Nonnull
   ErlangQAtom getQAtom();
 
-  @NotNull
+  @Nonnull
   ErlangRuleBody getRuleBody();
 
 }

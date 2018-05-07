@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.inspection;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
@@ -26,7 +28,6 @@ import org.intellij.erlang.bif.ErlangBifTable;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangFunctionReferenceImpl;
 import org.intellij.erlang.quickfixes.ErlangCreateFunctionQuickFix;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangUnresolvedFunctionInspection extends ErlangInspectionBase {
   @Override
@@ -34,7 +35,7 @@ public class ErlangUnresolvedFunctionInspection extends ErlangInspectionBase {
     if (!(file instanceof ErlangFile)) return;
     file.accept(new ErlangRecursiveVisitor() {
       @Override
-      public void visitFunctionCallExpression(@NotNull ErlangFunctionCallExpression o) {
+      public void visitFunctionCallExpression(@Nonnull ErlangFunctionCallExpression o) {
         super.visitFunctionCallExpression(o);        
         PsiReference reference = o.getReference();
         if (reference instanceof ErlangFunctionReferenceImpl && reference.resolve() == null) {
@@ -68,7 +69,7 @@ public class ErlangUnresolvedFunctionInspection extends ErlangInspectionBase {
       }
 
       @Override
-      public void visitSpecFun(@NotNull ErlangSpecFun o) {
+      public void visitSpecFun(@Nonnull ErlangSpecFun o) {
         super.visitSpecFun(o);
         PsiReference reference = o.getReference();
         if (reference instanceof ErlangFunctionReferenceImpl && reference.resolve() == null) {
@@ -80,7 +81,7 @@ public class ErlangUnresolvedFunctionInspection extends ErlangInspectionBase {
       }
 
       @Override
-      public void visitFunctionWithArity(@NotNull ErlangFunctionWithArity o) {
+      public void visitFunctionWithArity(@Nonnull ErlangFunctionWithArity o) {
         super.visitFunctionWithArity(o);
         PsiReference reference = o.getReference();
         if (reference instanceof ErlangFunctionReferenceImpl && reference.resolve() == null) {
@@ -93,7 +94,7 @@ public class ErlangUnresolvedFunctionInspection extends ErlangInspectionBase {
 
       //prevents UnresolvedFunction messages in callback specifications
       @Override
-      public void visitCallbackSpec(@NotNull ErlangCallbackSpec o) {
+      public void visitCallbackSpec(@Nonnull ErlangCallbackSpec o) {
       }
     });
   }

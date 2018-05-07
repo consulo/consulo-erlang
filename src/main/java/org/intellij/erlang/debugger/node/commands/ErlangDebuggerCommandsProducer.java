@@ -5,8 +5,8 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 
@@ -14,53 +14,53 @@ public final class ErlangDebuggerCommandsProducer {
   private ErlangDebuggerCommandsProducer() {
   }
 
-  @NotNull
-  public static ErlangDebuggerCommand getSetBreakpointCommand(@NotNull String module, int line) {
+  @Nonnull
+  public static ErlangDebuggerCommand getSetBreakpointCommand(@Nonnull String module, int line) {
     return new SetBreakpointCommand(module, line);
   }
 
-  @NotNull
-  public static ErlangDebuggerCommand getRemoveBreakpointCommand(@NotNull String module, int line) {
+  @Nonnull
+  public static ErlangDebuggerCommand getRemoveBreakpointCommand(@Nonnull String module, int line) {
     return new RemoveBreakpointCommand(module, line);
   }
 
-  @NotNull
-  public static ErlangDebuggerCommand getRunDebuggerCommand(@NotNull String module, @NotNull String function, @NotNull List<String> args) {
+  @Nonnull
+  public static ErlangDebuggerCommand getRunDebuggerCommand(@Nonnull String module, @Nonnull String function, @Nonnull List<String> args) {
     return new RunDebuggerCommand(module, function, args);
   }
 
-  @NotNull
-  public static ErlangDebuggerCommand getInterpretModulesCommand(@NotNull List<String> moduleNames) {
+  @Nonnull
+  public static ErlangDebuggerCommand getInterpretModulesCommand(@Nonnull List<String> moduleNames) {
     return new InterpretModulesCommand(moduleNames);
   }
 
-  @NotNull
-  public static ErlangDebuggerCommand getDebugRemoteNodeCommand(@NotNull String nodeName, @Nullable String cookie) {
+  @Nonnull
+  public static ErlangDebuggerCommand getDebugRemoteNodeCommand(@Nonnull String nodeName, @Nullable String cookie) {
     return new DebugRemoteNodeCommand(nodeName, cookie);
   }
 
-  @NotNull
-  public static ErlangDebuggerCommand getStepIntoCommand(@NotNull OtpErlangPid pid) {
+  @Nonnull
+  public static ErlangDebuggerCommand getStepIntoCommand(@Nonnull OtpErlangPid pid) {
     return new StepIntoCommand(pid);
   }
 
-  @NotNull
-  public static ErlangDebuggerCommand getStepOverCommand(@NotNull OtpErlangPid pid) {
+  @Nonnull
+  public static ErlangDebuggerCommand getStepOverCommand(@Nonnull OtpErlangPid pid) {
     return new StepOverCommand(pid);
   }
 
-  @NotNull
-  public static ErlangDebuggerCommand getStepOutCommand(@NotNull OtpErlangPid pid) {
+  @Nonnull
+  public static ErlangDebuggerCommand getStepOutCommand(@Nonnull OtpErlangPid pid) {
     return new StepOutCommand(pid);
   }
 
-  @NotNull
-  public static ErlangDebuggerCommand getContinueCommand(@NotNull OtpErlangPid pid) {
+  @Nonnull
+  public static ErlangDebuggerCommand getContinueCommand(@Nonnull OtpErlangPid pid) {
     return new ContinueCommand(pid);
   }
 
   private static class StepOverCommand extends AbstractPidCommand {
-    public StepOverCommand(@NotNull OtpErlangPid pid) {
+    public StepOverCommand(@Nonnull OtpErlangPid pid) {
       super("step_over", pid);
     }
   }
@@ -70,13 +70,13 @@ public final class ErlangDebuggerCommandsProducer {
     private final String myFunction;
     private final List<String> myArgs;
 
-    RunDebuggerCommand(@NotNull String module, @NotNull String function, @NotNull List<String> args) {
+    RunDebuggerCommand(@Nonnull String module, @Nonnull String function, @Nonnull List<String> args) {
       myModule = module;
       myFunction = function;
       myArgs = args;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public OtpErlangTuple toMessage() {
       return new OtpErlangTuple(new OtpErlangObject[] {
@@ -92,12 +92,12 @@ public final class ErlangDebuggerCommandsProducer {
     private final String myModule;
     private final int myLine;
 
-    SetBreakpointCommand(@NotNull String module, int line) {
+    SetBreakpointCommand(@Nonnull String module, int line) {
       myModule = module;
       myLine = line + 1;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public OtpErlangTuple toMessage() {
       return new OtpErlangTuple(new OtpErlangObject[]{
@@ -112,12 +112,12 @@ public final class ErlangDebuggerCommandsProducer {
     private final String myName;
     private final OtpErlangPid myPid;
 
-    protected AbstractPidCommand(@NotNull String cmdName, @NotNull OtpErlangPid pid) {
+    protected AbstractPidCommand(@Nonnull String cmdName, @Nonnull OtpErlangPid pid) {
       myName = cmdName;
       myPid = pid;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public OtpErlangTuple toMessage() {
       return new OtpErlangTuple(new OtpErlangObject[]{new OtpErlangAtom(myName), myPid});
@@ -125,19 +125,19 @@ public final class ErlangDebuggerCommandsProducer {
   }
 
   private static class StepOutCommand extends AbstractPidCommand {
-    public StepOutCommand(@NotNull OtpErlangPid pid) {
+    public StepOutCommand(@Nonnull OtpErlangPid pid) {
       super("step_out", pid);
     }
   }
 
   private static class StepIntoCommand extends AbstractPidCommand {
-    public StepIntoCommand(@NotNull OtpErlangPid pid) {
+    public StepIntoCommand(@Nonnull OtpErlangPid pid) {
       super("step_into", pid);
     }
   }
 
   private static class ContinueCommand extends AbstractPidCommand {
-    protected ContinueCommand(@NotNull OtpErlangPid pid) {
+    protected ContinueCommand(@Nonnull OtpErlangPid pid) {
       super("continue", pid);
     }
   }
@@ -145,15 +145,15 @@ public final class ErlangDebuggerCommandsProducer {
   private static class InterpretModulesCommand implements ErlangDebuggerCommand {
     private final List<String> myModuleNames;
 
-    public InterpretModulesCommand(@NotNull List<String> moduleNames) {
+    public InterpretModulesCommand(@Nonnull List<String> moduleNames) {
       myModuleNames = moduleNames;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public OtpErlangTuple toMessage() {
       List<OtpErlangObject> moduleNameAtoms = ContainerUtil.map(myModuleNames, new Function<String, OtpErlangObject>() {
-        @NotNull
+        @Nonnull
         @Override
         public OtpErlangObject fun(String moduleName) {
           return new OtpErlangAtom(moduleName);
@@ -170,12 +170,12 @@ public final class ErlangDebuggerCommandsProducer {
     private final String myNodeName;
     private final String myCookie;
 
-    public DebugRemoteNodeCommand(@NotNull String nodeName, @Nullable String cookie) {
+    public DebugRemoteNodeCommand(@Nonnull String nodeName, @Nullable String cookie) {
       myNodeName = nodeName;
       myCookie = !StringUtil.isEmptyOrSpaces(cookie) ? cookie : "nocookie";
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public OtpErlangTuple toMessage() {
       return new OtpErlangTuple(new OtpErlangObject[] {
@@ -190,12 +190,12 @@ public final class ErlangDebuggerCommandsProducer {
     private final String myModule;
     private final int myLine;
 
-    public RemoveBreakpointCommand(@NotNull String module, int line) {
+    public RemoveBreakpointCommand(@Nonnull String module, int line) {
       myModule = module;
       myLine = line + 1;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public OtpErlangTuple toMessage() {
       return new OtpErlangTuple(new OtpErlangObject[] {
@@ -207,7 +207,7 @@ public final class ErlangDebuggerCommandsProducer {
   }
 
   public interface ErlangDebuggerCommand {
-    @NotNull
+    @Nonnull
     OtpErlangTuple toMessage();
   }
 }

@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -24,14 +26,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public class ErlangTypeReferenceImpl<T extends ErlangQAtom> extends ErlangAtomBasedReferenceImpl<T> {
   @Nullable
   private final ErlangModuleRef myModuleRef;
 
-  public ErlangTypeReferenceImpl(@NotNull T element, @Nullable ErlangModuleRef moduleRef, TextRange range, String name) {
+  public ErlangTypeReferenceImpl(@Nonnull T element, @Nullable ErlangModuleRef moduleRef, TextRange range, String name) {
     super(element, range, name);
     myModuleRef = moduleRef;
   }
@@ -47,7 +49,7 @@ public class ErlangTypeReferenceImpl<T extends ErlangQAtom> extends ErlangAtomBa
     return null;
   }
 
-  @NotNull
+  @Nonnull
   private PsiFile getPsiFile() {
     PsiReference reference = myModuleRef != null ? myModuleRef.getReference() : null;
     PsiElement resolve = reference != null ? reference.resolve() : null;
@@ -55,7 +57,7 @@ public class ErlangTypeReferenceImpl<T extends ErlangQAtom> extends ErlangAtomBa
     return moduleRefContainingFile != null ? moduleRefContainingFile : myElement.getContainingFile();
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public Object[] getVariants() {
     ErlangExportTypeAttribute exportTypeAttribute = PsiTreeUtil.getParentOfType(myElement, ErlangExportTypeAttribute.class);

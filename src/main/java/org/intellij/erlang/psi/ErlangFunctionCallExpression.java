@@ -1,28 +1,28 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 
 public interface ErlangFunctionCallExpression extends ErlangExpression {
 
-  @NotNull
+  @Nonnull
   ErlangArgumentList getArgumentList();
 
-  @NotNull
+  @Nonnull
   ErlangQAtom getQAtom();
 
   @Nullable
   PsiReference getReference();
 
-  @NotNull
+  @Nonnull
   PsiElement getNameIdentifier();
 
   int getTextOffset();
 
-  @NotNull
+  @Nonnull
   String getName();
 
 }

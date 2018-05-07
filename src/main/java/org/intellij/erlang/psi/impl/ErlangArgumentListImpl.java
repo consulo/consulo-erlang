@@ -2,12 +2,15 @@
 package org.intellij.erlang.psi.impl;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.intellij.erlang.ErlangTypes.*;
+
+import javax.annotation.*;
+
 import org.intellij.erlang.psi.*;
 
 public class ErlangArgumentListImpl extends ErlangCompositeElementImpl implements ErlangArgumentList {
@@ -16,25 +19,25 @@ public class ErlangArgumentListImpl extends ErlangCompositeElementImpl implement
     super(node);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ErlangVisitor) ((ErlangVisitor)visitor).visitArgumentList(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<ErlangClauseGuard> getClauseGuardList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangClauseGuard.class);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<ErlangExpression> getExpressionList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangExpression.class);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public PsiElement getParLeft() {
     return findNotNullChildByType(ERL_PAR_LEFT);
   }

@@ -31,7 +31,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.intellij.erlang.eunit.ErlangUnitRunConfiguration;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.roots.ui.configuration.ModulesCombobox;
@@ -85,7 +85,7 @@ public class ErlangUnitRunConfigurationEditorForm extends SettingsEditor<ErlangU
     configData.setKind((ErlangUnitRunConfiguration.ErlangUnitRunConfigurationKind) myTestKindComboBox.getSelectedItem());
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected JComponent createEditor() {
     return component;

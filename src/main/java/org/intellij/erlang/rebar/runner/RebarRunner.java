@@ -16,7 +16,7 @@
 
 package org.intellij.erlang.rebar.runner;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.configurations.RunProfile;
@@ -32,7 +32,7 @@ public final class RebarRunner extends DefaultProgramRunner
 {
 	public static final String REBAR_RUNNER_ID = "RebarRunner";
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getRunnerId()
 	{
@@ -40,7 +40,7 @@ public final class RebarRunner extends DefaultProgramRunner
 	}
 
 	@Override
-	public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile)
+	public boolean canRun(@Nonnull String executorId, @Nonnull RunProfile profile)
 	{
 		return DefaultRunExecutor.EXECUTOR_ID.equals(executorId) && profile instanceof RebarRunConfigurationBase;
 	}

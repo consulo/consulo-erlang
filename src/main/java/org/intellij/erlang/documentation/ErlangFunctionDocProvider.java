@@ -22,15 +22,16 @@ import org.intellij.erlang.ErlangParserDefinition;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.ErlangSpecification;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 
 final class ErlangFunctionDocProvider implements ElementDocProvider {
-  @NotNull private final ErlangFunction myErlangFunction;
+  @Nonnull
+  private final ErlangFunction myErlangFunction;
 
-  public ErlangFunctionDocProvider(@NotNull ErlangFunction erlangFunction) {
+  public ErlangFunctionDocProvider(@Nonnull ErlangFunction erlangFunction) {
     myErlangFunction = erlangFunction;
   }
 

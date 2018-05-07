@@ -30,8 +30,8 @@ import org.intellij.erlang.bif.ErlangBifDescriptor;
 import org.intellij.erlang.bif.ErlangBifTable;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.*;
 
@@ -68,7 +68,7 @@ public class ErlangParameterInfoHandler implements ParameterInfoHandler<ErlangAr
   }
 
   @Override
-  public void showParameterInfo(@NotNull ErlangArgumentList args, CreateParameterInfoContext context) {
+  public void showParameterInfo(@Nonnull ErlangArgumentList args, CreateParameterInfoContext context) {
     ErlangFunctionCallExpression erlFunctionCall = PsiTreeUtil.getParentOfType(args, ErlangFunctionCallExpression.class);
     if (erlFunctionCall != null) {
       PsiReference reference = erlFunctionCall.getReference();
@@ -121,7 +121,7 @@ public class ErlangParameterInfoHandler implements ParameterInfoHandler<ErlangAr
   }
 
   @Override
-  public void updateParameterInfo(@NotNull ErlangArgumentList place, UpdateParameterInfoContext context) {
+  public void updateParameterInfo(@Nonnull ErlangArgumentList place, UpdateParameterInfoContext context) {
     context.setCurrentParameter(ParameterInfoUtils.getCurrentParameterIndex(place.getNode(), context.getOffset(), ErlangTypes.ERL_COMMA));
   }
 
@@ -136,7 +136,7 @@ public class ErlangParameterInfoHandler implements ParameterInfoHandler<ErlangAr
   }
 
   @Override
-  public void updateUI(@Nullable Object p, @NotNull ParameterInfoUIContext context) {
+  public void updateUI(@Nullable Object p, @Nonnull ParameterInfoUIContext context) {
     if (p == null) {
       context.setUIComponentEnabled(false);
       return;
@@ -157,7 +157,7 @@ public class ErlangParameterInfoHandler implements ParameterInfoHandler<ErlangAr
       if (specification != null) {
         specification.accept(new ErlangRecursiveVisitor() {
           @Override
-          public void visitFunTypeArguments(@NotNull ErlangFunTypeArguments o) {
+          public void visitFunTypeArguments(@Nonnull ErlangFunTypeArguments o) {
             argsRef.setIfNull(o);
           }
         });
@@ -182,7 +182,7 @@ public class ErlangParameterInfoHandler implements ParameterInfoHandler<ErlangAr
               final Ref<ErlangType> itemTypeRef = Ref.create();
               specification.accept(new ErlangRecursiveVisitor() {
                 @Override
-                public void visitTypeGuard(@NotNull ErlangTypeGuard o) {
+                public void visitTypeGuard(@Nonnull ErlangTypeGuard o) {
                   ErlangTopType item = ContainerUtil.getFirstItem(o.getTopTypeList());
                   ErlangQVar qVar = item == null ? null : item.getQVar();
                   PsiReference reference = qVar == null ? null : qVar.getReference();

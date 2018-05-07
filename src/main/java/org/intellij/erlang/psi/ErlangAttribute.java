@@ -1,8 +1,8 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangAttribute extends ErlangCompositeElement {
@@ -31,7 +31,7 @@ public interface ErlangAttribute extends ErlangCompositeElement {
   @Nullable
   ErlangSpecification getSpecification();
 
-  @NotNull
+  @Nonnull
   PsiElement getOpMinus();
 
 }

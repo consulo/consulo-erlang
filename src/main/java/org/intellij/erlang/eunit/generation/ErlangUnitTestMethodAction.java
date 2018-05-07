@@ -1,5 +1,7 @@
 package org.intellij.erlang.eunit.generation;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInsight.CodeInsightActionHandler;
 import com.intellij.codeInsight.actions.CodeInsightAction;
 import com.intellij.codeInsight.template.Expression;
@@ -17,10 +19,9 @@ import com.intellij.psi.util.PsiTreeUtil;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangUnitTestMethodAction extends CodeInsightAction implements CodeInsightActionHandler {
-  private static void insertTestFunction(@NotNull Project project, @NotNull Editor editor, String name, boolean needNewline) {
+  private static void insertTestFunction(@Nonnull Project project, @Nonnull Editor editor, String name, boolean needNewline) {
     final Template template = TemplateManager.getInstance(project).createTemplate("", "");
     final Expression nameExpr = new ConstantNode(name);
     final Expression expected = new ConstantNode("expected");
@@ -39,14 +40,14 @@ public class ErlangUnitTestMethodAction extends CodeInsightAction implements Cod
     TemplateManager.getInstance(project).startTemplate(editor, template, null);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected CodeInsightActionHandler getHandler() {
     return this;
   }
 
   @Override
-  public void invoke(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile psiFile) {
+  public void invoke(@Nonnull Project project, @Nonnull Editor editor, @Nonnull PsiFile psiFile) {
     PsiElement lastChild = psiFile.getLastChild();
     int endOffset = lastChild.getTextRange().getEndOffset();
 
@@ -65,7 +66,7 @@ public class ErlangUnitTestMethodAction extends CodeInsightAction implements Cod
   }
 
   @Override
-  protected boolean isValidForFile(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+  protected boolean isValidForFile(@Nonnull Project project, @Nonnull Editor editor, @Nonnull PsiFile file) {
     if (!(file instanceof ErlangFile)) return false;
     return ErlangPsiImplUtil.isEunitImported((ErlangFile) file);
   }

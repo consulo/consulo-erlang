@@ -16,6 +16,8 @@
 
 package org.intellij.erlang;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.cacheBuilder.WordsScanner;
 import com.intellij.lang.findUsages.FindUsagesProvider;
 import com.intellij.psi.ElementDescriptionUtil;
@@ -24,7 +26,6 @@ import com.intellij.usageView.UsageViewLongNameLocation;
 import com.intellij.usageView.UsageViewNodeTextLocation;
 import com.intellij.usageView.UsageViewTypeLocation;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangFindUsagesProvider implements FindUsagesProvider {
   @Override
@@ -35,7 +36,7 @@ public class ErlangFindUsagesProvider implements FindUsagesProvider {
   }
 
   @Override
-  public boolean canFindUsagesFor(@NotNull PsiElement o) {
+  public boolean canFindUsagesFor(@Nonnull PsiElement o) {
     return o instanceof ErlangFunction || o instanceof ErlangQVar
       || o instanceof ErlangRecordDefinition || o instanceof ErlangModule
       || o instanceof ErlangMacrosDefinition || o instanceof ErlangTypedExpr
@@ -44,25 +45,25 @@ public class ErlangFindUsagesProvider implements FindUsagesProvider {
   }
 
   @Override
-  public String getHelpId(@NotNull PsiElement psiElement) {
+  public String getHelpId(@Nonnull PsiElement psiElement) {
     return "reference.dialogs.findUsages.other"; // todo: after 13.1 use HelpID
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public String getType(@NotNull PsiElement element) {
+  public String getType(@Nonnull PsiElement element) {
     return ElementDescriptionUtil.getElementDescription(element, UsageViewTypeLocation.INSTANCE);
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public String getDescriptiveName(@NotNull PsiElement element) {
+  public String getDescriptiveName(@Nonnull PsiElement element) {
     return ElementDescriptionUtil.getElementDescription(element, UsageViewLongNameLocation.INSTANCE);
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public String getNodeText(@NotNull PsiElement element, boolean useFullName) {
+  public String getNodeText(@Nonnull PsiElement element, boolean useFullName) {
     return ElementDescriptionUtil.getElementDescription(element, UsageViewNodeTextLocation.INSTANCE);
   }
 }

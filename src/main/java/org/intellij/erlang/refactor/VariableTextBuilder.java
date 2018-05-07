@@ -22,7 +22,7 @@ import com.intellij.psi.PsiRecursiveElementVisitor;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 
@@ -30,12 +30,12 @@ public class VariableTextBuilder extends PsiRecursiveElementVisitor {
   private StringBuilder myResult = new StringBuilder();
 
   @Override
-  public void visitWhiteSpace(@NotNull PsiWhiteSpace space) {
+  public void visitWhiteSpace(@Nonnull PsiWhiteSpace space) {
     myResult.append(space.getText().replace('\n', ' '));
   }
 
   @Override
-  public void visitElement(@NotNull PsiElement element) {
+  public void visitElement(@Nonnull PsiElement element) {
     if (element instanceof ErlangNamedElement) {
       myResult.append(((ErlangNamedElement) element).getName());
       return;
@@ -92,12 +92,12 @@ public class VariableTextBuilder extends PsiRecursiveElementVisitor {
     super.visitElement(element);
   }
 
-  @NotNull
+  @Nonnull
   public String result() {
     return result("PlaceHolder");
   }
 
-  @NotNull
+  @Nonnull
   public String result(String defaultValue) {
     String s = StringUtil.toTitleCase(myResult.toString())
       .replaceAll("_", "")

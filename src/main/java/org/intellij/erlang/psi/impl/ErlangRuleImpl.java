@@ -2,12 +2,13 @@
 package org.intellij.erlang.psi.impl;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import static org.intellij.erlang.ErlangTypes.*;
+
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.psi.*;
 
 public class ErlangRuleImpl extends ErlangCompositeElementImpl implements ErlangRule {
@@ -16,13 +17,13 @@ public class ErlangRuleImpl extends ErlangCompositeElementImpl implements Erlang
     super(node);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ErlangVisitor) ((ErlangVisitor)visitor).visitRule(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<ErlangRuleClause> getRuleClauseList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangRuleClause.class);
   }

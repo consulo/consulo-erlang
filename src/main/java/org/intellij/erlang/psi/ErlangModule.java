@@ -1,8 +1,8 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import org.intellij.erlang.stubs.ErlangModuleStub;
@@ -29,13 +29,13 @@ public interface ErlangModule extends ErlangNamedElement, StubBasedPsiElement<Er
   @Nullable
   PsiElement getParRight();
 
-  @NotNull
+  @Nonnull
   String getName();
 
-  @NotNull
+  @Nonnull
   PsiElement setName(String newName);
 
-  @NotNull
+  @Nonnull
   PsiElement getNameIdentifier();
 
   int getTextOffset();

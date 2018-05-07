@@ -7,7 +7,7 @@ import com.intellij.openapi.project.Project;
 import org.intellij.erlang.debugger.node.commands.ErlangDebuggerCommandsProducer;
 import org.intellij.erlang.debugger.node.events.ErlangDebuggerEvent;
 import org.intellij.erlang.debugger.node.events.ErlangDebuggerEventsProducer;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import java.io.IOException;
 import java.util.LinkedList;

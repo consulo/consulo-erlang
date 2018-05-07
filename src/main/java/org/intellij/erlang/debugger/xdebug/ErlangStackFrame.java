@@ -30,8 +30,8 @@ import org.intellij.erlang.debugger.node.ErlangVariableBinding;
 import org.intellij.erlang.psi.ErlangFunExpression;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.Collection;
 
@@ -39,11 +39,11 @@ public class ErlangStackFrame extends XStackFrame {
   private final ErlangSourcePosition mySourcePosition;
   private final Collection<ErlangVariableBinding> myBindings;
 
-  public ErlangStackFrame(@NotNull ErlangTraceElement traceElement) {
+  public ErlangStackFrame(@Nonnull ErlangTraceElement traceElement) {
     this(traceElement, new ErlangSourcePosition(traceElement.getModule(), traceElement.getFunction(), traceElement.getFunctionArgs().arity()));
   }
 
-  public ErlangStackFrame(@NotNull ErlangTraceElement traceElement, @Nullable ErlangSourcePosition sourcePosition) {
+  public ErlangStackFrame(@Nonnull ErlangTraceElement traceElement, @Nullable ErlangSourcePosition sourcePosition) {
     mySourcePosition = sourcePosition;
     myBindings = traceElement.getBindings();
   }
@@ -77,7 +77,7 @@ public class ErlangStackFrame extends XStackFrame {
   }
 
   @Override
-  public void computeChildren(@NotNull XCompositeNode node) {
+  public void computeChildren(@Nonnull XCompositeNode node) {
     XValueChildrenList myVariables = new XValueChildrenList(myBindings.size());
     for (ErlangVariableBinding binding : myBindings) {
       myVariables.add(binding.getName(), getVariableValue(binding.getValue()));
@@ -89,7 +89,7 @@ public class ErlangStackFrame extends XStackFrame {
     //TODO implement XValue to provide proper presentation of values of variables.
     return new XValue() {
       @Override
-      public void computePresentation(@NotNull XValueNode node, @NotNull XValuePlace place) {
+      public void computePresentation(@Nonnull XValueNode node, @Nonnull XValuePlace place) {
         node.setPresentation(AllIcons.Debugger.Value, "", value.toString(), false);
       }
     };

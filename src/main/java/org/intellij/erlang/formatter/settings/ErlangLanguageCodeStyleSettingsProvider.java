@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.formatter.settings;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.application.options.IndentOptionsEditor;
 import com.intellij.application.options.SmartIndentOptionsEditor;
 import com.intellij.lang.Language;
@@ -23,21 +25,21 @@ import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
 import org.intellij.erlang.ErlangLanguage;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 
 public class ErlangLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider {
   public static final String AROUND_OPERATORS = "Around Operators";
   public static final String ALIGNMENT = "Alignment";
 
-  @NotNull
+  @Nonnull
   @Override
   public Language getLanguage() {
     return ErlangLanguage.INSTANCE;
   }
 
   @Override
-  public String getCodeSample(@NotNull SettingsType settingsType) {
+  public String getCodeSample(@Nonnull SettingsType settingsType) {
     if (settingsType == SettingsType.SPACING_SETTINGS || settingsType == SettingsType.WRAPPING_AND_BRACES_SETTINGS) {
       return DEFAULT_CODE_SAMPLE;
     }
@@ -64,7 +66,7 @@ public class ErlangLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSe
   }
 
   @Override
-  public void customizeSettings(@NotNull CodeStyleSettingsCustomizable consumer, @NotNull SettingsType settingsType) {
+  public void customizeSettings(@Nonnull CodeStyleSettingsCustomizable consumer, @Nonnull SettingsType settingsType) {
     if (settingsType == SettingsType.SPACING_SETTINGS) {
       consumer.showStandardOptions(
 //        "SPACE_BEFORE_METHOD_CALL_PARENTHESES", // todo

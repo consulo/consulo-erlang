@@ -16,14 +16,15 @@
 
 package org.intellij.erlang.debugger.xdebug;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.xdebugger.breakpoints.XLineBreakpointType;
 
 public class ErlangLineBreakpointType extends XLineBreakpointType<ErlangLineBreakpointProperties>
 {
-	@NotNull
+	@Nonnull
 	public static ErlangLineBreakpointType getInstance()
 	{
 		return EXTENSION_POINT_NAME.findExtension(ErlangLineBreakpointType.class);
@@ -36,7 +37,7 @@ public class ErlangLineBreakpointType extends XLineBreakpointType<ErlangLineBrea
 
 	@Nullable
 	@Override
-	public ErlangLineBreakpointProperties createBreakpointProperties(@NotNull VirtualFile file, int line)
+	public ErlangLineBreakpointProperties createBreakpointProperties(@Nonnull VirtualFile file, int line)
 	{
 		return new ErlangLineBreakpointProperties();
 	}

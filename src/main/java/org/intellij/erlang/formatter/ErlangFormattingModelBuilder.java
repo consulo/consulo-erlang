@@ -29,12 +29,12 @@ import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.tree.TokenSet;
 import org.intellij.erlang.ErlangLanguage;
 import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import static org.intellij.erlang.ErlangTypes.*;
 
 public class ErlangFormattingModelBuilder implements FormattingModelBuilder {
-  @NotNull
+  @Nonnull
   @Override
   public FormattingModel createModel(PsiElement element, CodeStyleSettings settings) {
     CommonCodeStyleSettings commonSettings = settings.getCommonSettings(ErlangLanguage.INSTANCE);
@@ -44,7 +44,7 @@ public class ErlangFormattingModelBuilder implements FormattingModelBuilder {
     return FormattingModelProvider.createFormattingModelForPsiFile(element.getContainingFile(), block, settings);
   }
 
-  private static SpacingBuilder createSpacingBuilder(@NotNull CommonCodeStyleSettings settings, @NotNull ErlangCodeStyleSettings erlangSettings) {
+  private static SpacingBuilder createSpacingBuilder(@Nonnull CommonCodeStyleSettings settings, @Nonnull ErlangCodeStyleSettings erlangSettings) {
     TokenSet rules = TokenSet.create(ERL_RULE, ERL_RECORD_DEFINITION, ERL_INCLUDE, ERL_MACROS_DEFINITION, ERL_ATTRIBUTE);
     TokenSet keywords = TokenSet.create(
       ERL_AFTER, ERL_WHEN, ERL_BEGIN, ERL_END, ERL_OF, ERL_CASE, ERL_CATCH, ERL_IF, ERL_RECEIVE,

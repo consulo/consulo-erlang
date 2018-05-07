@@ -2,7 +2,9 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 
@@ -11,7 +13,7 @@ public interface ErlangRecordField extends ErlangCompositeElement {
   @Nullable
   ErlangExpression getExpression();
 
-  @NotNull
+  @Nonnull
   List<ErlangQAtom> getQAtomList();
 
   @Nullable

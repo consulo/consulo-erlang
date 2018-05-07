@@ -2,18 +2,20 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangRecordLikeType extends ErlangType {
 
-  @NotNull
+  @Nonnull
   List<ErlangTopType> getTopTypeList();
 
-  @NotNull
+  @Nonnull
   PsiElement getCurlyLeft();
 
-  @NotNull
+  @Nonnull
   PsiElement getCurlyRight();
 
 }

@@ -1,13 +1,14 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi.impl;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
+
 import static org.intellij.erlang.ErlangTypes.*;
+
+import javax.annotation.*;
+
 import org.intellij.erlang.psi.*;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
@@ -18,13 +19,13 @@ public class ErlangListComprehensionImpl extends ErlangExpressionImpl implements
     super(node);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ErlangVisitor) ((ErlangVisitor)visitor).visitListComprehension(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public ErlangExpression getExpression() {
     return findNotNullChildByClass(ErlangExpression.class);
   }
@@ -36,7 +37,7 @@ public class ErlangListComprehensionImpl extends ErlangExpressionImpl implements
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public PsiElement getBracketLeft() {
     return findNotNullChildByType(ERL_BRACKET_LEFT);
   }
@@ -48,7 +49,7 @@ public class ErlangListComprehensionImpl extends ErlangExpressionImpl implements
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public PsiElement getOrOr() {
     return findNotNullChildByType(ERL_OR_OR);
   }

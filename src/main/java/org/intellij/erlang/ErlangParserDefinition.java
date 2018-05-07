@@ -16,12 +16,13 @@
 
 package org.intellij.erlang;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.parser.ErlangLexer;
 import org.intellij.erlang.parser.ErlangParser;
 import org.intellij.erlang.psi.ErlangTokenType;
 import org.intellij.erlang.psi.impl.ErlangFileImpl;
 import org.intellij.erlang.stubs.types.ErlangFileElementType;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
@@ -44,43 +45,43 @@ public class ErlangParserDefinition implements ParserDefinition {
   public static final TokenSet COMMENTS = TokenSet.create(ERL_COMMENT, ERL_FUNCTION_DOC_COMMENT, ERL_MODULE_DOC_COMMENT, ERL_SHEBANG);
   public static final TokenSet LITERALS = TokenSet.create(ErlangTypes.ERL_STRING);
 
-  @NotNull
+  @Nonnull
   @Override
-  public Lexer createLexer(@NotNull LanguageVersion languageVersion) {
+  public Lexer createLexer(@Nonnull LanguageVersion languageVersion) {
     return new ErlangLexer();
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public PsiParser createParser( @NotNull LanguageVersion languageVersion) {
+  public PsiParser createParser( @Nonnull LanguageVersion languageVersion) {
     return new ErlangParser();
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public IFileElementType getFileNodeType() {
     return ErlangFileElementType.INSTANCE;
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public TokenSet getWhitespaceTokens(@NotNull LanguageVersion languageVersion) {
+  public TokenSet getWhitespaceTokens(@Nonnull LanguageVersion languageVersion) {
     return WS;
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public TokenSet getCommentTokens(@NotNull LanguageVersion languageVersion) {
+  public TokenSet getCommentTokens(@Nonnull LanguageVersion languageVersion) {
     return COMMENTS;
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public TokenSet getStringLiteralElements(@NotNull LanguageVersion languageVersion) {
+  public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion) {
     return LITERALS;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public PsiElement createElement(ASTNode astNode) {
     return ErlangTypes.Factory.createElement(astNode);

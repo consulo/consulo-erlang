@@ -25,7 +25,7 @@ import org.intellij.erlang.psi.ErlangIncludeLib;
 import org.intellij.erlang.psi.ErlangIncludeString;
 import org.intellij.erlang.psi.impl.ErlangIncludeLibImpl;
 import org.intellij.erlang.stubs.ErlangIncludeLibStub;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -33,7 +33,7 @@ public class ErlangIncludeLibElementType extends ErlangStubElementType<ErlangInc
   public static final ErlangIncludeLib[] EMPTY_ARRAY = new ErlangIncludeLib[0];
 
   public static final ArrayFactory<ErlangIncludeLib> ARRAY_FACTORY = new ArrayFactory<ErlangIncludeLib>() {
-    @NotNull
+    @Nonnull
     @Override
     public ErlangIncludeLib[] create(final int count) {
       return count == 0 ? EMPTY_ARRAY : new ErlangIncludeLib[count];
@@ -45,25 +45,25 @@ public class ErlangIncludeLibElementType extends ErlangStubElementType<ErlangInc
   }
 
   @Override
-  public ErlangIncludeLib createPsi(@NotNull ErlangIncludeLibStub stub) {
+  public ErlangIncludeLib createPsi(@Nonnull ErlangIncludeLibStub stub) {
     return new ErlangIncludeLibImpl(stub, this);
   }
 
   @Override
-  public ErlangIncludeLibStub createStub(@NotNull ErlangIncludeLib psi, StubElement parentStub) {
+  public ErlangIncludeLibStub createStub(@Nonnull ErlangIncludeLib psi, StubElement parentStub) {
     ErlangIncludeString includeString = psi.getIncludeString();
     String text = includeString != null ? StringUtil.unquoteString(includeString.getText()) : "";
     return new ErlangIncludeLibStub(parentStub, this, text);
   }
 
   @Override
-  public void serialize(@NotNull ErlangIncludeLibStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@Nonnull ErlangIncludeLibStub stub, @Nonnull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getString());
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ErlangIncludeLibStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public ErlangIncludeLibStub deserialize(@Nonnull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new ErlangIncludeLibStub(parentStub, this, dataStream.readName());
   }
 }

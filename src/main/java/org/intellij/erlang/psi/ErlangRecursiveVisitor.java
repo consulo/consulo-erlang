@@ -16,13 +16,14 @@
 
 package org.intellij.erlang.psi;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangRecursiveVisitor extends ErlangVisitor {
   @Override
-  public void visitCompositeElement(@NotNull ErlangCompositeElement o) {
+  public void visitCompositeElement(@Nonnull ErlangCompositeElement o) {
     for (PsiElement psiElement : o.getChildren()) {
       if (psiElement instanceof ErlangCompositeElement) {
         psiElement.accept(this);

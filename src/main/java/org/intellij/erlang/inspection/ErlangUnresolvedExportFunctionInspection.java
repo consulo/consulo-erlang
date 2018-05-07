@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.inspection;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
@@ -24,7 +26,6 @@ import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangRecursiveVisitor;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.quickfixes.ErlangCreateFunctionQuickFix;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangUnresolvedExportFunctionInspection extends ErlangInspectionBase {
   @Override
@@ -32,7 +33,7 @@ public class ErlangUnresolvedExportFunctionInspection extends ErlangInspectionBa
     if (!(file instanceof ErlangFile)) return;
     file.accept(new ErlangRecursiveVisitor() {
       @Override
-      public void visitExportFunction(@NotNull ErlangExportFunction o) {
+      public void visitExportFunction(@Nonnull ErlangExportFunction o) {
         PsiReference reference = o.getReference();
         if (reference.resolve() == null) {
           String name = o.getQAtom().getText();

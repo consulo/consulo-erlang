@@ -1,8 +1,8 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import org.intellij.erlang.stubs.ErlangIncludeLibStub;
@@ -12,7 +12,7 @@ public interface ErlangIncludeLib extends ErlangCompositeElement, StubBasedPsiEl
   @Nullable
   ErlangIncludeString getIncludeString();
 
-  @NotNull
+  @Nonnull
   PsiElement getOpMinus();
 
   @Nullable

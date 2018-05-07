@@ -24,7 +24,7 @@ import com.intellij.refactoring.rename.RenameInputValidator;
 import com.intellij.util.ProcessingContext;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangElementFactory;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 public class ErlangRenameInputValidator implements RenameInputValidator {
   @Override

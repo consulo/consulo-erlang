@@ -16,13 +16,14 @@
 
 package org.intellij.erlang.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
 import org.intellij.erlang.psi.ErlangCompositeElement;
 import org.intellij.erlang.psi.ErlangNamedElement;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class ErlangNamedElementImpl extends ErlangCompositeElementImpl implements ErlangCompositeElement, ErlangNamedElement {
   public ErlangNamedElementImpl(ASTNode node) {
@@ -30,7 +31,7 @@ public abstract class ErlangNamedElementImpl extends ErlangCompositeElementImpl 
   }
 
   @Override
-  public PsiElement setName(@NonNls @NotNull String s) throws IncorrectOperationException {
+  public PsiElement setName(@NonNls @Nonnull String s) throws IncorrectOperationException {
     return this;
   }
 }

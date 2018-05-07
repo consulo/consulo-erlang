@@ -2,12 +2,15 @@
 package org.intellij.erlang.psi.impl;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static org.intellij.erlang.ErlangTypes.*;
+
+import javax.annotation.*;
+
 import org.intellij.erlang.psi.*;
 
 public class ErlangTypedRecordFieldsImpl extends ErlangCompositeElementImpl implements ErlangTypedRecordFields {
@@ -16,25 +19,25 @@ public class ErlangTypedRecordFieldsImpl extends ErlangCompositeElementImpl impl
     super(node);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ErlangVisitor) ((ErlangVisitor)visitor).visitTypedRecordFields(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<ErlangGenericFunctionCallExpression> getGenericFunctionCallExpressionList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangGenericFunctionCallExpression.class);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<ErlangTypedExpr> getTypedExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangTypedExpr.class);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public PsiElement getCurlyLeft() {
     return findNotNullChildByType(ERL_CURLY_LEFT);
   }

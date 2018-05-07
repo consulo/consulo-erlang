@@ -29,7 +29,7 @@ import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -40,9 +40,9 @@ public class ErlangUnitRunConfigurationProducer extends RunConfigurationProducer
   }
 
   @Override
-  protected boolean setupConfigurationFromContext(@NotNull ErlangUnitRunConfiguration configuration,
-                                                  @NotNull ConfigurationContext context,
-                                                  @NotNull Ref<PsiElement> sourceElement) {
+  protected boolean setupConfigurationFromContext(@Nonnull ErlangUnitRunConfiguration configuration,
+                                                  @Nonnull ConfigurationContext context,
+                                                  @Nonnull Ref<PsiElement> sourceElement) {
     PsiElement psiElement = sourceElement.get();
     if (psiElement == null || !psiElement.isValid()) {
       return false;
@@ -77,7 +77,7 @@ public class ErlangUnitRunConfigurationProducer extends RunConfigurationProducer
   }
 
   @Override
-  public boolean isConfigurationFromContext(@NotNull ErlangUnitRunConfiguration configuration, @NotNull ConfigurationContext context) {
+  public boolean isConfigurationFromContext(@Nonnull ErlangUnitRunConfiguration configuration, @Nonnull ConfigurationContext context) {
     PsiElement psiElement = context.getPsiLocation();
     if (psiElement == null || !psiElement.isValid()) {
       return false;
@@ -100,8 +100,8 @@ public class ErlangUnitRunConfigurationProducer extends RunConfigurationProducer
     return false;
   }
 
-  @NotNull
-  private static LinkedHashSet<String> findTestModuleNames(@NotNull ConfigurationContext context) {
+  @Nonnull
+  private static LinkedHashSet<String> findTestModuleNames(@Nonnull ConfigurationContext context) {
     LinkedHashSet<String> moduleNames = new LinkedHashSet<String>();
     for (ErlangFile f : ErlangUnitTestElementUtil.findFileTestElements(context.getProject(), context.getDataContext())) {
       VirtualFile virtualFile = f.getVirtualFile();
@@ -112,12 +112,12 @@ public class ErlangUnitRunConfigurationProducer extends RunConfigurationProducer
     return moduleNames;
   }
 
-  @NotNull
-  private static LinkedHashSet<String> findTestFunctionNames(@NotNull PsiElement context) {
+  @Nonnull
+  private static LinkedHashSet<String> findTestFunctionNames(@Nonnull PsiElement context) {
     Collection<ErlangFunction> functions = ErlangUnitTestElementUtil.findFunctionTestElements(context);
     functions = ContainerUtil.filter(functions, new Condition<ErlangFunction>() {
       @Override
-      public boolean value(@NotNull ErlangFunction erlangFunction) {
+      public boolean value(@Nonnull ErlangFunction erlangFunction) {
         return ErlangPsiImplUtil.isEunitTestFunction(erlangFunction);
       }
     });

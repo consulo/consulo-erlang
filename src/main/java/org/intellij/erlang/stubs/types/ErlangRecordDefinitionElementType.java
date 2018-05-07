@@ -23,7 +23,7 @@ import com.intellij.util.ArrayFactory;
 import org.intellij.erlang.psi.ErlangRecordDefinition;
 import org.intellij.erlang.psi.impl.ErlangRecordDefinitionImpl;
 import org.intellij.erlang.stubs.ErlangRecordDefinitionStub;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class ErlangRecordDefinitionElementType extends ErlangNamedStubElementTyp
   public static final ErlangRecordDefinition[] EMPTY_ARRAY = new ErlangRecordDefinition[0];
 
   public static final ArrayFactory<ErlangRecordDefinition> ARRAY_FACTORY = new ArrayFactory<ErlangRecordDefinition>() {
-    @NotNull
+    @Nonnull
     @Override
     public ErlangRecordDefinition[] create(final int count) {
       return count == 0 ? EMPTY_ARRAY : new ErlangRecordDefinition[count];
@@ -43,23 +43,23 @@ public class ErlangRecordDefinitionElementType extends ErlangNamedStubElementTyp
   }
 
   @Override
-  public ErlangRecordDefinition createPsi(@NotNull ErlangRecordDefinitionStub stub) {
+  public ErlangRecordDefinition createPsi(@Nonnull ErlangRecordDefinitionStub stub) {
     return new ErlangRecordDefinitionImpl(stub, this);
   }
 
   @Override
-  public ErlangRecordDefinitionStub createStub(@NotNull ErlangRecordDefinition psi, StubElement parentStub) {
+  public ErlangRecordDefinitionStub createStub(@Nonnull ErlangRecordDefinition psi, StubElement parentStub) {
     return new ErlangRecordDefinitionStub(parentStub, this, psi.getName());
   }
 
   @Override
-  public void serialize(@NotNull ErlangRecordDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@Nonnull ErlangRecordDefinitionStub stub, @Nonnull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getName());
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ErlangRecordDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public ErlangRecordDefinitionStub deserialize(@Nonnull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new ErlangRecordDefinitionStub(parentStub, this, dataStream.readName());
   }
 }

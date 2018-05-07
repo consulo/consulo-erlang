@@ -22,7 +22,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.quickfixes.ErlangIntroduceRecordFieldFix;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class ErlangUnresolvedRecordFieldInspection extends ErlangInspectionBase {
   @Override
@@ -30,7 +30,7 @@ public class ErlangUnresolvedRecordFieldInspection extends ErlangInspectionBase 
     if (!(file instanceof ErlangFile)) return;
     file.accept(new ErlangRecursiveVisitor() {
       @Override
-      public void visitRecordField(@NotNull ErlangRecordField o) {
+      public void visitRecordField(@Nonnull ErlangRecordField o) {
         super.visitRecordField(o);
         ErlangRecordExpression recordExpression = PsiTreeUtil.getParentOfType(o, ErlangRecordExpression.class);
         if (recordExpression != null) {

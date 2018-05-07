@@ -18,7 +18,7 @@ package org.intellij.erlang.rebar.runner;
 
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 
@@ -28,18 +28,18 @@ final class RebarRunConfigurationEditorForm extends SettingsEditor<RebarRunConfi
   private JCheckBox mySkipDependencies;
 
   @Override
-  protected void resetEditorFrom(@NotNull RebarRunConfigurationBase rebarRunConfiguration) {
+  protected void resetEditorFrom(@Nonnull RebarRunConfigurationBase rebarRunConfiguration) {
     myCommandText.setText(rebarRunConfiguration.getCommand());
     mySkipDependencies.setSelected(rebarRunConfiguration.isSkipDependencies());
   }
 
   @Override
-  protected void applyEditorTo(@NotNull RebarRunConfigurationBase rebarRunConfiguration) throws ConfigurationException {
+  protected void applyEditorTo(@Nonnull RebarRunConfigurationBase rebarRunConfiguration) throws ConfigurationException {
     rebarRunConfiguration.setCommand(myCommandText.getText());
     rebarRunConfiguration.setSkipDependencies(mySkipDependencies.isSelected());
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected JComponent createEditor() {
     return myComponent;

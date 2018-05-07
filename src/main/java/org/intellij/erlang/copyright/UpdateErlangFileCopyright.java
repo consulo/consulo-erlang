@@ -16,8 +16,9 @@
 
 package org.intellij.erlang.copyright;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.psi.ErlangFile;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -29,7 +30,7 @@ import consulo.copyright.config.CopyrightFileConfig;
 public class UpdateErlangFileCopyright extends UpdatePsiFileCopyright<CopyrightFileConfig>
 {
 
-	public UpdateErlangFileCopyright(@NotNull PsiFile psiFile, @NotNull CopyrightProfile copyrightProfile)
+	public UpdateErlangFileCopyright(@Nonnull PsiFile psiFile, @Nonnull CopyrightProfile copyrightProfile)
 	{
 		super(psiFile, copyrightProfile);
 	}

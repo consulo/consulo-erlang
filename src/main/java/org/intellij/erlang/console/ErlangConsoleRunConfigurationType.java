@@ -21,7 +21,7 @@ import com.intellij.execution.configurations.ConfigurationType;
 import com.intellij.openapi.extensions.Extensions;
 import org.intellij.erlang.ErlangIcons;
 import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.swing.*;
 
@@ -30,34 +30,34 @@ public final class ErlangConsoleRunConfigurationType implements ConfigurationTyp
     return Extensions.findExtension(CONFIGURATION_TYPE_EP, ErlangConsoleRunConfigurationType.class);
   }
 
-  @NotNull
+  @Nonnull
   @NonNls
   @Override
   public String getDisplayName() {
     return "Erlang Console";
   }
 
-  @NotNull
+  @Nonnull
   @NonNls
   @Override
   public String getConfigurationTypeDescription() {
     return "Starts an Erlang Console";
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public Icon getIcon() {
     return ErlangIcons.ERLANG_CONSOLE;
   }
 
-  @NotNull
+  @Nonnull
   @NonNls
   @Override
   public String getId() {
     return "ErlangConsoleRunConfigurationType";
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public ConfigurationFactory[] getConfigurationFactories() {
     return new ConfigurationFactory[]{ErlangConsoleRunConfigurationFactory.getInstance()};

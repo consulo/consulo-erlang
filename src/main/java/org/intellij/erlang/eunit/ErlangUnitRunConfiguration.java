@@ -33,7 +33,7 @@ import org.intellij.erlang.runconfig.ErlangModuleBasedConfiguration;
 import org.intellij.erlang.runconfig.ErlangRunConfigurationBase;
 import org.intellij.erlang.runconfig.ErlangRunner;
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -41,28 +41,28 @@ import java.util.Set;
 public class ErlangUnitRunConfiguration extends ErlangRunConfigurationBase<ErlangUnitRunningState> {
   private final ErlangUnitConfigData myConfigData = new ErlangUnitConfigData();
 
-  public ErlangUnitRunConfiguration(Project project, String name, @NotNull ErlangUnitRunConfigurationType configurationType) {
+  public ErlangUnitRunConfiguration(Project project, String name, @Nonnull ErlangUnitRunConfigurationType configurationType) {
     super(name, new ErlangModuleBasedConfiguration(project), configurationType.getConfigurationFactories()[0]);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected ModuleBasedConfiguration createInstance() {
     return new ErlangUnitRunConfiguration(getProject(), getName(), ErlangUnitRunConfigurationType.getInstance());
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
     return new ErlangUnitRunConfigurationEditorForm();
   }
 
   @Override
-  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment env) throws ExecutionException {
+  public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment env) throws ExecutionException {
     return ErlangRunner.EMPTY_RUN_STATE; // todo: CommandLineState
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected ErlangUnitRunningState newRunningState(ExecutionEnvironment env, Module module) {
     return new ErlangUnitRunningState(env, module, this);
@@ -73,7 +73,7 @@ public class ErlangUnitRunConfiguration extends ErlangRunConfigurationBase<Erlan
     return true;
   }
 
-  @NotNull
+  @Nonnull
   public ErlangUnitConfigData getConfigData() {
     return myConfigData;
   }
@@ -85,7 +85,7 @@ public class ErlangUnitRunConfiguration extends ErlangRunConfigurationBase<Erlan
   }
 
   @Override
-  public void readExternal(@NotNull Element element) throws InvalidDataException {
+  public void readExternal(@Nonnull Element element) throws InvalidDataException {
     super.readExternal(element);
     XmlSerializer.deserializeInto(myConfigData, element);
   }
@@ -95,39 +95,39 @@ public class ErlangUnitRunConfiguration extends ErlangRunConfigurationBase<Erlan
   }
 
   public static final class ErlangUnitConfigData {
-    @NotNull
+    @Nonnull
     private ErlangUnitRunConfigurationKind myKind = ErlangUnitRunConfigurationKind.MODULE;
 
-    @NotNull
+    @Nonnull
     private Set<String> myModuleNames = new LinkedHashSet<String>();
 
-    @NotNull
+    @Nonnull
     private Set<String> myFunctionNames = new LinkedHashSet<String>();
 
-    @NotNull
+    @Nonnull
     public ErlangUnitRunConfigurationKind getKind() {
       return myKind;
     }
 
-    public void setKind(@NotNull ErlangUnitRunConfigurationKind kind) {
+    public void setKind(@Nonnull ErlangUnitRunConfigurationKind kind) {
       myKind = kind;
     }
 
-    @NotNull
+    @Nonnull
     public Set<String> getModuleNames() {
       return myModuleNames;
     }
 
-    public void setModuleNames(@NotNull Set<String> moduleNames) {
+    public void setModuleNames(@Nonnull Set<String> moduleNames) {
       myModuleNames = moduleNames;
     }
 
-    @NotNull
+    @Nonnull
     public Set<String> getFunctionNames() {
       return myFunctionNames;
     }
 
-    public void setFunctionNames(@NotNull Set<String> functionNames) {
+    public void setFunctionNames(@Nonnull Set<String> functionNames) {
       myFunctionNames = functionNames;
     }
   }

@@ -30,7 +30,7 @@ import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.refactor.ErlangRefactoringUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,14 +39,14 @@ public class ErlangCreateFunctionQuickFix extends LocalQuickFixBase {
   private final String myName;
   private final int myArity;
 
-  public ErlangCreateFunctionQuickFix(@NotNull String name, int arity) {
+  public ErlangCreateFunctionQuickFix(@Nonnull String name, int arity) {
     super("Create Function '" + name + "/" + arity + "'", "Erlang");
     myName = name;
     myArity = arity;
   }
 
   @Override
-  public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+  public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor descriptor) {
     //noinspection unchecked
     PsiElement call = PsiTreeUtil.getContextOfType(
       descriptor.getPsiElement(),

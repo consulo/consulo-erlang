@@ -1,13 +1,14 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi.impl;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
+
 import static org.intellij.erlang.ErlangTypes.*;
+
+import javax.annotation.*;
+
 import org.intellij.erlang.psi.*;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveState;
@@ -20,7 +21,7 @@ public class ErlangQVarImpl extends ErlangNamedElementImpl implements ErlangQVar
     super(node);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ErlangVisitor) ((ErlangVisitor)visitor).visitQVar(this);
     else super.accept(visitor);
   }
@@ -46,22 +47,22 @@ public class ErlangQVarImpl extends ErlangNamedElementImpl implements ErlangQVar
     return ErlangPsiImplUtil.processDeclarations(this, processor, state, lastParent, place);
   }
 
-  @NotNull
+  @Nonnull
   public String getName() {
     return ErlangPsiImplUtil.getName(this);
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement setName(String newName) {
     return ErlangPsiImplUtil.setName(this, newName);
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement getNameIdentifier() {
     return ErlangPsiImplUtil.getNameIdentifier(this);
   }
 
-  @NotNull
+  @Nonnull
   public SearchScope getUseScope() {
     return ErlangPsiImplUtil.getUseScope(this);
   }

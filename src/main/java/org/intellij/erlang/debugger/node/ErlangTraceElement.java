@@ -2,7 +2,7 @@ package org.intellij.erlang.debugger.node;
 
 import com.ericsson.otp.erlang.OtpErlangList;
 import org.intellij.erlang.psi.ErlangFile;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Collection;
 
@@ -12,32 +12,32 @@ public class ErlangTraceElement {
   private final OtpErlangList myFunctionArgs;
   private final Collection<ErlangVariableBinding> myBindings;
 
-  public ErlangTraceElement(@NotNull ErlangFile module,
-                            @NotNull String function,
-                            @NotNull OtpErlangList functionArgs,
-                            @NotNull Collection<ErlangVariableBinding> bindings) {
+  public ErlangTraceElement(@Nonnull ErlangFile module,
+                            @Nonnull String function,
+                            @Nonnull OtpErlangList functionArgs,
+                            @Nonnull Collection<ErlangVariableBinding> bindings) {
     myModule = module;
     myFunction = function;
     myFunctionArgs = functionArgs;
     myBindings = bindings;
   }
 
-  @NotNull
+  @Nonnull
   public ErlangFile getModule() {
     return myModule;
   }
 
-  @NotNull
+  @Nonnull
   public String getFunction() {
     return myFunction;
   }
 
-  @NotNull
+  @Nonnull
   public OtpErlangList getFunctionArgs() {
     return myFunctionArgs;
   }
 
-  @NotNull
+  @Nonnull
   public Collection<ErlangVariableBinding> getBindings() {
     return myBindings;
   }

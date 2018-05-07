@@ -2,12 +2,14 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangFunType100T extends ErlangType {
 
-  @NotNull
+  @Nonnull
   List<ErlangTopType> getTopTypeList();
 
   @Nullable
@@ -16,7 +18,7 @@ public interface ErlangFunType100T extends ErlangType {
   @Nullable
   PsiElement getDotDotDot();
 
-  @NotNull
+  @Nonnull
   PsiElement getParLeft();
 
   @Nullable

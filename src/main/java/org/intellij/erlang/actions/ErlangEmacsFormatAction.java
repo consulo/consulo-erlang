@@ -21,7 +21,7 @@ import java.io.File;
 import org.intellij.erlang.emacs.EmacsSettings;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.utils.ErlangExternalToolsNotificationListener;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.OSProcessHandler;
@@ -201,8 +201,8 @@ public class ErlangEmacsFormatAction extends AnAction implements DumbAware
 		}
 	}
 
-	@NotNull
-	private static String getSdkPath(@NotNull PsiFile psiFile)
+	@Nonnull
+	private static String getSdkPath(@Nonnull PsiFile psiFile)
 	{
 		Sdk sdk = ModuleUtilCore.getSdk(psiFile, ErlangModuleExtension.class);
 		assert sdk != null;

@@ -32,8 +32,8 @@ import com.intellij.util.text.CaseInsensitiveStringHashingStrategy;
 import gnu.trove.THashSet;
 import org.intellij.erlang.ErlangIcons;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,7 +43,7 @@ import java.util.Map;
 import static org.intellij.erlang.psi.impl.ErlangPsiImplUtil.*;
 
 public class ErlangVariableReferenceImpl extends PsiReferenceBase<ErlangQVar> {
-  public ErlangVariableReferenceImpl(@NotNull ErlangQVar element, TextRange range) {
+  public ErlangVariableReferenceImpl(@Nonnull ErlangQVar element, TextRange range) {
     super(element, range);
   }
 
@@ -70,7 +70,7 @@ public class ErlangVariableReferenceImpl extends PsiReferenceBase<ErlangQVar> {
     return erlangFile != null ? erlangFile.getModule() : null;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public Object[] getVariants() {
     if (PsiTreeUtil.getParentOfType(myElement, ErlangArgumentDefinition.class) != null) return new Object[]{};
@@ -124,13 +124,13 @@ public class ErlangVariableReferenceImpl extends PsiReferenceBase<ErlangQVar> {
     }
 
     @SuppressWarnings("NullableProblems")
-    private MyBaseScopeProcessor(@Nullable ErlangFunctionClause clause, @NotNull Collection<ErlangQVar> result) {
+    private MyBaseScopeProcessor(@Nullable ErlangFunctionClause clause, @Nonnull Collection<ErlangQVar> result) {
       this(clause, true, ContainerUtil.<String>newArrayList());
       myVars = result;
     }
 
     @Override
-    public boolean execute(@NotNull PsiElement psiElement, ResolveState resolveState) {
+    public boolean execute(@Nonnull PsiElement psiElement, ResolveState resolveState) {
       if (!psiElement.equals(myElement) && psiElement instanceof ErlangQVar && !psiElement.getText().equals("_") && !inColonQualified(myElement)) {
         boolean ancestor = PsiTreeUtil.isAncestor(myClause, psiElement, false);
         if ((ancestor || myForce) && (inArgumentDefinition(psiElement) || inLeftPartOfAssignment(psiElement))) {
@@ -142,7 +142,7 @@ public class ErlangVariableReferenceImpl extends PsiReferenceBase<ErlangQVar> {
     }
   }
 
-  public void populateVariables(@Nullable ErlangFunctionClause clause, @NotNull Collection<ErlangQVar> result) {
+  public void populateVariables(@Nullable ErlangFunctionClause clause, @Nonnull Collection<ErlangQVar> result) {
     ResolveUtil.treeWalkUp(myElement, new MyBaseScopeProcessor(clause, result));
   }
 }

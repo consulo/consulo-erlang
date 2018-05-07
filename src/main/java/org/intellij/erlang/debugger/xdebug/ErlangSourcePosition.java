@@ -11,8 +11,8 @@ import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunExpression;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,12 +64,12 @@ public class ErlangSourcePosition {
     }
   }
 
-  @NotNull
+  @Nonnull
   public String getErlangModuleName() {
     return FileUtil.getNameWithoutExtension(myErlangFile.getName());
   }
 
-  @NotNull
+  @Nonnull
   public ErlangFile getErlangFile() {
     return myErlangFile;
   }

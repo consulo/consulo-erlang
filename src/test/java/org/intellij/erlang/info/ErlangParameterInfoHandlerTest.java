@@ -16,10 +16,11 @@
 
 package org.intellij.erlang.info;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.ErlangParameterInfoHandler;
 import org.intellij.erlang.psi.ErlangArgumentList;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.lang.parameterInfo.CreateParameterInfoContext;
 import com.intellij.lang.parameterInfo.ParameterInfoHandler;
 import com.intellij.lang.parameterInfo.UpdateParameterInfoContext;
@@ -91,7 +92,7 @@ public class ErlangParameterInfoHandlerTest extends ErlangLightPlatformCodeInsig
 		private final Editor myEditor;
 		private final PsiFile myFile;
 
-		public MockCreateParameterInfoContext(@NotNull Editor editor, @NotNull PsiFile file)
+		public MockCreateParameterInfoContext(@Nonnull Editor editor, @Nonnull PsiFile file)
 		{
 			myEditor = editor;
 			myFile = file;
@@ -151,7 +152,7 @@ public class ErlangParameterInfoHandlerTest extends ErlangLightPlatformCodeInsig
 		}
 
 		@Override
-		@NotNull
+		@Nonnull
 		public Editor getEditor()
 		{
 			return myEditor;
@@ -167,7 +168,7 @@ public class ErlangParameterInfoHandlerTest extends ErlangLightPlatformCodeInsig
 		private Object myHighlightedParameter;
 		private int myCurrentParameter;
 
-		public MockUpdateParameterInfoContext(@NotNull Editor editor, @NotNull PsiFile file)
+		public MockUpdateParameterInfoContext(@Nonnull Editor editor, @Nonnull PsiFile file)
 		{
 			myEditor = editor;
 			myFile = file;
@@ -236,7 +237,7 @@ public class ErlangParameterInfoHandlerTest extends ErlangLightPlatformCodeInsig
 			return myEditor.getCaretModel().getOffset();
 		}
 
-		@NotNull
+		@Nonnull
 		public Editor getEditor()
 		{
 			return myEditor;

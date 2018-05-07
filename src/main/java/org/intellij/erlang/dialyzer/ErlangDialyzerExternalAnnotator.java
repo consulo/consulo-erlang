@@ -19,10 +19,12 @@ package org.intellij.erlang.dialyzer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.sdk.ErlangSystemUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.codeInsight.daemon.HighlightDisplayKey;
 import com.intellij.codeInspection.InspectionProfile;
@@ -64,7 +66,7 @@ public class ErlangDialyzerExternalAnnotator extends ExternalAnnotator<ErlangDia
 
 	@Nullable
 	@Override
-	public State collectInformation(@NotNull PsiFile file)
+	public State collectInformation(@Nonnull PsiFile file)
 	{
 		VirtualFile vFile = file.getVirtualFile();
 		if(vFile == null || vFile.getFileType() != ErlangFileType.MODULE)
@@ -147,7 +149,7 @@ public class ErlangDialyzerExternalAnnotator extends ExternalAnnotator<ErlangDia
 	}
 
 	@Override
-	public void apply(@NotNull PsiFile file, State annotationResult, @NotNull AnnotationHolder holder)
+	public void apply(@Nonnull PsiFile file, State annotationResult, @Nonnull AnnotationHolder holder)
 	{
 		if(annotationResult == null || !file.isValid())
 		{
@@ -175,7 +177,7 @@ public class ErlangDialyzerExternalAnnotator extends ExternalAnnotator<ErlangDia
 			HighlightDisplayKey key = HighlightDisplayKey.find(ErlangDialyzerInspection.INSPECTION_SHORT_NAME);
 			annotation.registerFix(new DisableInspectionToolAction(key)
 			{
-				@NotNull
+				@Nonnull
 				@Override
 				public String getText()
 				{

@@ -18,10 +18,11 @@ package org.intellij.erlang.runconfig;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.intellij.erlang.console.ErlangConsoleUtil;
 import org.intellij.erlang.sdk.ErlangSdkType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
@@ -48,7 +49,7 @@ public abstract class ErlangRunningState extends CommandLineState {
     myModule = module;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected ProcessHandler startProcess() throws ExecutionException {
     Sdk sdk = ModuleUtilCore.getSdk(myModule, ErlangModuleExtension.class);
@@ -57,7 +58,7 @@ public abstract class ErlangRunningState extends CommandLineState {
     return new OSProcessHandler(commandLine.createProcess(), commandLine.getCommandLineString());
   }
 
-  private GeneralCommandLine getCommand(@NotNull Sdk sdk) throws ExecutionException {
+  private GeneralCommandLine getCommand(@Nonnull Sdk sdk) throws ExecutionException {
     GeneralCommandLine commandLine = new GeneralCommandLine();
     String homePath = sdk.getHomePath();
     assert homePath != null;
@@ -119,7 +120,7 @@ public abstract class ErlangRunningState extends CommandLineState {
     commandLine.addParameters(getErlFlags());
   }
 
-  @NotNull
+  @Nonnull
   public abstract ConsoleView createConsoleView(Executor executor);
 
   public static class ErlangEntryPoint {
@@ -146,7 +147,7 @@ public abstract class ErlangRunningState extends CommandLineState {
     }
 
     @Nullable
-    public static ErlangEntryPoint fromModuleAndFunction(@NotNull String moduleAndFunction, @NotNull String params) {
+    public static ErlangEntryPoint fromModuleAndFunction(@Nonnull String moduleAndFunction, @Nonnull String params) {
       List<String> split = StringUtil.split(moduleAndFunction, " ");
       if (split.size() != 2) return null;
       String module = split.get(0);

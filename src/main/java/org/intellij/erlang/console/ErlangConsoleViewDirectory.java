@@ -19,8 +19,8 @@ package org.intellij.erlang.console;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 
@@ -36,16 +36,16 @@ final class ErlangConsoleViewDirectory {
     return outInstance;
   }
 
-  public synchronized void addConsole(@NotNull ErlangConsoleView console) {
+  public synchronized void addConsole(@Nonnull ErlangConsoleView console) {
     consoleViews.add(console);
   }
 
-  public synchronized void delConsole(@NotNull ErlangConsoleView console) {
+  public synchronized void delConsole(@Nonnull ErlangConsoleView console) {
     consoleViews.remove(console);
   }
 
   @Nullable
-  public synchronized ErlangConsoleView getConsole(@NotNull Editor editor) {
+  public synchronized ErlangConsoleView getConsole(@Nonnull Editor editor) {
     for (ErlangConsoleView consoleView : consoleViews) {
       if (editor == consoleView.getConsoleEditor()) {
         return consoleView;
@@ -55,7 +55,7 @@ final class ErlangConsoleViewDirectory {
   }
 
   @Nullable
-  public synchronized ErlangConsoleView getConsole(@NotNull Project project) {
+  public synchronized ErlangConsoleView getConsole(@Nonnull Project project) {
     for (ErlangConsoleView consoleView : consoleViews) {
       if (project == consoleView.getProject()) {
         return consoleView;

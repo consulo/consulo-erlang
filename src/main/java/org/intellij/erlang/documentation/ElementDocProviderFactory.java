@@ -16,6 +16,9 @@
 
 package org.intellij.erlang.documentation;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.intellij.erlang.bif.ErlangBifTable;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.ErlangFunctionCallExpression;
@@ -23,8 +26,6 @@ import org.intellij.erlang.psi.ErlangGlobalFunctionCallExpression;
 import org.intellij.erlang.psi.ErlangModule;
 import org.intellij.erlang.psi.ErlangModuleRef;
 import org.intellij.erlang.psi.ErlangTypeDefinition;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -44,7 +45,7 @@ final class ElementDocProviderFactory
 	}
 
 	@Nullable
-	static ElementDocProvider create(@NotNull PsiElement psiElement)
+	static ElementDocProvider create(@Nonnull PsiElement psiElement)
 	{
 		final Project project = psiElement.getProject();
 		if(psiElement instanceof ErlangModule)
@@ -130,7 +131,7 @@ final class ElementDocProviderFactory
 		return null;
 	}
 
-	private static boolean isFileFromErlangSdk(@NotNull PsiElement target, @NotNull VirtualFile virtualFile)
+	private static boolean isFileFromErlangSdk(@Nonnull PsiElement target, @Nonnull VirtualFile virtualFile)
 	{
 		Sdk sdk = ModuleUtilCore.getSdk(target, ErlangModuleExtension.class);
 		if(sdk == null)
@@ -148,7 +149,7 @@ final class ElementDocProviderFactory
 	}
 
 	@Nullable
-	private static VirtualFile getVirtualFile(@NotNull PsiElement psiElement)
+	private static VirtualFile getVirtualFile(@Nonnull PsiElement psiElement)
 	{
 		final PsiFile containingFile = psiElement.getContainingFile();
 		return (containingFile == null ? null : containingFile.getVirtualFile());

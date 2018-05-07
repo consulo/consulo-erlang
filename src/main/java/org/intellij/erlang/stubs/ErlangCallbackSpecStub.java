@@ -21,7 +21,7 @@ import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.io.StringRef;
 import org.intellij.erlang.psi.ErlangCallbackSpec;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 public class ErlangCallbackSpecStub extends StubBase<ErlangCallbackSpec> {
   private final StringRef myNameRef;

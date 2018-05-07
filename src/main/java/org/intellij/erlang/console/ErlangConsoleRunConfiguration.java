@@ -19,9 +19,10 @@ package org.intellij.erlang.console;
 import java.util.Arrays;
 import java.util.Collection;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.sdk.ErlangSdkType;
 import org.jdom.Element;
-import org.jetbrains.annotations.NotNull;
 import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
@@ -42,23 +43,24 @@ import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.xmlb.XmlSerializer;
 
 public final class ErlangConsoleRunConfiguration extends ModuleBasedConfiguration<RunConfigurationModule> {
-  @NotNull private String myWorkingDirPath;
+  @Nonnull
+  private String myWorkingDirPath;
   private String myConsoleArgs;
 
-  public ErlangConsoleRunConfiguration(@NotNull String name, @NotNull Project project) {
+  public ErlangConsoleRunConfiguration(@Nonnull String name, @Nonnull Project project) {
     super(name, new RunConfigurationModule(project), ErlangConsoleRunConfigurationFactory.getInstance());
     myWorkingDirPath = project.getBasePath();
     myConsoleArgs = "";
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
     return new ErlangConsoleRunConfigurationForm(getProject(), getConfigurationModule().getModule());
   }
 
-  @NotNull
-  public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment environment)
+  @Nonnull
+  public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment environment)
     throws ExecutionException {
     return new ErlangConsoleCommandLineState(this, environment);
   }
@@ -74,7 +76,7 @@ public final class ErlangConsoleRunConfiguration extends ModuleBasedConfiguratio
   }
 
   @Override
-  public void writeExternal(@NotNull final Element element) throws WriteExternalException {
+  public void writeExternal(@Nonnull final Element element) throws WriteExternalException {
     super.writeExternal(element);
     writeModule(element);
     XmlSerializer.serializeInto(this, element);
@@ -95,26 +97,26 @@ public final class ErlangConsoleRunConfiguration extends ModuleBasedConfiguratio
   }
 
   @Override
-  public void readExternal(@NotNull final Element element) throws InvalidDataException {
+  public void readExternal(@Nonnull final Element element) throws InvalidDataException {
     super.readExternal(element);
     readModule(element);
     XmlSerializer.deserializeInto(this, element);
   }
 
-  public void setWorkingDirPath(@NotNull String workingDirPath) {
+  public void setWorkingDirPath(@Nonnull String workingDirPath) {
     myWorkingDirPath = workingDirPath;
   }
 
-  @NotNull
+  @Nonnull
   public String getWorkingDirPath() {
     return myWorkingDirPath;
   }
 
-  public void setConsoleArgs(@NotNull String consoleArgs) {
+  public void setConsoleArgs(@Nonnull String consoleArgs) {
     myConsoleArgs = consoleArgs;
   }
 
-  @NotNull
+  @Nonnull
   public String getConsoleArgs() {
     return myConsoleArgs;
   }

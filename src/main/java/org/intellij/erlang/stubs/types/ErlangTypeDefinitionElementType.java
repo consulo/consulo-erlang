@@ -23,7 +23,7 @@ import com.intellij.util.ArrayFactory;
 import org.intellij.erlang.psi.ErlangTypeDefinition;
 import org.intellij.erlang.psi.impl.ErlangTypeDefinitionImpl;
 import org.intellij.erlang.stubs.ErlangTypeDefinitionStub;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class ErlangTypeDefinitionElementType extends ErlangNamedStubElementType<
   public static final ErlangTypeDefinition[] EMPTY_ARRAY = new ErlangTypeDefinition[0];
 
   public static final ArrayFactory<ErlangTypeDefinition> ARRAY_FACTORY = new ArrayFactory<ErlangTypeDefinition>() {
-    @NotNull
+    @Nonnull
     @Override
     public ErlangTypeDefinition[] create(final int count) {
       return count == 0 ? EMPTY_ARRAY : new ErlangTypeDefinition[count];
@@ -43,24 +43,24 @@ public class ErlangTypeDefinitionElementType extends ErlangNamedStubElementType<
   }
 
   @Override
-  public ErlangTypeDefinition createPsi(@NotNull ErlangTypeDefinitionStub stub) {
+  public ErlangTypeDefinition createPsi(@Nonnull ErlangTypeDefinitionStub stub) {
     return new ErlangTypeDefinitionImpl(stub, this);
   }
 
   @Override
-  public ErlangTypeDefinitionStub createStub(@NotNull ErlangTypeDefinition psi, StubElement parentStub) {
+  public ErlangTypeDefinitionStub createStub(@Nonnull ErlangTypeDefinition psi, StubElement parentStub) {
     return new ErlangTypeDefinitionStub(parentStub, this, psi.getName(), psi.getArity());
   }
 
   @Override
-  public void serialize(@NotNull ErlangTypeDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@Nonnull ErlangTypeDefinitionStub stub, @Nonnull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getName());
     dataStream.writeInt(stub.getArity());
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ErlangTypeDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public ErlangTypeDefinitionStub deserialize(@Nonnull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new ErlangTypeDefinitionStub(parentStub, this, dataStream.readName(), dataStream.readInt());
   }
 }

@@ -16,9 +16,11 @@
 
 package org.intellij.erlang.rebar.importWizard;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.configuration.ErlangCompilerSettings;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.intellij.ide.util.projectWizard.ModuleWizardStep;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -155,14 +157,14 @@ public class RebarProjectImportBuilderTest /*extends ProjectWizardTestCase*/ {
    return null;
   }
 
-  private static void validateProject(@NotNull Project project) throws Exception {
+  private static void validateProject(@Nonnull Project project) throws Exception {
     ErlangCompilerSettings compilerSettings = ErlangCompilerSettings.getInstance(project);
     /*assertNotNull("Erlang compiler settings are not created.", compilerSettings);
     assertTrue("Rebar compiler is not set as default compiler.", compilerSettings.isUseRebarCompilerEnabled());
     assertFalse("Clear output directory flag was not unset.", CompilerWorkspaceConfiguration.getInstance(project).CLEAR_OUTPUT_DIRECTORY); */
   }
 
-  private void validateModule(@NotNull Module module) throws Exception {
+  private void validateModule(@Nonnull Module module) throws Exception {
    /* final String importedModulePath = getProject().getBaseDir().getPath();
 
     final Element actualImlElement = new Element("root");
@@ -186,7 +188,7 @@ public class RebarProjectImportBuilderTest /*extends ProjectWizardTestCase*/ {
     validateFacet(module);     */
   }
 
-  private static void validateFacet(@NotNull Module module) throws Exception {
+  private static void validateFacet(@Nonnull Module module) throws Exception {
    /* FacetManager facetManager = FacetManager.getInstance(module);
     ErlangFacet facet = facetManager.getFacetByType(ErlangFacetType.TYPE_ID);
     assertNotNull("Erlang facet was not added.", facet);  */

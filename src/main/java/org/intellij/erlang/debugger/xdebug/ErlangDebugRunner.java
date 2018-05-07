@@ -1,10 +1,11 @@
 package org.intellij.erlang.debugger.xdebug;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.intellij.erlang.application.ErlangApplicationConfiguration;
 import org.intellij.erlang.debugger.remote.ErlangRemoteDebugRunConfiguration;
 import org.intellij.erlang.eunit.ErlangUnitRunConfiguration;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.configurations.RunProfileState;
@@ -23,21 +24,21 @@ public class ErlangDebugRunner extends GenericProgramRunner
 
 	@Nullable
 	@Override
-	protected RunContentDescriptor doExecute(@NotNull RunProfileState state, @NotNull final ExecutionEnvironment env) throws ExecutionException
+	protected RunContentDescriptor doExecute(@Nonnull RunProfileState state, @Nonnull final ExecutionEnvironment env) throws ExecutionException
 	{
 		XDebuggerManager xDebuggerManager = XDebuggerManager.getInstance(env.getProject());
 		return xDebuggerManager.startSession(env, new XDebugProcessStarter()
 		{
-			@NotNull
+			@Nonnull
 			@Override
-			public XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException
+			public XDebugProcess start(@Nonnull XDebugSession session) throws ExecutionException
 			{
 				return new ErlangXDebugProcess(session, env);
 			}
 		}).getRunContentDescriptor();
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public String getRunnerId()
 	{
@@ -45,7 +46,7 @@ public class ErlangDebugRunner extends GenericProgramRunner
 	}
 
 	@Override
-	public boolean canRun(@NotNull String executorId, @NotNull RunProfile profile)
+	public boolean canRun(@Nonnull String executorId, @Nonnull RunProfile profile)
 	{
 		return DefaultDebugExecutor.EXECUTOR_ID.equals(executorId) && (profile instanceof ErlangApplicationConfiguration ||
 				profile instanceof ErlangUnitRunConfiguration ||

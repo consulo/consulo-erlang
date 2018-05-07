@@ -2,15 +2,16 @@
 package org.intellij.erlang.psi.impl;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import static org.intellij.erlang.ErlangTypes.*;
 import org.intellij.erlang.stubs.ErlangFunctionStub;
 import org.intellij.erlang.psi.*;
 import com.intellij.navigation.ItemPresentation;
+
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 import com.intellij.psi.stubs.IStubElementType;
 
@@ -24,31 +25,31 @@ public class ErlangFunctionImpl extends ErlangStubbedPsiElementBase<ErlangFuncti
     super(stub, nodeType);
   }
 
-  public void accept(@NotNull PsiElementVisitor visitor) {
+  public void accept(@Nonnull PsiElementVisitor visitor) {
     if (visitor instanceof ErlangVisitor) ((ErlangVisitor)visitor).visitFunction(this);
     else super.accept(visitor);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public List<ErlangFunctionClause> getFunctionClauseList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, ErlangFunctionClause.class);
   }
 
   @Override
-  @NotNull
+  @Nonnull
   public ErlangQAtom getAtomName() {
     List<ErlangFunctionClause> p1 = getFunctionClauseList();
     ErlangFunctionClause p2 = p1.get(0);
     return p2.getQAtom();
   }
 
-  @NotNull
+  @Nonnull
   public String getName() {
     return ErlangPsiImplUtil.getName(this);
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement setName(String newName) {
     return ErlangPsiImplUtil.setName(this, newName);
   }
@@ -57,17 +58,17 @@ public class ErlangFunctionImpl extends ErlangStubbedPsiElementBase<ErlangFuncti
     return ErlangPsiImplUtil.getArity(this);
   }
 
-  @NotNull
+  @Nonnull
   public PsiElement getNameIdentifier() {
     return ErlangPsiImplUtil.getNameIdentifier(this);
   }
 
-  @NotNull
+  @Nonnull
   public ItemPresentation getPresentation() {
     return ErlangPsiImplUtil.getPresentation(this);
   }
 
-  @NotNull
+  @Nonnull
   public Icon getIcon(int flags) {
     return ErlangPsiImplUtil.getIcon(this, flags);
   }

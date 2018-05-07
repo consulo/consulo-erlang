@@ -2,7 +2,7 @@ package org.intellij.erlang.eunit;
 
 import java.util.Collection;
 
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 import consulo.erlang.rebar.module.RebarModuleUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;

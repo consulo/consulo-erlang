@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.quickfixes;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -26,17 +28,16 @@ import org.intellij.erlang.psi.ErlangRecordDefinition;
 import org.intellij.erlang.psi.ErlangRecordExpression;
 import org.intellij.erlang.psi.ErlangTypedRecordFields;
 import org.intellij.erlang.psi.impl.ErlangElementFactory;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangIntroduceRecordFieldFix extends ErlangQuickFixBase {
-  @NotNull
+  @Nonnull
   @Override
   public String getFamilyName() {
     return "Introduce record field";
   }
 
   @Override
-  public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+  public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor descriptor) {
     PsiElement element = descriptor.getPsiElement();
     ErlangRecordExpression recordExpression = PsiTreeUtil.getParentOfType(element, ErlangRecordExpression.class);
     if (recordExpression != null) {

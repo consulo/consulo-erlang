@@ -26,7 +26,7 @@ import com.intellij.psi.tree.IStubFileElementType;
 import org.intellij.erlang.ErlangLanguage;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.stubs.ErlangFileStub;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -42,7 +42,7 @@ public class ErlangFileElementType extends IStubFileElementType<ErlangFileStub> 
   public StubBuilder getBuilder() {
     return new DefaultStubBuilder() {
       @Override
-      protected StubElement createStubForFile(@NotNull PsiFile file) {
+      protected StubElement createStubForFile(@Nonnull PsiFile file) {
         if (file instanceof ErlangFile) {
           return new ErlangFileStub((ErlangFile) file);
         }
@@ -57,18 +57,18 @@ public class ErlangFileElementType extends IStubFileElementType<ErlangFileStub> 
   }
 
   @Override
-  public void serialize(@NotNull ErlangFileStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@Nonnull ErlangFileStub stub, @Nonnull StubOutputStream dataStream) throws IOException {
     dataStream.writeBoolean(stub.isExportAll());
     dataStream.writeName(stub.getParseTransforms());
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ErlangFileStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public ErlangFileStub deserialize(@Nonnull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new ErlangFileStub(null, dataStream.readBoolean(), dataStream.readName());
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public String getExternalId() {
     return "erlang.FILE";

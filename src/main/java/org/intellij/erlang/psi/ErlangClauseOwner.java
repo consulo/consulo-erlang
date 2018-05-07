@@ -1,9 +1,9 @@
 package org.intellij.erlang.psi;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public interface ErlangClauseOwner {
-  @NotNull
+  @Nonnull
   List<ErlangCrClause> getCrClauseList();
 }

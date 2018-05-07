@@ -16,9 +16,10 @@
 
 package org.intellij.erlang.highlighting;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.inspection.*;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.testFramework.fixtures.CodeInsightTestFixture;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 
@@ -50,7 +51,7 @@ public abstract class ErlangHighlightingTestBase extends ErlangLightPlatformCode
     return "testData/highlighting/";
   }
 
-  public static void setUpInspections(@NotNull CodeInsightTestFixture fixture) {
+  public static void setUpInspections(@Nonnull CodeInsightTestFixture fixture) {
     //noinspection unchecked
     fixture.enableInspections(
       ErlangUnboundVariableInspection.class,

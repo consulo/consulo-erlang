@@ -2,15 +2,17 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangFunTypeArguments extends ErlangCompositeElement {
 
-  @NotNull
+  @Nonnull
   List<ErlangTopType> getTopTypeList();
 
-  @NotNull
+  @Nonnull
   PsiElement getParLeft();
 
   @Nullable

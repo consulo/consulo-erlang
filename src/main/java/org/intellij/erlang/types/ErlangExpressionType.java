@@ -25,8 +25,8 @@ import com.intellij.util.containers.Convertor;
 import org.intellij.erlang.ErlangTypes;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.Map;
 
@@ -51,7 +51,7 @@ public abstract class ErlangExpressionType {
   }
 
   public static class ErlangPrimitiveType extends ErlangExpressionType {
-    public ErlangPrimitiveType(@NotNull String name) {
+    public ErlangPrimitiveType(@Nonnull String name) {
       super(name);
     }
   }
@@ -89,18 +89,18 @@ public abstract class ErlangExpressionType {
       }
     });
 
-  @NotNull
+  @Nonnull
   public static ErlangExpressionType create(@Nullable ErlangExpression e) {
     if (e == null) return UNKNOWN;
     final Ref<ErlangExpressionType> ref = Ref.create(UNKNOWN);
     e.accept(new ErlangVisitor() {
       @Override
-      public void visitParenthesizedExpression(@NotNull ErlangParenthesizedExpression o) {
+      public void visitParenthesizedExpression(@Nonnull ErlangParenthesizedExpression o) {
         ref.set(create(o.getExpression()));
       }
 
       @Override
-      public void visitMultiplicativeExpression(@NotNull ErlangMultiplicativeExpression o) {
+      public void visitMultiplicativeExpression(@Nonnull ErlangMultiplicativeExpression o) {
         PsiElement firstChild = o.getFirstChild();
         PsiElement operator = firstChild.getNextSibling();
         if (operator == null) return;
@@ -115,7 +115,7 @@ public abstract class ErlangExpressionType {
       }
 
       @Override
-      public void visitFunctionCallExpression(@NotNull ErlangFunctionCallExpression o) {
+      public void visitFunctionCallExpression(@Nonnull ErlangFunctionCallExpression o) {
         PsiReference reference = o.getReference();
         PsiElement element = reference != null ? reference.resolve() : null ;
         if (element instanceof ErlangFunction) {
@@ -124,29 +124,29 @@ public abstract class ErlangExpressionType {
       }
 
       @Override
-      public void visitBinaryExpression(@NotNull ErlangBinaryExpression o) {
+      public void visitBinaryExpression(@Nonnull ErlangBinaryExpression o) {
         ref.set(BINARY);
       }
 
       @Override
-      public void visitTupleExpression(@NotNull ErlangTupleExpression o) {
+      public void visitTupleExpression(@Nonnull ErlangTupleExpression o) {
         ref.set(TUPLE);
       }
 
       @Override
-      public void visitListExpression(@NotNull ErlangListExpression o) {
+      public void visitListExpression(@Nonnull ErlangListExpression o) {
         ref.set(LIST);
       }
 
       @Override
-      public void visitAdditiveExpression(@NotNull ErlangAdditiveExpression o) {
+      public void visitAdditiveExpression(@Nonnull ErlangAdditiveExpression o) {
         ErlangExpressionType leftType = create(o.getLeft());
         ErlangExpressionType rightType = create(o.getRight());
         if (leftType.equals(rightType)) ref.set(leftType);
       }
 
       @Override
-      public void visitMaxExpression(@NotNull ErlangMaxExpression o) {
+      public void visitMaxExpression(@Nonnull ErlangMaxExpression o) {
         if (o.getInteger() != null) ref.set(INTEGER);
         else if (o.getFloat() != null) ref.set(FLOAT);
         else if (o.getQAtom() != null) ref.set(ATOM);
@@ -154,20 +154,20 @@ public abstract class ErlangExpressionType {
       }
 
       @Override
-      public void visitStringLiteral(@NotNull ErlangStringLiteral o) {
+      public void visitStringLiteral(@Nonnull ErlangStringLiteral o) {
         ref.set(STRING);
       }
 
       @Override
-      public void visitFunExpression(@NotNull ErlangFunExpression o) {
+      public void visitFunExpression(@Nonnull ErlangFunExpression o) {
         ref.set(FUN);
       }
     });
     return ref.get();
   }
 
-  @NotNull
-  public static ErlangExpressionType calculateFunctionType(@NotNull ErlangFunction function) {
+  @Nonnull
+  public static ErlangExpressionType calculateFunctionType(@Nonnull ErlangFunction function) {
     ErlangSpecification spec = ErlangPsiImplUtil.getSpecification(function);
     if (spec == null) return UNKNOWN;
     ErlangFunTypeSigs signature = ErlangPsiImplUtil.getSignature(spec);

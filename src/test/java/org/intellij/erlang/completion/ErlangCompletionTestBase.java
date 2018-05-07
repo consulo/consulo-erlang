@@ -22,8 +22,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageManagerImpl;
 import com.intellij.testFramework.UsefulTestCase;
@@ -50,9 +50,9 @@ abstract public class ErlangCompletionTestBase extends ErlangLightPlatformCodeIn
     myModule = myFixture.getModule();
   }
 
-  protected void doCheckResult(@NotNull String before, @NotNull String after) { doCheckResult(before, after, null); }
+  protected void doCheckResult(@Nonnull String before, @Nonnull String after) { doCheckResult(before, after, null); }
 
-  protected void doCheckResult(@NotNull String before, @NotNull String after, @Nullable Character c) {
+  protected void doCheckResult(@Nonnull String before, @Nonnull String after, @Nullable Character c) {
     myFixture.configureByText("a.erl", before);
     myFixture.completeBasic();
     if (c != null) myFixture.type(c);

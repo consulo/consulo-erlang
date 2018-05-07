@@ -31,7 +31,7 @@ import org.intellij.erlang.navigation.ErlangNavigationUtil;
 import org.intellij.erlang.psi.ErlangCallbackSpec;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.awt.event.MouseEvent;
 import java.text.MessageFormat;
@@ -41,7 +41,7 @@ import java.util.List;
 
 public class ErlangBehaviourMarkerProvider implements LineMarkerProvider {
   @Override
-  public LineMarkerInfo getLineMarkerInfo(@NotNull PsiElement element) {
+  public LineMarkerInfo getLineMarkerInfo(@Nonnull PsiElement element) {
     if (element instanceof ErlangFunction) {
       List<ErlangCallbackSpec> prototypes = ErlangNavigationUtil.getCallbackSpecs((ErlangFunction) element);
       if (!prototypes.isEmpty()) {
@@ -52,7 +52,7 @@ public class ErlangBehaviourMarkerProvider implements LineMarkerProvider {
   }
 
   @Override
-  public void collectSlowLineMarkers(@NotNull List<PsiElement> elements, @NotNull Collection<LineMarkerInfo> result) {
+  public void collectSlowLineMarkers(@Nonnull List<PsiElement> elements, @Nonnull Collection<LineMarkerInfo> result) {
   }
 
   private static LineMarkerInfo createImplementationMarker(final ErlangFunction function,

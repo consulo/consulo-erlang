@@ -3,12 +3,13 @@ package consulo.erlang.module.extension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import javax.annotation.Nullable;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.VerticalFlowLayout;
@@ -25,12 +26,12 @@ import consulo.roots.ModuleRootLayer;
  */
 public class ErlangMutableModuleExtension extends ErlangModuleExtension implements MutableModuleExtensionWithSdk<ErlangModuleExtension>
 {
-	public ErlangMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer moduleRootLayer)
+	public ErlangMutableModuleExtension(@Nonnull String id, @Nonnull ModuleRootLayer moduleRootLayer)
 	{
 		super(id, moduleRootLayer);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public MutableModuleInheritableNamedPointer<Sdk> getInheritableSdk()
 	{
@@ -67,7 +68,7 @@ public class ErlangMutableModuleExtension extends ErlangModuleExtension implemen
 	}
 
 	@Override
-	public boolean isModified(@NotNull ErlangModuleExtension erlangModuleExtension)
+	public boolean isModified(@Nonnull ErlangModuleExtension erlangModuleExtension)
 	{
 		return isModifiedImpl(erlangModuleExtension) || !myParseTransforms.equals(erlangModuleExtension
 				.myParseTransforms);

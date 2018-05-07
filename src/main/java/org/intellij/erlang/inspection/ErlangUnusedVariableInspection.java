@@ -26,7 +26,7 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Query;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.quickfixes.ErlangRenameVariableFix;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import static org.intellij.erlang.psi.impl.ErlangPsiImplUtil.*;
 
@@ -38,7 +38,7 @@ public class ErlangUnusedVariableInspection extends ErlangInspectionBase {
       for (final ErlangFunctionClause functionClause : function.getFunctionClauseList()) {
         functionClause.accept(new ErlangRecursiveVisitor() {
           @Override
-          public void visitQVar(@NotNull ErlangQVar o) {
+          public void visitQVar(@Nonnull ErlangQVar o) {
             if (!isForceSkipped(o) && !isMacros(o) && ((inArgumentDefinition(o) && !inArgumentList(o)) || inLeftPartOfAssignment(o))) {
               PsiReference reference = o.getReference();
               PsiElement resolve = reference != null ? reference.resolve() : null;

@@ -29,8 +29,8 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.documentation.DocumentationManagerProtocol;
 import com.intellij.codeInsight.documentation.PlatformDocumentationUtil;
 import com.intellij.ide.BrowserUtil;
@@ -60,17 +60,19 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
     HTTP_STYLE = "<style type=\"text/css\">\n" + css + "</style>\n";
   }
 
-  @NotNull private final Project myProject;
-  @NotNull private final VirtualFile myVirtualFile;
+  @Nonnull
+  private final Project myProject;
+  @Nonnull
+  private final VirtualFile myVirtualFile;
   @Nullable private List<OrderEntry> myOrderEntries;
   @Nullable private List<String> myExternalDocUrls;
 
-  protected ErlangSdkDocProviderBase(@NotNull Project project, @NotNull VirtualFile virtualFile) {
+  protected ErlangSdkDocProviderBase(@Nonnull Project project, @Nonnull VirtualFile virtualFile) {
     myProject = project;
     myVirtualFile = virtualFile;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public List<String> getExternalDocUrls() {
     if (myExternalDocUrls == null) {
@@ -107,7 +109,7 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
     return null;
   }
 
-  @NotNull
+  @Nonnull
   private List<OrderEntry> getOrderEntries() {
     if (myOrderEntries == null) {
       final ProjectFileIndex fileIndex = ProjectRootManager.getInstance(myProject).getFileIndex();
@@ -117,7 +119,7 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
   }
 
   @Nullable
-  private String retrieveDoc(@NotNull BufferedReader reader) {
+  private String retrieveDoc(@Nonnull BufferedReader reader) {
     try {
       String line;
       boolean functionDocFound = false;
@@ -147,8 +149,8 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
     return null;
   }
 
-  @NotNull
-  private String appendCorrectedLine(@NotNull StringBuilder builder, @NotNull String line) {
+  @Nonnull
+  private String appendCorrectedLine(@Nonnull StringBuilder builder, @Nonnull String line) {
     final Matcher matcher = PATTERN_HREF.matcher(line);
     int lastCopiedChar = 0;
     while (matcher.find()) {
@@ -165,17 +167,17 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
     return line;
   }
 
-  @NotNull
+  @Nonnull
   protected abstract String getInDocRef();
 
-  protected abstract boolean isDocEnd(@NotNull String line);
+  protected abstract boolean isDocEnd(@Nonnull String line);
 
-  protected abstract boolean isDocBegin(@NotNull String line);
+  protected abstract boolean isDocBegin(@Nonnull String line);
 
-  @NotNull
-  private static List<String> getHttpUrls(@NotNull List<OrderEntry> orderEntries,
-                                          @NotNull VirtualFile virtualFile,
-                                          @NotNull String inDocRef) {
+  @Nonnull
+  private static List<String> getHttpUrls(@Nonnull List<OrderEntry> orderEntries,
+                                          @Nonnull VirtualFile virtualFile,
+                                          @Nonnull String inDocRef) {
     for (OrderEntry orderEntry : orderEntries) {
       final String[] docRootUrls = orderEntry.getUrls(OrderRootType.DOCUMENTATION);
       final String sdkHttpDocRelPath = httpDocRelPath(virtualFile);
@@ -188,9 +190,9 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
     return Collections.emptyList();
   }
 
-  @NotNull
-  private static List<String> getFileUrls(@NotNull List<OrderEntry> orderEntries,
-                                          @NotNull VirtualFile virtualFile) {
+  @Nonnull
+  private static List<String> getFileUrls(@Nonnull List<OrderEntry> orderEntries,
+                                          @Nonnull VirtualFile virtualFile) {
     List<String> fileUrls = null;
     for (OrderEntry orderEntry : orderEntries) {
       final VirtualFile[] docRootFiles = orderEntry.getFiles(OrderRootType.DOCUMENTATION);
@@ -208,7 +210,7 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
   }
 
   @Nullable
-  private static BufferedReader createReader(@NotNull String urlString) {
+  private static BufferedReader createReader(@Nonnull String urlString) {
     try {
       final URL url = BrowserUtil.getURL(urlString);
       if (url == null) {
@@ -226,7 +228,7 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
   }
 
   @Nullable
-  private static String httpDocRelPath(@NotNull VirtualFile virtualFile) {
+  private static String httpDocRelPath(@Nonnull VirtualFile virtualFile) {
     final String appDirName = virtualFile.getParent().getParent().getName();
     final String prefix;
     if (appDirName.startsWith("erts")) {
@@ -238,8 +240,8 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
     return prefix + appDirName + "/doc/html/" + virtualFile.getNameWithoutExtension() + ".html";
   }
 
-  @NotNull
-  private static BufferedReader createHttpReader(@NotNull URL url) throws IOException {
+  @Nonnull
+  private static BufferedReader createHttpReader(@Nonnull URL url) throws IOException {
     final HttpConfigurable httpConfigurable = HttpConfigurable.getInstance();
     httpConfigurable.prepareURL(url.toString());
     final URLConnection urlConnection = url.openConnection();
@@ -253,7 +255,7 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
   }
 
   @Nullable
-  private static BufferedReader createFileReader(@NotNull URL url) {
+  private static BufferedReader createFileReader(@Nonnull URL url) {
     try {
       final InputStreamReader stream = new InputStreamReader(url.openStream());
       return new BufferedReader(stream);
@@ -262,13 +264,13 @@ abstract class ErlangSdkDocProviderBase implements ElementDocProvider {
     }
   }
 
-  @NotNull
-  private static String decorateRetrievedHtml(@NotNull String retrievedHtml) {
+  @Nonnull
+  private static String decorateRetrievedHtml(@Nonnull String retrievedHtml) {
     return "<html>\n" + HTTP_STYLE + "<body>\n" + retrievedHtml + "</body></html>\n";
   }
 
-  @NotNull
-  private String convertLink(@NotNull String href) {
+  @Nonnull
+  private String convertLink(@Nonnull String href) {
     final Matcher evaluatedLinkMatcher = PATTERN_EVALUATED_LINK.matcher(href);
     final String concreteHref = (evaluatedLinkMatcher.matches()) ? evaluatedLinkMatcher.group(1) : href;
     final Matcher externalLinkMatcher = PATTERN_EXTERNAL_LINK.matcher(concreteHref);

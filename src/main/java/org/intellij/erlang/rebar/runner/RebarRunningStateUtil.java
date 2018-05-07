@@ -3,7 +3,7 @@ package org.intellij.erlang.rebar.runner;
 import java.util.List;
 
 import org.intellij.erlang.utils.ErlangExternalToolsNotificationListener;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import consulo.erlang.rebar.module.RebarModuleUtil;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
@@ -18,7 +18,7 @@ public class RebarRunningStateUtil {
   private RebarRunningStateUtil() {
   }
 
-  public static GeneralCommandLine getRebarCommandLine(@NotNull RebarRunConfigurationBase configuration) {
+  public static GeneralCommandLine getRebarCommandLine(@Nonnull RebarRunConfigurationBase configuration) {
     Project project = configuration.getProject();
 
 

@@ -16,19 +16,20 @@
 
 package org.intellij.erlang.dialyzer;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.openapi.components.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @State(  name = "DialyzerSettings", storages = @Storage(file = StoragePathMacros.PROJECT_CONFIG_DIR + "/dialyzer.xml"))
 public final class DialyzerSettings implements PersistentStateComponent<DialyzerSettings> {
-  @NotNull
+  @Nonnull
   private String myCurrentPltPath = "";
 
-  @NotNull
-  public static DialyzerSettings getInstance(@NotNull Project project) {
+  @Nonnull
+  public static DialyzerSettings getInstance(@Nonnull Project project) {
     final DialyzerSettings persisted = ServiceManager.getService(project, DialyzerSettings.class);
     return persisted != null ? persisted : new DialyzerSettings();
   }
@@ -40,16 +41,16 @@ public final class DialyzerSettings implements PersistentStateComponent<Dialyzer
   }
 
   @Override
-  public void loadState(@NotNull DialyzerSettings dialyzerSettings) {
+  public void loadState(@Nonnull DialyzerSettings dialyzerSettings) {
     XmlSerializerUtil.copyBean(dialyzerSettings, this);
   }
 
-  @NotNull
+  @Nonnull
   public String getCurrentPltPath() {
     return myCurrentPltPath;
   }
 
-  public void setCurrentPltPath(@NotNull String currentPltPath) {
+  public void setCurrentPltPath(@Nonnull String currentPltPath) {
     myCurrentPltPath = currentPltPath;
   }
 

@@ -31,13 +31,13 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.formatter.FormatterUtil;
 import org.intellij.erlang.ErlangTypes;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 
 public class ErlangClausesSmartEnterProcessor extends SmartEnterProcessor {
   @Override
-  public boolean process(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+  public boolean process(@Nonnull Project project, @Nonnull Editor editor, @Nonnull PsiFile file) {
     if (!(file instanceof ErlangFile)) return false;
 
     PsiDocumentManager.getInstance(project).commitAllDocuments();
@@ -65,7 +65,7 @@ public class ErlangClausesSmartEnterProcessor extends SmartEnterProcessor {
     return false;
   }
 
-  private static boolean processCrClause(@NotNull Project project, @NotNull Editor editor) {
+  private static boolean processCrClause(@Nonnull Project project, @Nonnull Editor editor) {
     TemplateManager templateManager = TemplateManager.getInstance(project);
     Template template = templateManager.createTemplate("", "", "\n$variable$ ->$END$");
     Expression var = new MyTextExpressionNode("_");
@@ -76,7 +76,7 @@ public class ErlangClausesSmartEnterProcessor extends SmartEnterProcessor {
     return true;
   }
 
-  private static boolean processFunctionClause(@NotNull Project project, @NotNull Editor editor, int offset, @NotNull ErlangFunctionClause functionClause) {
+  private static boolean processFunctionClause(@Nonnull Project project, @Nonnull Editor editor, int offset, @Nonnull ErlangFunctionClause functionClause) {
     TemplateManager templateManager = TemplateManager.getInstance(project);
     ErlangQAtom qAtom = functionClause.getQAtom();
 
@@ -111,7 +111,7 @@ public class ErlangClausesSmartEnterProcessor extends SmartEnterProcessor {
   }
 
   private static class MyTextExpressionNode extends VariableNode {
-    public MyTextExpressionNode(@NotNull String name) {
+    public MyTextExpressionNode(@Nonnull String name) {
       super(name, null);
     }
 

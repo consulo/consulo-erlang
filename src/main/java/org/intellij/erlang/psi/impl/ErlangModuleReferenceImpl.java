@@ -16,16 +16,17 @@
 
 package org.intellij.erlang.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.ErlangModuleIndex;
 import org.intellij.erlang.psi.ErlangQAtom;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangModuleReferenceImpl<T extends ErlangQAtom> extends ErlangAtomBasedReferenceImpl<T> {
-  public ErlangModuleReferenceImpl(@NotNull T element, TextRange range, String name) {
+  public ErlangModuleReferenceImpl(@Nonnull T element, TextRange range, String name) {
     super(element, range, name);
   }
 
@@ -34,7 +35,7 @@ public class ErlangModuleReferenceImpl<T extends ErlangQAtom> extends ErlangAtom
     return ContainerUtil.getFirstItem(ErlangModuleIndex.getModulesByName(myElement.getProject(), myReferenceName, GlobalSearchScope.allScope(myElement.getProject())));
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public Object[] getVariants() {
     return new Object[0];

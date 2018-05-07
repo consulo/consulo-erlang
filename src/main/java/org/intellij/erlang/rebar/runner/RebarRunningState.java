@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.rebar.runner;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionResult;
 import com.intellij.execution.Executor;
@@ -28,19 +30,18 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.ui.ConsoleView;
 import org.intellij.erlang.console.ErlangConsoleUtil;
-import org.jetbrains.annotations.NotNull;
 
 final class RebarRunningState extends CommandLineState {
   private final RebarRunConfigurationBase myConfiguration;
 
-  public RebarRunningState(@NotNull final ExecutionEnvironment env, @NotNull final RebarRunConfigurationBase config) {
+  public RebarRunningState(@Nonnull final ExecutionEnvironment env, @Nonnull final RebarRunConfigurationBase config) {
     super(env);
     myConfiguration = config;
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ExecutionResult execute(@NotNull Executor executor, @NotNull ProgramRunner runner) throws ExecutionException {
+  public ExecutionResult execute(@Nonnull Executor executor, @Nonnull ProgramRunner runner) throws ExecutionException {
     final TextConsoleBuilder consoleBuilder = new TextConsoleBuilderImpl(myConfiguration.getProject()) {
       @Override
       public ConsoleView getConsole() {
@@ -53,7 +54,7 @@ final class RebarRunningState extends CommandLineState {
     return super.execute(executor, runner);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected ProcessHandler startProcess() throws ExecutionException {
     GeneralCommandLine commandLine = RebarRunningStateUtil.getRebarCommandLine(myConfiguration);

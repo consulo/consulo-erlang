@@ -19,11 +19,11 @@ package org.intellij.erlang.console;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ex.EditorEx;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class ErlangConsoleExecuteAction extends AnAction {
   @Override
-  public void update(@NotNull AnActionEvent actionEvent) {
+  public void update(@Nonnull AnActionEvent actionEvent) {
     Presentation presentation = actionEvent.getPresentation();
     Editor editor = actionEvent.getData(CommonDataKeys.EDITOR);
     if (!(editor instanceof EditorEx) || ((EditorEx) editor).isRendererMode()) {
@@ -39,7 +39,7 @@ public class ErlangConsoleExecuteAction extends AnAction {
   }
 
   @Override
-  public void actionPerformed(@NotNull AnActionEvent actionEvent) {
+  public void actionPerformed(@Nonnull AnActionEvent actionEvent) {
     Editor editor = actionEvent.getData(CommonDataKeys.EDITOR);
     if (editor != null) {
       ErlangConsoleView consoleView = ErlangConsoleViewDirectory.getInstance().getConsole(editor);

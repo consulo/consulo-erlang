@@ -22,7 +22,7 @@ import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public final class RebarRunConfigurationFactory extends ConfigurationFactory {
   private static final RebarRunConfigurationFactory ourInstance = new RebarRunConfigurationFactory();
@@ -38,13 +38,13 @@ public final class RebarRunConfigurationFactory extends ConfigurationFactory {
     }
   }
 
-  @NotNull
+  @Nonnull
   public static RebarRunConfigurationFactory getInstance() {
     return ourInstance;
   }
 
   @Override
-  public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
+  public RunConfiguration createTemplateConfiguration(@Nonnull Project project) {
     return new RebarRunConfiguration("Erlang Rebar", project);
   }
 }

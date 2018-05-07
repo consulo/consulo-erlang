@@ -24,10 +24,12 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangModule;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.ProjectRootManager;
@@ -58,7 +60,7 @@ public class ErlangModuleIndex extends ScalarIndexExtension<String> {
 
   private DataIndexer<String, Void, FileContent> myDataIndexer = new MyDataIndexer();
 
-  @NotNull
+  @Nonnull
   @Override
   public ID<String, Void> getName() {
     return ERLANG_MODULE_INDEX;
@@ -69,7 +71,7 @@ public class ErlangModuleIndex extends ScalarIndexExtension<String> {
     return INDEX_VERSION;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public DataIndexer<String, Void, FileContent> getIndexer() {
     return myDataIndexer;
@@ -90,12 +92,12 @@ public class ErlangModuleIndex extends ScalarIndexExtension<String> {
     return false;
   }
 
-  public static Collection<String> getNames(@NotNull Project project) {
+  public static Collection<String> getNames(@Nonnull Project project) {
     return FileBasedIndex.getInstance().getAllKeys(ERLANG_MODULE_INDEX, project);
   }
 
-  @NotNull
-  public static List<ErlangModule> getModulesByName(@NotNull Project project, @NotNull String name, @NotNull GlobalSearchScope searchScope) {
+  @Nonnull
+  public static List<ErlangModule> getModulesByName(@Nonnull Project project, @Nonnull String name, @Nonnull GlobalSearchScope searchScope) {
     return getByName(project, name, searchScope, new Function<ErlangFile, ErlangModule>() {
       @Nullable
       @Override
@@ -105,8 +107,8 @@ public class ErlangModuleIndex extends ScalarIndexExtension<String> {
     });
   }
 
-  @NotNull
-  public static List<ErlangFile> getFilesByName(@NotNull Project project, @NotNull String name, @NotNull GlobalSearchScope searchScope) {
+  @Nonnull
+  public static List<ErlangFile> getFilesByName(@Nonnull Project project, @Nonnull String name, @Nonnull GlobalSearchScope searchScope) {
     return getByName(project, name, searchScope, new Function<ErlangFile, ErlangFile>() {
       @Override
       public ErlangFile fun(ErlangFile erlangFile) {
@@ -115,7 +117,7 @@ public class ErlangModuleIndex extends ScalarIndexExtension<String> {
     });
   }
 
-  private static <T> List<T> getByName(@NotNull Project project, @NotNull String name, @NotNull GlobalSearchScope searchScope, final Function<ErlangFile, T> psiMapper) {
+  private static <T> List<T> getByName(@Nonnull Project project, @Nonnull String name, @Nonnull GlobalSearchScope searchScope, final Function<ErlangFile, T> psiMapper) {
     final PsiManager psiManager = PsiManager.getInstance(project);
     List<VirtualFile> virtualFiles = getVirtualFilesByName(project, name, searchScope);
     return ContainerUtil.mapNotNull(virtualFiles, new Function<VirtualFile, T>() {
@@ -128,7 +130,7 @@ public class ErlangModuleIndex extends ScalarIndexExtension<String> {
     });
   }
 
-  private static List<VirtualFile> getVirtualFilesByName(@NotNull Project project, @NotNull String name, @NotNull GlobalSearchScope searchScope) {
+  private static List<VirtualFile> getVirtualFilesByName(@Nonnull Project project, @Nonnull String name, @Nonnull GlobalSearchScope searchScope) {
     final ProjectFileIndex projectFileIndex = ProjectRootManager.getInstance(project).getFileIndex();
     Collection<VirtualFile> files = FileBasedIndex.getInstance().getContainingFiles(ERLANG_MODULE_INDEX, name, searchScope);
     ArrayList<VirtualFile> filesList = new ArrayList<VirtualFile>(files);
@@ -195,7 +197,7 @@ public class ErlangModuleIndex extends ScalarIndexExtension<String> {
 
   private static class MyDataIndexer implements DataIndexer<String, Void, FileContent> {
     @Override
-    @NotNull
+    @Nonnull
     public Map<String, Void> map(final FileContent inputData) {
       return Collections.singletonMap(inputData.getFile().getNameWithoutExtension(), null);
     }

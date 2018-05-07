@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.psi.impl;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -26,7 +28,6 @@ import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangMacrosDefinition;
 import org.intellij.erlang.psi.ErlangMacrosName;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangMacrosReferenceImpl<T extends ErlangMacrosName> extends PsiReferenceBase<T> {
   protected final String myReferenceName;
@@ -55,7 +56,7 @@ public class ErlangMacrosReferenceImpl<T extends ErlangMacrosName> extends PsiRe
     return null;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public Object[] getVariants() {
     return ArrayUtil.toObjectArray(ErlangPsiImplUtil.getMacrosLookupElements(myElement.getContainingFile()));

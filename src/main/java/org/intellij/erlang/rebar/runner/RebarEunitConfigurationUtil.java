@@ -6,7 +6,7 @@ import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Collection;
 import java.util.Set;
@@ -50,7 +50,7 @@ class RebarEunitConfigurationUtil {
     commandBuilder.append(StringUtil.join(distinctFunctionNames, ","));
   }
 
-  @NotNull
+  @Nonnull
   static String createDefaultRebarCommand(Collection<ErlangFile> suites, Collection<ErlangFunction> functions, boolean failIfNoSuitesSpecified) {
     StringBuilder commandBuilder = new StringBuilder();
     commandBuilder.append("eunit ");

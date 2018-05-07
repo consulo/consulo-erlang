@@ -28,8 +28,8 @@ import org.intellij.erlang.psi.ErlangQVar;
 import org.intellij.erlang.psi.ErlangRecursiveVisitor;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.psi.impl.ErlangVarProcessor;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.execution.console.ConsoleHistoryController;
 import com.intellij.execution.console.LanguageConsoleImpl;
 import com.intellij.execution.process.ProcessHandler;
@@ -47,7 +47,7 @@ public final class ErlangConsoleView extends LanguageConsoleImpl
 	@Nullable
 	private OutputStreamWriter myProcessInputWriter;
 
-	public ErlangConsoleView(@NotNull Project project)
+	public ErlangConsoleView(@Nonnull Project project)
 	{
 		super(project, "Erlang Console", ErlangLanguage.INSTANCE);
 
@@ -63,7 +63,7 @@ public final class ErlangConsoleView extends LanguageConsoleImpl
 	}
 
 	@Override
-	public void attachToProcess(@NotNull ProcessHandler processHandler)
+	public void attachToProcess(@Nonnull ProcessHandler processHandler)
 	{
 		super.attachToProcess(processHandler);
 		OutputStream processInput = processHandler.getProcessInput();
@@ -82,7 +82,7 @@ public final class ErlangConsoleView extends LanguageConsoleImpl
 		ErlangConsoleViewDirectory.getInstance().delConsole(this);
 	}
 
-	public void append(@NotNull final String text)
+	public void append(@Nonnull final String text)
 	{
 		WriteCommandAction.runWriteCommandAction(getProject(), new Runnable()
 		{
@@ -111,7 +111,7 @@ public final class ErlangConsoleView extends LanguageConsoleImpl
 			getFile().accept(new ErlangRecursiveVisitor()
 			{
 				@Override
-				public void visitQVar(@NotNull ErlangQVar o)
+				public void visitQVar(@Nonnull ErlangQVar o)
 				{
 					String name = o.getName();
 					if(!context.containsKey(name))
@@ -121,7 +121,7 @@ public final class ErlangConsoleView extends LanguageConsoleImpl
 				}
 
 				@Override
-				public void visitFunctionCallExpression(@NotNull ErlangFunctionCallExpression o)
+				public void visitFunctionCallExpression(@Nonnull ErlangFunctionCallExpression o)
 				{
 					String name = o.getNameIdentifier().getText();
 					int size = o.getArgumentList().getExpressionList().size();

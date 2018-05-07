@@ -16,10 +16,11 @@
 
 package org.intellij.erlang;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.LiteralTextEscaper;
 import org.intellij.erlang.psi.ErlangStringLiteral;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangStringLiteralEscaper extends LiteralTextEscaper<ErlangStringLiteral> {
   public ErlangStringLiteralEscaper(ErlangStringLiteral element) {
@@ -27,7 +28,7 @@ public class ErlangStringLiteralEscaper extends LiteralTextEscaper<ErlangStringL
   }
 
   @Override
-  public boolean decode(@NotNull final TextRange rangeInsideHost, @NotNull final StringBuilder outChars) {
+  public boolean decode(@Nonnull final TextRange rangeInsideHost, @Nonnull final StringBuilder outChars) {
     // todo implement proper java-like string escapes support
     TextRange.assertProperRange(rangeInsideHost);
     outChars.append(myHost.getText(), rangeInsideHost.getStartOffset(), rangeInsideHost.getEndOffset());
@@ -35,7 +36,7 @@ public class ErlangStringLiteralEscaper extends LiteralTextEscaper<ErlangStringL
   }
 
   @Override
-  public int getOffsetInHost(final int offsetInDecoded, @NotNull final TextRange rangeInsideHost) {
+  public int getOffsetInHost(final int offsetInDecoded, @Nonnull final TextRange rangeInsideHost) {
     TextRange.assertProperRange(rangeInsideHost);
     int offset = offsetInDecoded;
     // todo implement proper java-like string escapes support

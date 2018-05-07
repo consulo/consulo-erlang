@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.debugger.remote;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.filters.TextConsoleBuilder;
@@ -24,7 +26,6 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.module.Module;
 import org.intellij.erlang.runconfig.ErlangRunningState;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangRemoteDebugRunningState extends ErlangRunningState {
   public ErlangRemoteDebugRunningState(ExecutionEnvironment env, Module module) {
@@ -51,7 +52,7 @@ public class ErlangRemoteDebugRunningState extends ErlangRunningState {
     return null;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public ConsoleView createConsoleView(Executor executor) {
     final TextConsoleBuilder consoleBuilder = TextConsoleBuilderFactory.getInstance().createBuilder(getEnvironment().getProject());

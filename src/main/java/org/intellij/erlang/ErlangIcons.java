@@ -22,6 +22,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.ui.LayeredIcon;
 import com.intellij.util.PlatformIcons;
+import consulo.ui.image.Image;
 
 public interface ErlangIcons {
   Icon FUNCTION = PlatformIcons.FUNCTION_ICON;
@@ -50,7 +51,7 @@ public interface ErlangIcons {
   Icon EUNIT = new LayeredIcon(FILE, AllIcons.Nodes.JunitTestMark);
   Icon HEADER = IconLoader.getIcon("/icons/erlang-header-16.png");
 
-  Icon ERLANG = IconLoader.getIcon("/icons/erlang-small-16.png");
+  Image ERLANG = IconLoader.getIcon("/icons/erlang-small-16.png");
   Icon REBAR = IconLoader.getIcon("/icons/rebar-16.png");
   Icon REBAR_MODULE_CONFLICT = IconLoader.getIcon("/icons/rebar-module-conflict-16.png");
   Icon REBAR_EUNIT = new LayeredIcon(REBAR, AllIcons.Nodes.JunitTestMark);

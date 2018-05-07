@@ -18,7 +18,7 @@ package org.intellij.erlang.documentation;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.regex.Pattern;
 
@@ -26,23 +26,23 @@ final class ErlangSdkModuleDocProvider extends ErlangSdkDocProviderBase {
   private static final Pattern PATTERN_MODULE_BEGIN = Pattern.compile("^  <h3>MODULE</h3>$");
   private static final Pattern PATTERN_MODULE_END = Pattern.compile("^  <h3>EXPORTS</h3>$");
 
-  public ErlangSdkModuleDocProvider(@NotNull Project project, @NotNull VirtualFile virtualFile) {
+  public ErlangSdkModuleDocProvider(@Nonnull Project project, @Nonnull VirtualFile virtualFile) {
     super(project, virtualFile);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   protected String getInDocRef() {
     return "";
   }
 
   @Override
-  public boolean isDocBegin(@NotNull String line) {
+  public boolean isDocBegin(@Nonnull String line) {
     return PATTERN_MODULE_BEGIN.matcher(line).matches();
   }
 
   @Override
-  public boolean isDocEnd(@NotNull String line) {
+  public boolean isDocEnd(@Nonnull String line) {
     return PATTERN_MODULE_END.matcher(line).matches();
   }
 }

@@ -1,12 +1,13 @@
 package consulo.erlang.debugger;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.ErlangTypes;
 import org.intellij.erlang.debugger.xdebug.ErlangLineBreakpointType;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import consulo.annotations.RequiredReadAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
@@ -28,7 +29,7 @@ public class ErlangLineBreakpointTypeResolver implements XLineBreakpointTypeReso
 	@Nullable
 	@Override
 	@RequiredReadAction
-	public XLineBreakpointType<?> resolveBreakpointType(@NotNull Project project, @NotNull VirtualFile virtualFile, int line)
+	public XLineBreakpointType<?> resolveBreakpointType(@Nonnull Project project, @Nonnull VirtualFile virtualFile, int line)
 	{
 		if(virtualFile.getFileType() != ErlangFileType.MODULE)
 		{
@@ -42,7 +43,7 @@ public class ErlangLineBreakpointTypeResolver implements XLineBreakpointTypeReso
 	// description at http://www.erlang.org/doc/apps/debugger/debugger_chapter.html
 	// and, ideally, it should return false otherwise
 	@RequiredReadAction
-	private static boolean isLineBreakpointAvailable(VirtualFile file, int line, @NotNull Project project)
+	private static boolean isLineBreakpointAvailable(VirtualFile file, int line, @Nonnull Project project)
 	{
 		Document document = FileDocumentManager.getInstance().getDocument(file);
 		if(document == null)

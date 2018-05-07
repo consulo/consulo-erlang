@@ -49,8 +49,8 @@ import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangElementFactory;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.refactor.ErlangRefactoringUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.*;
 
@@ -58,7 +58,7 @@ public class ErlangExtractFunctionHandler implements RefactoringActionHandler {
   public static final Logger LOGGER = Logger.getInstance(ErlangExtractFunctionHandler.class);
 
   @Override
-  public void invoke(@NotNull final Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext) {
+  public void invoke(@Nonnull final Project project, Editor editor, PsiFile file, @Nullable DataContext dataContext) {
     if (!CommonRefactoringUtil.checkReadOnlyStatus(file)) return;
 
     SelectionModel selectionModel = editor.getSelectionModel();
@@ -83,7 +83,7 @@ public class ErlangExtractFunctionHandler implements RefactoringActionHandler {
       ErlangRefactoringUtil.smartIntroduce(editor, file,
         new ErlangRefactoringUtil.Extractor() {
           @Override
-          public boolean checkContext(@NotNull PsiFile file, @NotNull Editor editor, @Nullable PsiElement element) {
+          public boolean checkContext(@Nonnull PsiFile file, @Nonnull Editor editor, @Nullable PsiElement element) {
             boolean ok = PsiTreeUtil.getParentOfType(element, ErlangClauseBody.class) != null;
             if (!ok) {
               showCannotPerformError(project, editor);
@@ -92,7 +92,7 @@ public class ErlangExtractFunctionHandler implements RefactoringActionHandler {
           }
 
           @Override
-          public void process(@NotNull Editor editor, @NotNull ErlangExpression expression) {
+          public void process(@Nonnull Editor editor, @Nonnull ErlangExpression expression) {
             perform(editor, ContainerUtil.newSmartList(expression));
           }
         });
@@ -100,8 +100,8 @@ public class ErlangExtractFunctionHandler implements RefactoringActionHandler {
     selectionModel.removeSelection();
   }
 
-  @NotNull
-  private static List<ErlangExpression> getSelectedExpressions(@NotNull PsiElement first, @NotNull PsiElement second) {
+  @Nonnull
+  private static List<ErlangExpression> getSelectedExpressions(@Nonnull PsiElement first, @Nonnull PsiElement second) {
     if (second instanceof LeafPsiElement) {
       final IElementType elementType = ((LeafPsiElement) second).getElementType();
       if (elementType == ErlangTypes.ERL_DOT || elementType == ErlangTypes.ERL_SEMI) {
@@ -194,8 +194,8 @@ public class ErlangExtractFunctionHandler implements RefactoringActionHandler {
     }
   }
 
-  @NotNull
-  static String generateSignature(@NotNull String functionName, @NotNull List<ErlangNamedElement> inParams) {
+  @Nonnull
+  static String generateSignature(@Nonnull String functionName, @Nonnull List<ErlangNamedElement> inParams) {
     return functionName + "(" + StringUtil.join(inParams, new Function<ErlangNamedElement, String>() {
       @Override
       public String fun(ErlangNamedElement o) {
@@ -204,8 +204,8 @@ public class ErlangExtractFunctionHandler implements RefactoringActionHandler {
     }, ", ") + ")";
   }
 
-  @NotNull
-  private static String bindings(@NotNull List<ErlangNamedElement> out) {
+  @Nonnull
+  private static String bindings(@Nonnull List<ErlangNamedElement> out) {
     if (out.isEmpty()) return "";
     String join = StringUtil.join(out, new Function<ErlangNamedElement, String>() {
       @Override
@@ -218,7 +218,7 @@ public class ErlangExtractFunctionHandler implements RefactoringActionHandler {
   }
 
 
-  public static Pair<List<ErlangNamedElement>, List<ErlangNamedElement>> analyze(@NotNull List<? extends PsiElement> elements) {
+  public static Pair<List<ErlangNamedElement>, List<ErlangNamedElement>> analyze(@Nonnull List<? extends PsiElement> elements) {
     PsiElement first = elements.get(0);
     final PsiElement scope = PsiTreeUtil.getTopmostParentOfType(first, ErlangFunction.class);
     final PsiElement lastElement = elements.get(elements.size() - 1);
@@ -263,7 +263,7 @@ public class ErlangExtractFunctionHandler implements RefactoringActionHandler {
     for (PsiElement child : children) {
       child.accept(new ErlangRecursiveVisitor() {
         @Override
-        public void visitQVar(@NotNull ErlangQVar o) {
+        public void visitQVar(@Nonnull ErlangQVar o) {
           result.add(o);
         }
       });
@@ -294,11 +294,11 @@ public class ErlangExtractFunctionHandler implements RefactoringActionHandler {
     }
   }
 
-  private static void showCannotPerformError(@NotNull Project project, @NotNull Editor editor) {
+  private static void showCannotPerformError(@Nonnull Project project, @Nonnull Editor editor) {
     CommonRefactoringUtil.showErrorHint(project, editor, "Cannot perform refactoring", "Cannot Perform Refactoring", "refactoring.extractMethod");
   }
 
   @Override
-  public void invoke(@NotNull Project project, @NotNull PsiElement[] elements, DataContext dataContext) {
+  public void invoke(@Nonnull Project project, @Nonnull PsiElement[] elements, DataContext dataContext) {
   }
 }

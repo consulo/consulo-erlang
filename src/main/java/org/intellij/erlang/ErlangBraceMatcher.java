@@ -21,8 +21,8 @@ import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ErlangBraceMatcher implements PairedBraceMatcher {
   private static final BracePair[] PAIRS = new BracePair[]{
@@ -44,7 +44,7 @@ public class ErlangBraceMatcher implements PairedBraceMatcher {
   }
 
   @Override
-  public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType type) {
+  public boolean isPairedBracesAllowedBeforeType(@Nonnull IElementType lbraceType, @Nullable IElementType type) {
     return TokenType.WHITE_SPACE == type
       || ErlangParserDefinition.COMMENTS.contains(type)
       || type == ErlangTypes.ERL_SEMI

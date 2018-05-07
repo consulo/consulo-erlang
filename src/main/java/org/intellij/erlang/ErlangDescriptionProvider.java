@@ -24,11 +24,11 @@ import com.intellij.usageView.UsageViewNodeTextLocation;
 import com.intellij.usageView.UsageViewShortNameLocation;
 import com.intellij.usageView.UsageViewTypeLocation;
 import org.intellij.erlang.psi.*;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class ErlangDescriptionProvider implements ElementDescriptionProvider {
   @Override
-  public String getElementDescription(@NotNull PsiElement o, @NotNull ElementDescriptionLocation location) {
+  public String getElementDescription(@Nonnull PsiElement o, @Nonnull ElementDescriptionLocation location) {
     if (o instanceof ErlangQAtom) {
       return "Atom '" + o.getText() + "'";
     }

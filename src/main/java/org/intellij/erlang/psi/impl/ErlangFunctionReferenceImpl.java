@@ -20,6 +20,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.intellij.erlang.ErlangModuleIndex;
 import org.intellij.erlang.bif.ErlangBifTable;
 import org.intellij.erlang.psi.ErlangCallbackSpec;
@@ -30,8 +33,6 @@ import org.intellij.erlang.psi.ErlangImportFunction;
 import org.intellij.erlang.psi.ErlangQAtom;
 import org.intellij.erlang.sdk.ErlangSdkRelease;
 import org.intellij.erlang.sdk.ErlangSdkType;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -56,7 +57,7 @@ public class ErlangFunctionReferenceImpl<T extends ErlangQAtom> extends PsiPolyV
   protected final String myReferenceName;
   private final int myArity;
 
-  public ErlangFunctionReferenceImpl(@NotNull T element, @Nullable ErlangQAtom moduleAtom, TextRange range, String name, int arity) {
+  public ErlangFunctionReferenceImpl(@Nonnull T element, @Nullable ErlangQAtom moduleAtom, TextRange range, String name, int arity) {
     super(element, range);
     myReferenceName = name;
     myModuleAtom = moduleAtom;
@@ -120,7 +121,7 @@ public class ErlangFunctionReferenceImpl<T extends ErlangQAtom> extends PsiPolyV
     return null;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public ResolveResult[] multiResolve(boolean incompleteCode) {
     if (suppressResolve()) return ResolveResult.EMPTY_ARRAY; // for #132
@@ -169,7 +170,7 @@ public class ErlangFunctionReferenceImpl<T extends ErlangQAtom> extends PsiPolyV
     return PsiTreeUtil.getParentOfType(myElement, ErlangCallbackSpec.class) != null;
   }
 
-  @NotNull
+  @Nonnull
   private String getModuleFileName() {
     return myModuleAtom != null ? StringUtil.unquoteString(myModuleAtom.getText()) : "";
   }
@@ -180,7 +181,7 @@ public class ErlangFunctionReferenceImpl<T extends ErlangQAtom> extends PsiPolyV
   }
 
   @Nullable
-  private ErlangFunction getExternalFunction(@NotNull String moduleFileName) {
+  private ErlangFunction getExternalFunction(@Nonnull String moduleFileName) {
     Project project = getElement().getProject();
     List<ErlangFunction> result = new ArrayList<ErlangFunction>();
     for (ErlangFile file : ErlangModuleIndex.getFilesByName(project, moduleFileName, GlobalSearchScope.allScope(project))) {
@@ -190,7 +191,7 @@ public class ErlangFunctionReferenceImpl<T extends ErlangQAtom> extends PsiPolyV
     return ContainerUtil.getFirstItem(result);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public Object[] getVariants() {
     if (PsiTreeUtil.getParentOfType(myElement, ErlangExportFunction.class) != null) return EMPTY_ARRAY;

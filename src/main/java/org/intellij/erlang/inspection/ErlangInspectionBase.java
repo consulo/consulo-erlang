@@ -19,14 +19,16 @@ package org.intellij.erlang.inspection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.ErlangLanguage;
 import org.intellij.erlang.psi.ErlangAttribute;
 import org.intellij.erlang.psi.ErlangClauseBody;
 import org.intellij.erlang.psi.ErlangCompositeElement;
 import org.intellij.erlang.psi.ErlangExpression;
 import org.intellij.erlang.psi.ErlangFunction;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.intellij.codeInsight.daemon.impl.actions.AbstractSuppressByNoInspectionCommentFix;
 import com.intellij.codeInspection.CustomSuppressableInspectionTool;
 import com.intellij.codeInspection.InspectionManager;
@@ -52,7 +54,7 @@ abstract public class ErlangInspectionBase extends LocalInspectionTool implement
   private static final Pattern SUPPRESS_PATTERN = Pattern.compile(SuppressionUtil.COMMON_SUPPRESS_REGEXP);
 
   @Override
-  public ProblemDescriptor[] checkFile(@NotNull PsiFile file, @NotNull InspectionManager manager, boolean isOnTheFly) {
+  public ProblemDescriptor[] checkFile(@Nonnull PsiFile file, @Nonnull InspectionManager manager, boolean isOnTheFly) {
     ProblemsHolder problemsHolder = new ProblemsHolder(manager, file, isOnTheFly);
     try {
       checkFile(file, problemsHolder);
@@ -74,7 +76,7 @@ abstract public class ErlangInspectionBase extends LocalInspectionTool implement
   }
 
   @Override
-  public boolean isSuppressedFor(@NotNull PsiElement element) {
+  public boolean isSuppressedFor(@Nonnull PsiElement element) {
     return isSuppressedForParent(element, ErlangFunction.class) ||
       isSuppressedForParent(element, ErlangAttribute.class) ||
       isSuppressedForExpression(element);
@@ -151,7 +153,7 @@ abstract public class ErlangInspectionBase extends LocalInspectionTool implement
     }
 
     @Override
-    protected void createSuppression(@NotNull Project project, @NotNull PsiElement element, @NotNull PsiElement container) throws IncorrectOperationException {
+    protected void createSuppression(@Nonnull Project project, @Nonnull PsiElement element, @Nonnull PsiElement container) throws IncorrectOperationException {
       final PsiParserFacade parserFacade = PsiParserFacade.SERVICE.getInstance(project);
       final String text = "noinspection " + myID;
       PsiComment comment = parserFacade.createLineOrBlockCommentFromText(element.getContainingFile().getLanguage(), text);

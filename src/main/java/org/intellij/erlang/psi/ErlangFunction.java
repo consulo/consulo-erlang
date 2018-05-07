@@ -2,36 +2,38 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import org.intellij.erlang.stubs.ErlangFunctionStub;
 import com.intellij.navigation.ItemPresentation;
+
+import javax.annotation.Nonnull;
 import javax.swing.Icon;
 
 public interface ErlangFunction extends ErlangNamedElement, StubBasedPsiElement<ErlangFunctionStub> {
 
-  @NotNull
+  @Nonnull
   List<ErlangFunctionClause> getFunctionClauseList();
 
-  @NotNull
+  @Nonnull
   ErlangQAtom getAtomName();
 
-  @NotNull
+  @Nonnull
   String getName();
 
-  @NotNull
+  @Nonnull
   PsiElement setName(String newName);
 
   int getArity();
 
-  @NotNull
+  @Nonnull
   PsiElement getNameIdentifier();
 
-  @NotNull
+  @Nonnull
   ItemPresentation getPresentation();
 
-  @NotNull
+  @Nonnull
   Icon getIcon(int flags);
 
   boolean isExported();

@@ -20,14 +20,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.util.PsiTreeUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public abstract class ResolveUtil {
   private ResolveUtil() {
   }
 
-  public static boolean treeWalkUp(@Nullable PsiElement place, @NotNull PsiScopeProcessor processor) {
+  public static boolean treeWalkUp(@Nullable PsiElement place, @Nonnull PsiScopeProcessor processor) {
     PsiElement lastParent = null;
     PsiElement run = place;
     while (run != null) {
@@ -38,11 +38,11 @@ public abstract class ResolveUtil {
     return true;
   }
 
-  public static boolean processChildren(@NotNull PsiElement element,
-                                        @NotNull PsiScopeProcessor processor,
-                                        @NotNull ResolveState substitutor,
+  public static boolean processChildren(@Nonnull PsiElement element,
+                                        @Nonnull PsiScopeProcessor processor,
+                                        @Nonnull ResolveState substitutor,
                                         @Nullable PsiElement lastParent,
-                                        @NotNull PsiElement place) {
+                                        @Nonnull PsiElement place) {
     PsiElement run = lastParent == null ? element.getLastChild() : lastParent.getPrevSibling();
     while (run != null) {
       if (PsiTreeUtil.findCommonParent(place, run) != run && !run.processDeclarations(processor, substitutor, null, place)) {

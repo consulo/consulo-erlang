@@ -16,8 +16,8 @@
 
 package org.intellij.erlang.roots;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ModifiableRootModel;
@@ -31,18 +31,18 @@ public final class ErlangIncludeDirectoryUtil {
   private ErlangIncludeDirectoryUtil() {
   }
 
-  @NotNull
+  @Nonnull
   public static VirtualFile[] getIncludeDirectories(@Nullable Module module) {
     if (module == null) return VirtualFile.EMPTY_ARRAY;
     ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
     return rootManager.getContentFolderFiles(ContentFolderScopes.of(ErlangIncludeContentFolderTypeProvider.getInstance()));
   }
 
-  public static void markAsIncludeDirectory(@NotNull ContentEntry contentEntry, @NotNull VirtualFile directory) {
+  public static void markAsIncludeDirectory(@Nonnull ContentEntry contentEntry, @Nonnull VirtualFile directory) {
     contentEntry.addFolder(directory, ErlangIncludeContentFolderTypeProvider.getInstance());
   }
 
-  public static void markAsIncludeDirectory(@NotNull Module module, @NotNull VirtualFile directory) {
+  public static void markAsIncludeDirectory(@Nonnull Module module, @Nonnull VirtualFile directory) {
     ModuleRootManager rootManager = ModuleRootManager.getInstance(module);
     ModifiableRootModel rootModel = rootManager.getModifiableModel();
     for (ContentEntry contentEntry : rootModel.getContentEntries()) {

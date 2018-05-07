@@ -16,6 +16,9 @@
 
 package org.intellij.erlang.quickfixes;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import com.intellij.codeInsight.template.Template;
 import com.intellij.codeInsight.template.TemplateManager;
 import com.intellij.codeInsight.template.impl.ConstantNode;
@@ -29,19 +32,17 @@ import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangMacros;
 import org.intellij.erlang.psi.ErlangMacrosDefinition;
 import org.intellij.erlang.psi.ErlangMacrosName;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class ErlangIntroduceMacroQuickFix extends ErlangQuickFixBase {
 
-  @NotNull
+  @Nonnull
   @Override
   public String getFamilyName() {
     return "Introduce macro";
   }
 
   @Override
-  public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+  public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor descriptor) {
     PsiElement psiElement = descriptor.getPsiElement();
 
     if (!(psiElement instanceof ErlangMacros)) return;

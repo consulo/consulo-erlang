@@ -16,13 +16,14 @@
 
 package org.intellij.erlang.console;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.compiler.options.CompileStepBeforeRun;
 import com.intellij.execution.BeforeRunTask;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
-import org.jetbrains.annotations.NotNull;
 
 final class ErlangConsoleRunConfigurationFactory extends ConfigurationFactory {
   private static final ErlangConsoleRunConfigurationFactory ourInstance = new ErlangConsoleRunConfigurationFactory();
@@ -32,20 +33,20 @@ final class ErlangConsoleRunConfigurationFactory extends ConfigurationFactory {
   }
 
   @Override
-  public void configureBeforeRunTaskDefaults(@NotNull Key<? extends BeforeRunTask> providerID,
-                                             @NotNull BeforeRunTask task) {
+  public void configureBeforeRunTaskDefaults(@Nonnull Key<? extends BeforeRunTask> providerID,
+                                             @Nonnull BeforeRunTask task) {
     if (providerID == CompileStepBeforeRun.ID) {
       task.setEnabled(false);
     }
   }
 
-  @NotNull
+  @Nonnull
   public static ErlangConsoleRunConfigurationFactory getInstance() {
     return ourInstance;
   }
 
   @Override
-  public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
+  public RunConfiguration createTemplateConfiguration(@Nonnull Project project) {
     return new ErlangConsoleRunConfiguration("Erlang Shell", project);
   }
 }

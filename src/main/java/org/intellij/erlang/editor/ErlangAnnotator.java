@@ -35,115 +35,115 @@ import org.intellij.erlang.ErlangTypes;
 import org.intellij.erlang.documentation.ErlangDocUtil;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.List;
 import java.util.Set;
 
 public class ErlangAnnotator implements Annotator, DumbAware {
   @Override
-  public void annotate(@NotNull PsiElement psiElement, @NotNull final AnnotationHolder annotationHolder) {
+  public void annotate(@Nonnull PsiElement psiElement, @Nonnull final AnnotationHolder annotationHolder) {
     if (psiElement instanceof PsiComment) {
       highlightEdocTags((PsiComment) psiElement, annotationHolder);
     }
     else if (!(psiElement instanceof ErlangFile)) return;
     psiElement.accept(new ErlangRecursiveVisitor() {
       @Override
-      public void visitAtomAttribute(@NotNull ErlangAtomAttribute o) {
+      public void visitAtomAttribute(@Nonnull ErlangAtomAttribute o) {
         super.visitAtomAttribute(o);
         setHighlighting(o.getQAtom(), annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
       }
 
       @Override
-      public void visitCallbackSpec(@NotNull ErlangCallbackSpec o) {
+      public void visitCallbackSpec(@Nonnull ErlangCallbackSpec o) {
         super.visitCallbackSpec(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
       }
 
       @Override
-      public void visitSpecification(@NotNull ErlangSpecification o) {
+      public void visitSpecification(@Nonnull ErlangSpecification o) {
         super.visitSpecification(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
       }
 
       @Override
-      public void visitAttribute(@NotNull ErlangAttribute o) {
+      public void visitAttribute(@Nonnull ErlangAttribute o) {
         super.visitAttribute(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
       }
 
       @Override
-      public void visitExport(@NotNull ErlangExport o) {
+      public void visitExport(@Nonnull ErlangExport o) {
         super.visitExport(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
       }
 
       @Override
-      public void visitExportTypeAttribute(@NotNull ErlangExportTypeAttribute o) {
+      public void visitExportTypeAttribute(@Nonnull ErlangExportTypeAttribute o) {
         super.visitExportTypeAttribute(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
       }
 
       @Override
-      public void visitImportDirective(@NotNull ErlangImportDirective o) {
+      public void visitImportDirective(@Nonnull ErlangImportDirective o) {
         super.visitImportDirective(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
       }
 
       @Override
-      public void visitInclude(@NotNull ErlangInclude o) {
+      public void visitInclude(@Nonnull ErlangInclude o) {
         super.visitInclude(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
         markNameAsAttribute(o, annotationHolder, "include");
       }
 
       @Override
-      public void visitFunctionWithArity(@NotNull ErlangFunctionWithArity o) {
+      public void visitFunctionWithArity(@Nonnull ErlangFunctionWithArity o) {
         super.visitFunctionWithArity(o);
         setHighlighting(o.getQAtom(), annotationHolder, ErlangSyntaxHighlighter.FUNCTION);        
       }
 
       @Override
-      public void visitExportFunction(@NotNull ErlangExportFunction o) {
+      public void visitExportFunction(@Nonnull ErlangExportFunction o) {
         super.visitExportFunction(o);
         setHighlighting(o.getQAtom(), annotationHolder, ErlangSyntaxHighlighter.FUNCTION);
       }
 
       @Override
-      public void visitFunctionCallExpression(@NotNull ErlangFunctionCallExpression o) {
+      public void visitFunctionCallExpression(@Nonnull ErlangFunctionCallExpression o) {
         super.visitFunctionCallExpression(o);
         TextAttributesKey key = o.getParent() instanceof ErlangGuard ? ErlangSyntaxHighlighter.GUARD : ErlangSyntaxHighlighter.FUNCTION_CALL;
         markCall(o.getQAtom(), annotationHolder, key);
       }
 
       @Override
-      public void visitGenericFunctionCallExpression(@NotNull ErlangGenericFunctionCallExpression o) {
+      public void visitGenericFunctionCallExpression(@Nonnull ErlangGenericFunctionCallExpression o) {
         super.visitGenericFunctionCallExpression(o);
         markCall(PsiTreeUtil.getPrevSiblingOfType(o.getArgumentList(), ErlangQAtom.class), annotationHolder, ErlangSyntaxHighlighter.FUNCTION_CALL);        
       }
 
       @Override
-      public void visitModuleRef(@NotNull ErlangModuleRef o) {
+      public void visitModuleRef(@Nonnull ErlangModuleRef o) {
         super.visitModuleRef(o);
         setHighlighting(o.getQAtom(), annotationHolder, ErlangSyntaxHighlighter.MODULE_REF);
       }
 
       @Override
-      public void visitIncludeLib(@NotNull ErlangIncludeLib o) {
+      public void visitIncludeLib(@Nonnull ErlangIncludeLib o) {
         super.visitIncludeLib(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
         markNameAsAttribute(o, annotationHolder, "include_lib");
       }
 
       @Override
-      public void visitModule(@NotNull ErlangModule o) {
+      public void visitModule(@Nonnull ErlangModule o) {
         super.visitModule(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
       }
 
       @Override
-      public void visitRecordDefinition(@NotNull ErlangRecordDefinition o) {
+      public void visitRecordDefinition(@Nonnull ErlangRecordDefinition o) {
         super.visitRecordDefinition(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
         markNameAsAttribute(o, annotationHolder, "record");
@@ -154,14 +154,14 @@ public class ErlangAnnotator implements Annotator, DumbAware {
       }
 
       @Override
-      public void visitMacrosDefinition(@NotNull ErlangMacrosDefinition o) {
+      public void visitMacrosDefinition(@Nonnull ErlangMacrosDefinition o) {
         super.visitMacrosDefinition(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
         markNameAsAttribute(o, annotationHolder, "define");
       }
 
       @Override
-      public void visitTypeDefinition(@NotNull ErlangTypeDefinition o) {
+      public void visitTypeDefinition(@Nonnull ErlangTypeDefinition o) {
         super.visitTypeDefinition(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
         markAttributeName(o, annotationHolder, "type", ErlangSyntaxHighlighter.ATTRIBUTE);
@@ -169,7 +169,7 @@ public class ErlangAnnotator implements Annotator, DumbAware {
       }
 
       @Override
-      public void visitMacrosName(@NotNull ErlangMacrosName o) {
+      public void visitMacrosName(@Nonnull ErlangMacrosName o) {
         super.visitMacrosName(o);
         final PsiElement firstChild = o.getFirstChild();
         if (firstChild != null) {
@@ -178,13 +178,13 @@ public class ErlangAnnotator implements Annotator, DumbAware {
       }
 
       @Override
-      public void visitBehaviour(@NotNull ErlangBehaviour o) {
+      public void visitBehaviour(@Nonnull ErlangBehaviour o) {
         super.visitBehaviour(o);
         markFirstChild(o, annotationHolder, ErlangSyntaxHighlighter.ATTRIBUTE);
       }
 
       @Override
-      public void visitRecordRef(@NotNull ErlangRecordRef o) {
+      public void visitRecordRef(@Nonnull ErlangRecordRef o) {
         super.visitRecordRef(o);
         final PsiElement firstChild = o.getFirstChild();
         if (firstChild != null) {
@@ -193,7 +193,7 @@ public class ErlangAnnotator implements Annotator, DumbAware {
       }
 
       @Override
-      public void visitQAtom(@NotNull ErlangQAtom o) {
+      public void visitQAtom(@Nonnull ErlangQAtom o) {
         super.visitQAtom(o);
         PsiElement atom = o.getAtom();
         PsiElement parent = o.getParent();
@@ -213,7 +213,7 @@ public class ErlangAnnotator implements Annotator, DumbAware {
       }
 
       @Override
-      public void visitFunction(@NotNull ErlangFunction o) {
+      public void visitFunction(@Nonnull ErlangFunction o) {
         super.visitFunction(o);
         for (ErlangFunctionClause erlangFunClause : o.getFunctionClauseList()) {
           setHighlighting(erlangFunClause.getFirstChild(), annotationHolder, ErlangSyntaxHighlighter.FUNCTION);
@@ -221,7 +221,7 @@ public class ErlangAnnotator implements Annotator, DumbAware {
       }
 
       @Override
-      public void visitSpecFun(@NotNull ErlangSpecFun o) {
+      public void visitSpecFun(@Nonnull ErlangSpecFun o) {
         super.visitSpecFun(o);
         //noinspection unchecked
         ErlangCompositeElement parent = PsiTreeUtil.getParentOfType(o, ErlangSpecification.class, ErlangCallbackSpec.class);
@@ -236,13 +236,13 @@ public class ErlangAnnotator implements Annotator, DumbAware {
     });
   }
 
-  private static void markCall(@Nullable ErlangQAtom atom, @NotNull AnnotationHolder annotationHolder, TextAttributesKey key) {
+  private static void markCall(@Nullable ErlangQAtom atom, @Nonnull AnnotationHolder annotationHolder, TextAttributesKey key) {
     if (atom != null && atom.getMacros() == null) {
       setHighlighting(atom, annotationHolder, key);
     }
   }
 
-  private static void highlightEdocTags(@NotNull PsiComment comment, @NotNull AnnotationHolder annotationHolder) {
+  private static void highlightEdocTags(@Nonnull PsiComment comment, @Nonnull AnnotationHolder annotationHolder) {
     IElementType tokenType = comment.getTokenType();
     final Set<String> edocTags;
     if (tokenType == ErlangParserDefinition.ERL_FUNCTION_DOC_COMMENT) {
@@ -267,14 +267,14 @@ public class ErlangAnnotator implements Annotator, DumbAware {
     }
   }
 
-  private static void markNameAsAttribute(@NotNull ErlangCompositeElement o,
-                                          @NotNull AnnotationHolder annotationHolder,
-                                          @NotNull String name) {
+  private static void markNameAsAttribute(@Nonnull ErlangCompositeElement o,
+                                          @Nonnull AnnotationHolder annotationHolder,
+                                          @Nonnull String name) {
     markAttributeName(o, annotationHolder, name, ErlangSyntaxHighlighter.ATTRIBUTE);
   }
 
-  private static void markAttributeName(@NotNull ErlangCompositeElement o, @NotNull AnnotationHolder annotationHolder,
-                                        @NotNull String name, @NotNull TextAttributesKey key) {
+  private static void markAttributeName(@Nonnull ErlangCompositeElement o, @Nonnull AnnotationHolder annotationHolder,
+                                        @Nonnull String name, @Nonnull TextAttributesKey key) {
     PsiElement rec = o.getFirstChild();
     while (rec != null) {
       if (rec instanceof LeafPsiElement && name.equals(rec.getText())) break;
@@ -285,20 +285,20 @@ public class ErlangAnnotator implements Annotator, DumbAware {
     }
   }
 
-  private static void markFirstChild(@NotNull ErlangCompositeElement o, @NotNull AnnotationHolder annotationHolder,
-                                     @NotNull TextAttributesKey key) {
+  private static void markFirstChild(@Nonnull ErlangCompositeElement o, @Nonnull AnnotationHolder annotationHolder,
+                                     @Nonnull TextAttributesKey key) {
     final PsiElement firstChild = o.getFirstChild();
     if (firstChild != null) {
       setHighlighting(firstChild, annotationHolder, key);
     }
   }
 
-  private static void setHighlighting(@NotNull TextRange range, @NotNull AnnotationHolder holder, @NotNull TextAttributesKey key) {
+  private static void setHighlighting(@Nonnull TextRange range, @Nonnull AnnotationHolder holder, @Nonnull TextAttributesKey key) {
     holder.createInfoAnnotation(range, null).setEnforcedTextAttributes(TextAttributes.ERASE_MARKER);
     holder.createInfoAnnotation(range, null).setEnforcedTextAttributes(EditorColorsManager.getInstance().getGlobalScheme().getAttributes(key));
   }
 
-  private static void setHighlighting(@NotNull PsiElement element, @NotNull AnnotationHolder holder, @NotNull TextAttributesKey key) {
+  private static void setHighlighting(@Nonnull PsiElement element, @Nonnull AnnotationHolder holder, @Nonnull TextAttributesKey key) {
     holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(TextAttributes.ERASE_MARKER);
     holder.createInfoAnnotation(element, null).setEnforcedTextAttributes(EditorColorsManager.getInstance().getGlobalScheme().getAttributes(key));
   }

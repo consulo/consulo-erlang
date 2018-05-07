@@ -21,12 +21,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.Icon;
 
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.ide.structureView.StructureViewModel;
@@ -50,9 +50,9 @@ import com.intellij.util.containers.ContainerUtil;
 
 public class ErlangStructureViewFactory implements PsiStructureViewFactory {
   @Override
-  public StructureViewBuilder getStructureViewBuilder(@NotNull final PsiFile psiFile) {
+  public StructureViewBuilder getStructureViewBuilder(@Nonnull final PsiFile psiFile) {
     return new TreeBasedStructureViewBuilder() {
-      @NotNull
+      @Nonnull
       @Override
       public StructureViewModel createStructureViewModel(@Nullable Editor editor) {
         return new Model(psiFile);
@@ -66,7 +66,7 @@ public class ErlangStructureViewFactory implements PsiStructureViewFactory {
   }
 
   public static class Model extends StructureViewModelBase implements StructureViewModel.ElementInfoProvider {
-    public Model(@NotNull PsiFile psiFile) {
+    public Model(@Nonnull PsiFile psiFile) {
       super(psiFile, new Element(psiFile));
       withSuitableClasses(ErlangFile.class, ErlangFunction.class, ErlangFunctionClause.class);
     }
@@ -137,7 +137,7 @@ public class ErlangStructureViewFactory implements PsiStructureViewFactory {
       else if (myElement instanceof ErlangFile) {
         Comparator<ErlangNamedElement> comparator = new Comparator<ErlangNamedElement>() {
           @Override
-          public int compare(@NotNull ErlangNamedElement o1, @NotNull ErlangNamedElement o2) {
+          public int compare(@Nonnull ErlangNamedElement o1, @Nonnull ErlangNamedElement o2) {
             String name = o1.getName();
             if (name == null) return -1;
             return name.compareToIgnoreCase(o2.getName());
@@ -166,7 +166,7 @@ public class ErlangStructureViewFactory implements PsiStructureViewFactory {
         String name = ((ErlangFunctionClause) myElement).getQAtom().getText();
         List<String> expressionStrings = ContainerUtil.map(exprs, new Function<ErlangArgumentDefinition, String>() {
           @Override
-          public String fun(@NotNull ErlangArgumentDefinition o) {
+          public String fun(@Nonnull ErlangArgumentDefinition o) {
             return o.getText();
           }
         });
@@ -211,7 +211,7 @@ public class ErlangStructureViewFactory implements PsiStructureViewFactory {
     }
   }
 
-  @NotNull
+  @Nonnull
   private static Icon createRowIcon(Icon first, Icon second) {
     RowIcon rowIcon = new RowIcon(2);
     rowIcon.setIcon(first, 0);

@@ -24,7 +24,7 @@ import org.intellij.erlang.psi.ErlangCallbackSpec;
 import org.intellij.erlang.psi.impl.ErlangCallbackSpecImpl;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.stubs.ErlangCallbackSpecStub;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -32,7 +32,7 @@ public class ErlangCallbackStubElementType extends ErlangStubElementType<ErlangC
   public static final ErlangCallbackSpec[] EMPTY_ARRAY = new ErlangCallbackSpec[0];
 
   public static final ArrayFactory<ErlangCallbackSpec> ARRAY_FACTORY = new ArrayFactory<ErlangCallbackSpec>() {
-    @NotNull
+    @Nonnull
     @Override
     public ErlangCallbackSpec[] create(final int count) {
       return count == 0 ? EMPTY_ARRAY : new ErlangCallbackSpec[count];
@@ -44,26 +44,26 @@ public class ErlangCallbackStubElementType extends ErlangStubElementType<ErlangC
   }
 
   @Override
-  public ErlangCallbackSpec createPsi(@NotNull ErlangCallbackSpecStub stub) {
+  public ErlangCallbackSpec createPsi(@Nonnull ErlangCallbackSpecStub stub) {
     return new ErlangCallbackSpecImpl(stub, this);
   }
 
   @Override
-  public ErlangCallbackSpecStub createStub(@NotNull ErlangCallbackSpec psi, StubElement parentStub) {
+  public ErlangCallbackSpecStub createStub(@Nonnull ErlangCallbackSpec psi, StubElement parentStub) {
     String name = ErlangPsiImplUtil.getCallbackSpecName(psi);
     int arity = ErlangPsiImplUtil.getCallBackSpecArguments(psi).size();
     return new ErlangCallbackSpecStub(parentStub, this, name, arity);
   }
 
   @Override
-  public void serialize(@NotNull ErlangCallbackSpecStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@Nonnull ErlangCallbackSpecStub stub, @Nonnull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getName());
     dataStream.writeInt(stub.getArity());
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ErlangCallbackSpecStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public ErlangCallbackSpecStub deserialize(@Nonnull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new ErlangCallbackSpecStub(parentStub, this, dataStream.readName(), dataStream.readInt());
   }
 }

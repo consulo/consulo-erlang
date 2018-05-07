@@ -20,9 +20,10 @@ import com.ericsson.otp.erlang.OtpErlangPid;
 import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XSuspendContext;
 import org.intellij.erlang.debugger.node.ErlangProcessSnapshot;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+
+import javax.annotation.Nullable;
 
 public class ErlangSuspendContext extends XSuspendContext {
   private XExecutionStack[] myExecutionStacks;

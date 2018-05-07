@@ -2,15 +2,17 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangModelFieldList extends ErlangCompositeElement {
 
-  @NotNull
+  @Nonnull
   List<ErlangArgumentDefinition> getArgumentDefinitionList();
 
-  @NotNull
+  @Nonnull
   PsiElement getBracketLeft();
 
   @Nullable

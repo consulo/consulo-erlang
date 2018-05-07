@@ -2,21 +2,23 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.Nonnull;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangBinUnitType extends ErlangType {
 
-  @NotNull
+  @Nonnull
   List<ErlangQVar> getQVarList();
 
-  @NotNull
+  @Nonnull
   PsiElement getColon();
 
-  @NotNull
+  @Nonnull
   PsiElement getOpArMul();
 
-  @NotNull
+  @Nonnull
   PsiElement getInteger();
 
 }

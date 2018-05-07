@@ -19,9 +19,10 @@ package org.intellij.erlang.editor;
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 import static org.intellij.erlang.ErlangTypes.*;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.ErlangParserDefinition;
 import org.intellij.erlang.parser.ErlangLexer;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
@@ -55,13 +56,13 @@ public class ErlangSyntaxHighlighter extends SyntaxHighlighterBase {
   public static final TextAttributesKey CALLBACK      = createTextAttributesKey("ERL_CALLBACK", CodeInsightColors.METHOD_CALL_ATTRIBUTES);
   public static final TextAttributesKey MODULE_REF    = createTextAttributesKey("ERL_MODULE_REF", DefaultLanguageHighlighterColors.CLASS_NAME);
 
-  @NotNull
+  @Nonnull
   @Override
   public Lexer getHighlightingLexer() {
     return new ErlangLexer();
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public TextAttributesKey[] getTokenHighlights(IElementType type) {
     if (type == TokenType.BAD_CHARACTER) {

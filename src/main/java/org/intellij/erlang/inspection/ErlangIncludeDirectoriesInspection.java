@@ -3,10 +3,12 @@ package org.intellij.erlang.inspection;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.codeInspection.InspectionManager;
 import com.intellij.codeInspection.LocalInspectionTool;
@@ -29,7 +31,7 @@ import com.intellij.util.containers.ContainerUtil;
 public class ErlangIncludeDirectoriesInspection extends LocalInspectionTool {
   @Nullable
   @Override
-  public ProblemDescriptor[] checkFile(@NotNull final PsiFile psiFile, @NotNull final InspectionManager manager, final boolean isOnTheFly) {
+  public ProblemDescriptor[] checkFile(@Nonnull final PsiFile psiFile, @Nonnull final InspectionManager manager, final boolean isOnTheFly) {
     if (!(psiFile instanceof ErlangFile)) return ProblemDescriptor.EMPTY_ARRAY;
     VirtualFile file = psiFile.getVirtualFile();
     final Module module = file != null ? ModuleUtilCore.findModuleForFile(file, psiFile.getProject()) : null;
@@ -82,7 +84,7 @@ public class ErlangIncludeDirectoriesInspection extends LocalInspectionTool {
     }
 
     @Override
-    public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+    public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor descriptor) {
       if (myDoFix) {
         for (Module module : ModuleManager.getInstance(project).getModules()) {
           doFix(module);
@@ -93,19 +95,19 @@ public class ErlangIncludeDirectoriesInspection extends LocalInspectionTool {
       }
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getName() {
       return myName;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getFamilyName() {
       return myName;
     }
 
-    private static void doFix(@NotNull Module module) {
+    private static void doFix(@Nonnull Module module) {
       if (ModuleUtilCore.getExtension(module, ErlangModuleExtension.class) == null) return;
       List<VirtualFile> includeFolders = getIncludeFoldersNotMarkedAsIncludeDirectories(module);
       for (VirtualFile includeFolder : includeFolders) {

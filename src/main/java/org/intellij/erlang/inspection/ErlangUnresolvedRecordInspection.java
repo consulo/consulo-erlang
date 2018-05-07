@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.inspection;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -24,7 +26,6 @@ import com.intellij.util.ProcessingContext;
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.quickfixes.ErlangIntroduceRecordFix;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangUnresolvedRecordInspection extends ErlangInspectionBase {
   @Override
@@ -32,13 +33,13 @@ public class ErlangUnresolvedRecordInspection extends ErlangInspectionBase {
     if (!(file instanceof ErlangFile)) return;
     file.accept(new ErlangRecursiveVisitor() {
       @Override
-      public void visitRecordRef(@NotNull ErlangRecordRef o) {
+      public void visitRecordRef(@Nonnull ErlangRecordRef o) {
         if (o.getQAtom().getMacros() != null) return;
         process(o, problemsHolder);
       }
 
       @Override
-      public void visitQAtom(@NotNull ErlangQAtom o) {
+      public void visitQAtom(@Nonnull ErlangQAtom o) {
         if (ErlangPsiImplUtil.secondAtomInIsRecord().accepts(o, new ProcessingContext())) {
           process(o, problemsHolder);
         }
@@ -46,7 +47,7 @@ public class ErlangUnresolvedRecordInspection extends ErlangInspectionBase {
     });
   }
 
-  private static void process(@NotNull PsiElement o, @NotNull ProblemsHolder problemsHolder) {
+  private static void process(@Nonnull PsiElement o, @Nonnull ProblemsHolder problemsHolder) {
     PsiReference ref = o.getReference();
     if (ref == null || ref.resolve() == null) {
       problemsHolder.registerProblem(o, "Unresolved record " + "'" + (o.getText()) + "'", new ErlangIntroduceRecordFix());

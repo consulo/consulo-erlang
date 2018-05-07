@@ -29,7 +29,7 @@ import org.intellij.erlang.psi.ErlangIncludeLib;
 import org.intellij.erlang.psi.ErlangIncludeString;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.quickfixes.ErlangFindIncludeQuickFix;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 
@@ -38,7 +38,7 @@ public class ErlangUnresolvedIncludeLibInspection extends ErlangInspectionBase {
   private static final Logger LOG = Logger.getInstance(ErlangUnresolvedIncludeLibInspection.class);
 
   @Override
-  protected void checkFile(PsiFile file, @NotNull ProblemsHolder problemsHolder) {
+  protected void checkFile(PsiFile file, @Nonnull ProblemsHolder problemsHolder) {
     if (!(file instanceof ErlangFile)) return;
 
     for (ErlangIncludeLib erlangIncludeLib : ((ErlangFile) file).getIncludeLibs()) {
@@ -48,9 +48,9 @@ public class ErlangUnresolvedIncludeLibInspection extends ErlangInspectionBase {
     }
   }
 
-  static void processInclude(@NotNull ProblemsHolder problemsHolder,
-                             @NotNull List<ErlangFile> files,
-                             @NotNull ErlangIncludeString string,
+  static void processInclude(@Nonnull ProblemsHolder problemsHolder,
+                             @Nonnull List<ErlangFile> files,
+                             @Nonnull ErlangIncludeString string,
                              String what) {
     boolean empty = string.getTextLength() <= 2;
     TextRange range = empty ? TextRange.create(0, string.getTextLength()) : TextRange.create(1, string.getTextLength() - 1);
@@ -66,9 +66,9 @@ public class ErlangUnresolvedIncludeLibInspection extends ErlangInspectionBase {
     }
     else if (files.size() > 1) {
       String resolvedFilesList = StringUtil.join(files, new Function<ErlangFile, String>() {
-        @NotNull
+        @Nonnull
         @Override
-        public String fun(@NotNull ErlangFile erlangFile) {
+        public String fun(@Nonnull ErlangFile erlangFile) {
           PsiFile originalFile = erlangFile.getOriginalFile();
           VirtualFile virtualFile = originalFile.getVirtualFile();
           return virtualFile == null ? "null" : virtualFile.getPath();

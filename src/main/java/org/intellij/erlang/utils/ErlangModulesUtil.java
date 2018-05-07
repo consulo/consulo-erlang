@@ -35,7 +35,7 @@ import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.ErlangModuleIndex;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangModule;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import java.util.Collection;
 import java.util.HashSet;

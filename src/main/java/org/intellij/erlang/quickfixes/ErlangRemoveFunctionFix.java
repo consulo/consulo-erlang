@@ -16,23 +16,24 @@
 
 package org.intellij.erlang.quickfixes;
 
+import javax.annotation.Nonnull;
+
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.util.PsiTreeUtil;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.ErlangSpecification;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
 
 public class ErlangRemoveFunctionFix extends ErlangQuickFixBase {
-  @NotNull
+  @Nonnull
   @Override
   public String getFamilyName() {
     return "Remove function";
   }
 
   @Override
-  public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+  public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor descriptor) {
     ErlangFunction function = PsiTreeUtil.getParentOfType(descriptor.getPsiElement(), ErlangFunction.class);
     if (function != null) {
       ErlangSpecification specification = ErlangPsiImplUtil.getSpecification(function);

@@ -21,8 +21,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
@@ -51,14 +51,14 @@ public class ErlangApplicationIndex extends ScalarIndexExtension<String>
 	private static final DataIndexer<String, Void, FileContent> DATA_INDEXER = new ErlangApplicationDataIndexer();
 	private static final String APP_SRC = ".app.src";
 
-	@NotNull
+	@Nonnull
 	@Override
 	public ID<String, Void> getName()
 	{
 		return ERLANG_APPLICAION_INDEX;
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
 	public DataIndexer<String, Void, FileContent> getIndexer()
 	{
@@ -90,7 +90,7 @@ public class ErlangApplicationIndex extends ScalarIndexExtension<String>
 	}
 
 	@Nullable
-	public static VirtualFile getApplicationDirectoryByName(@NotNull String appName, @NotNull GlobalSearchScope searchScope)
+	public static VirtualFile getApplicationDirectoryByName(@Nonnull String appName, @Nonnull GlobalSearchScope searchScope)
 	{
 		ApplicationPathExtractingProcessor processor = new ApplicationPathExtractingProcessor();
 		FileBasedIndex.getInstance().processValues(ERLANG_APPLICAION_INDEX, appName, null, processor, searchScope);
@@ -103,7 +103,7 @@ public class ErlangApplicationIndex extends ScalarIndexExtension<String>
 		return processor.getApplicationPath();
 	}
 
-	public static List<VirtualFile> getAllApplicationDirectories(@NotNull Project project, @NotNull final GlobalSearchScope searchScope)
+	public static List<VirtualFile> getAllApplicationDirectories(@Nonnull Project project, @Nonnull final GlobalSearchScope searchScope)
 	{
 		final ArrayList<VirtualFile> result = new ArrayList<VirtualFile>();
 		final FileBasedIndex index = FileBasedIndex.getInstance();
@@ -228,7 +228,7 @@ public class ErlangApplicationIndex extends ScalarIndexExtension<String>
 
 	private static class ErlangApplicationDataIndexer implements DataIndexer<String, Void, FileContent>
 	{
-		@NotNull
+		@Nonnull
 		@Override
 		public Map<String, Void> map(FileContent inputData)
 		{
@@ -236,7 +236,7 @@ public class ErlangApplicationIndex extends ScalarIndexExtension<String>
 		}
 	}
 
-	@NotNull
+	@Nonnull
 	private static String getApplicationName(VirtualFile appFile)
 	{
 		String filename = appFile.getName();

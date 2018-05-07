@@ -29,7 +29,7 @@ import org.intellij.erlang.psi.ErlangFunctionClause;
 import org.intellij.erlang.psi.ErlangQAtom;
 import org.intellij.erlang.psi.impl.ErlangElementFactory;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class ErlangHeadMismatchInspection extends ErlangInspectionBase implement
             problemsHolder.registerProblem(clauseHead, "Head mismatch: should be '" + functionSignature + "'",
               new LocalQuickFixBase("Rename clause head") {
                 @Override
-                public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+                public void applyFix(@Nonnull Project project, @Nonnull ProblemDescriptor descriptor) {
                   PsiElement oldHead = descriptor.getPsiElement();
                   if (oldHead instanceof ErlangQAtom) {
                     PsiElement newHead = ErlangElementFactory.createQAtomFromText(project, functionName);

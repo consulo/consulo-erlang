@@ -11,6 +11,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.debugger.node.ErlangDebuggerEventListener;
 import org.intellij.erlang.debugger.node.ErlangDebuggerNode;
@@ -24,8 +27,6 @@ import org.intellij.erlang.runconfig.ErlangRunConfigurationBase;
 import org.intellij.erlang.runconfig.ErlangRunningState;
 import org.intellij.erlang.sdk.ErlangSdkType;
 import org.intellij.erlang.utils.ErlangModulesUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.ericsson.otp.erlang.OtpErlangPid;
 import com.intellij.execution.ExecutionException;
@@ -62,13 +63,14 @@ import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
 
 public class ErlangXDebugProcess extends XDebugProcess {
   private final ExecutionEnvironment myExecutionEnvironment;
-  @NotNull private ErlangDebuggerNode myDebuggerNode;
+  @Nonnull
+  private ErlangDebuggerNode myDebuggerNode;
   private ProcessHandler myErlangProcessHandler;
   private XBreakpointHandler<?>[] myBreakpointHandlers = new XBreakpointHandler[]{new ErlangLineBreakpointHandler(this)};
   private ConcurrentHashMap<ErlangSourcePosition, XLineBreakpoint<ErlangLineBreakpointProperties>> myPositionToLineBreakpointMap =
     new ConcurrentHashMap<ErlangSourcePosition, XLineBreakpoint<ErlangLineBreakpointProperties>>();
 
-  public ErlangXDebugProcess(@NotNull XDebugSession session, ExecutionEnvironment env) {
+  public ErlangXDebugProcess(@Nonnull XDebugSession session, ExecutionEnvironment env) {
     //TODO add debug build targets and make sure the project is built using them.
     super(session);
     session.setPauseActionSupported(false);
@@ -177,7 +179,7 @@ public class ErlangXDebugProcess extends XDebugProcess {
     myDebuggerNode.interpretModules(modulesToInterpret);
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public ExecutionConsole createConsole() {
     try {
@@ -192,19 +194,19 @@ public class ErlangXDebugProcess extends XDebugProcess {
     return myBreakpointHandlers;
   }
 
-  @NotNull
+  @Nonnull
   @Override
   public XDebuggerEditorsProvider getEditorsProvider() {
     return new XDebuggerEditorsProvider() {
-      @NotNull
+      @Nonnull
       @Override
       public FileType getFileType() {
         return ErlangFileType.MODULE;
       }
 
-      @NotNull
+      @Nonnull
       @Override
-      public Document createDocument(@NotNull Project project, @NotNull String text, @Nullable XSourcePosition sourcePosition, @NotNull EvaluationMode mode) {
+      public Document createDocument(@Nonnull Project project, @Nonnull String text, @Nullable XSourcePosition sourcePosition, @Nonnull EvaluationMode mode) {
         final LightVirtualFile file = new LightVirtualFile("plain-text-erlang-debugger.txt", text);
         //noinspection ConstantConditions
         return FileDocumentManager.getInstance().getDocument(file);
@@ -238,7 +240,7 @@ public class ErlangXDebugProcess extends XDebugProcess {
   }
 
   @Override
-  public void runToPosition(@NotNull XSourcePosition position) {
+  public void runToPosition(@Nonnull XSourcePosition position) {
     //TODO implement me
   }
 

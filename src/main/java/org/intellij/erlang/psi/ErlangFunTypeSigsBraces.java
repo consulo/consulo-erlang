@@ -1,8 +1,8 @@
 // This is a generated file. Not intended for manual editing.
 package org.intellij.erlang.psi;
 
-import java.util.List;
-import org.jetbrains.annotations.*;
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangFunTypeSigsBraces extends ErlangCompositeElement {
@@ -10,7 +10,7 @@ public interface ErlangFunTypeSigsBraces extends ErlangCompositeElement {
   @Nullable
   ErlangFunTypeSigs getFunTypeSigs();
 
-  @NotNull
+  @Nonnull
   PsiElement getParLeft();
 
   @Nullable

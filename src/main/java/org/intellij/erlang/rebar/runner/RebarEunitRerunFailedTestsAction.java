@@ -5,11 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nullable;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.Location;
@@ -39,15 +41,15 @@ import com.intellij.util.containers.ContainerUtil;
 public class RebarEunitRerunFailedTestsAction extends AbstractRerunFailedTestsAction
 {
 
-	public RebarEunitRerunFailedTestsAction(@NotNull ComponentContainer componentContainer, TestConsoleProperties properties)
+	public RebarEunitRerunFailedTestsAction(@Nonnull ComponentContainer componentContainer, TestConsoleProperties properties)
 	{
 		super(componentContainer);
 		init(properties);
 	}
 
-	@NotNull
+	@Nonnull
 	@Override
-	protected Filter getFilter(@NotNull Project project, @NotNull GlobalSearchScope globalSearchScope)
+	protected Filter getFilter(@Nonnull Project project, @Nonnull GlobalSearchScope globalSearchScope)
 	{
 		return new Filter()
 		{
@@ -61,7 +63,7 @@ public class RebarEunitRerunFailedTestsAction extends AbstractRerunFailedTestsAc
 
 	@Nullable
 	@Override
-	public MyRunProfile getRunProfile(@NotNull ExecutionEnvironment executionEnvironment)
+	public MyRunProfile getRunProfile(@Nonnull ExecutionEnvironment executionEnvironment)
 	{
 		TestFrameworkRunningModel model = getModel();
 		if(model == null)
@@ -70,7 +72,7 @@ public class RebarEunitRerunFailedTestsAction extends AbstractRerunFailedTestsAc
 		}
 		return new MyRunProfile((RunConfigurationBase) model.getProperties().getConfiguration())
 		{
-			@NotNull
+			@Nonnull
 			@Override
 			public Module[] getModules()
 			{
@@ -79,7 +81,7 @@ public class RebarEunitRerunFailedTestsAction extends AbstractRerunFailedTestsAc
 
 			@Nullable
 			@Override
-			public RunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment env) throws ExecutionException
+			public RunProfileState getState(@Nonnull Executor executor, @Nonnull ExecutionEnvironment env) throws ExecutionException
 			{
 				RebarEunitRunConfiguration runConfiguration = createRerunFailedTestsRunConfiguration();
 				return new RebarEunitRunningState(env, runConfiguration);

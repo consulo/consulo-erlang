@@ -18,7 +18,7 @@ package org.intellij.erlang.utils;
 
 import javax.swing.event.HyperlinkEvent;
 
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationListener;
 import com.intellij.openapi.options.ShowSettingsUtil;
@@ -28,16 +28,16 @@ public class ErlangExternalToolsNotificationListener implements NotificationList
 {
 	public static final String ERLANG_RELATED_TOOLS = "Erlang External Tools";
 
-	@NotNull
+	@Nonnull
 	private final Project myProject;
 
-	public ErlangExternalToolsNotificationListener(@NotNull Project project)
+	public ErlangExternalToolsNotificationListener(@Nonnull Project project)
 	{
 		myProject = project;
 	}
 
 	@Override
-	public void hyperlinkUpdate(@NotNull Notification notification, @NotNull HyperlinkEvent event)
+	public void hyperlinkUpdate(@Nonnull Notification notification, @Nonnull HyperlinkEvent event)
 	{
 		if(event.getEventType() == HyperlinkEvent.EventType.ACTIVATED)
 		{

@@ -25,7 +25,7 @@ import org.intellij.erlang.psi.ErlangInclude;
 import org.intellij.erlang.psi.ErlangIncludeString;
 import org.intellij.erlang.psi.impl.ErlangIncludeImpl;
 import org.intellij.erlang.stubs.ErlangIncludeStub;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.IOException;
 
@@ -33,7 +33,7 @@ public class ErlangIncludeElementType extends ErlangStubElementType<ErlangInclud
   public static final ErlangInclude[] EMPTY_ARRAY = new ErlangInclude[0];
 
   public static final ArrayFactory<ErlangInclude> ARRAY_FACTORY = new ArrayFactory<ErlangInclude>() {
-    @NotNull
+    @Nonnull
     @Override
     public ErlangInclude[] create(final int count) {
       return count == 0 ? EMPTY_ARRAY : new ErlangInclude[count];
@@ -45,25 +45,25 @@ public class ErlangIncludeElementType extends ErlangStubElementType<ErlangInclud
   }
 
   @Override
-  public ErlangInclude createPsi(@NotNull ErlangIncludeStub stub) {
+  public ErlangInclude createPsi(@Nonnull ErlangIncludeStub stub) {
     return new ErlangIncludeImpl(stub, this);
   }
 
   @Override
-  public ErlangIncludeStub createStub(@NotNull ErlangInclude psi, StubElement parentStub) {
+  public ErlangIncludeStub createStub(@Nonnull ErlangInclude psi, StubElement parentStub) {
     ErlangIncludeString includeString = psi.getIncludeString();
     String text = includeString != null ? StringUtil.unquoteString(includeString.getText()) : "";
     return new ErlangIncludeStub(parentStub, this, text);
   }
 
   @Override
-  public void serialize(@NotNull ErlangIncludeStub stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@Nonnull ErlangIncludeStub stub, @Nonnull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getString());
   }
 
-  @NotNull
+  @Nonnull
   @Override
-  public ErlangIncludeStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+  public ErlangIncludeStub deserialize(@Nonnull StubInputStream dataStream, StubElement parentStub) throws IOException {
     return new ErlangIncludeStub(parentStub, this, dataStream.readName());
   }
 }

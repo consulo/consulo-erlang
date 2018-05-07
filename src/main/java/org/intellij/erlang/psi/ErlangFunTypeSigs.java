@@ -2,7 +2,9 @@
 package org.intellij.erlang.psi;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+
+import javax.annotation.*;
+
 import com.intellij.psi.PsiElement;
 
 public interface ErlangFunTypeSigs extends ErlangCompositeElement {
@@ -10,10 +12,10 @@ public interface ErlangFunTypeSigs extends ErlangCompositeElement {
   @Nullable
   ErlangModuleRef getModuleRef();
 
-  @NotNull
+  @Nonnull
   ErlangSpecFun getSpecFun();
 
-  @NotNull
+  @Nonnull
   List<ErlangTypeSig> getTypeSigList();
 
   @Nullable
