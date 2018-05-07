@@ -16,6 +16,8 @@
 
 package org.intellij.erlang.actions;
 
+import org.intellij.erlang.ErlangIcons;
+import org.intellij.erlang.psi.impl.ErlangElementFactory;
 import com.intellij.ide.actions.CreateFileFromTemplateAction;
 import com.intellij.ide.actions.CreateFileFromTemplateDialog;
 import com.intellij.openapi.project.DumbAware;
@@ -24,29 +26,28 @@ import com.intellij.openapi.ui.InputValidatorEx;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDirectory;
-import org.intellij.erlang.ErlangIcons;
-import org.intellij.erlang.psi.impl.ErlangElementFactory;
+import consulo.awt.TargetAWT;
 
 public class CreateErlangFileAction extends CreateFileFromTemplateAction implements DumbAware {
   private static final String NEW_ERLANG_FILE = "New Erlang File";
 
   public CreateErlangFileAction() {
-    super(NEW_ERLANG_FILE, "", ErlangIcons.FILE);
+    super(NEW_ERLANG_FILE, "", TargetAWT.to(ErlangIcons.FILE));
   }
 
   @Override
   protected void buildDialog(final Project project, PsiDirectory directory, CreateFileFromTemplateDialog.Builder builder) {
     builder.
       setTitle(NEW_ERLANG_FILE).
-      addKind("Empty module", ErlangIcons.FILE, "Erlang Module").
-      addKind("Header file", ErlangIcons.HEADER, "Erlang Header").
-      addKind("EUnit tests", ErlangIcons.EUNIT, "Erlang EUnit Tests").
-      addKind("OTP application", ErlangIcons.OTP_APPLICATION, "Erlang Application").
-      addKind("OTP application resource file", ErlangIcons.OTP_APP_RESOURCE, "Erlang Application Resource File").
-      addKind("OTP supervisor", ErlangIcons.OTP_SUPERVISOR, "Erlang Supervisor").
-      addKind("OTP gen_server", ErlangIcons.OTP_GEN_SERVER, "Erlang Gen Server").
-      addKind("OTP gen_fsm", ErlangIcons.OTP_GEN_FSM, "Erlang Gen FSM").
-      addKind("OTP gen_event", ErlangIcons.OTP_GEN_EVENT, "Erlang Gen Event").
+      addKind("Empty module", TargetAWT.to(ErlangIcons.FILE), "Erlang Module").
+      addKind("Header file", TargetAWT.to(ErlangIcons.HEADER), "Erlang Header").
+      addKind("EUnit tests", TargetAWT.to(ErlangIcons.EUNIT), "Erlang EUnit Tests").
+      addKind("OTP application", TargetAWT.to(ErlangIcons.OTP_APPLICATION), "Erlang Application").
+      addKind("OTP application resource file", TargetAWT.to(ErlangIcons.OTP_APP_RESOURCE), "Erlang Application Resource File").
+      addKind("OTP supervisor", TargetAWT.to(ErlangIcons.OTP_SUPERVISOR), "Erlang Supervisor").
+      addKind("OTP gen_server", TargetAWT.to(ErlangIcons.OTP_GEN_SERVER), "Erlang Gen Server").
+      addKind("OTP gen_fsm", TargetAWT.to(ErlangIcons.OTP_GEN_FSM), "Erlang Gen FSM").
+      addKind("OTP gen_event", TargetAWT.to(ErlangIcons.OTP_GEN_EVENT), "Erlang Gen Event").
       setValidator(new InputValidatorEx() {
         @Override
         public boolean checkInput(String inputString) {

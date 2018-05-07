@@ -16,11 +16,11 @@
 
 package org.intellij.erlang;
 
-import javax.swing.Icon;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.ui.image.Image;
 
 public class ErlangFileType extends LanguageFileType {
   public static ErlangFileType MODULE = new ErlangFileType();
@@ -51,7 +51,7 @@ public class ErlangFileType extends LanguageFileType {
   }
 
   @Override
-  public Icon getIcon() {
+  public Image getIcon() {
     return ErlangIcons.FILE;
   }
 
@@ -75,7 +75,7 @@ public class ErlangFileType extends LanguageFileType {
     }
 
     @Override
-    public Icon getIcon() {
+    public Image getIcon() {
       return ErlangIcons.HEADER;
     }
   }
@@ -100,7 +100,7 @@ public class ErlangFileType extends LanguageFileType {
     }
 
     @Override
-    public Icon getIcon() {
+    public Image getIcon() {
       return ErlangIcons.OTP_APP_RESOURCE;
     }
   }
@@ -125,7 +125,7 @@ public class ErlangFileType extends LanguageFileType {
     }
 
     @Override
-    public Icon getIcon() {
+    public Image getIcon() {
       return ErlangIcons.TERMS;
     }
   }
@@ -141,7 +141,7 @@ public class ErlangFileType extends LanguageFileType {
   }
 
   @Nullable
-  public static Icon getIconForFile(String filename) {
+  public static Image getIconForFile(String filename) {
     ErlangFileType fileType = getFileType(filename);
     return fileType == null ? null : fileType.getIcon();
   }

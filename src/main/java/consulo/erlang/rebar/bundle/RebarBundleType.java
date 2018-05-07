@@ -1,12 +1,11 @@
 package consulo.erlang.rebar.bundle;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
+import javax.annotation.Nullable;
 
 import org.intellij.erlang.ErlangIcons;
-
-import javax.annotation.Nullable;
 import com.intellij.openapi.projectRoots.SdkType;
+import consulo.ui.image.Image;
 
 /**
  * @author VISTALL
@@ -47,7 +46,7 @@ public class RebarBundleType extends SdkType
 
 	@Nullable
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return ErlangIcons.REBAR;
 	}

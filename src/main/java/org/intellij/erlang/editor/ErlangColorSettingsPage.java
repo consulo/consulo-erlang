@@ -16,20 +16,20 @@
 
 package org.intellij.erlang.editor;
 
+import static org.intellij.erlang.editor.ErlangSyntaxHighlighter.*;
+
+import gnu.trove.THashMap;
+
+import java.util.Map;
+
+import javax.annotation.Nonnull;
+
+import org.jetbrains.annotations.NonNls;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
-import gnu.trove.THashMap;
-import org.intellij.erlang.ErlangIcons;
-import org.jetbrains.annotations.NonNls;
-import javax.annotation.Nonnull;
-
-import javax.swing.*;
-import java.util.Map;
-
-import static org.intellij.erlang.editor.ErlangSyntaxHighlighter.*;
 
 public class ErlangColorSettingsPage implements ColorSettingsPage {
   private static final AttributesDescriptor[] ATTRS;
@@ -65,10 +65,6 @@ public class ErlangColorSettingsPage implements ColorSettingsPage {
   @Nonnull
   public String getDisplayName() {
     return "Erlang";
-  }
-
-  public Icon getIcon() {
-    return ErlangIcons.FILE;
   }
 
   @Nonnull

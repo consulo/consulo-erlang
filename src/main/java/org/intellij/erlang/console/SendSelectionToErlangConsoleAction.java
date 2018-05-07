@@ -28,12 +28,13 @@ import com.intellij.openapi.actionSystem.Presentation;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
+import consulo.awt.TargetAWT;
 
 public class SendSelectionToErlangConsoleAction extends AnAction {
   @Override
   public void update(@Nonnull AnActionEvent actionEvent) {
     final Presentation presentation = actionEvent.getPresentation();
-    presentation.setIcon(ErlangIcons.ERLANG_CONSOLE);
+    presentation.setIcon(TargetAWT.to(ErlangIcons.ERLANG_CONSOLE));
     presentation.setVisible(true);
     final DataContext dataContext = actionEvent.getDataContext();
     final PsiFile psiFile = dataContext.getData(CommonDataKeys.PSI_FILE);

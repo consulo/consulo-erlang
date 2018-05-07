@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.Icon;
 
 import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
@@ -39,9 +40,15 @@ import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.psi.impl.ErlangVariableReferenceImpl;
 import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
 import org.intellij.erlang.types.ErlangExpressionType;
-
-import javax.annotation.Nullable;
-import com.intellij.codeInsight.completion.*;
+import com.intellij.codeInsight.completion.CodeCompletionHandlerBase;
+import com.intellij.codeInsight.completion.CompletionContributor;
+import com.intellij.codeInsight.completion.CompletionInitializationContext;
+import com.intellij.codeInsight.completion.CompletionParameters;
+import com.intellij.codeInsight.completion.CompletionResultSet;
+import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.completion.InsertHandler;
+import com.intellij.codeInsight.completion.InsertionContext;
+import com.intellij.codeInsight.completion.PrioritizedLookupElement;
 import com.intellij.codeInsight.completion.util.ParenthesesInsertHandler;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
@@ -77,6 +84,7 @@ import com.intellij.util.Function;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.text.CaseInsensitiveStringHashingStrategy;
+import consulo.awt.TargetAWT;
 import consulo.codeInsight.completion.CompletionProvider;
 
 public class ErlangCompletionContributor extends CompletionContributor {
@@ -412,7 +420,7 @@ public class ErlangCompletionContributor extends CompletionContributor {
 
   private static LookupElementBuilder getDefaultPathLookupElementBuilder(String includeText, VirtualFile lookedUpFile, @Nullable String appName) {
     String slash = lookedUpFile.isDirectory() ? "/" : "";
-    Icon icon = lookedUpFile.isDirectory() ? ErlangIcons.MODULE : ErlangFileType.getIconForFile(lookedUpFile.getName());
+    Icon icon = lookedUpFile.isDirectory() ? ErlangIcons.MODULE : TargetAWT.to(ErlangFileType.getIconForFile(lookedUpFile.getName()));
     return LookupElementBuilder.create(getCompletedString(includeText, lookedUpFile, appName))
                                .withPresentableText(lookedUpFile.getName() + slash)
                                .withIcon(icon)

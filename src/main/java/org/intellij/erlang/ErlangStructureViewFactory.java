@@ -27,6 +27,7 @@ import javax.swing.Icon;
 
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
+import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 import com.intellij.ide.structureView.StructureViewBuilder;
 import com.intellij.ide.structureView.StructureViewModel;
@@ -200,7 +201,7 @@ public class ErlangStructureViewFactory implements PsiStructureViewFactory {
       }
       else if (myElement instanceof ErlangModule) {
         PsiFile file = myElement.getContainingFile();
-        return file instanceof ErlangFile ? ErlangIconDescriptorUpdater.getIcon((ErlangFile) file) : ErlangIcons.FILE;
+        return file instanceof ErlangFile ? TargetAWT.to(ErlangIconDescriptorUpdater.getIcon((ErlangFile) file)) : TargetAWT.to(ErlangIcons.FILE);
       }
       else if (myElement instanceof ErlangFunctionClause)   return ErlangIcons.FUNCTION_CLAUSE;
       else if (myElement instanceof ErlangAttribute)        return ErlangIcons.ATTRIBUTE;

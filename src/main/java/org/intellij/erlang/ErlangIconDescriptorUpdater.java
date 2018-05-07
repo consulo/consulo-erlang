@@ -17,26 +17,27 @@
 package org.intellij.erlang;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
+import javax.annotation.Nullable;
 
 import org.intellij.erlang.psi.ErlangBehaviour;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangModule;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-
-import javax.annotation.Nullable;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import consulo.annotations.RequiredReadAction;
+import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptor;
 import consulo.ide.IconDescriptorUpdater;
+import consulo.ui.image.Image;
 
 public class ErlangIconDescriptorUpdater implements IconDescriptorUpdater, DumbAware
 {
 	@Nullable
-	public static Icon getIcon(@Nonnull ErlangFile file)
+	public static Image getIcon(@Nonnull ErlangFile file)
 	{
 		if(!file.isValid())
 		{
@@ -68,12 +69,13 @@ public class ErlangIconDescriptorUpdater implements IconDescriptorUpdater, DumbA
 		return type;
 	}
 
+	@RequiredReadAction
 	@Override
 	public void updateIcon(@Nonnull IconDescriptor iconDescriptor, @Nonnull PsiElement element, int i)
 	{
 		if(element instanceof ErlangFile)
 		{
-			iconDescriptor.setMainIcon(getIcon((ErlangFile) element));
+			iconDescriptor.setMainIcon(TargetAWT.to(getIcon((ErlangFile) element)));
 		}
 	}
 
@@ -86,9 +88,9 @@ public class ErlangIconDescriptorUpdater implements IconDescriptorUpdater, DumbA
 		OTP_GEN_FSM("gen_fsm", ErlangIcons.OTP_GEN_FSM),
 		OTP_GEN_EVENT("gen_event", ErlangIcons.OTP_GEN_EVENT);
 		public final String behaviourName;
-		public final Icon icon;
+		public final Image icon;
 
-		ModuleType(String behaviourName, Icon icon)
+		ModuleType(String behaviourName, Image icon)
 		{
 			this.behaviourName = behaviourName;
 			this.icon = icon;
