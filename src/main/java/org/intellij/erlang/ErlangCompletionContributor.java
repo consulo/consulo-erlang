@@ -420,7 +420,7 @@ public class ErlangCompletionContributor extends CompletionContributor {
 
   private static LookupElementBuilder getDefaultPathLookupElementBuilder(String includeText, VirtualFile lookedUpFile, @Nullable String appName) {
     String slash = lookedUpFile.isDirectory() ? "/" : "";
-    Icon icon = lookedUpFile.isDirectory() ? ErlangIcons.MODULE : TargetAWT.to(ErlangFileType.getIconForFile(lookedUpFile.getName()));
+    Icon icon = lookedUpFile.isDirectory() ? TargetAWT.to(ErlangIcons.MODULE) : TargetAWT.to(ErlangFileType.getIconForFile(lookedUpFile.getName()));
     return LookupElementBuilder.create(getCompletedString(includeText, lookedUpFile, appName))
                                .withPresentableText(lookedUpFile.getName() + slash)
                                .withIcon(icon)

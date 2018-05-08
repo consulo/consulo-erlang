@@ -14,6 +14,7 @@ import com.intellij.navigation.ItemPresentation;
 import javax.annotation.Nonnull;
 import javax.swing.Icon;
 import com.intellij.psi.stubs.IStubElementType;
+import consulo.awt.TargetAWT;
 
 public class ErlangFunctionImpl extends ErlangStubbedPsiElementBase<ErlangFunctionStub> implements ErlangFunction {
 
@@ -70,7 +71,7 @@ public class ErlangFunctionImpl extends ErlangStubbedPsiElementBase<ErlangFuncti
 
   @Nonnull
   public Icon getIcon(int flags) {
-    return ErlangPsiImplUtil.getIcon(this, flags);
+    return TargetAWT.to(ErlangPsiImplUtil.getIcon(this, flags));
   }
 
   public boolean isExported() {

@@ -29,7 +29,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import consulo.annotations.RequiredReadAction;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptor;
 import consulo.ide.IconDescriptorUpdater;
 import consulo.ui.image.Image;
@@ -75,7 +74,7 @@ public class ErlangIconDescriptorUpdater implements IconDescriptorUpdater, DumbA
 	{
 		if(element instanceof ErlangFile)
 		{
-			iconDescriptor.setMainIcon(TargetAWT.to(getIcon((ErlangFile) element)));
+			iconDescriptor.setMainIcon(getIcon((ErlangFile) element));
 		}
 	}
 

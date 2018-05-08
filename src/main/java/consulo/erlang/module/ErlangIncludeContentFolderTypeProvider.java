@@ -3,11 +3,11 @@ package consulo.erlang.module;
 import java.awt.Color;
 
 import javax.annotation.Nonnull;
-import javax.swing.Icon;
 
 import org.intellij.erlang.ErlangIcons;
 import com.intellij.ui.JBColor;
 import consulo.roots.ContentFolderTypeProvider;
+import consulo.ui.image.Image;
 
 /**
  * @author VISTALL
@@ -36,7 +36,7 @@ public class ErlangIncludeContentFolderTypeProvider extends ContentFolderTypePro
 
 	@Nonnull
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
 		return ErlangIcons.IncludeRoot;
 	}

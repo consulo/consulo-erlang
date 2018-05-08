@@ -38,51 +38,58 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.util.FunctionUtil;
 import com.intellij.util.containers.HashSet;
+import consulo.awt.TargetAWT;
 
-public class ErlangRecursiveCallLineMarkerProvider implements LineMarkerProvider, DumbAware {
+public class ErlangRecursiveCallLineMarkerProvider implements LineMarkerProvider, DumbAware
+{
 
-  @Override
-  public LineMarkerInfo getLineMarkerInfo(@Nonnull PsiElement element) {
-    return null; //do nothing
-  }
+	@Override
+	public LineMarkerInfo getLineMarkerInfo(@Nonnull PsiElement element)
+	{
+		return null; //do nothing
+	}
 
-  @Override
-  public void collectSlowLineMarkers(@Nonnull List<PsiElement> elements, @Nonnull Collection<LineMarkerInfo> result) {
-    Set<Integer> lines = new HashSet<Integer>();
-    for (PsiElement element : elements) {
-      if (element instanceof ErlangFunctionCallExpression || element instanceof ErlangFunctionWithArity) {
-        PsiReference reference = element.getReference();
-        PsiElement resolve = reference != null ? reference.resolve() : null;
-        if (resolve instanceof ErlangFunction) {
-          if (ErlangPsiImplUtil.isRecursiveCall(element, (ErlangFunction) resolve)) {
-            PsiDocumentManager instance = PsiDocumentManager.getInstance(element.getProject());
-            Document document = instance.getDocument(element.getContainingFile());
-            int textOffset = element.getTextOffset();
-            if (document == null) continue;
-            int lineNumber = document.getLineNumber(textOffset);
-            if (!lines.contains(lineNumber)) {
-              result.add(new RecursiveMethodCallMarkerInfo(element));
-            }
-            lines.add(lineNumber);
-          }
-        }
-      }
-    }
-  }
+	@Override
+	public void collectSlowLineMarkers(@Nonnull List<PsiElement> elements, @Nonnull Collection<LineMarkerInfo> result)
+	{
+		Set<Integer> lines = new HashSet<Integer>();
+		for(PsiElement element : elements)
+		{
+			if(element instanceof ErlangFunctionCallExpression || element instanceof ErlangFunctionWithArity)
+			{
+				PsiReference reference = element.getReference();
+				PsiElement resolve = reference != null ? reference.resolve() : null;
+				if(resolve instanceof ErlangFunction)
+				{
+					if(ErlangPsiImplUtil.isRecursiveCall(element, (ErlangFunction) resolve))
+					{
+						PsiDocumentManager instance = PsiDocumentManager.getInstance(element.getProject());
+						Document document = instance.getDocument(element.getContainingFile());
+						int textOffset = element.getTextOffset();
+						if(document == null)
+						{
+							continue;
+						}
+						int lineNumber = document.getLineNumber(textOffset);
+						if(!lines.contains(lineNumber))
+						{
+							result.add(new RecursiveMethodCallMarkerInfo(element));
+						}
+						lines.add(lineNumber);
+					}
+				}
+			}
+		}
+	}
 
-  private static class RecursiveMethodCallMarkerInfo extends LineMarkerInfo<PsiElement> {
-    private RecursiveMethodCallMarkerInfo(@Nonnull PsiElement methodCall) {
-
-      super(methodCall,
-        methodCall.getTextRange(),
-        ErlangIcons.RECURSIVE_CALL,
-        Pass.LINE_MARKERS,
-        FunctionUtil.<PsiElement, String>constant("Recursive call"),
-        null,
-        GutterIconRenderer.Alignment.RIGHT
-      );
-    }
-  }
+	private static class RecursiveMethodCallMarkerInfo extends LineMarkerInfo<PsiElement>
+	{
+		private RecursiveMethodCallMarkerInfo(@Nonnull PsiElement methodCall)
+		{
+			super(methodCall, methodCall.getTextRange(), TargetAWT.to(ErlangIcons.RECURSIVE_CALL), Pass.LINE_MARKERS, FunctionUtil.<PsiElement, String>constant("Recursive call"), null,
+					GutterIconRenderer.Alignment.RIGHT);
+		}
+	}
 }
 
 

@@ -29,6 +29,7 @@ import java.util.Queue;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.swing.Icon;
 
 import org.intellij.erlang.ErlangApplicationIndex;
@@ -54,9 +55,6 @@ import org.intellij.erlang.stubs.ErlangMacrosDefinitionStub;
 import org.intellij.erlang.stubs.ErlangModuleStub;
 import org.intellij.erlang.stubs.ErlangRecordDefinitionStub;
 import org.intellij.erlang.stubs.ErlangTypeDefinitionStub;
-
-import javax.annotation.Nullable;
-import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.codeInsight.completion.BasicInsertHandler;
 import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
@@ -100,6 +98,8 @@ import com.intellij.util.Function;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.containers.ContainerUtil;
+import consulo.erlang.module.extension.ErlangModuleExtension;
+import consulo.ui.image.Image;
 
 public class ErlangPsiImplUtil
 {
@@ -1585,7 +1585,7 @@ public class ErlangPsiImplUtil
 
 	@Nonnull
 	@SuppressWarnings("UnusedParameters")
-	public static Icon getIcon(@Nonnull ErlangFunction o, int flags)
+	public static Image getIcon(@Nonnull ErlangFunction o, int flags)
 	{
 		return ErlangIcons.FUNCTION;
 	}

@@ -19,6 +19,7 @@ package org.intellij.erlang.navigation;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.swing.Icon;
 
 import org.intellij.erlang.ErlangIcons;
@@ -30,7 +31,6 @@ import org.intellij.erlang.psi.ErlangModuleRef;
 import org.intellij.erlang.psi.ErlangSpecFun;
 import org.intellij.erlang.psi.impl.ErlangCompositeElementImpl;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import javax.annotation.Nullable;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.PsiElement;
@@ -38,6 +38,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
+import consulo.awt.TargetAWT;
 
 public class ErlangNavigationUtil {
 
@@ -90,7 +91,7 @@ public class ErlangNavigationUtil {
           @Nullable
           @Override
           public Icon getIcon(boolean unused) {
-            return ErlangIcons.CALLBACK;
+            return TargetAWT.to(ErlangIcons.CALLBACK);
           }
         };
       }
