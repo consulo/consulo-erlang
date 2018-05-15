@@ -1,55 +1,41 @@
 package org.intellij.erlang.configuration;
 
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import javax.annotation.Nonnull;
 
-import com.intellij.compiler.options.CompilerConfigurable;
-import com.intellij.openapi.options.ConfigurationException;
+import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
+import consulo.options.SimpleConfigurableByProperties;
+import consulo.ui.CheckBox;
+import consulo.ui.Component;
+import consulo.ui.RequiredUIAccess;
+import consulo.ui.VerticalLayout;
 
-public class ErlangCompilerOptionsConfigurable extends CompilerConfigurable
+public class ErlangCompilerOptionsConfigurable extends SimpleConfigurableByProperties implements Configurable
 {
-	private JPanel myRootPanel;
-
-	private JCheckBox myAddDebugInfoCheckBox;
-	private final ErlangCompilerSettings mySettings;
+	private final Project myProject;
 
 	public ErlangCompilerOptionsConfigurable(final Project project)
 	{
-		super(project);
+		myProject = project;
+	}
 
-		mySettings = ErlangCompilerSettings.getInstance(project);
+	@RequiredUIAccess
+	@Nonnull
+	@Override
+	protected Component createLayout(PropertyBuilder propertyBuilder)
+	{
+		ErlangCompilerSettings settings = ErlangCompilerSettings.getInstance(myProject);
+
+		VerticalLayout layout = VerticalLayout.create();
+		CheckBox enableDebugBox = CheckBox.create("Add &debug info");
+		layout.add(enableDebugBox);
+		propertyBuilder.add(enableDebugBox, settings::isAddDebugInfoEnabled, settings::setAddDebugInfoEnabled);
+		return layout;
 	}
 
 	@Override
 	public String getDisplayName()
 	{
 		return "Erlang Compiler";
-	}
-
-	@Override
-	public JComponent createComponent()
-	{
-		return myRootPanel;
-	}
-
-	@Override
-	public void reset()
-	{
-
-		myAddDebugInfoCheckBox.setSelected(mySettings.isAddDebugInfoEnabled());
-	}
-
-	@Override
-	public void apply() throws ConfigurationException
-	{
-		mySettings.setAddDebugInfoEnabled(myAddDebugInfoCheckBox.isSelected());
-	}
-
-	@Override
-	public boolean isModified()
-	{
-		return mySettings.isAddDebugInfoEnabled() != myAddDebugInfoCheckBox.isSelected();
 	}
 }
