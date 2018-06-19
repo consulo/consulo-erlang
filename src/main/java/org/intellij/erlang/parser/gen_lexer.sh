@@ -1,1 +1,0 @@
-~/src/community/tools/lexer/jflex-1.4/bin/jflex --skel ~/src/community/tools/lexer/idea-flex.skeleton --charat --nobak Erlang.flex

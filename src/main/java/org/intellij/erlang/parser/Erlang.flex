@@ -1,23 +1,18 @@
 package org.intellij.erlang.parser;
-import com.intellij.lexer.FlexLexer;
+
+import com.intellij.lexer.LexerBase;
 import com.intellij.psi.tree.IElementType;
 import static org.intellij.erlang.ErlangTypes.*;
 import static org.intellij.erlang.ErlangParserDefinition.*;
 
 %%
 
-%{
-  public _ErlangLexer() {
-    this((java.io.Reader)null);
-  }
-%}
-
 %class _ErlangLexer
-%implements FlexLexer
+%extends LexerBase
 %unicode
 %public
 
-%function advance
+%function advanceImpl
 %type IElementType
 
 %table
