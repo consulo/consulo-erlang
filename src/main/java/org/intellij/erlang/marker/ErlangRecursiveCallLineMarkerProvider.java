@@ -38,7 +38,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.util.FunctionUtil;
 import com.intellij.util.containers.HashSet;
-import consulo.awt.TargetAWT;
 
 public class ErlangRecursiveCallLineMarkerProvider implements LineMarkerProvider, DumbAware
 {
@@ -86,7 +85,7 @@ public class ErlangRecursiveCallLineMarkerProvider implements LineMarkerProvider
 	{
 		private RecursiveMethodCallMarkerInfo(@Nonnull PsiElement methodCall)
 		{
-			super(methodCall, methodCall.getTextRange(), TargetAWT.to(ErlangIcons.RECURSIVE_CALL), Pass.LINE_MARKERS, FunctionUtil.<PsiElement, String>constant("Recursive call"), null,
+			super(methodCall, methodCall.getTextRange(), ErlangIcons.RECURSIVE_CALL, Pass.LINE_MARKERS, FunctionUtil.<PsiElement, String>constant("Recursive call"), null,
 					GutterIconRenderer.Alignment.RIGHT);
 		}
 	}
