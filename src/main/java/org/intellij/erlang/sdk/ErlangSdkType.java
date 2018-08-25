@@ -22,18 +22,17 @@ import java.util.Collections;
 import java.util.regex.Pattern;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import org.intellij.erlang.ErlangIcons;
 import org.jetbrains.annotations.NonNls;
-
-import javax.annotation.Nullable;
 import org.jetbrains.annotations.TestOnly;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkModificator;
+import com.intellij.openapi.projectRoots.SdkTable;
 import com.intellij.openapi.projectRoots.SdkType;
-import com.intellij.openapi.projectRoots.impl.SdkImpl;
 import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.SystemInfo;
@@ -227,7 +226,7 @@ public class ErlangSdkType extends SdkType
 	public static Sdk createMockSdk(@Nonnull final String sdkHome)
 	{
 		final String release = getReleaseString(sdkHome);
-		final Sdk sdk = new SdkImpl(release, getInstance());
+		final Sdk sdk = SdkTable.getInstance().createSdk(release, getInstance());
 		final SdkModificator sdkModificator = sdk.getSdkModificator();
 		sdkModificator.setHomePath(sdkHome);
 		sdkModificator.setVersionString(release); // must be set after home path, otherwise setting home path clears the version string
