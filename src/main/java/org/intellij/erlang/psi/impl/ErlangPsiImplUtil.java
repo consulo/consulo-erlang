@@ -30,7 +30,6 @@ import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.swing.Icon;
 
 import org.intellij.erlang.ErlangApplicationIndex;
 import org.intellij.erlang.ErlangCompletionContributor;
@@ -1532,7 +1531,7 @@ public class ErlangPsiImplUtil
 
 			@Nullable
 			@Override
-			public Icon getIcon(boolean b)
+			public Image getIcon()
 			{
 				return o.getIcon(0);
 			}

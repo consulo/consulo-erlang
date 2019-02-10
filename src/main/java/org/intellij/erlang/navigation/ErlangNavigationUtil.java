@@ -20,7 +20,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.Nullable;
-import javax.swing.Icon;
 
 import org.intellij.erlang.ErlangIcons;
 import org.intellij.erlang.psi.ErlangBehaviour;
@@ -38,7 +37,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
-import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 
 public class ErlangNavigationUtil {
 
@@ -90,8 +89,8 @@ public class ErlangNavigationUtil {
 
           @Nullable
           @Override
-          public Icon getIcon(boolean unused) {
-            return TargetAWT.to(ErlangIcons.CALLBACK);
+          public Image getIcon() {
+            return ErlangIcons.CALLBACK;
           }
         };
       }

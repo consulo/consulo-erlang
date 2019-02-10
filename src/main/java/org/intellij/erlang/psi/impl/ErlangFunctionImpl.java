@@ -3,18 +3,20 @@ package org.intellij.erlang.psi.impl;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
+
+import org.intellij.erlang.psi.ErlangFunction;
+import org.intellij.erlang.psi.ErlangFunctionClause;
+import org.intellij.erlang.psi.ErlangQAtom;
+import org.intellij.erlang.psi.ErlangVisitor;
+import org.intellij.erlang.stubs.ErlangFunctionStub;
 import com.intellij.lang.ASTNode;
+import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.util.PsiTreeUtil;
-import org.intellij.erlang.stubs.ErlangFunctionStub;
-import org.intellij.erlang.psi.*;
-import com.intellij.navigation.ItemPresentation;
-
-import javax.annotation.Nonnull;
-import javax.swing.Icon;
 import com.intellij.psi.stubs.IStubElementType;
-import consulo.awt.TargetAWT;
+import com.intellij.psi.util.PsiTreeUtil;
+import consulo.ui.image.Image;
 
 public class ErlangFunctionImpl extends ErlangStubbedPsiElementBase<ErlangFunctionStub> implements ErlangFunction {
 
@@ -70,8 +72,8 @@ public class ErlangFunctionImpl extends ErlangStubbedPsiElementBase<ErlangFuncti
   }
 
   @Nonnull
-  public Icon getIcon(int flags) {
-    return TargetAWT.to(ErlangPsiImplUtil.getIcon(this, flags));
+  public Image getIcon(int flags) {
+    return ErlangPsiImplUtil.getIcon(this, flags);
   }
 
   public boolean isExported() {

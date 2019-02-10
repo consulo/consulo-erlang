@@ -29,7 +29,6 @@ import java.util.Set;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.swing.Icon;
 
 import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
 import org.intellij.erlang.parser.ErlangLexer;
@@ -84,8 +83,8 @@ import com.intellij.util.Function;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.text.CaseInsensitiveStringHashingStrategy;
-import consulo.awt.TargetAWT;
 import consulo.codeInsight.completion.CompletionProvider;
+import consulo.ui.image.Image;
 
 public class ErlangCompletionContributor extends CompletionContributor {
   public static final int MODULE_PRIORITY = -15;
@@ -420,7 +419,7 @@ public class ErlangCompletionContributor extends CompletionContributor {
 
   private static LookupElementBuilder getDefaultPathLookupElementBuilder(String includeText, VirtualFile lookedUpFile, @Nullable String appName) {
     String slash = lookedUpFile.isDirectory() ? "/" : "";
-    Icon icon = lookedUpFile.isDirectory() ? TargetAWT.to(ErlangIcons.MODULE) : TargetAWT.to(ErlangFileType.getIconForFile(lookedUpFile.getName()));
+    Image icon = lookedUpFile.isDirectory() ? ErlangIcons.MODULE : ErlangFileType.getIconForFile(lookedUpFile.getName());
     return LookupElementBuilder.create(getCompletedString(includeText, lookedUpFile, appName))
                                .withPresentableText(lookedUpFile.getName() + slash)
                                .withIcon(icon)

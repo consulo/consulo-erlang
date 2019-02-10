@@ -3,13 +3,13 @@ package org.intellij.erlang.psi;
 
 import java.util.List;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.StubBasedPsiElement;
+import javax.annotation.Nonnull;
+
 import org.intellij.erlang.stubs.ErlangFunctionStub;
 import com.intellij.navigation.ItemPresentation;
-
-import javax.annotation.Nonnull;
-import javax.swing.Icon;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.StubBasedPsiElement;
+import consulo.ui.image.Image;
 
 public interface ErlangFunction extends ErlangNamedElement, StubBasedPsiElement<ErlangFunctionStub> {
 
@@ -34,7 +34,7 @@ public interface ErlangFunction extends ErlangNamedElement, StubBasedPsiElement<
   ItemPresentation getPresentation();
 
   @Nonnull
-  Icon getIcon(int flags);
+  Image getIcon(int flags);
 
   boolean isExported();
 

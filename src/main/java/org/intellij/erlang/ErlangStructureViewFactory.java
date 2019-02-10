@@ -23,7 +23,6 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.swing.Icon;
 
 import org.intellij.erlang.psi.*;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
@@ -45,7 +44,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
-import consulo.awt.TargetAWT;
 import consulo.ide.IconDescriptorUpdaters;
 import consulo.ui.image.Image;
 import consulo.ui.image.ImageEffects;
@@ -257,12 +255,7 @@ public class ErlangStructureViewFactory implements PsiStructureViewFactory
 		}
 
 		@Override
-		public Icon getIcon(boolean open)
-		{
-			return TargetAWT.to(getIconImpl(open));
-		}
-
-		private Image getIconImpl(boolean open)
+		public Image getIcon()
 		{
 			if(!myElement.isValid())
 			{
