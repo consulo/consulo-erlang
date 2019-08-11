@@ -16,13 +16,6 @@
 
 package org.intellij.erlang.actions;
 
-import java.io.File;
-
-import org.intellij.erlang.emacs.EmacsSettings;
-import org.intellij.erlang.psi.ErlangFile;
-import org.intellij.erlang.utils.ErlangExternalToolsNotificationListener;
-import javax.annotation.Nonnull;
-import consulo.erlang.module.extension.ErlangModuleExtension;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.process.OSProcessHandler;
 import com.intellij.execution.process.ProcessAdapter;
@@ -35,7 +28,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.DumbAware;
@@ -49,6 +41,14 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ExceptionUtil;
+import consulo.erlang.module.extension.ErlangModuleExtension;
+import consulo.logging.Logger;
+import org.intellij.erlang.emacs.EmacsSettings;
+import org.intellij.erlang.psi.ErlangFile;
+import org.intellij.erlang.utils.ErlangExternalToolsNotificationListener;
+
+import javax.annotation.Nonnull;
+import java.io.File;
 
 public class ErlangEmacsFormatAction extends AnAction implements DumbAware
 {
