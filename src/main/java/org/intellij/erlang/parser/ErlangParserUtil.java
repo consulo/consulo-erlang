@@ -28,22 +28,21 @@ import com.intellij.psi.impl.source.resolve.FileContextUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import gnu.trove.TObjectIntHashMap;
-
-import javax.annotation.Nonnull;
-
 import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.ErlangTypes;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 
+import javax.annotation.Nonnull;
+
 public class ErlangParserUtil extends GeneratedParserUtilBase {
   public static boolean isApplicationLanguage(PsiBuilder builder_, @SuppressWarnings("UnusedParameters") int level) {
-    PsiFile file = builder_.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
+    PsiFile file = builder_.getUserData(FileContextUtil.CONTAINING_FILE_KEY);
     assert file != null;
     return isApplicationConfigFileType(file);
   }
 
   public static boolean isConsole(PsiBuilder builder_, @SuppressWarnings("UnusedParameters") int level) {
-    PsiFile file = builder_.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
+    PsiFile file = builder_.getUserData(FileContextUtil.CONTAINING_FILE_KEY);
     assert file != null;
     return isConsole(file);
   }
@@ -60,8 +59,8 @@ public class ErlangParserUtil extends GeneratedParserUtilBase {
 
   private static final Key<TObjectIntHashMap<String>> MODES_KEY = Key.create("MODES_KEY");
   private static TObjectIntHashMap<String> getParsingModes(PsiBuilder builder_) {
-    TObjectIntHashMap<String> flags = builder_.getUserDataUnprotected(MODES_KEY);
-    if (flags == null) builder_.putUserDataUnprotected(MODES_KEY, flags = new TObjectIntHashMap<String>());
+    TObjectIntHashMap<String> flags = builder_.getUserData(MODES_KEY);
+    if (flags == null) builder_.putUserData(MODES_KEY, flags = new TObjectIntHashMap<String>());
     return flags;
   }
 
