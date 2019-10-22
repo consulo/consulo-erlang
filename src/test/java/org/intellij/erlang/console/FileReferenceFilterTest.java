@@ -16,15 +16,15 @@
 
 package org.intellij.erlang.console;
 
-import java.io.File;
-import java.util.regex.Pattern;
-
-import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 import com.intellij.execution.filters.Filter;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
+import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
+
+import java.io.File;
+import java.util.regex.Pattern;
 
 @SuppressWarnings("ConstantConditions")
 public class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
@@ -40,8 +40,8 @@ public class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtu
     final FileReferenceFilter compilationErrorFilter = new FileReferenceFilter(getProject(), ErlangConsoleUtil.COMPILATION_ERROR_PATH);
     final String consoleOutput = "some text||src/a_module.erl:123: more text here";
     final Filter.Result result = compilationErrorFilter.applyFilter(consoleOutput, consoleOutput.length());
-    assertEquals(11, result.highlightStartOffset);
-    assertEquals(31, result.highlightEndOffset);
+    assertEquals(11, result.getHighlightStartOffset());
+    assertEquals(31, result.getHighlightEndOffset());
     assertNotNull(result.hyperlinkInfo);
   }
 
@@ -49,8 +49,8 @@ public class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtu
     final FileReferenceFilter compilationErrorFilter = new FileReferenceFilter(getProject(), ErlangConsoleUtil.COMPILATION_ERROR_PATH);
     final String consoleOutput = "some text||" + getProject().getBasePath() + "/src/a_module.erl:123: more text here";
     final Filter.Result result = compilationErrorFilter.applyFilter(consoleOutput, consoleOutput.length());
-    assertEquals(11, result.highlightStartOffset);
-    assertEquals(32 + getProject().getBasePath().length(), result.highlightEndOffset);
+    assertEquals(11, result.getHighlightStartOffset());
+    assertEquals(32 + getProject().getBasePath().length(), result.getHighlightEndOffset());
     assertNotNull(result.hyperlinkInfo);
   }
 
@@ -58,8 +58,8 @@ public class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtu
     final FileReferenceFilter compilationErrorFilter = new FileReferenceFilter(getProject(), ErlangConsoleUtil.COMPILATION_ERROR_PATH);
     final String consoleOutput = "some text||src/B_module.erl:123: more text here"; // may be case insensitive
     final Filter.Result result = compilationErrorFilter.applyFilter(consoleOutput, consoleOutput.length());
-    assertEquals(11, result.highlightStartOffset);
-    assertEquals(31, result.highlightEndOffset);
+    assertEquals(11, result.getHighlightStartOffset());
+    assertEquals(31, result.getHighlightEndOffset());
     assertNull(result.hyperlinkInfo);
   }
 
@@ -67,8 +67,8 @@ public class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtu
     final FileReferenceFilter compilationErrorFilter = new FileReferenceFilter(getProject(), ErlangConsoleUtil.EUNIT_ERROR_PATH);
     final String consoleOutput = "some text (src/a_module.erl, line 123) more text here";
     final Filter.Result result = compilationErrorFilter.applyFilter(consoleOutput, consoleOutput.length());
-    assertEquals(11, result.highlightStartOffset);
-    assertEquals(37, result.highlightEndOffset);
+    assertEquals(11, result.getHighlightStartOffset());
+    assertEquals(37, result.getHighlightEndOffset());
     assertNotNull(result.hyperlinkInfo);
   }
   
@@ -88,8 +88,8 @@ public class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtu
     final FileReferenceFilter compilationErrorFilter = new FileReferenceFilter(getProject(), ErlangConsoleUtil.EUNIT_FAILURE_PATH);
     final String consoleOutput = "some text [{file,\"src/a_module.erl\"},{line,123}] more text here";
     final Filter.Result result = compilationErrorFilter.applyFilter(consoleOutput, consoleOutput.length());
-    assertEquals(10, result.highlightStartOffset);
-    assertEquals(48, result.highlightEndOffset);
+    assertEquals(10, result.getHighlightStartOffset());
+    assertEquals(48, result.getHighlightEndOffset());
     assertNotNull(result.hyperlinkInfo);
   }
 
