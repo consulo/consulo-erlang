@@ -1,14 +1,5 @@
 package consulo.erlang.debugger;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.intellij.erlang.ErlangFileType;
-import org.intellij.erlang.ErlangTypes;
-import org.intellij.erlang.debugger.xdebug.ErlangLineBreakpointType;
-import org.intellij.erlang.psi.*;
-import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import consulo.annotations.RequiredReadAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
@@ -18,7 +9,16 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
 import com.intellij.xdebugger.XDebuggerUtil;
 import com.intellij.xdebugger.breakpoints.XLineBreakpointType;
+import consulo.annotation.access.RequiredReadAction;
 import consulo.xdebugger.breakpoints.XLineBreakpointTypeResolver;
+import org.intellij.erlang.ErlangFileType;
+import org.intellij.erlang.ErlangTypes;
+import org.intellij.erlang.debugger.xdebug.ErlangLineBreakpointType;
+import org.intellij.erlang.psi.*;
+import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * @author VISTALL

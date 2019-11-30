@@ -1,14 +1,14 @@
 package org.intellij.erlang.configuration;
 
-import javax.annotation.Nonnull;
-
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
 import consulo.options.SimpleConfigurableByProperties;
 import consulo.ui.CheckBox;
 import consulo.ui.Component;
-import consulo.ui.RequiredUIAccess;
+import consulo.ui.annotation.RequiredUIAccess;
 import consulo.ui.layout.VerticalLayout;
+
+import javax.annotation.Nonnull;
 
 public class ErlangCompilerOptionsConfigurable extends SimpleConfigurableByProperties implements Configurable
 {

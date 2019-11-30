@@ -16,22 +16,22 @@
 
 package org.intellij.erlang;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.intellij.erlang.psi.ErlangBehaviour;
-import org.intellij.erlang.psi.ErlangFile;
-import org.intellij.erlang.psi.ErlangModule;
-import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import consulo.annotations.RequiredReadAction;
+import consulo.annotation.access.RequiredReadAction;
 import consulo.ide.IconDescriptor;
 import consulo.ide.IconDescriptorUpdater;
 import consulo.ui.image.Image;
+import org.intellij.erlang.psi.ErlangBehaviour;
+import org.intellij.erlang.psi.ErlangFile;
+import org.intellij.erlang.psi.ErlangModule;
+import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class ErlangIconDescriptorUpdater implements IconDescriptorUpdater, DumbAware
 {

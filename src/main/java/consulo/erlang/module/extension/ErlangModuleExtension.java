@@ -1,16 +1,15 @@
 package consulo.erlang.module.extension;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import org.intellij.erlang.sdk.ErlangSdkType;
-import org.jdom.Element;
 import com.intellij.openapi.projectRoots.SdkType;
-import consulo.annotations.RequiredReadAction;
+import consulo.annotation.access.RequiredReadAction;
 import consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
 import consulo.roots.ModuleRootLayer;
+import org.intellij.erlang.sdk.ErlangSdkType;
+import org.jdom.Element;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author VISTALL

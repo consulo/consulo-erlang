@@ -1,24 +1,20 @@
 package consulo.erlang.module.extension;
 
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.annotation.Nullable;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import javax.annotation.Nonnull;
-
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.text.StringUtil;
-import consulo.annotations.RequiredDispatchThread;
 import consulo.extension.ui.ModuleExtensionSdkBoxBuilder;
 import consulo.module.extension.MutableModuleExtensionWithSdk;
 import consulo.module.extension.MutableModuleInheritableNamedPointer;
 import consulo.roots.ModuleRootLayer;
+import consulo.ui.annotation.RequiredUIAccess;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * @author VISTALL
@@ -38,7 +34,7 @@ public class ErlangMutableModuleExtension extends ErlangModuleExtension implemen
 		return (MutableModuleInheritableNamedPointer<Sdk>) super.getInheritableSdk();
 	}
 
-	@RequiredDispatchThread
+	@RequiredUIAccess
 	@Nullable
 	@Override
 	public JComponent createConfigurablePanel(@Nullable Runnable runnable)
