@@ -16,44 +16,6 @@
 
 package org.intellij.erlang.psi.impl;
 
-import static com.intellij.patterns.PlatformPatterns.psiElement;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.intellij.erlang.ErlangApplicationIndex;
-import org.intellij.erlang.ErlangCompletionContributor;
-import org.intellij.erlang.ErlangIcons;
-import org.intellij.erlang.ErlangModuleIndex;
-import org.intellij.erlang.ErlangParserDefinition;
-import org.intellij.erlang.ErlangStringLiteralEscaper;
-import org.intellij.erlang.ErlangTypes;
-import org.intellij.erlang.bif.ErlangBifDescriptor;
-import org.intellij.erlang.bif.ErlangBifTable;
-import org.intellij.erlang.parser.ErlangParserUtil;
-import org.intellij.erlang.psi.*;
-import org.intellij.erlang.rebar.util.RebarConfigUtil;
-import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
-import org.intellij.erlang.sdk.ErlangSdkRelease;
-import org.intellij.erlang.sdk.ErlangSdkType;
-import org.intellij.erlang.stubs.ErlangBehaviourStub;
-import org.intellij.erlang.stubs.ErlangFunctionStub;
-import org.intellij.erlang.stubs.ErlangIncludeLibStub;
-import org.intellij.erlang.stubs.ErlangIncludeStub;
-import org.intellij.erlang.stubs.ErlangMacrosDefinitionStub;
-import org.intellij.erlang.stubs.ErlangModuleStub;
-import org.intellij.erlang.stubs.ErlangRecordDefinitionStub;
-import org.intellij.erlang.stubs.ErlangTypeDefinitionStub;
 import com.intellij.codeInsight.completion.BasicInsertHandler;
 import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
@@ -70,12 +32,7 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.util.Comparing;
-import com.intellij.openapi.util.Condition;
-import com.intellij.openapi.util.Key;
-import com.intellij.openapi.util.Pair;
-import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.*;
 import com.intellij.openapi.util.io.FileUtilRt;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
@@ -99,6 +56,23 @@ import com.intellij.util.ProcessingContext;
 import com.intellij.util.containers.ContainerUtil;
 import consulo.erlang.module.extension.ErlangModuleExtension;
 import consulo.ui.image.Image;
+import consulo.util.dataholder.Key;
+import org.intellij.erlang.*;
+import org.intellij.erlang.bif.ErlangBifDescriptor;
+import org.intellij.erlang.bif.ErlangBifTable;
+import org.intellij.erlang.parser.ErlangParserUtil;
+import org.intellij.erlang.psi.*;
+import org.intellij.erlang.rebar.util.RebarConfigUtil;
+import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
+import org.intellij.erlang.sdk.ErlangSdkRelease;
+import org.intellij.erlang.sdk.ErlangSdkType;
+import org.intellij.erlang.stubs.*;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
+
+import static com.intellij.patterns.PlatformPatterns.psiElement;
 
 public class ErlangPsiImplUtil
 {

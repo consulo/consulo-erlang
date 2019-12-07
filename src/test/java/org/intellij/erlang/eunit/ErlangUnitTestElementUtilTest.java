@@ -1,28 +1,20 @@
 package org.intellij.erlang.eunit;
 
-import java.util.Collection;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiFile;
+import consulo.util.dataholder.Key;
 import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.util.Key;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiFile;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collection;
 
 public class ErlangUnitTestElementUtilTest extends ErlangLightPlatformCodeInsightFixtureTestCase
 {
-	@Override
-	protected void setUp() throws Exception
-	{
-		System.setProperty("idea.platform.prefix", "Idea");
-		super.setUp();
-	}
-
 	@Override
 	protected String getTestDataPath()
 	{

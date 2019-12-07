@@ -1,8 +1,8 @@
 package org.intellij.erlang.dialyzer;
 
 import com.intellij.codeInspection.ProblemsHolder;
-import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiFile;
+import consulo.util.dataholder.Key;
 import org.intellij.erlang.inspection.ErlangInspectionBase;
 
 public class ErlangDialyzerInspection extends ErlangInspectionBase {
