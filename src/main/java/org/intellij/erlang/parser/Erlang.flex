@@ -11,11 +11,8 @@ import static org.intellij.erlang.ErlangParserDefinition.*;
 %extends LexerBase
 %unicode
 %public
-
 %function advanceImpl
 %type IElementType
-
-%table
 
 /* This hex range is the same as octal \O00 - \O37 */
 ControlCharacter = [\000 - \037]
@@ -150,4 +147,4 @@ UniversalPattern = _
   "->"                          { return ERL_ARROW; }
   "#"                           { return ERL_RADIX; }
 
- .                              { return com.intellij.psi.TokenType.BAD_CHARACTER; }
+  [^]                           { return com.intellij.psi.TokenType.BAD_CHARACTER; }
