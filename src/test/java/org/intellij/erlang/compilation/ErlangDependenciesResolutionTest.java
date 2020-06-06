@@ -1,15 +1,15 @@
 package org.intellij.erlang.compilation;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
-
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.testFramework.ModuleTestCase;
 import com.intellij.util.Function;
 import com.intellij.util.containers.ContainerUtil;
 
-public class ErlangDependenciesResolutionTest extends ModuleTestCase {
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+public abstract class ErlangDependenciesResolutionTest extends ModuleTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();

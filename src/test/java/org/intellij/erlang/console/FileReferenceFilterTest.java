@@ -27,7 +27,7 @@ import java.io.File;
 import java.util.regex.Pattern;
 
 @SuppressWarnings("ConstantConditions")
-public class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
+public abstract class FileReferenceFilterTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
 
   public void setUp() throws Exception {
     super.setUp();

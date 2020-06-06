@@ -16,13 +16,6 @@
 
 package org.intellij.erlang.formatting;
 
-import java.io.File;
-import java.io.IOException;
-
-import org.intellij.erlang.ErlangFileType;
-import org.intellij.erlang.ErlangLanguage;
-import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
-import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.psi.codeStyle.CodeStyleManager;
@@ -30,8 +23,15 @@ import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import junit.framework.Assert;
+import org.intellij.erlang.ErlangFileType;
+import org.intellij.erlang.ErlangLanguage;
+import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
+import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 
-public class ErlangFormattingTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
+import java.io.File;
+import java.io.IOException;
+
+public abstract class ErlangFormattingTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   public static final boolean OVERRIDE_TEST_DATA = false;
   private CodeStyleSettings myTemporarySettings;
 

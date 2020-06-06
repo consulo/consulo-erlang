@@ -18,7 +18,7 @@ package org.intellij.erlang.sdk;
 
 import junit.framework.TestCase;
 
-public class ErlangSdkReleaseTest extends TestCase {
+public abstract class ErlangSdkReleaseTest extends TestCase {
   public void testNeedCompletion1() throws Exception { assertTrue(ErlangSdkRelease.R15B03.needBifCompletion("empty")); }
   public void testNeedCompletion2() throws Exception { assertFalse(ErlangSdkRelease.R16A.needBifCompletion("empty")); }
   public void testNeedCompletion3() throws Exception { assertFalse(ErlangSdkRelease.R16B.needBifCompletion("empty")); }

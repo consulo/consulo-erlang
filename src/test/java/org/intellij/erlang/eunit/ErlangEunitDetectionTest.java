@@ -4,7 +4,7 @@ import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 
-public class ErlangEunitDetectionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
+public abstract class ErlangEunitDetectionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/eunit/detection/";

@@ -21,7 +21,7 @@ import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 
 import java.io.File;
 
-public class ErlangAutoIndentTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
+public abstract class ErlangAutoIndentTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   public static final boolean OVERRIDE_TEST_DATA = false;
 
   @Override

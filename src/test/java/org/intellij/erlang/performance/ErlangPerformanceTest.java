@@ -5,7 +5,7 @@ import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.util.ThrowableRunnable;
 
-public class ErlangPerformanceTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
+public abstract class ErlangPerformanceTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/performance/";
@@ -23,7 +23,6 @@ public class ErlangPerformanceTest extends ErlangLightPlatformCodeInsightFixture
 
   @Override
   protected void setUp() throws Exception {
-    System.setProperty("idea.platform.prefix", "Idea");
     super.setUp();
     ErlangHighlightingTestBase.setUpInspections(myFixture);
     setUpProjectSdk();

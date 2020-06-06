@@ -16,17 +16,17 @@
 
 package org.intellij.erlang.documentation;
 
-import javax.annotation.Nonnull;
-
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.psi.ErlangModule;
 import org.intellij.erlang.psi.ErlangTypeDefinition;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
+
+import javax.annotation.Nonnull;
 
 @SuppressWarnings("ConstantConditions")
-public class ErlangDocumentationProviderTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
+public abstract class ErlangDocumentationProviderTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   private ErlangDocumentationProvider myErlangDocProvider;
 
   @Override

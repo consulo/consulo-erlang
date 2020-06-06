@@ -18,7 +18,7 @@ package org.intellij.erlang.quickfixes;
 
 import org.intellij.erlang.inspection.ErlangHeadMismatchInspection;
 
-public class ErlangHeadMismatchFixTest extends ErlangQuickFixTestBase {
+public abstract class ErlangHeadMismatchFixTest extends ErlangQuickFixTestBase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();

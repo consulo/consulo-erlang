@@ -2,12 +2,11 @@ package org.intellij.erlang.quickfixes;
 
 import org.intellij.erlang.inspection.ErlangUnresolvedRecordInspection;
 
-public class ErlangIntroduceRecordFixTest extends ErlangQuickFixTestBase {
+public abstract class ErlangIntroduceRecordFixTest extends ErlangQuickFixTestBase {
 
   @SuppressWarnings("unchecked")
   @Override
   protected void setUp() throws Exception {
-    System.setProperty("idea.platform.prefix", "Idea");
     super.setUp();
     myFixture.enableInspections(ErlangUnresolvedRecordInspection.class);
   }

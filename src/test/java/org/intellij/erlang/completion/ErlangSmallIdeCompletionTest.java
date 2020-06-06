@@ -18,7 +18,7 @@ package org.intellij.erlang.completion;
 
 import com.intellij.codeInsight.completion.CompletionType;
 
-public class ErlangSmallIdeCompletionTest extends ErlangCompletionTestBase {
+public abstract class ErlangSmallIdeCompletionTest extends ErlangCompletionTestBase {
   public void testIncludeOtpIncludeDirectoryCompletion() throws Throwable {
     myFixture.configureByFiles("otp-include-directory/src/includeuser.erl",
       "otp-include-directory/include/include.hrl",

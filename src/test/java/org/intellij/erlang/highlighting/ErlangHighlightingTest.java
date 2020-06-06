@@ -16,7 +16,7 @@
 
 package org.intellij.erlang.highlighting;
 
-public class ErlangHighlightingTest extends ErlangHighlightingTestBase {
+public abstract class ErlangHighlightingTest extends ErlangHighlightingTestBase {
 
   public void testHelloWorld()        { doTest(); }
   public void testExport()            { doTest(); }

@@ -28,7 +28,7 @@ import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
 
 import java.util.List;
 
-public class ErlangGotoSuperTest extends LightPlatformCodeInsightFixtureTestCase {
+public abstract class ErlangGotoSuperTest extends LightPlatformCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/navigation/goto_super/";

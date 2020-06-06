@@ -18,7 +18,7 @@ package org.intellij.erlang.quickfixes;
 
 import org.intellij.erlang.inspection.ErlangUnboundVariableInspection;
 
-public class ErlangIntroduceVariableFixTest extends ErlangQuickFixTestBase {
+public abstract class ErlangIntroduceVariableFixTest extends ErlangQuickFixTestBase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();

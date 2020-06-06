@@ -16,7 +16,7 @@
 
 package org.intellij.erlang.resolve;
 
-public class ErlangSmallIdeIncludeResolveTest extends ErlangIncludeResolveTestBase {
+public abstract class ErlangSmallIdeIncludeResolveTest extends ErlangIncludeResolveTestBase {
   public void testRelativeToIncludeDirectory() throws Exception {
     doTest("src/testmodule.erl", "include/testinclude.hrl", "src/test.app.src");
   }

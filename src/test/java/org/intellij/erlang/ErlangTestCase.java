@@ -59,7 +59,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 @SuppressWarnings("ALL")
-public class ErlangTestCase extends TestCase {
+public abstract class ErlangTestCase extends TestCase {
   public static TestSuite suite() {
     TestSuite suite = new TestSuite();
     //suite.addTestSuite(ErlangParserTest.class);

@@ -19,7 +19,7 @@ package org.intellij.erlang.refactoring;
 import com.intellij.testFramework.fixtures.LightPlatformCodeInsightFixtureTestCase;
 import org.intellij.erlang.refactor.introduce.ErlangIntroduceVariableHandler;
 
-public class ErlangIntroduceVariableTest extends LightPlatformCodeInsightFixtureTestCase {
+public abstract class ErlangIntroduceVariableTest extends LightPlatformCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/refactoring/introduce_variable";

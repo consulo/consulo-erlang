@@ -9,13 +9,7 @@ import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 
 import java.util.List;
 
-public class ErlangIncludeLibResolveTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
-  @Override
-  protected void setUp() throws Exception {
-    System.setProperty("idea.platform.prefix", "Idea");
-    super.setUp();
-  }
-
+public abstract class ErlangIncludeLibResolveTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/resolve/includeLib/";

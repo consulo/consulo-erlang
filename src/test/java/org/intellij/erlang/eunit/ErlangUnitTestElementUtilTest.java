@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
 
-public class ErlangUnitTestElementUtilTest extends ErlangLightPlatformCodeInsightFixtureTestCase
+public abstract class ErlangUnitTestElementUtilTest extends ErlangLightPlatformCodeInsightFixtureTestCase
 {
 	@Override
 	protected String getTestDataPath()

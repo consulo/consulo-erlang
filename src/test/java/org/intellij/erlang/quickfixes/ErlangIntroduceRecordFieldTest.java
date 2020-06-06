@@ -18,7 +18,7 @@ package org.intellij.erlang.quickfixes;
 
 import org.intellij.erlang.inspection.ErlangUnresolvedRecordFieldInspection;
 
-public class ErlangIntroduceRecordFieldTest extends ErlangQuickFixTestBase {
+public abstract class ErlangIntroduceRecordFieldTest extends ErlangQuickFixTestBase {
 
   @SuppressWarnings("unchecked")
   @Override

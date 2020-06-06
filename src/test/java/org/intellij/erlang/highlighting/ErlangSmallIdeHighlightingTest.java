@@ -16,7 +16,7 @@
 
 package org.intellij.erlang.highlighting;
 
-public class ErlangSmallIdeHighlightingTest extends ErlangHighlightingTestBase {
+public abstract class ErlangSmallIdeHighlightingTest extends ErlangHighlightingTestBase {
   public void testIncludeFromOtpIncludeDirResolve() throws Exception {
     enableUnresolvedMacroInspection();
     doTest("smallIdeOtpInclude/src/IncludeResolve.erl",

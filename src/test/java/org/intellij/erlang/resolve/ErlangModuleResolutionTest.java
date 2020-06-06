@@ -24,7 +24,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 
-public class ErlangModuleResolutionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
+public abstract class ErlangModuleResolutionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   /*@Override
   protected LightProjectDescriptor getProjectDescriptor() {
     return new DefaultLightProjectDescriptor() {

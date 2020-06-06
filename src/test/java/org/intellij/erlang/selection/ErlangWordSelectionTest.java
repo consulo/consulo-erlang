@@ -18,7 +18,7 @@ package org.intellij.erlang.selection;
 
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 
-public class ErlangWordSelectionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
+public abstract class ErlangWordSelectionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/select-word/";

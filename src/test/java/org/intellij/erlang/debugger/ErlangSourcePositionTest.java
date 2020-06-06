@@ -9,12 +9,11 @@ import org.intellij.erlang.psi.ErlangFile;
 import org.intellij.erlang.psi.ErlangFunction;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 
-public class ErlangSourcePositionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
+public abstract class ErlangSourcePositionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   private ErlangFile myErlangFile;
 
   @Override
   protected void setUp() throws Exception {
-    System.setProperty("idea.platform.prefix", "Idea");
     super.setUp();
     myFixture.configureByFile("erlang-source-position.erl");
     myErlangFile = (ErlangFile) myFixture.getFile();

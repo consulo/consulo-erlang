@@ -19,7 +19,7 @@ package org.intellij.erlang.refactoring;
 import org.intellij.erlang.refactor.introduce.ErlangExtractFunctionHandler;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 
-public class ErlangExtractFunctionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
+public abstract class ErlangExtractFunctionTest extends ErlangLightPlatformCodeInsightFixtureTestCase {
   @Override
   protected String getTestDataPath() {
     return "testData/refactoring/extract_function";
@@ -32,11 +32,5 @@ public class ErlangExtractFunctionTest extends ErlangLightPlatformCodeInsightFix
     myFixture.configureByFile(getTestName(true) + ".erl");
     new ErlangExtractFunctionHandler().invoke(myFixture.getProject(), myFixture.getEditor(), myFixture.getFile(), null);
     myFixture.checkResultByFile(getTestName(true) + "-after.erl");
-  }
-
-  @Override
-  protected void setUp() throws Exception {
-    System.setProperty("idea.platform.prefix", "Idea");
-    super.setUp();
   }
 }

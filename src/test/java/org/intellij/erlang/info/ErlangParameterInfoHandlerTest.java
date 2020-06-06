@@ -16,11 +16,6 @@
 
 package org.intellij.erlang.info;
 
-import javax.annotation.Nonnull;
-
-import org.intellij.erlang.ErlangParameterInfoHandler;
-import org.intellij.erlang.psi.ErlangArgumentList;
-import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 import com.intellij.lang.parameterInfo.CreateParameterInfoContext;
 import com.intellij.lang.parameterInfo.ParameterInfoHandler;
 import com.intellij.lang.parameterInfo.UpdateParameterInfoContext;
@@ -29,8 +24,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ArrayUtil;
+import org.intellij.erlang.ErlangParameterInfoHandler;
+import org.intellij.erlang.psi.ErlangArgumentList;
+import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
 
-public class ErlangParameterInfoHandlerTest extends ErlangLightPlatformCodeInsightFixtureTestCase
+import javax.annotation.Nonnull;
+
+public abstract class ErlangParameterInfoHandlerTest extends ErlangLightPlatformCodeInsightFixtureTestCase
 {
 	private static final String FOO = "foo(Arg1, Arg2) -> ok.\n";
 

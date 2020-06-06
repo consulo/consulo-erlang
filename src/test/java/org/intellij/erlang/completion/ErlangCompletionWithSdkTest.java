@@ -16,7 +16,7 @@
 
 package org.intellij.erlang.completion;
 
-public class ErlangCompletionWithSdkTest extends ErlangCompletionTestBase {
+public abstract class ErlangCompletionWithSdkTest extends ErlangCompletionTestBase {
   /*@Override
   protected LightProjectDescriptor getProjectDescriptor() {
     return new DefaultLightProjectDescriptor() {
