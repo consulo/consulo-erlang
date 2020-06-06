@@ -3,6 +3,8 @@ package org.intellij.erlang.eunit;
 import java.util.Collection;
 
 import javax.annotation.Nullable;
+
+import com.intellij.psi.search.GlobalSearchScope;
 import consulo.erlang.rebar.module.RebarModuleUtil;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
@@ -21,7 +23,7 @@ public class ErlangTestRunConfigProducersUtil {
   public static boolean shouldProduceRebarTestRunConfiguration(@Nullable Project project, @Nullable Module module) {
     if (project == null || module == null) return false;
     if (StringUtil.isEmpty(RebarModuleUtil.getRebarPath(module))) return false;
-    Collection<VirtualFile> configs = FilenameIndex.getVirtualFilesByName(project, "rebar.config", module.getModuleContentScope());
+    Collection<VirtualFile> configs = FilenameIndex.getVirtualFilesByName(project, "rebar.config", GlobalSearchScope.moduleContentScope(module));
     return !configs.isEmpty();
   }
 }
