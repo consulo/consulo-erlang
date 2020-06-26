@@ -24,6 +24,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.util.ArrayUtil;
+import consulo.util.dataholder.UserDataHolderEx;
 import org.intellij.erlang.ErlangParameterInfoHandler;
 import org.intellij.erlang.psi.ErlangArgumentList;
 import org.intellij.erlang.utils.ErlangLightPlatformCodeInsightFixtureTestCase;
@@ -193,6 +194,12 @@ public abstract class ErlangParameterInfoHandlerTest extends ErlangLightPlatform
 			myHighlightedParameter = parameter;
 		}
 
+		@Override
+		public Object getHighlightedParameter()
+		{
+			return null;
+		}
+
 		public void setCurrentParameter(int index)
 		{
 			myCurrentParameter = index;
@@ -220,6 +227,36 @@ public abstract class ErlangParameterInfoHandlerTest extends ErlangLightPlatform
 		public Object[] getObjectsToView()
 		{
 			return ArrayUtil.EMPTY_OBJECT_ARRAY;
+		}
+
+		@Override
+		public boolean isPreservedOnHintHidden()
+		{
+			return false;
+		}
+
+		@Override
+		public void setPreservedOnHintHidden(boolean b)
+		{
+
+		}
+
+		@Override
+		public boolean isInnermostContext()
+		{
+			return false;
+		}
+
+		@Override
+		public boolean isSingleParameterInfo()
+		{
+			return false;
+		}
+
+		@Override
+		public UserDataHolderEx getCustomContext()
+		{
+			return null;
 		}
 
 		public Project getProject()

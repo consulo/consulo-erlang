@@ -47,11 +47,6 @@ public class ErlangParameterInfoHandler implements ParameterInfoHandler<ErlangAr
   }
 
   @Override
-  public Object[] getParametersForDocumentation(Object p, ParameterInfoContext context) {
-    return null;
-  }
-
-  @Override
   public ErlangArgumentList findElementForParameterInfo(CreateParameterInfoContext context) {
     return getErlangArgumentList(context);
   }
@@ -123,16 +118,6 @@ public class ErlangParameterInfoHandler implements ParameterInfoHandler<ErlangAr
   @Override
   public void updateParameterInfo(@Nonnull ErlangArgumentList place, UpdateParameterInfoContext context) {
     context.setCurrentParameter(ParameterInfoUtils.getCurrentParameterIndex(place.getNode(), context.getOffset(), ErlangTypes.ERL_COMMA));
-  }
-
-  @Override
-  public String getParameterCloseChars() {
-    return ",){}";
-  }
-
-  @Override
-  public boolean tracksParameterIndex() {
-    return true;
   }
 
   @Override
