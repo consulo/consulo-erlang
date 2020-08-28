@@ -16,16 +16,6 @@
 
 package org.intellij.erlang.quickfixes;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import javax.swing.Icon;
-
-import org.intellij.erlang.ErlangIcons;
-import org.intellij.erlang.psi.impl.ErlangElementFactory;
-import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
@@ -33,13 +23,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.popup.JBPopupFactory;
-import com.intellij.openapi.ui.popup.ListPopup;
-import com.intellij.openapi.ui.popup.ListPopupStep;
-import com.intellij.openapi.ui.popup.ListSeparator;
-import com.intellij.openapi.ui.popup.MnemonicNavigationFilter;
-import com.intellij.openapi.ui.popup.PopupStep;
-import com.intellij.openapi.ui.popup.SpeedSearchFilter;
+import com.intellij.openapi.ui.popup.*;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -49,7 +33,15 @@ import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.util.FileContentUtilCore;
-import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
+import org.intellij.erlang.ErlangIcons;
+import org.intellij.erlang.psi.impl.ErlangElementFactory;
+import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author mark-dev
@@ -137,8 +129,8 @@ public class ErlangFindIncludeQuickFix extends ErlangQuickFixBase {
 
       @Nullable
       @Override
-      public Icon getIconFor(Object o) {
-        return TargetAWT.to(ErlangIcons.HEADER);
+      public Image getIconFor(Object o) {
+        return ErlangIcons.HEADER;
       }
 
       @Nonnull
