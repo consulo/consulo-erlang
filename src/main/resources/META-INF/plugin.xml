@@ -212,13 +212,13 @@
 
 		<moduleExtensionProvider key="erlang"
 								 name="Erlang"
-								 icon="/icons/erlang-small-16.png"
+								 icon="consulo.erlang.ErlangIconGroup@erlang_small_16"
 								 immutableClass="consulo.erlang.module.extension.ErlangModuleExtension"
 								 mutableClass="consulo.erlang.module.extension.ErlangMutableModuleExtension"/>
 		<moduleExtensionProvider key="rebar"
 								 parentKey="erlang"
 								 name="Rebar"
-								 icon="/icons/rebar-16.png"
+								 icon="consulo.erlang.ErlangIconGroup@rebar_16"
 								 immutableClass="consulo.erlang.rebar.module.extension.RebarModuleExtension"
 								 mutableClass="consulo.erlang.rebar.module.extension.RebarMutableModuleExtension"/>
 
