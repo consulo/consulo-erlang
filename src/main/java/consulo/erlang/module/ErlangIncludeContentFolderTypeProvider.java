@@ -1,13 +1,13 @@
 package consulo.erlang.module;
 
-import java.awt.Color;
+import consulo.roots.ContentFolderTypeProvider;
+import consulo.ui.color.ColorValue;
+import consulo.ui.color.RGBColor;
+import consulo.ui.ex.util.LightDarkColorValue;
+import consulo.ui.image.Image;
+import org.intellij.erlang.ErlangIcons;
 
 import javax.annotation.Nonnull;
-
-import org.intellij.erlang.ErlangIcons;
-import com.intellij.ui.JBColor;
-import consulo.roots.ContentFolderTypeProvider;
-import consulo.ui.image.Image;
 
 /**
  * @author VISTALL
@@ -15,12 +15,12 @@ import consulo.ui.image.Image;
  */
 public class ErlangIncludeContentFolderTypeProvider extends ContentFolderTypeProvider
 {
-	public static final Color COLOR = new JBColor(new Color(140, 123, 79), new Color(140, 123, 79));
+	public static final ColorValue COLOR = new LightDarkColorValue(new RGBColor(140, 123, 79), new RGBColor(140, 123, 79));
 
 	@Nonnull
 	public static ErlangIncludeContentFolderTypeProvider getInstance()
 	{
-		return EP_NAME.findExtension(ErlangIncludeContentFolderTypeProvider.class);
+		return EP_NAME.findExtensionOrFail(ErlangIncludeContentFolderTypeProvider.class);
 	}
 
 	public ErlangIncludeContentFolderTypeProvider()
@@ -50,7 +50,7 @@ public class ErlangIncludeContentFolderTypeProvider extends ContentFolderTypePro
 
 	@Nonnull
 	@Override
-	public Color getGroupColor()
+	public ColorValue getGroupColor()
 	{
 		return COLOR;
 	}
