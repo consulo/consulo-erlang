@@ -55,6 +55,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.ProcessingContext;
 import com.intellij.util.containers.ContainerUtil;
 import consulo.erlang.module.extension.ErlangModuleExtension;
+import consulo.ide.IconDescriptorUpdaters;
 import consulo.ui.image.Image;
 import consulo.util.dataholder.Key;
 import org.intellij.erlang.*;
@@ -1507,7 +1508,7 @@ public class ErlangPsiImplUtil
 			@Override
 			public Image getIcon()
 			{
-				return o.getIcon(0);
+				return IconDescriptorUpdaters.getIcon(o, 0);
 			}
 		};
 	}
@@ -1554,13 +1555,6 @@ public class ErlangPsiImplUtil
 	public static String createTypePresentation(@Nonnull ErlangTypeDefinition type)
 	{
 		return type.getName() + "/" + getArity(type);
-	}
-
-	@Nonnull
-	@SuppressWarnings("UnusedParameters")
-	public static Image getIcon(@Nonnull ErlangFunction o, int flags)
-	{
-		return ErlangIcons.FUNCTION;
 	}
 
 	public static boolean isRecursiveCall(PsiElement element, ErlangFunction function)

@@ -276,7 +276,6 @@ function ::= function_clause (';' function_clause)* {
     getArity
     getNameIdentifier
     getPresentation
-    getIcon
     isExported
   ]
   stubClass="org.intellij.erlang.stubs.ErlangFunctionStub"
