@@ -26,8 +26,9 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.impl.source.resolve.FileContextUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import consulo.util.collection.primitive.objects.ObjectIntMap;
+import consulo.util.collection.primitive.objects.ObjectMaps;
 import consulo.util.dataholder.Key;
-import gnu.trove.TObjectIntHashMap;
 import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.ErlangTypes;
 import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
@@ -57,32 +58,35 @@ public class ErlangParserUtil extends GeneratedParserUtilBase {
       (ApplicationManager.getApplication().isUnitTestMode() && (fileType.getDefaultExtension().equals("app") || fileType.getDefaultExtension().equals("config")));
   }
 
-  private static final Key<TObjectIntHashMap<String>> MODES_KEY = Key.create("MODES_KEY");
-  private static TObjectIntHashMap<String> getParsingModes(PsiBuilder builder_) {
-    TObjectIntHashMap<String> flags = builder_.getUserData(MODES_KEY);
-    if (flags == null) builder_.putUserData(MODES_KEY, flags = new TObjectIntHashMap<String>());
+  private static final Key<ObjectIntMap<String>> MODES_KEY = Key.create("MODES_KEY");
+  private static ObjectIntMap<String> getParsingModes(PsiBuilder builder_) {
+    ObjectIntMap<String> flags = builder_.getUserData(MODES_KEY);
+    if (flags == null) builder_.putUserData(MODES_KEY, flags = ObjectMaps.newObjectIntHashMap());
     return flags;
   }
 
   public static boolean isModeOn(PsiBuilder builder_, @SuppressWarnings("UnusedParameters") int level, String mode) {
-    return getParsingModes(builder_).get(mode) > 0;
+    return getParsingModes(builder_).getInt(mode) > 0;
   }
 
   public static boolean isModeOff(PsiBuilder builder_, @SuppressWarnings("UnusedParameters") int level, String mode) {
-    return getParsingModes(builder_).get(mode) == 0;
+    return getParsingModes(builder_).getInt(mode) == 0;
   }
 
   public static boolean enterMode(PsiBuilder builder_, @SuppressWarnings("UnusedParameters") int level, String mode) {
-    TObjectIntHashMap<String> flags = getParsingModes(builder_);
-    if (!flags.increment(mode)) flags.put(mode, 1);
+    ObjectIntMap<String> flags = getParsingModes(builder_);
+    if(flags.containsKey(mode))
+        flags.putInt(mode, flags.getInt(mode) + 1);
+    else
+        flags.putInt(mode, 1);
     return true;
   }
 
   public static boolean exitMode(PsiBuilder builder_, @SuppressWarnings("UnusedParameters") int level, String mode) {
-    TObjectIntHashMap<String> flags = getParsingModes(builder_);
-    int count = flags.get(mode);
+    ObjectIntMap<String> flags = getParsingModes(builder_);
+    int count = flags.getInt(mode);
     if (count == 1) flags.remove(mode);
-    else if (count > 1) flags.put(mode, count -1);
+    else if (count > 1) flags.putInt(mode, count -1);
     else builder_.error("Could not exit inactive '" + mode + "' mode at offset " + builder_.getCurrentOffset());
     return true;
   }

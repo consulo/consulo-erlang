@@ -16,20 +16,18 @@
 
 package org.intellij.erlang.editor;
 
-import static org.intellij.erlang.editor.ErlangSyntaxHighlighter.*;
-
-import gnu.trove.THashMap;
-
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
-import org.jetbrains.annotations.NonNls;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
+import org.jetbrains.annotations.NonNls;
+
+import javax.annotation.Nonnull;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.intellij.erlang.editor.ErlangSyntaxHighlighter.*;
 
 public class ErlangColorSettingsPage implements ColorSettingsPage {
   private static final AttributesDescriptor[] ATTRS;
@@ -116,7 +114,7 @@ public class ErlangColorSettingsPage implements ColorSettingsPage {
 
   public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
     @NonNls
-    final Map<String, TextAttributesKey> map = new THashMap<String, TextAttributesKey>();
+    final Map<String, TextAttributesKey> map = new HashMap<String, TextAttributesKey>();
     map.put("a", ATOM);
     map.put("d", DOC_TAG);
     map.put("k", KEYWORD);

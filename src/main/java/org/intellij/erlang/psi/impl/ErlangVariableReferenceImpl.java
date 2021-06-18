@@ -29,12 +29,12 @@ import com.intellij.util.ArrayUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.text.CaseInsensitiveStringHashingStrategy;
-import gnu.trove.THashSet;
+import consulo.util.collection.Sets;
 import org.intellij.erlang.ErlangIcons;
 import org.intellij.erlang.psi.*;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -76,7 +76,7 @@ public class ErlangVariableReferenceImpl extends PsiReferenceBase<ErlangQVar> {
     if (PsiTreeUtil.getParentOfType(myElement, ErlangArgumentDefinition.class) != null) return new Object[]{};
 
     List<LookupElement> result = new ArrayList<LookupElement>();
-    Collection<String> vars = new THashSet<String>(CaseInsensitiveStringHashingStrategy.INSTANCE);
+    Collection<String> vars = Sets.newHashSet(CaseInsensitiveStringHashingStrategy.INSTANCE);
     PsiFile file = myElement.getContainingFile();
     if (!(myElement.getParent() instanceof ErlangRecordExpression)) {
       ErlangFunctionClause clause = PsiTreeUtil.getParentOfType(myElement, ErlangFunctionClause.class);

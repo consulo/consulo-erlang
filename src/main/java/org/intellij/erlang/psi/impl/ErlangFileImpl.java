@@ -39,7 +39,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
-import gnu.trove.THashMap;
 import org.intellij.erlang.ErlangFileType;
 import org.intellij.erlang.ErlangLanguage;
 import org.intellij.erlang.ErlangTypes;
@@ -47,9 +46,9 @@ import org.intellij.erlang.psi.*;
 import org.intellij.erlang.stubs.ErlangCallbackSpecStub;
 import org.intellij.erlang.stubs.ErlangFileStub;
 import org.intellij.erlang.stubs.types.*;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.*;
 
 public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameIdentifierOwner {
@@ -429,7 +428,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
       myTypeMap = CachedValuesManager.getManager(getProject()).createCachedValue(new CachedValueProvider<Map<String, ErlangTypeDefinition>>() {
         @Override
         public Result<Map<String, ErlangTypeDefinition>> compute() {
-          Map<String, ErlangTypeDefinition> map = new THashMap<String, ErlangTypeDefinition>();
+          Map<String, ErlangTypeDefinition> map = new HashMap<String, ErlangTypeDefinition>();
           for (ErlangTypeDefinition type : getTypes()) {
             String mName = type.getName();
             if (!map.containsKey(mName)) {
@@ -486,7 +485,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
       myMacrosesMap = CachedValuesManager.getManager(getProject()).createCachedValue(new CachedValueProvider<Map<String, ErlangMacrosDefinition>>() {
         @Override
         public Result<Map<String, ErlangMacrosDefinition>> compute() {
-          Map<String, ErlangMacrosDefinition> map = new THashMap<String, ErlangMacrosDefinition>();
+          Map<String, ErlangMacrosDefinition> map = new HashMap<String, ErlangMacrosDefinition>();
           for (ErlangMacrosDefinition macros : getMacroses()) {
             ErlangMacrosName mName = macros.getMacrosName();
             if (mName == null) continue;
@@ -658,7 +657,7 @@ public class ErlangFileImpl extends PsiFileBase implements ErlangFile, PsiNameId
       myRecordsMap = CachedValuesManager.getManager(getProject()).createCachedValue(new CachedValueProvider<Map<String, ErlangRecordDefinition>>() {
         @Override
         public Result<Map<String, ErlangRecordDefinition>> compute() {
-          Map<String, ErlangRecordDefinition> map = new THashMap<String, ErlangRecordDefinition>();
+          Map<String, ErlangRecordDefinition> map = new HashMap<String, ErlangRecordDefinition>();
           for (ErlangRecordDefinition record : getRecords()) {
             String recordName = record.getName();
             if (!map.containsKey(recordName)) {

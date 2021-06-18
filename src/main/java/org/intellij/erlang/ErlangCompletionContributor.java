@@ -16,38 +16,7 @@
 
 package org.intellij.erlang;
 
-import static com.intellij.patterns.PlatformPatterns.psiElement;
-import static com.intellij.patterns.StandardPatterns.instanceOf;
-
-import gnu.trove.THashSet;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
-import org.intellij.erlang.parser.ErlangLexer;
-import org.intellij.erlang.parser.ErlangParserUtil;
-import org.intellij.erlang.psi.*;
-import org.intellij.erlang.psi.impl.ErlangFileImpl;
-import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
-import org.intellij.erlang.psi.impl.ErlangVariableReferenceImpl;
-import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
-import org.intellij.erlang.types.ErlangExpressionType;
-import com.intellij.codeInsight.completion.CodeCompletionHandlerBase;
-import com.intellij.codeInsight.completion.CompletionContributor;
-import com.intellij.codeInsight.completion.CompletionInitializationContext;
-import com.intellij.codeInsight.completion.CompletionParameters;
-import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.completion.CompletionType;
-import com.intellij.codeInsight.completion.InsertHandler;
-import com.intellij.codeInsight.completion.InsertionContext;
-import com.intellij.codeInsight.completion.PrioritizedLookupElement;
+import com.intellij.codeInsight.completion.*;
 import com.intellij.codeInsight.completion.util.ParenthesesInsertHandler;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
@@ -65,13 +34,7 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiComment;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiFileFactory;
-import com.intellij.psi.PsiPolyVariantReference;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.ResolveResult;
+import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleSettingsManager;
 import com.intellij.psi.formatter.FormatterUtil;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
@@ -85,6 +48,22 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.text.CaseInsensitiveStringHashingStrategy;
 import consulo.codeInsight.completion.CompletionProvider;
 import consulo.ui.image.Image;
+import org.intellij.erlang.formatter.settings.ErlangCodeStyleSettings;
+import org.intellij.erlang.parser.ErlangLexer;
+import org.intellij.erlang.parser.ErlangParserUtil;
+import org.intellij.erlang.psi.*;
+import org.intellij.erlang.psi.impl.ErlangFileImpl;
+import org.intellij.erlang.psi.impl.ErlangPsiImplUtil;
+import org.intellij.erlang.psi.impl.ErlangVariableReferenceImpl;
+import org.intellij.erlang.roots.ErlangIncludeDirectoryUtil;
+import org.intellij.erlang.types.ErlangExpressionType;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
+
+import static com.intellij.patterns.PlatformPatterns.psiElement;
+import static com.intellij.patterns.StandardPatterns.instanceOf;
 
 public class ErlangCompletionContributor extends CompletionContributor {
   public static final int MODULE_PRIORITY = -15;
@@ -92,7 +71,7 @@ public class ErlangCompletionContributor extends CompletionContributor {
   public static final int MODULE_FUNCTIONS_PRIORITY = -4;
   public static final int TYPE_PRIORITY = 10;
   public static final int BIF_PRIORITY = -5;
-  public static final THashSet<String> KEYWORDS_WITH_PARENTHESIS = ContainerUtil.newTroveSet(CaseInsensitiveStringHashingStrategy.INSTANCE,
+  public static final Set<String> KEYWORDS_WITH_PARENTHESIS = ContainerUtil.newTroveSet(CaseInsensitiveStringHashingStrategy.INSTANCE,
     "include", "include_lib", "module", "export", "export_type", "import", "define", "record", "behaviour"
   );
 
@@ -237,7 +216,7 @@ public class ErlangCompletionContributor extends CompletionContributor {
         Set<ErlangExpressionType> expectedTypes = getExpectedTypes(argList, pos);
         if (expectedTypes.isEmpty()) return;
 
-        Collection<ErlangQVar> vars = new THashSet<ErlangQVar>();
+        Collection<ErlangQVar> vars = new HashSet<ErlangQVar>();
         ErlangFunctionClause clause = PsiTreeUtil.getParentOfType(expression, ErlangFunctionClause.class);
         ((ErlangVariableReferenceImpl) reference).populateVariables(clause, vars);
 
